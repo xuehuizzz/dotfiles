@@ -1,0 +1,26 @@
+# top-most EditorConfig file
+root = true  # 表示该文件是项目的根配置文件，编辑器在查找配置时会从当前文件夹开始逐级向上查找，直到找到该文件为止
+
+[*]
+end_of_line = lf   # 设置换行符的类型,lf（Unix 风格）、cr（Mac 风格）或 crlf（Windows 风格）
+insert_final_newline = true  # 设置是否在文件末尾插入一个空行
+charset = utf-8
+trim_trailing_whitespace = true  #删除行尾空白字符
+max_line_length = 100  
+
+[*.py]
+indent_style = space  # 设置缩进风格。可选值为 tab（制表符）或 space（空格）
+indent_size = 4  # 设置每个缩进级别的空格数
+insert_final_newline = true
+
+[*.{py,js}]
+indent_style = space
+indent_size = 4
+
+[*.go]
+indent_style = tab
+indent_size = 4
+tab_width = 4
+
+[Makefile]
+indent_style = tab
