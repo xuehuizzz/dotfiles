@@ -1,14 +1,14 @@
 <div align="center">
     <h2><img src="https://readme-typing-svg.herokuapp.com?font=Optima&size=35&duration=6000&color=FF5733&center=true&vCenter=true&width=800&lines=代码是写给人看的,+顺便能在机器上运行" alt="Typing SVG"/></h2>
 </div>
-==Google开源项目风格指南==
 
+###  Google开源项目风格指南
 ```bash
 https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/contents/#
 https://www.runoob.com/w3cnote/google-python-styleguide.html
 ```
 
-#### ==1.格式化导包顺序 .isort.cfg==
+#### 1.格式化导包顺序 .isort.cfg
 
 `pip install isort`
 
@@ -35,7 +35,7 @@ isort your_script.py    # 格式化单个文件
 isort .    # 格式化整个项目目录
 ```
 
-##### ==2.代码风格和格式保持一致 .editorconfig==
+#### 2.代码风格和格式保持一致 .editorconfig
 `用于在多个开发者和不同编辑器或IDE之间保持一致的代码风格和格式`
 
 `新建 .editorconfig 配置文件, 位于项目根目录, 内容如下:`
@@ -69,7 +69,7 @@ tab_width = 4
 indent_style = tab
 ```
 
-##### ==3.使用环境文件 .env==
+#### 3.使用环境文件 .env
 
 `.env 文件（全称为“环境文件”）通常用于存储项目的配置信息，如数据库连接字符串、API密钥等`
 
@@ -99,7 +99,7 @@ db_port = os.getenv("DB_PORT")   # 输出为: "3306"
 db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 ```
 
-##### ==4.编码建议==
+#### 4.编码建议
 
 *   <font color="red">掌握函数式编程</font>
 
@@ -303,7 +303,7 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
         )
         ```
 
-##### ==5.使用类型注解==
+#### 5.使用类型注解
 
 **<font color="red">0.</font>自动生成静态类型注解**
 
@@ -384,7 +384,7 @@ def add(x: int, y: int) -> int:
 result = apply_function(add, 10, 20)
 ```
 
-##### ==6.静态类型检查==
+#### 6.静态类型检查
 
 `pip install mypy`
 
