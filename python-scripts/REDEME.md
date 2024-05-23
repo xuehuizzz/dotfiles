@@ -1,5 +1,6 @@
-### **代码是写给人看的, 顺便能在机器上运行**
-
+<div align="center">
+    <h2><img src="https://readme-typing-svg.herokuapp.com?font=Optima&size=35&duration=6000&color=FF5733&center=true&vCenter=true&width=800&lines=代码是写给人看的,+顺便能在机器上运行" alt="Typing SVG"/></h2>
+</div>
 ==Google开源项目风格指南==
 
 ```bash
