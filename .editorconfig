@@ -4,9 +4,9 @@ root = true  # 表示该文件是项目的根配置文件，编辑器在查找�
 [*]
 end_of_line = lf   # 设置换行符的类型,lf（Unix 风格）、cr（Mac 风格）或 crlf（Windows 风格）
 insert_final_newline = true  # 设置是否在文件末尾插入一个空行
-charset = utf-8
-trim_trailing_whitespace = true  #删除行尾空白字符
-max_line_length = 100  
+charset = utf-8  # 设置文件编码
+trim_trailing_whitespace = true  # 设置是否删除行尾空白字符
+max_line_length = 100  # 设置每行的最大字符数 
 
 [*.py]
 indent_style = space  # 设置缩进风格。可选值为 tab（制表符）或 space（空格）
