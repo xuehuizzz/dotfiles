@@ -11,7 +11,6 @@ max_line_length = 100
 [*.py]
 indent_style = space  # 设置缩进风格。可选值为 tab（制表符）或 space（空格）
 indent_size = 4  # 设置每个缩进级别的空格数
-insert_final_newline = true
 
 [*.{py,js}]
 indent_style = space
