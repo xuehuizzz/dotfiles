@@ -1,0 +1,10 @@
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+  lg = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short'     //终极日志格式
+  lg- = log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago' --author=your name  //查看自己上周的更改
