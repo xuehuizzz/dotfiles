@@ -1,3 +1,4 @@
+set mouse=a " 启用鼠标
 set nocompatible " 关闭 vi 兼容模式
 syntax on " 自动语法高亮
 set number " 显示行号
