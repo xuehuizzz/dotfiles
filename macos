@@ -1,0 +1,17 @@
+defaults write com.apple.dock springboard-columns -int 9     # 设置列数
+defaults write com.apple.dock springboard-rows -int 6    # 设置行数
+killall Dock   # 重启 Dock 生效
+
+# 恢复默认的列数和行数
+defaults write com.apple.dock springboard-rows Default
+defaults write com.apple.dock springboard-columns Default
+killall Dock    # 重启 Dock 生效
+
+pwpolicy -clearaccountpolicies   # 取消 4 位数密码限制
+
+open -n /Applications/WeChat.app/Contents/MacOS/WeChat    # 微信双开
+
+sudo spctl --master-disable    #禁用安装守护,允许安装未知来源
+
+defaults write com.apple.CrashReporter DialogType none    # 关闭崩溃报错
+defaults write com.apple.CrashReporter DialogType crashreport  # 恢复崩溃报错
