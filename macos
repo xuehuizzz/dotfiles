@@ -1,4 +1,4 @@
-# 详细设置信息见: https://macos-defaults.com
+# 更多设置信息见: https://macos-defaults.com
 
 defaults write com.apple.dock autohide-time-modifier -float 0 && killall Dock  # 使Dock的自动隐藏和显示立即发生
 defaults write com.apple.dock autohide-delay -int 0 && killall Dock   # 设置启动坞响应时间最短
