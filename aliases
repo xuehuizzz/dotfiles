@@ -1,3 +1,4 @@
+-------------for macOS-----------------------------------------------
 alias purge="sudo purge"   # 清理内存 for mac
 alias ty="sudo spctl --master-disable"  #同意安装任意来源 for mac
 alias jupyter="nohup jupyter notebook --allow-root > jupyter.log 2>&1 &"  #后台启动jupyter notebook
@@ -6,3 +7,4 @@ alias woman="tldr"
 alias cat="ccat"    # or bat
 alias hist="history -i"
 alias rezsh="source ~/.zshrc"
+alias open="open -a TextEdit"    # 默认使用文本编辑打开文件
