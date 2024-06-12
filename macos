@@ -1,4 +1,4 @@
-defaults write com.apple.dock autohide-time-modifier -float 0.5 && killall Dock  # 设置启动坞动画时间设置为 0.5 秒 
+defaults write com.apple.dock autohide-time-modifier -float 0 && killall Dock  # 使Dock的自动隐藏和显示立即发生
 defaults write com.apple.dock autohide-delay -int 0 && killall Dock   # 设置启动坞响应时间最短
 defaults delete com.apple.dock autohide-time-modifier && killall Dock    # 恢复启动坞默认动画时间
 defaults delete com.apple.Dock autohide-delay && killall Dock    # 恢复默认启动坞响应时间
@@ -20,3 +20,6 @@ sudo spctl --master-disable    #禁用安装守护,允许安装未知来源
 
 defaults write com.apple.CrashReporter DialogType none    # 关闭崩溃报错
 defaults write com.apple.CrashReporter DialogType crashreport  # 恢复崩溃报错
+
+defaults write com.apple.dock minimize-to-application -bool true  # 将最小化的窗口归到应用程序图标中，而不是单独显示在Dock中
+
