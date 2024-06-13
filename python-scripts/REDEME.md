@@ -138,6 +138,17 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
 *   避免`import *`, 建议用`__all__`来定义模块中可被导出的变量名
 
+*   **使用参数化SQL语句，强制区分数据和命令，避免产生SQL注入漏洞。**
+
+    *
+        ```python
+            import sqlite3
+            connection = sqlite3.connect('example.db')
+            cursor = connection.cursor()
+            # 参数化查询, 将元组以参数形式传入
+            cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        ```
+
 *   两种方式命名入口文件
 
     *
