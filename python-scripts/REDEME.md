@@ -146,7 +146,7 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
             connection = sqlite3.connect('example.db')
             cursor = connection.cursor()
             # 参数化查询, 将元组以参数形式传入
-            cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+            cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
         ```
 
 *   两种方式命名入口文件
