@@ -138,6 +138,20 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
 *   避免`import *`, 建议用`__all__`来定义模块中可被导出的变量名
 
+*   批量插入数据库, 更简洁, 易维护
+
+    *
+        ```sql
+            -- 不建议使用 单条插入
+            INSERT INTO table (column1, column2) VALUES (value1, value2);
+            INSERT INTO table (column1, column2) VALUES (value3, value4);
+
+            -- 批量插入
+            -- 可以在一次事务中插入多行数据，这减少了事务的开销和网络通信的次数，提高了插入效率
+            INSERT INTO table (column1, column2) VALUES (value1, value2), (value3, value4);
+
+        ````
+
 *   **使用参数化SQL语句，强制区分数据和命令，避免产生SQL注入漏洞。**
 
     *
