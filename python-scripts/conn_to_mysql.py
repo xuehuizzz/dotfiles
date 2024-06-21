@@ -1,6 +1,5 @@
 # pip install pymysql pymysql-pool python-dotenv
-"""
-This file is used to connect to MySQL and perform basic operations
+"""This file is used to connect to MySQL and perform basic operations.
 """
 import os
 
@@ -31,14 +30,14 @@ class MySQLHelper:
 
     @classmethod
     def initialize_pool(cls):
-        """初始化连接池"""
+        """Initialize the connection pool"""
         if not cls._pool:
             config = cls.load_db_config()
             cls._pool = ConnectionPool(**config)
 
     @classmethod
     def load_db_config(cls):
-        """加载数据库配置信息"""
+        """Load the database configuration"""
         config = {
             "host": os.getenv("MY_HOST"),
             "user": os.getenv("MY_USER"),
@@ -81,11 +80,31 @@ class MySQLHelper:
 
 
 if __name__ == "__main__":
-    """使用classmethod是保证在程序启动前及创建实例前就加载数据"""
+    """Using classmethod to ensure the data is loaded before program start and instance creation"""
     MySQLHelper.initialize_pool()
     try:
         with MySQLHelper() as db:
+            # Example of batch insert
+            insert_query = "INSERT INTO video (title, url) VALUES (%s, %s)"
+            insert_data = [
+                ("Title1", "http://example.com/1"),
+                ("Title2", "http://example.com/2"),
+                ("Title3", "http://example.com/3"),
+            ]
+            rows_inserted = db.execute_many_queries(insert_query, insert_data)
+            print(f"{rows_inserted} rows inserted.")
+
+            # Example of batch update
+            update_query = "UPDATE video SET title = %s WHERE id = %s"
+            update_data = [
+                ("New Title1", 1),
+                ("New Title2", 2),
+                ("New Title3", 3),
+            ]
+            rows_updated = db.execute_many_queries(update_query, update_data)
+            print(f"{rows_updated} rows updated.")
+
             results = db.fetch_all("SELECT count(id) FROM video;")
-        print(results)
+            print(results)
     except pymysql.MySQLError as e:
         raise pymysql.MySQLError(f"An error occurred: {e!r}") from e
