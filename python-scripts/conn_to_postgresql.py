@@ -55,7 +55,7 @@ class PostgreSQLHelper:
             self.conn.rollback()
             raise RuntimeError(f"Failed to execute query: {query_err!r}") from query_err
 
-    def batch_execute(self, query: str, param_list: List[List[Any]]) -> None:
+    def execute_many_queries(self, query: str, param_list: List[List[Any]]) -> None:
         """Execute a batch of SQL queries"""
         try:
             execute_batch(self.cursor, query, param_list)
@@ -84,7 +84,7 @@ if __name__ == "__main__":
                 ("value3", "value4"),
                 ("value5", "value6")
             ]
-            db.batch_execute(insert_query, insert_params)
+            db.execute_many_queries(insert_query, insert_params)
 
             # Batch update
             update_query = "UPDATE your_table SET column1 = %s WHERE column2 = %s"
@@ -93,7 +93,7 @@ if __name__ == "__main__":
                 ("new_value3", "value4"),
                 ("new_value5", "value6")
             ]
-            db.batch_execute(update_query, update_params)
+            db.execute_many_queries(update_query, update_params)
 
             # Fetch data
             results = db.fetch_all("SELECT * FROM your_table")
