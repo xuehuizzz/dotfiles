@@ -156,11 +156,38 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
     *
         ```python
+            # 1. execute, 以元组形式传参
             import sqlite3
             connection = sqlite3.connect('example.db')
             cursor = connection.cursor()
             # 参数化查询, 将元组以参数形式传入
             cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+
+            # 2.executemany, 直接传参
+            import psycopg2
+            conn = psycopg2.connect(
+                dbname="your_dbname",
+                user="your_username",
+                password="your_password",
+                host="your_host",
+                port="your_port"
+            )
+            
+            cur = conn.cursor()
+            data_to_insert = [
+                (1, 'Alice', '2024-07-01'),
+                (2, 'Bob', '2024-07-02'),
+                (3, 'Charlie', '2024-07-03')
+            ]
+            
+            insert_query = """
+            INSERT INTO your_table (id, name, date)  LUES (%s, %s, %s)
+            """
+            cur.executemany(insert_query, data_to_insert)
+            conn.commit()
+            cur.close()
+            conn.close()
+
         ```
 
 *   两种方式命名入口文件
