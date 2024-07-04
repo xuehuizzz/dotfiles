@@ -28,3 +28,7 @@ defaults write com.apple.dock mineffect -string "scale"   # 设置最小化窗�
 defaults write com.apple.finder "_FXSortFoldersFirst" -bool "true" && killall Finder   # 访达, 将文件夹放在最上面
 
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true  # 禁止Image Capture（图像捕捉）应用程序在检测到新连接的设备（如相机或手机）时自动弹出
+
+# Focus Follows Mouse 焦点跟随鼠标
+defaults write com.apple.Terminal FocusFollowsMouse -string true # 开启
+defaults write com.apple.Terminal FocusFollowsMouse -string false # 关闭
