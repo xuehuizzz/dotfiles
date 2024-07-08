@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# 使用shell脚本从远程服务器下载单个文件/整个路径下的所有文件
 # 加载 .env 文件中的变量
 if [ -f .env ]; then
   export $(cat .env | xargs)
