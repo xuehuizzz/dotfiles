@@ -21,10 +21,10 @@ if [ $? -ne 0 ]; then
 fi
 
 # 使用 scp 从远程服务器获取文件
-# scp "$REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH" "$LOCAL_PATH"
+# scp "$REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH" "$LOCAL_PATH"    # REMOTE_PATH是个文件
 
 # 使用 scp 从远程服务器获取整个目录
-scp -r "$REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH"/* "$LOCAL_PATH"
+scp -r "$REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH"/* "$LOCAL_PATH"   # REMOTE_PATH是个路径
 
 # 检查 scp 命令是否成功
 if [ $? -eq 0 ]; then
