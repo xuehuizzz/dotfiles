@@ -12,6 +12,15 @@ SELECT * FROM cte WHERE other_condition;
 SELECT DISTINCT ON (column1) column1, column2, column3
 FROM table_name
 ORDER BY column1, column4 DESC;
+-- 通常是替代 DISTINCT ON() 的最佳选择，因为它们提供了更多的灵活性和更好的性能
+SELECT *
+FROM (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY column1 ORDER BY column2) as rn
+    FROM your_table
+) subquery
+WHERE rn = 1;
+
 
 -- 条件表达式
 SELECT COALESCE(NULL, 'default', 'fallback');  -- 返回第一个非 NULL 的值
