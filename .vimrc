@@ -1,3 +1,6 @@
+" :colorscheme <Tab> 查看已支持的主题
+colorscheme default   " 替换成你喜欢的主题名称
+set background=dark   " 如果是暗色背景主题
 set mouse=a " 启用鼠标
 set nocompatible " 关闭 vi 兼容模式
 syntax on " 自动语法高亮
