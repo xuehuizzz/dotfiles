@@ -52,6 +52,8 @@ class PostgreSQLHelper:
             return self.cursor.rowcount
         except Exception as query_err:
             self.conn.rollback()
+            sql_with_params = self.cursor.mogrify(query, params).decode('utf-8')
+            logger.error(f"Failed to execute query: {query_err!r}\nSQL: {sql_with_params}")
             raise RuntimeError(f"Failed to execute query: {query_err!r}") from query_err
             
     def execute_many_queries(self, query: str, params: Optional[List[Any]] = None) -> int:
@@ -62,6 +64,8 @@ class PostgreSQLHelper:
             return self.cursor.rowcount
         except Exception as query_err:
             self.conn.rollback()
+            sql_with_params = self.cursor.mogrify(query, params).decode('utf-8')
+            logger.error(f"Failed to execute query: {query_err!r}\nSQL: {sql_with_params}")
             raise RuntimeError(f"Failed to execute query: {query_err!r}") from query_err
             
     def fetch_all(self, query: str, params: Optional[List[Any]] = None) -> List[Any]:
