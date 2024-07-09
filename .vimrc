@@ -39,7 +39,6 @@ setlocal foldlevel=1 " 设置折叠层数为
 " nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 " 用空格键来开关折叠
 
-
 " return OS type, eg: windows, or linux, mac, et.st..
 function! MySys()
 if has("win16") || has("win32") || has("win64") || has("win95")
@@ -270,3 +269,6 @@ smap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
 "-----------------------------------------------------------------
 " plugin – a.vim
 "-----------------------------------------------------------------
+
+highlight StatusLine cterm=bold ctermfg=Black ctermbg=LightGreen guifg=Black guibg=LightGreen
+
