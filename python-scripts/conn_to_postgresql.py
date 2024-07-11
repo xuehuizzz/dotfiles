@@ -1,13 +1,15 @@
-# pip install psycopg2 python-dotenv
 """
 This file is used to connect to PostgreSQL and perform basic operations
+pip install psycopg2 python-dotenv
 """
 import os
 from typing import List, Optional, Any
+
 from dotenv import load_dotenv
 from psycopg2 import pool
 
 load_dotenv()
+
 
 class PostgreSQLHelper:
     _connection_pool: Optional[pool.SimpleConnectionPool] = None
@@ -15,6 +17,7 @@ class PostgreSQLHelper:
     def __init__(self):
         self.conn = None
         self.cursor = None
+        PostgreSQLHelper.initialize_pool()
 
     def __enter__(self):
         self.conn = self._connection_pool.getconn()
@@ -76,32 +79,41 @@ class PostgreSQLHelper:
         except Exception as fetch_err:
             raise RuntimeError(f"Failed to fetch data: {fetch_err!r}") from fetch_err
 
+    def real_executed_query(self, query: str, params: Optional[List[Any]] = None) -> str:
+        """Return the last executed SQL query with parameters interpolated"""
+        if params and isinstance(params, (list, tuple)):
+            if isinstance(params[0], (list, tuple)):
+                real_sql = "\n".join(
+                    self.cursor.mogrify(query, param_set).decode('utf-8') for param_set in
+                    params
+                ) + "\n"
+            else:
+                real_sql = self.cursor.mogrify(query, params).decode('utf-8') + "\n"
+        return query, real_sql
+
 
 if __name__ == "__main__":
-    PostgreSQLHelper.initialize_pool()
-    try:
-        with PostgreSQLHelper() as db:
-            # Batch insert
-            insert_query = "INSERT INTO your_table (column1, column2) VALUES (%s, %s)"
-            insert_params = [
-                ("value1", "value2"),
-                ("value3", "value4"),
-                ("value5", "value6")
-            ]
-            db.execute_many_queries(insert_query, insert_params)
+    with PostgreSQLHelper() as db:
+        # Batch insert
+        insert_query = "INSERT INTO your_table (column1, column2) VALUES (%s, %s)"
+        insert_params = [
+            ("value1", "value2"),
+            ("value3", "value4"),
+            ("value5", "value6")
+        ]
+        db.execute_many_queries(insert_query, insert_params)
 
-            # Batch update
-            update_query = "UPDATE your_table SET column1 = %s WHERE column2 = %s"
-            update_params = [
-                ("new_value1", "value2"),
-                ("new_value3", "value4"),
-                ("new_value5", "value6")
-            ]
-            db.execute_many_queries(update_query, update_params)
+        # Batch update
+        update_query = "UPDATE your_table SET column1 = %s WHERE column2 = %s"
+        update_params = [
+            ("new_value1", "value2"),
+            ("new_value3", "value4"),
+            ("new_value5", "value6")
+        ]
+        db.execute_many_queries(update_query, update_params)
 
-            # Fetch data
-            results = db.fetch_all("SELECT * FROM your_table")
-        for row in results:
-            print(row)
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")
+        # Fetch data
+        results = db.fetch_all("SELECT * FROM your_table")
+    for row in results:
+        print(row)
+
