@@ -55,8 +55,6 @@ class PostgreSQLHelper:
             return self.cursor.rowcount
         except Exception as query_err:
             self.conn.rollback()
-            sql_with_params = self.cursor.mogrify(query, params).decode('utf-8')
-            logger.error(f"Failed to execute query: {query_err!r}\nSQL: {sql_with_params}")
             raise RuntimeError(f"Failed to execute query: {query_err!r}") from query_err
             
     def execute_many_queries(self, query: str, params: Optional[List[Any]] = None) -> int:
@@ -67,8 +65,6 @@ class PostgreSQLHelper:
             return self.cursor.rowcount
         except Exception as query_err:
             self.conn.rollback()
-            sql_with_params = self.cursor.mogrify(query, params).decode('utf-8')
-            logger.error(f"Failed to execute query: {query_err!r}\nSQL: {sql_with_params}")
             raise RuntimeError(f"Failed to execute query: {query_err!r}") from query_err
             
     def fetch_all(self, query: str, params: Optional[List[Any]] = None) -> List[Any]:
@@ -81,6 +77,7 @@ class PostgreSQLHelper:
 
     def real_executed_query(self, query: str, params: Optional[List[Any]] = None) -> str:
         """Return the last executed SQL query with parameters interpolated"""
+        real_sql = ""
         if params and isinstance(params, (list, tuple)):
             if isinstance(params[0], (list, tuple)):
                 real_sql = "\n".join(
@@ -89,7 +86,7 @@ class PostgreSQLHelper:
                 ) + "\n"
             else:
                 real_sql = self.cursor.mogrify(query, params).decode('utf-8') + "\n"
-        return query, real_sql
+        return real_sql
 
 
 if __name__ == "__main__":
