@@ -12,10 +12,6 @@ max_line_length = 100  # 设置每行的最大字符数
 indent_style = space  # 设置缩进风格。可选值为 tab（制表符）或 space（空格）
 indent_size = 4  # 设置每个缩进级别的空格数
 
-[*.{py,js}]
-indent_style = space
-indent_size = 4
-
 [*.go]
 indent_style = tab
 indent_size = 4
