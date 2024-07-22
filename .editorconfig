@@ -23,3 +23,6 @@ tab_width = 4
 
 [Makefile]
 indent_style = tab
+
+[*.{css,html,js,json,jsx,scss,ts,tsx,yaml,yml}]
+indent_size = 2
