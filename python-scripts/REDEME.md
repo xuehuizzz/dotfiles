@@ -126,6 +126,8 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
 *   多行的表达式, 应该用括号括起来, 而不要用反斜杠续行
 
+*   避免`from xxx import *`, 因为可能会造成命名空间的污染. 禁止导入了模块却不使用它
+
 *   程序的main文件应该以 #!/usr/bin/python2或者 #!/usr/bin/python3开始, 大部分.py文件不必以#!作为文件的开始
 
 *   尽量减少try/except块中的代码量, 避免使用全局变量, 用类变量来代替
