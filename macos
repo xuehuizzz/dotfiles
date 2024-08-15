@@ -33,7 +33,7 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true  # 
 defaults write com.apple.Terminal FocusFollowsMouse -string true # 开启
 defaults write com.apple.Terminal FocusFollowsMouse -string false # 关闭
 
-# 永久隐藏Dock栏, 将
+# 永久隐藏Dock栏, 仅是在桌面隐藏
 defaults write com.apple.dock autohide -bool true   # autohide：设置为 true 会自动隐藏 Dock。
 defaults write com.apple.dock autohide-delay -float 1000    # autohide-delay：将其设置为一个非常大的值（如 1000），使 Dock 几乎不可能在正常操作中显示
 defaults write com.apple.dock autohide-time-modifier -float 0    # autohide-time-modifier：设置为 0 确保 Dock 消失得非常快
