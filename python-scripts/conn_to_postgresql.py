@@ -19,24 +19,13 @@ from psycopg2 import pool
 load_dotenv()
 
 
-class PostgreSQLHelper:
+class PostgreSQLContext:
     _connection_pool: Optional[pool.SimpleConnectionPool] = None
 
     def __init__(self):
         self.conn = None
         self.cursor = None
-        PostgreSQLHelper.initialize_pool()
-
-    def __enter__(self):
-        self.conn = self._connection_pool.getconn()
-        self.cursor = self.conn.cursor()
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        if self.cursor:
-            self.cursor.close()
-        if self.conn:
-            self._connection_pool.putconn(self.conn)
+        PostgreSQLContext.initialize_pool()
 
     @classmethod
     def initialize_pool(cls):
@@ -96,9 +85,20 @@ class PostgreSQLHelper:
                 real_sql = self.cursor.mogrify(query, params).decode('utf-8') + "\n"
         return real_sql
 
+    def __enter__(self):
+        self.conn = self._connection_pool.getconn()
+        self.cursor = self.conn.cursor()
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if self.cursor:
+            self.cursor.close()
+        if self.conn:
+            self._connection_pool.putconn(self.conn)
+
 
 if __name__ == "__main__":
-    with PostgreSQLHelper() as db:
+    with PostgreSQLContext() as db:
         # Batch insert
         insert_query = "INSERT INTO your_table (column1, column2) VALUES (%s, %s)"
         insert_params = [
