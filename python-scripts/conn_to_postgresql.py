@@ -25,7 +25,18 @@ class PostgreSQLContext:
         self.conn = None
         self.cursor = None
         PostgreSQLContext.initialize_pool()
+        
+    def __enter__(self):
+        self.conn = self._connection_pool.getconn()
+        self.cursor = self.conn.cursor()
+        return self
 
+    def __exit__(self, exc_type, exc_value, traceback):
+        if self.cursor:
+            self.cursor.close()
+        if self.conn:
+            self._connection_pool.putconn(self.conn)
+            
     @classmethod
     def initialize_pool(cls):
         if not cls._connection_pool:
@@ -83,17 +94,6 @@ class PostgreSQLContext:
             else:
                 real_sql = self.cursor.mogrify(query, params).decode('utf-8') + "\n"
         return real_sql
-
-    def __enter__(self):
-        self.conn = self._connection_pool.getconn()
-        self.cursor = self.conn.cursor()
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        if self.cursor:
-            self.cursor.close()
-        if self.conn:
-            self._connection_pool.putconn(self.conn)
 
 
 if __name__ == "__main__":
