@@ -1,11 +1,10 @@
-"""
-This file is used to connect to PostgreSQL and perform basic operations
+"""This file is used to connect to PostgreSQL and perform basic operations.
 pip install psycopg2 python-dotenv
 
 在别的类中调用的话, 在初始化方法中创建实例, 则仅会创建一次连接池 
 class Demo:
     def __init__(self:)
-        self.psql_helper = PostgreSQLHelper()
+        self.psql_helper = PostgreSQLContext()
     def aaa(self):
         with self.psql_helper as db:
             pass
