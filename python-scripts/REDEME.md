@@ -293,7 +293,11 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
     *
         ```python
-        # pip install black pylint wemake-python-styleguide
+        # pip install ruff black pylint wemake-python-styleguide, 优先推荐 ruff
+        ruff path/to/your_file.py  # 检查一个文件
+        ruff path/to/your_directory  # 检查一个目录
+        ruff path/to/your_file.py --fix  # 自动修复问题 
+
         # 在终端使用black和pylint来规范你的脚本
         black your_script.py  
         pylint your_script.py
