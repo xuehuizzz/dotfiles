@@ -8,3 +8,9 @@ psql db_name   # 连接到已存在的数据库
 CREATE USER myuser WITH PASSWORD 'mypassword';    # 连接到数据库后创建用户
 GRANT ALL PRIVILEGES ON DATABASE mydatabase TO myuser;   # 为新用户授予访问特定数据库的权限
 ```
+
+### 使用
+
+```bash
+SELECT * FROM your_table WHERE name !~ 'xx|xxx|xxxx';   # 查询name不包含多个条件
+```
