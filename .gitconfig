@@ -1,12 +1,12 @@
 [core]
-	excludesfile = /Users/xuehuizzz/.gitignore_global
+  excludesfile = /Users/xuehuizzz/.gitignore_global
 [user]
-	name = xuehui
-	email = xuehuizzz103@gmail.com
+  name = xuehui
+  email = xuehuizzz103@gmail.com
 [commit]
-	template = /Users/xuehuizzz/.stCommitMsg
+  template = /Users/xuehuizzz/.stCommitMsg
 [http]
-	sslVerify = true
+  sslVerify = true
 [alias]
   co = checkout
   ci = commit
@@ -18,11 +18,11 @@
   lg = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short'     //终极日志格式
   lg- = log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago' --author=your name  //查看自己上周的更改
 [safe]
-	directory = /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core
-	directory = /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask
-	directory = /usr/local/Homebrew
+  directory = /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core
+  directory = /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask
+  directory = /usr/local/Homebrew
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
