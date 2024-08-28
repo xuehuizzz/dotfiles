@@ -11,7 +11,7 @@ GRANT ALL PRIVILEGES ON DATABASE mydatabase TO myuser;   # 为新用户授予访
 
 ### 使用
 
-```bash
+```sql
 SELECT * FROM your_table WHERE name !~ 'xx|xxx|xxxx';   # 查询name不包含多个条件
 
 -- CTE
