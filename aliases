@@ -1,4 +1,4 @@
--------------for macOS-----------------------------------------------
+-------------macOS command aliases-----------------------------------------------
 alias purge="sudo purge"   # 清理内存 for mac
 alias ty="sudo spctl --master-disable"  #同意安装任意来源 for mac, 版本需低于macOS15.0
 alias jupyter="nohup jupyter notebook --allow-root > jupyter.log 2>&1 &"  #后台启动jupyter notebook
