@@ -1,5 +1,8 @@
 version: '3.7' # 指定 docker-compose 文件的版本
 
+x-environment: &default-environment # 定义一个全局环境变量配置块
+  TZ: Asia/Shanghai # 统一设置所有容器的时区为亚洲/上海
+  
 services: # 定义服务部分，每个服务对应一个容器
   web: # Web 服务
     image: nginx:alpine # 使用官方的 Nginx 镜像（基于 Alpine Linux）
@@ -38,6 +41,7 @@ services: # 定义服务部分，每个服务对应一个容器
     volumes: 
       - web_data:/usr/share/nginx/html # 挂载卷，将数据持久化到宿主机
     environment: 
+      <<: *default-environment # 引用全局环境变量配置
       - NGINX_HOST=localhost # 设置环境变量 NGINX_HOST 为 localhost
     restart: always # 重启策略，服务总是重新启动
              or    no：不自动重启。
@@ -55,6 +59,7 @@ services: # 定义服务部分，每个服务对应一个容器
   db: # 数据库服务
     image: postgres:latest # 使用官方的 PostgreSQL 最新镜像
     environment: 
+      <<: *default-environment # 引用全局环境变量配置
       POSTGRES_USER: user # 设置 PostgreSQL 的用户为 user
       POSTGRES_PASSWORD: password # 设置 PostgreSQL 的密码为 password
     volumes: 
