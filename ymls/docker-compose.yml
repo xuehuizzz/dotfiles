@@ -1,3 +1,10 @@
+# 如果有敏感信息存于 .env 文件当中, 使用如下命令运行容器
+# docker-compose --env-file envFilePath -f custom.yml up -d
+#    --env-file指定了 .env 文件的路径, 不指定这个参数的话, 会默认加载当前目录下的 .env 文件
+#    -f指定了自定义的yml文件, 不指定的话, 默认使用 docker-compose.yml文件
+# 同理, 如果使用了自定义文件启动, 那么在downd的时候也应指定该文件,否则默认 docker-compose.yml
+#     docker-compose -f custom.yml down
+
 version: '3.7' # 指定 docker-compose 文件的版本
 
 x-environment: &default-environment # 定义一个全局环境变量配置块
@@ -42,7 +49,7 @@ services: # 定义服务部分，每个服务对应一个容器
       - web_data:/usr/share/nginx/html # 挂载卷，将数据持久化到宿主机
     environment: 
       <<: *default-environment # 引用全局环境变量配置
-      - NGINX_HOST=localhost # 设置环境变量 NGINX_HOST 为 localhost
+      - NGINX_HOST=${NGINX_HOST} # 从 .env 文件中读取 NGINX_HOST 变量, 设置环境变量 NGINX_HOST 为 localhost
     restart: always # 重启策略，服务总是重新启动
              or    no：不自动重启。
                    on-failure：仅在失败时重启，可附加最大重启次数限制。例如 on-failure:3
@@ -60,8 +67,8 @@ services: # 定义服务部分，每个服务对应一个容器
     image: postgres:latest # 使用官方的 PostgreSQL 最新镜像
     environment: 
       <<: *default-environment # 引用全局环境变量配置
-      POSTGRES_USER: user # 设置 PostgreSQL 的用户为 user
-      POSTGRES_PASSWORD: password # 设置 PostgreSQL 的密码为 password
+      POSTGRES_USER: ${POSTGRES_USER} # 从 .env 文件中读取 POSTGRES_USER 变量, 设置 PostgreSQL 的用户为 user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # 从 .env 文件中读取 POSTGRES_PASSWORD 变量, 设置 PostgreSQL 的密码为 password
     volumes: 
       - db_data:/var/lib/postgresql/data # 持久化数据库数据到宿主机
     networks: 
