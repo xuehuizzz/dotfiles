@@ -11,7 +11,6 @@ def setup_logger(log_level=logging.INFO, console_level=None, logger_name='your_p
     log_dir = Path(__file__).parent / "logs"
     log_dir.mkdir(parents=True, exist_ok=True)
 
-
     log_file = log_dir / "task.log"
     log_file.touch(exist_ok=True)
 
