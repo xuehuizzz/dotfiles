@@ -17,6 +17,7 @@ class MySQLHelper:
     def __init__(self) -> None:
         self.conn: Optional[pymysql.connections.Connection] = None
         self.cursor: Optional[pymysql.cursors.Cursor] = None
+        MySQLHelper.initialize_pool()
 
     def __enter__(self) -> 'MySQLHelper':
         self.conn = self._pool.get_connection()
@@ -82,7 +83,6 @@ class MySQLHelper:
 
 if __name__ == "__main__":
     """Using classmethod to ensure the data is loaded before program start and instance creation"""
-    MySQLHelper.initialize_pool()
     try:
         with MySQLHelper() as db:
             # Example of batch insert
