@@ -12,7 +12,7 @@ load_dotenv()
 
 
 class MySQLHelper:
-    _pool: Optional[ConnectionPool] = None
+    _connection_pool: Optional[ConnectionPool] = None
 
     def __init__(self) -> None:
         self.conn: Optional[pymysql.connections.Connection] = None
@@ -20,7 +20,7 @@ class MySQLHelper:
         MySQLHelper.initialize_pool()
 
     def __enter__(self) -> 'MySQLHelper':
-        self.conn = self._pool.get_connection()
+        self.conn = self._connection_pool.get_connection()
         self.cursor = self.conn.cursor()
         return self
 
@@ -33,7 +33,7 @@ class MySQLHelper:
     @classmethod
     def initialize_pool(cls) -> None:
         """Initialize the connection pool"""
-        if not cls._pool:
+        if not cls._connection_pool:
             config = {
                 "host": os.getenv("MY_HOST"),
                 "user": os.getenv("MY_USER"),
@@ -44,7 +44,7 @@ class MySQLHelper:
             if not all(config.values()):
                 raise ValueError("Missing required environment variables for database connection.")
             
-            cls._pool = ConnectionPool(**config)
+            cls._connection_pool = ConnectionPool(**config)
 
     def execute_query(self, query: str, params: Optional[Tuple[Any, ...]] = None) -> int:
         try:
