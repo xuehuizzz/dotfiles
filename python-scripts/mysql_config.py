@@ -34,22 +34,17 @@ class MySQLHelper:
     def initialize_pool(cls) -> None:
         """Initialize the connection pool"""
         if not cls._pool:
-            config = cls.load_db_config()
+            config = {
+                "host": os.getenv("MY_HOST"),
+                "user": os.getenv("MY_USER"),
+                "password": os.getenv("MY_PWD"),
+                "database": os.getenv("MY_DB"),
+                "port": int(os.getenv("MY_PORT")) if os.getenv("MY_PORT") else 3306
+            }
+            if not all(config.values()):
+                raise ValueError("Missing required environment variables for database connection.")
+            
             cls._pool = ConnectionPool(**config)
-
-    @classmethod
-    def load_db_config(cls) -> dict[str, Any]:
-        """Load the database configuration"""
-        config = {
-            "host": os.getenv("MY_HOST"),
-            "user": os.getenv("MY_USER"),
-            "password": os.getenv("MY_PWD"),
-            "database": os.getenv("MY_DB"),
-            "port": int(os.getenv("MY_PORT")) if os.getenv("MY_PORT") else 3306
-        }
-        if not all(config.values()):
-            raise ValueError("Missing required environment variables for database connection.")
-        return config
 
     def execute_query(self, query: str, params: Optional[Tuple[Any, ...]] = None) -> int:
         try:
