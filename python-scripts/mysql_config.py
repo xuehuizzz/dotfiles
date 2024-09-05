@@ -1,5 +1,5 @@
-# pip install pymysql pymysql-pool python-dotenv
 """This file is used to connect to MySQL and perform basic operations.
+pip install pymysql pymysql-pool python-dotenv
 """
 import os
 from typing import Optional, List, Tuple, Any
