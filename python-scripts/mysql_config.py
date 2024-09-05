@@ -59,7 +59,7 @@ class MySQLHelper:
             self.conn.rollback()
             raise RuntimeError(f"Failed to execute query: {query_err!r}") from query_err
 
-    def execute_many_queries(self, query, params_list):
+    def execute_many_queries(self, query, params_list=None):
         try:
             self.conn.ping(reconnect=True)  # Reconnect if connection is lost
             self.cursor.executemany(query, params_list)
