@@ -2,6 +2,7 @@
 """This file is used to connect to MySQL and perform basic operations.
 """
 import os
+from typing import Optional, List, Tuple, Any
 
 import pymysql
 from dotenv import load_dotenv
@@ -11,32 +12,32 @@ load_dotenv()
 
 
 class MySQLHelper:
-    _pool = None
+    _pool: Optional[ConnectionPool] = None
 
-    def __init__(self):
-        self.conn = None
-        self.cursor = None
+    def __init__(self) -> None:
+        self.conn: Optional[pymysql.connections.Connection] = None
+        self.cursor: Optional[pymysql.cursors.Cursor] = None
 
-    def __enter__(self):
+    def __enter__(self) -> 'MySQLHelper':
         self.conn = self._pool.get_connection()
         self.cursor = self.conn.cursor()
         return self
 
-    def __exit__(self, exc_type, exc_value, traceback):
+    def __exit__(self, exc_type: Optional[type], exc_value: Optional[Exception], traceback: Optional[Any]) -> None:
         if self.cursor:
             self.cursor.close()
         if self.conn:
             self.conn.close()
 
     @classmethod
-    def initialize_pool(cls):
+    def initialize_pool(cls) -> None:
         """Initialize the connection pool"""
         if not cls._pool:
             config = cls.load_db_config()
             cls._pool = ConnectionPool(**config)
 
     @classmethod
-    def load_db_config(cls):
+    def load_db_config(cls) -> dict[str, Any]:
         """Load the database configuration"""
         config = {
             "host": os.getenv("MY_HOST"),
@@ -49,7 +50,7 @@ class MySQLHelper:
             raise ValueError("Missing required environment variables for database connection.")
         return config
 
-    def execute_query(self, query, params=None):
+    def execute_query(self, query: str, params: Optional[Tuple[Any, ...]] = None) -> int:
         try:
             self.conn.ping(reconnect=True)  # Reconnect if connection is lost
             self.cursor.execute(query, params)
@@ -59,7 +60,7 @@ class MySQLHelper:
             self.conn.rollback()
             raise RuntimeError(f"Failed to execute query: {query_err!r}") from query_err
 
-    def execute_many_queries(self, query, params_list=None):
+    def execute_many_queries(self, query: str, params_list: Optional[List[Tuple[Any, ...]]] = None) -> int:
         try:
             self.conn.ping(reconnect=True)  # Reconnect if connection is lost
             self.cursor.executemany(query, params_list)
@@ -69,7 +70,7 @@ class MySQLHelper:
             self.conn.rollback()
             raise RuntimeError(f"Failed to execute queries: {query_err!r}") from query_err
 
-    def fetch_all(self, query, params=None):
+    def fetch_all(self, query: str, params: Optional[Tuple[Any, ...]] = None) -> List[Tuple[Any, ...]]:
         try:
             self.cursor.execute(query, params)
             return self.cursor.fetchall()
