@@ -1,4 +1,12 @@
-# 用于配置 Python 项目的标准化文件, 一般位于项目根目录
+# 用于配置 Python 项目的标准化文件, 一般位于项目根目录 pip install mypy ruff isort
+# isort path/to/file.py / isort .     检查并修复单个文件/整个项目
+#     ruff check path/to/file.py --fix   检查并修复单个文件
+#     ruff check path/to/project/ --fix  检查并修复整个项目
+#     ruff check . --fix                 检查并修复当前目录中的所有py文件
+# mypy path/to/your_file.py 检测单个文件并手动修改
+# mypy path1 path2 检测该路径下所以py文件并手动修改
+
+
 [build-system]
 requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
