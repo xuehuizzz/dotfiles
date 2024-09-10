@@ -20,8 +20,9 @@ jobs:
 
       - name: Run Qodana analysis
         run: |
+          mkdir -p .github/workflows/reports/qodana-report
           docker pull jetbrains/qodana-python
-          docker run --rm -v ${{ github.workspace }}:/data jetbrains/qodana-python --save-report
+          docker run --rm -v ${{ github.workspace }}:/data -v ${{ github.workspace }}/.github/workflows/reports/qodana-report:/data/qodana/report jetbrains/qodana-python --save-report
 
       - name: Upload Qodana report as artifact
         if: always()
