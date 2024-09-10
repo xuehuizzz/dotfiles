@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+env:
+  DOCKER_IMAGE: jetbrains/qodana-python
+  REPORT_DIR: .github/workflows/reports/qodana-report
+
 jobs:
   qodana:
     runs-on: ubuntu-latest
@@ -17,21 +21,19 @@ jobs:
 
       - name: Set up Docker
         uses: docker/setup-buildx-action@v3  # 更新到 v3
-        
+
       - name: Debug - List files in Docker container
         run: |
-          docker pull jetbrains/qodana-python
-          docker run --rm -v ${{ github.workspace }}:/data jetbrains/qodana-python ls -alh /data  # 列出容器内的 /data 目录文件
-  
+          docker pull ${{ env.DOCKER_IMAGE }}
+          docker run --rm -v ${{ github.workspace }}:/data ${{ env.DOCKER_IMAGE }} ls -alh /data
+
       - name: Run Qodana analysis
         run: |
-          mkdir -p .github/workflows/reports/qodana-report
-          docker pull jetbrains/qodana-python
-          docker run --rm -v ${{ github.workspace }}:/data -v ${{ github.workspace }}/.github/workflows/reports/qodana-report:/data/qodana/report jetbrains/qodana-python --save-report --source-directory /data
+          mkdir -p ${{ env.REPORT_DIR }}
+          docker pull ${{ env.DOCKER_IMAGE }}
+          docker run --rm -v ${{ github.workspace }}:/data -v ${{ env.REPORT_DIR }}:/data/qodana/report ${{ env.DOCKER_IMAGE }} --save-report --source-directory /data --report-directory /data/qodana/report
 
-      - name: Upload Qodana report as artifact
-        if: always()
-        uses: actions/upload-artifact@v4  # 更新到 v4
+      - name: Upload Qodana report
+        uses: qodana/qodana-action@v4
         with:
-          name: qodana-report
-          path: .github/workflows/reports/qodana-report  # 确保路径正确
+          reportDirectory: ${{ env.REPORT_DIR }}
