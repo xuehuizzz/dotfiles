@@ -20,6 +20,7 @@ jobs:
         
       - name: Debug - List files in Docker container
         run: |
+          ls -alh ${{ github.workspace }}
           docker pull jetbrains/qodana-python
           docker run --rm -v ${{ github.workspace }}:/data jetbrains/qodana-python ls -alh /data  # 列出容器内的 /data 目录文件
   
