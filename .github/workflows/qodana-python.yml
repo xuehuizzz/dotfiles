@@ -13,19 +13,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  # 更新到 v4
 
       - name: Set up Docker
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3  # 更新到 v3
 
       - name: Run Qodana analysis
         run: |
           docker pull jetbrains/qodana-python
-          docker run --rm -v ${{ github.workspace }}:/data jetbrains/qodana-python
+          docker run --rm -v ${{ github.workspace }}:/data jetbrains/qodana-python --save-report
 
       - name: Upload Qodana report as artifact
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # 更新到 v4
         with:
           name: qodana-report
-          path: ./qodana/report
+          path: qodana/report  # 确保路径正确
