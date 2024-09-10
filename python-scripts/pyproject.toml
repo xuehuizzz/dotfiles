@@ -1,10 +1,13 @@
-# 用于配置 Python 项目的标准化文件
+# 用于配置 Python 项目的标准化文件, 一般位于项目根目录
 [project]
 name = "my_package"  # 项目名称
 version = "0.1.0"  # 项目版本
 description = "A sample Python package"  # 项目描述
 authors = [
-  { name = "Your Name", email = "your.email@example.com" }
+  { 
+    name = "Your Name", 
+    email = "your.email@example.com" 
+  }
 ]
 dependencies = ["requests>=2.25", "numpy>=1.21"]  # 依赖项
 
