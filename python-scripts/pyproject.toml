@@ -1,4 +1,10 @@
 # 用于配置 Python 项目的标准化文件, 一般位于项目根目录
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+# 项目信息
 [project]
 name = "my_package"  # 项目名称
 version = "0.1.0"  # 项目版本
@@ -10,7 +16,13 @@ authors = [
   }
 ]
 dependencies = ["requests>=2.25", "numpy>=1.21"]  # 依赖项
+[project.urls]
+homepage = "https://your-homepage.com"
+repository = "https://github.com/your-repo"
+documentation = "https://your-docs-url"
 
+
+# 代码质量格式检查
 [tool.ruff]
 # 指定哪些文件或目录应被检查
 target-version = "py39"  # 目标 Python 版本
@@ -31,6 +43,8 @@ ban-relative-imports = "all"  # 禁止相对导入
 [tool.ruff.per-file-ignores]
 "tests/test_*.py" = ["F401", "F403"]  # 忽略未使用的导入和 * 导入
 
+
+# 导包排序
 [tool.isort]
 line_length = 100    # 指定每行代码的最大字符数
 multi_line_output = 3   # 定义多行导入的格式
@@ -41,3 +55,40 @@ ensure_newline_before_comments = True    # 在导入语句上方的注释之前�
 known_first_party = ['my_module', 'my_other_module']   # import my_module, from my_other_module import xxx
 default_section = 'THIRDPARTY'     # 为未分类模块设置默认第三方库
 sections = ['FUTURE', 'STDLIB', 'THIRDPARTY', 'FIRSTPARTY', 'LOCALFOLDER']     # 定义导入语句的排序顺序
+
+
+# 静态类型检查
+[tool.mypy]
+python_version = "3.8"             # 设置 Python 版本
+ignore_missing_imports = true      # 忽略无法导入的模块
+disallow_untyped_calls = true      # 不允许调用未注释类型的函数
+disallow_untyped_defs = true       # 不允许定义未注释类型的函数
+disallow_incomplete_defs = true    # 禁止部分类型标注的函数
+check_untyped_defs = true          # 即使没有类型注解也检查函数体
+disallow_untyped_decorators = true # 不允许使用未注释类型的装饰器
+warn_unused_ignores = true         # 警告无效的 # type: ignore 注释
+warn_return_any = true             # 警告返回类型为 Any 的函数
+warn_redundant_casts = true        # 警告冗余的类型转换
+warn_unused_configs = true         # 警告未使用的配置选项
+warn_unreachable = true            # 警告无法到达的代码
+strict_optional = true             # 启用严格的 None 检查
+no_implicit_optional = true        # 禁止隐式使用 Optional[T]
+allow_untyped_globals = false      # 不允许使用未注释类型的全局变量
+allow_redefinition = false         # 不允许变量重新定义
+strict_equality = true             # 启用严格的相等性检查
+namespace_packages = true          # 启用对命名空间包的支持
+incremental = true                 # 增量模式
+cache_dir = ".mypy_cache"          # 自定义缓存目录
+sqlite_cache = true                # 使用 SQLite 存储缓存
+follow_imports = "silent"          # 静默处理导入的模块
+plugins = []                       # 插件列表
+
+# 为某些包禁用类型检查
+[[tool.mypy.overrides]]
+module = "some_library.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "test_file"
+ignore_errors = true               # 忽略这个文件中的所有类型检查错误
+
