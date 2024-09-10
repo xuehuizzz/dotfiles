@@ -18,6 +18,13 @@ jobs:
       - name: List project directory
         run: ls -alh  # 列出目录内容，确保代码检出  
 
+
+      - name: List all files recursively
+        run: ls -R
+      - name: Find Python files
+        run: find . -name "*.py"
+
+
       - name: Set up Docker
         uses: docker/setup-buildx-action@v3  # 更新到 v3
 
