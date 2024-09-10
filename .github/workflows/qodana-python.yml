@@ -1,0 +1,31 @@
+name: Qodana Python Analysis
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  qodana:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Run Qodana analysis
+        run: |
+          docker pull jetbrains/qodana-python
+          docker run --rm -v ${{ github.workspace }}:/data jetbrains/qodana-python
+
+      - name: Upload Qodana report as artifact
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: qodana-report
+          path: ./qodana/report
