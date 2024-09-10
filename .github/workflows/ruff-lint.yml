@@ -3,10 +3,10 @@ name: Ruff Lint
 on:
   push:
     branches:
-      - main  # 在推送到 main 分支时运行
+      - main
   pull_request:
     branches:
-      - main  # 在对 main 分支的 PR 时运行
+      - main
 
 jobs:
   lint:
@@ -14,27 +14,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 检出仓库代码
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 设置 Python 环境（选择 3.x 版本）
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      # 安装 Ruff
       - name: Install Ruff
         run: |
           python -m pip install --upgrade pip
           pip install ruff
 
-      # 运行 Ruff 来检查 Python 代码
+      # 将 Ruff 输出保存到文件
       - name: Run Ruff
-        run: ruff .  # 检查当前目录下的所有 Python 文件
+        run: |
+          ruff check . | tee ruff.log
 
-      # 如果你希望在 Ruff 检查失败时显示输出日志，可以加上这一部分
+      # 如果 Ruff 检查失败，显示 Ruff 的输出日志
       - name: Show Ruff logs
         if: failure()
         run: cat ruff.log
