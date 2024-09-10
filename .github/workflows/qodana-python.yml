@@ -17,7 +17,15 @@ jobs:
 
       - name: Set up Docker
         uses: docker/setup-buildx-action@v3  # 更新到 v3
-
+        
+      - name: Debug:List files in Docker container
+        run: |
+          docker pull jetbrains/qodana-python
+          docker run --rm -v ${{ github.workspace }}:/data jetbrains/qodana-python ls -alh /data  # 列出容器内的 /data 目录文件
+      - name: Debug:Find Python files in Docker container
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/data jetbrains/qodana-python find /data -name "*.py"  # 列出容器内的 Python 文件
+          
       - name: Run Qodana analysis
         run: |
           mkdir -p .github/workflows/reports/qodana-report
