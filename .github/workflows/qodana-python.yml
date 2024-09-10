@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  DOCKER_IMAGE: jetbrains/analyze:latest
+  DOCKER_IMAGE: jetbrains/qodana-python:latest
   REPORT_DIR: .github/workflows/reports/qodana-report
 
 jobs:
@@ -26,10 +26,6 @@ jobs:
         run: |
           docker pull ${{ env.DOCKER_IMAGE }}
           docker run --rm -v ${{ github.workspace }}:/data ${{ env.DOCKER_IMAGE }} ls -alh /data
-
-      - name: Debug - Check file permissions
-        run: |
-          docker run --rm -v ${{ github.workspace }}:/data ${{ env.DOCKER_IMAGE }} ls -l /data
 
       - name: Run Qodana analysis
         run: |
