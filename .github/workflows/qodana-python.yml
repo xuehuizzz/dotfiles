@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  DOCKER_IMAGE: jetbrains/qodana-python
+  DOCKER_IMAGE: jetbrains/analyze:latest
   REPORT_DIR: .github/workflows/reports/qodana-report
 
 jobs:
@@ -31,9 +31,10 @@ jobs:
         run: |
           mkdir -p ${{ env.REPORT_DIR }}
           docker pull ${{ env.DOCKER_IMAGE }}
-          docker run --rm -v ${{ github.workspace }}:/data -v ${{ env.REPORT_DIR }}:/data/qodana/report ${{ env.DOCKER_IMAGE }} --save-report --source-directory /data --report-directory /data/qodana/report
+          docker run --rm -v ${{ github.workspace }}:/data -v ${{ env.REPORT_DIR }}:/data/qodana/report ${{ env.DOCKER_IMAGE }} analyze /data --profile python --report-format html --save-report --report-directory /data/qodana/report
 
       - name: Upload Qodana report
-        uses: qodana/qodana-action@v4
+        uses: actions/upload-artifact@v4
         with:
-          reportDirectory: ${{ env.REPORT_DIR }}
+          name: qodana-report
+          path: ${{ env.REPORT_DIR }}
