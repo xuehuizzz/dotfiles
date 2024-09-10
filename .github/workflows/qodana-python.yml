@@ -17,15 +17,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # 更新到 v4
+        uses: actions/checkout@v4
 
       - name: Set up Docker
-        uses: docker/setup-buildx-action@v3  # 更新到 v3
+        uses: docker/setup-buildx-action@v3
 
       - name: Debug - List files in Docker container
         run: |
           docker pull ${{ env.DOCKER_IMAGE }}
           docker run --rm -v ${{ github.workspace }}:/data ${{ env.DOCKER_IMAGE }} ls -alh /data
+
+      - name: Debug - Check file permissions
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/data ${{ env.DOCKER_IMAGE }} ls -l /data
 
       - name: Run Qodana analysis
         run: |
