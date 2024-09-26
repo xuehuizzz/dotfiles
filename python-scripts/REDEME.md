@@ -118,20 +118,10 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
     *
         ```python
+        # 在日志记录和抛出异常的时候建议使用 `%r` 来进行字符串占位, 而不是 `%s`
         import logging
         logging.debug("Some debug info: %r", value)
         ```
-
-*   xlsx和csv互相转换
-
-    *
-        ```bash
-        xlsx2csv test.xlsx test.csv   #转换整个数据表
-        xlsx2csv -s 1 test.xlsx test.csv  #仅转换指定第一个数据表
-        csv2xlsx input.csv output.xlsx
-        ```
-
-*   在日志记录和抛出异常的时候建议使用 `%r` 来进行字符串占位, 而不是 `%s`
 
 *   在同一个文件中，保持使用字符串引号的一致性, 如果要引用的字符串为多行时，需要使用双引号引用字符串,文档字符串（docstring）必须使用三重双引号`"""` 
 
