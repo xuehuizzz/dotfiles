@@ -39,6 +39,9 @@ class MySQLHelper:
         if self.conn:
             self.conn.close()
             self.conn = None
+
+    @classmethod
+    def close_pool(cls) -> None:
         if MySQLHelper._connection_pool:
             MySQLHelper._connection_pool.dispose()
             MySQLHelper._connection_pool = None
@@ -91,26 +94,31 @@ class MySQLHelper:
 
 if __name__ == "__main__":
     """Using classmethod to ensure the data is loaded before program start and instance creation"""
-    with MySQLHelper() as db:
-        # Example of batch insert
-        insert_query = "INSERT INTO video (title, url) VALUES (%s, %s)"
-        insert_data = [
-            ("Title1", "http://example.com/1"),
-            ("Title2", "http://example.com/2"),
-            ("Title3", "http://example.com/3"),
-        ]
-        rows_inserted = db.execute_many_queries(insert_query, insert_data)
-        print(f"{rows_inserted} rows inserted.")
+    try:
+        with MySQLHelper() as db:
+            # Example of batch insert
+            insert_query = "INSERT INTO video (title, url) VALUES (%s, %s)"
+            insert_data = [
+                ("Title1", "http://example.com/1"),
+                ("Title2", "http://example.com/2"),
+                ("Title3", "http://example.com/3"),
+            ]
+            rows_inserted = db.execute_many_queries(insert_query, insert_data)
+            print(f"{rows_inserted} rows inserted.")
 
-        # Example of batch update
-        update_query = "UPDATE video SET title = %s WHERE id = %s"
-        update_data = [
-            ("New Title1", 1),
-            ("New Title2", 2),
-            ("New Title3", 3),
-        ]
-        rows_updated = db.execute_many_queries(update_query, update_data)
-        print(f"{rows_updated} rows updated.")
+            # Example of batch update
+            update_query = "UPDATE video SET title = %s WHERE id = %s"
+            update_data = [
+                ("New Title1", 1),
+                ("New Title2", 2),
+                ("New Title3", 3),
+            ]
+            rows_updated = db.execute_many_queries(update_query, update_data)
+            print(f"{rows_updated} rows updated.")
 
-        results = db.fetch_all("SELECT count(id) FROM video;")
-        print(results)
+            results = db.fetch_all("SELECT count(id) FROM video;")
+            print(results)
+    except Exception as err:
+        print(f"Error: {err!r}")
+    finally:
+        MySQLHelper.close_pool()
