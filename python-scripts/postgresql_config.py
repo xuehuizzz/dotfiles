@@ -13,11 +13,19 @@ load_dotenv()
 class PostgreSQLContext:
     _connection_pool: Optional[pool.SimpleConnectionPool] = None
 
-    def __init__(self):
+    def __init__(self, host: Optional[str] = None, port: Optional[int] = None,
+                 database: Optional[str] = None, user: Optional[str] = None,
+                 password: Optional[str] = None,):
         self.conn = None
         self.cursor = None
-        PostgreSQLContext.initialize_pool()
-        
+        self.user = user or os.getenv("PG_USER")
+        self.password = password or os.getenv("PG_PASSWORD")
+        self.database = database or os.getenv("PG_DB")
+        self.host = host or os.getenv("PG_HOST")
+        self.port = port or int(os.getenv("PG_PORT", 5432))
+        if not self._connection_pool:
+            PostgreSQLContext.initialize_pool(self.host, self.port, self.database, self.user, self.password)
+
     def __enter__(self):
         self.conn = self._connection_pool.getconn()
         self.cursor = self.conn.cursor()
@@ -28,18 +36,18 @@ class PostgreSQLContext:
             self.cursor.close()
         if self.conn:
             self._connection_pool.putconn(self.conn)
-            
+
     @classmethod
-    def initialize_pool(cls):
+    def initialize_pool(cls, host: str, port: int, database: str, user: str, password: str):
         if not cls._connection_pool:
             cls._connection_pool = pool.SimpleConnectionPool(
                 minconn=1,
                 maxconn=10,
-                host=os.getenv("PG_HOST"),
-                user=os.getenv("PG_USER"),
-                password=os.getenv("PG_PASSWORD"),
-                database=os.getenv("PG_DB"),
-                port=int(os.getenv("PG_PORT", 5432))
+                host=host,
+                port=port,
+                database=database,
+                user=user,
+                password=password
             )
             if cls._connection_pool:
                 print("Connection pool created successfully")
@@ -55,7 +63,7 @@ class PostgreSQLContext:
         except Exception as query_err:
             self.conn.rollback()
             raise RuntimeError(f"Failed to execute query: {query_err!r}") from query_err
-            
+
     def execute_many_queries(self, query: str, params: Optional[List[Any]] = None) -> int:
         """Execute many SQL query"""
         try:
@@ -65,7 +73,7 @@ class PostgreSQLContext:
         except Exception as query_err:
             self.conn.rollback()
             raise RuntimeError(f"Failed to execute query: {query_err!r}") from query_err
-            
+
     def fetch_all(self, query: str, params: Optional[List[Any]] = None) -> List[Any]:
         """Fetch all rows from a query"""
         try:
@@ -112,4 +120,3 @@ if __name__ == "__main__":
         results = db.fetch_all("SELECT * FROM your_table")
     for row in results:
         print(row)
-
