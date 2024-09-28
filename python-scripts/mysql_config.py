@@ -11,7 +11,7 @@ from pymysqlpool import ConnectionPool
 load_dotenv()
 
 
-class MySQLHelper:
+class MySQLContext:
     _connection_pool: Optional[ConnectionPool] = None
 
     def __init__(self, host: Optional[str] = None,  user: Optional[str] = None,
@@ -24,10 +24,10 @@ class MySQLHelper:
         self.password = password or os.getenv("MY_PWD")
         self.database = database or os.getenv("MY_DB")
         self.port = port or int(os.getenv("MY_PORT")) if os.getenv("MY_PORT") else 3306
-        if not MySQLHelper._connection_pool:
-            MySQLHelper.initialize_pool(self.host, self.user, self.password, self.database, self.port)
+        if not MySQLContext._connection_pool:
+            MySQLContext.initialize_pool(self.host, self.user, self.password, self.database, self.port)
 
-    def __enter__(self) -> 'MySQLHelper':
+    def __enter__(self) -> 'MySQLContext':
         self.conn = self._connection_pool.get_connection()
         self.cursor = self.conn.cursor()
         return self
@@ -42,9 +42,9 @@ class MySQLHelper:
 
     @classmethod
     def close_pool(cls) -> None:
-        if MySQLHelper._connection_pool:
-            MySQLHelper._connection_pool.dispose()
-            MySQLHelper._connection_pool = None
+        if MySQLContext._connection_pool:
+            MySQLContext._connection_pool.dispose()
+            MySQLContext._connection_pool = None
 
     @classmethod
     def initialize_pool(cls, host: str, user: str, password: str, database: str, port: int) -> None:
@@ -95,7 +95,7 @@ class MySQLHelper:
 if __name__ == "__main__":
     """Using classmethod to ensure the data is loaded before program start and instance creation"""
     try:
-        with MySQLHelper() as db:
+        with MySQLContext() as db:
             # Example of batch insert
             insert_query = "INSERT INTO video (title, url) VALUES (%s, %s)"
             insert_data = [
@@ -121,5 +121,6 @@ if __name__ == "__main__":
     except Exception as err:
         print(f"Error: {err!r}")
     finally:
-        # It only needs to be called once after all `with MySQLHelper() as db` operations have ended
-        MySQLHelper.close_pool()
+        # It only needs to be called once after all `with MySQLContext() as db` operations have ended
+        MySQLContext.close_pool()
+        
