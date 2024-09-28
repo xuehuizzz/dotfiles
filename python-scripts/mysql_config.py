@@ -121,4 +121,5 @@ if __name__ == "__main__":
     except Exception as err:
         print(f"Error: {err!r}")
     finally:
+        # It only needs to be called once after all `with MySQLHelper() as db` operations have ended
         MySQLHelper.close_pool()
