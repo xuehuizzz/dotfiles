@@ -1,11 +1,10 @@
-"""
-A log config file, Use lazy % formatting in logging functions
+"""A log config file, Use lazy % formatting in logging functions.
 """
 import logging
 from pathlib import Path
 
 
-def setup_logger(log_level=logging.INFO, console_level=None, logger_name='your_project_name'):
+def setup_logger(log_level=logging.INFO, console_level=None, logger_name='custom_logger_name'):
     """Sets up and returns a logger with both file and console handlers.
     """
     log_dir = Path(__file__).parent / "logs"
@@ -27,7 +26,7 @@ def setup_logger(log_level=logging.INFO, console_level=None, logger_name='your_p
     console_handler.setLevel(console_level or log_level)
 
     formatter = logging.Formatter(
-        '%(levelname)-10s%(asctime)s - %(filename)s [%(funcName)s:%(lineno)d] - %(message)s',
+        '%(asctime)s - %(levelname)-8s | %(filename)s [%(funcName)s:%(lineno)d] - %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S'
     )
 
@@ -47,4 +46,3 @@ if __name__ == '__main__':
     test_logger.warning('这是一个warning信息')
     test_logger.error('这是一个error信息')
     test_logger.critical('这是一个critical信息')
-
