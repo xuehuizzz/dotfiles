@@ -133,5 +133,5 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:
-        # It only needs to be called once after all `with PostgreSQLContext() as db` operations have ended
+        # Disconnect the pool at the end of the program
         PostgreSQLContext.close_pool()
