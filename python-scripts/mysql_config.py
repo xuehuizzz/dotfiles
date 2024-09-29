@@ -121,6 +121,6 @@ if __name__ == "__main__":
     except Exception as err:
         print(f"Error: {err!r}")
     finally:
-        # It only needs to be called once after all `with MySQLContext() as db` operations have ended
+        # Disconnect the pool at the end of the program
         MySQLContext.close_pool()
         
