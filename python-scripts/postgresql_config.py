@@ -75,6 +75,7 @@ class PostgreSQLContext:
     def execute_many_queries(self, query: str, params: Optional[List[Any]] = None) -> int:
         """Execute many SQL query"""
         try:
+            # TODO: 改成手动拼接多个 VALUES 语句
             self.cursor.executemany(query, params)
             self.conn.commit()
             return self.cursor.rowcount
