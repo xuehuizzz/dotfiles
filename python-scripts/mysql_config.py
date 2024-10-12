@@ -76,6 +76,7 @@ class MySQLContext:
 
     def execute_many_queries(self, query: str, params_list: Optional[List[Tuple[Any, ...]]] = None) -> int:
         try:
+            # TODO: 优化该方法, 因为executemany不是一条语句多个values
             self.conn.ping(reconnect=True)  # Reconnect if connection is lost
             self.cursor.executemany(query, params_list)
             self.conn.commit()
