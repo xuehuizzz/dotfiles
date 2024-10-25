@@ -1,5 +1,14 @@
 FROM ubuntu:22.04
 
+# 更换 APT 镜像源为清华大学镜像（可选，根据你的地理位置选择更快的镜像源）
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list && \
+    sed -i 's|http://security.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list
+
+# 配置 APT 以支持并行下载
+RUN echo 'Acquire::Queue-Mode "access";' > /etc/apt/apt.conf.d/99parallel && \
+    echo 'Acquire::http::Pipeline-Depth "200";' >> /etc/apt/apt.conf.d/99parallel && \
+    echo 'Acquire::https::Pipeline-Depth "200";' >> /etc/apt/apt.conf.d/99parallel
+
 # 安装基础依赖
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
