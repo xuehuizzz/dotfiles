@@ -1,4 +1,4 @@
-1.<mark>使用save和load导出并导入镜像</mark>
+一.<mark>使用save和load导出并导入镜像</mark>
 
 ```markdown
 # 导出镜像
@@ -9,7 +9,7 @@ docker load -i [导入文件名].tar
     docker load -i my_image.tar
 ```
 
-2.<mark>使用export和import导出并导入容器文件系统为镜像</mark>
+二.<mark>使用export和import导出并导入容器文件系统为镜像</mark>
 
 ```markdown
 # 导出容器文件
@@ -20,7 +20,7 @@ docker import [导入文件名].tar [新镜像名称]:[标签]
     docker import my_container.tar my_new_image:latest
 ```
 
-3.<mark>创建并启动容器</mark>
+三.<mark>创建并启动容器</mark>
 
 ```bash
 docker run \
@@ -32,6 +32,14 @@ docker run \
   -v /host/data:/container/data\  # 挂载主机的目录到容器的目录
   my_image:latest  # 使用的镜像
 ```
+
+四:<mark>docker容器重启策略</mark>
+
+- `no`: 默认策略, 不会自动重启容器
+- `on-failure`: 仅在容器已非零状态码退出时才会自动重启, 可以指定尝试重启的次数.  --restart=on-failure:5
+- `always`: 无论容器如何退出, 总是会自动重启容器
+- `unless-stopped`: 类似于`always`, 但当容器被手动停止(例如`docker stop`)时, 则不会自动重启
+
 4.<mark>docker run参数</mark>
 
 ①容器命名与标签
