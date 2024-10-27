@@ -40,6 +40,54 @@ docker run \
 - `always`: 无论容器如何退出, 总是会自动重启容器
 - `unless-stopped`: 类似于`always`, 但当容器被手动停止(例如`docker stop`)时, 则不会自动重启
 
+五.<mark>docker容器网络概述(5种网络类型)</mark>
+
+①. `桥接网络 bridge`
+- 当你创建容器但未指定网络时, 默认使用桥接网络
+- 容器之间可以通过容器名互相通信
+- 支持端口映射, 使外部访问容器服务成为可能
+- ```bash
+  # 查看当前网络
+  docker network ls
+  # 创建自定义桥接网络
+  docker network create my-bridge-network
+  # 运行容器并连接到自定义桥接网络
+  docker run -d --name my-container --network my-bridge-network my-image
+  ```
+
+②. `主机网络 host`
+- 容器共享主机的网络栈, 没有网络隔离.  提高网络性能, 减少网络开销
+- 使用场景: 对网络性能要求高, 或需要容器直接使用主机网络的场景
+- ```bash
+  docker run -d --name my-container --network host my-image
+  ```
+
+③. `覆盖网络 overlay`
+- 跨多个docker主机创建网络, 适用于Swarm集群或Kubernetes集群
+- 允许不同主机上的容器像在同一网络中一样通信
+- ```bash
+  # 创建覆盖网络
+  docker network create -d overlay my-overlay-network
+  # 在Swarm服务中使用覆盖网络
+  docker service create --name my-service --network my-overlay-network my-image
+  ```
+
+④. `容器网络 container`
+- 允许一个容器与另一个容器共享网络命名空间, 不需要单独分配IP地址
+- ```bash
+  # 运行第一个容器
+  docker run -d --name container1 my-image
+  # 运行第二个容器，并与第一个容器共享网络
+  docker run -d --name container2 --network container:container1 my-image
+  ```
+
+⑤. `无网络 none`
+- 容器没有网络接口, 完全隔离, 适用于不需要网络通信的特殊场景
+- ```bash
+  docker run -d --name my-container --network none my-image
+  ```
+
+
 4.<mark>docker run参数</mark>
 
 ①容器命名与标签
