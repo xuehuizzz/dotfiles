@@ -1,3 +1,19 @@
+<mark>常用命令</mark>
+```cmd
+docker ps -a  # 查看所以容器
+docker ps -q  # 列出所以运行中容器的ID,  -aq: 列出所有容器id
+docker stop/start 容器ID/名称    # 停止/启动容器
+docker restart 容器ID/名称    # 重启容器
+docker restart $(docker ps -aq)   # 重启所有容器
+docker inspect 容器ID/名称   # 查看容器的详细信息
+docker exec -it 容器ID/名称 bash   # 交互式进入容器内部
+docker iamges   # 查看所以镜像
+docker rm 容器ID/名称  # 删除已停止的容器, -f:强制删除运行中的容器, 谨慎使用
+docker rmi 镜像ID/名称  # 删除指定镜像, -f:强制删除镜像, 谨慎使用
+docker network ls   # 列出当前docker环境中所有网络
+docker network inspect 网络ID/名称   # 查看某个网络的详细信息
+```
+
 一.<mark>使用save和load导出并导入镜像</mark>
 
 ```markdown
@@ -89,8 +105,7 @@ docker run \
   docker run -d --name my-container --network none my-image
   ```
 
-
-4.<mark>docker run参数</mark>
+六.<mark>docker run参数</mark>
 
 ①容器命名与标签
 - `--name <容器名>`: 为容器指定一个唯一名称, 方便后续管理
