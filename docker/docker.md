@@ -1,4 +1,4 @@
-1.==使用save和load导出并导入镜像==
+1.<mark>使用save和load导出并导入镜像</mark>
 
 ```markdown
 # 导出镜像
@@ -9,7 +9,7 @@ docker load -i [导入文件名].tar
     docker load -i my_image.tar
 ```
 
-2.==使用export和import导出并导入容器文件系统为镜像==
+2.<mark>使用export和import导出并导入容器文件系统为镜像</mark>
 
 ```markdown
 # 导出容器文件
