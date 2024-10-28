@@ -42,3 +42,7 @@ killall Dock
 # 恢复Dock栏的显示, 自动隐藏与显示
 defaults write com.apple.dock autohide-delay -float 0
 killall Dock
+
+# 修复 brew services异常, 重新安装
+brew untap homebrew/services
+brew tap homebrew/services
