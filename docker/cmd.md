@@ -20,6 +20,8 @@ docker rm 容器ID/名称  # 删除已停止的容器, -f:强制删除运行中�
 docker rmi 镜像ID/名称  # 删除指定镜像, -f:强制删除镜像, 谨慎使用
 docker network ls   # 列出当前docker环境中所有网络
 docker network inspect 网络ID/名称   # 查看某个网络的详细信息
+docker network create --driver bridge my-custom-network   # 创建一个新的自定义网络, 指定类型为 bridge
+docker network rm 网络ID/名称   # 删除网络
 ```
 
 一.<mark>使用save和load导出并导入镜像</mark>
