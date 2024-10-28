@@ -32,10 +32,11 @@ docker exec -it 容器ID/名称 bash   # 交互式进入容器内部
 docker iamges   # 查看所以镜像
 docker rm 容器ID/名称  # 删除已停止的容器, -f:强制删除运行中的容器, 谨慎使用
 docker rmi 镜像ID/名称  # 删除指定镜像, -f:强制删除镜像, 谨慎使用
-docker network ls   # 列出当前docker环境中所有网络
+docker network ls   # 列出当前docker环境中所有网络, 一个docker容器可以连接多个网络
 docker network inspect 网络ID/名称   # 查看某个网络的详细信息
 docker network create --driver bridge my-custom-network   # 创建一个新的自定义网络, 指定类型为 bridge
 docker network connect 网络ID/名称 容器ID/名称    # 将一个容器连接到一个指定的网络
+docker network disconnect 网络ID/名称 容器ID/名称   # 断开连接网络
 docker network rm 网络ID/名称   # 删除网络
 ```
 
