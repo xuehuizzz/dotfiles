@@ -18,6 +18,8 @@ docker run \
   --health-timeout=5s \   # 健康检查命令的超时时间。如果超过这个时间，健康检查视为失败（默认30秒）
   --health-retries=3 \   # 如果连续多少次健康检查失败，认为容器处于不健康状态（默认3次）
   --health-start-period=30s \   # 容器启动后多长时间开始执行健康检查（默认0秒）。这可以为应用程序预留启动时间
+  --device-read-bps /dev/sda:10mb --device-write-bps /dev/sda:10mb \   # 限制容器对特定设备的读写速率(每秒字节数): 10mb, 防止某个容器过度占用IO资源，影响到宿主机或其他容器的正常运行
+  --device-read-iops /dev/sda:1000 --device-write-iops /dev/sda:1000 \   # 限制每秒的IO操作数为1000
   my_image:latest  # 使用的镜像
 
 docker rename my_comtainer my_new_container  # 重命名容器
