@@ -12,6 +12,7 @@ docker ps -q  # 列出所以运行中容器的ID,  -aq: 列出所有容器id
 docker stop/start 容器ID/名称    # 停止/启动容器
 docker restart 容器ID/名称    # 重启容器
 docker restart $(docker ps -aq)   # 重启所有容器
+docker logs -f --tail num 容器ID/名称   # 查看docker日志最新xxx条
 docker inspect 容器ID/名称   # 查看容器的详细信息
 docker exec -it 容器ID/名称 bash   # 交互式进入容器内部
 docker iamges   # 查看所以镜像
