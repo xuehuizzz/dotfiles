@@ -6,6 +6,7 @@ docker build \    # 构建镜像文件
   --build-arg no_proxy=localhost,127.0.0.1 \
   -t your-image-name:tag .     # 应与Dockerfile同一目录, 或使用 -f 指定dockerfile文件
 
+docker rename my_comtainer my_new_container  # 重命名容器
 docker ps -a  # 查看所以容器
 docker ps -q  # 列出所以运行中容器的ID,  -aq: 列出所有容器id
 docker stop/start 容器ID/名称    # 停止/启动容器
