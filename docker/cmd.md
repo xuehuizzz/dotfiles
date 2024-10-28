@@ -1,5 +1,11 @@
 <mark>常用命令</mark>
 ```cmd
+docker build \    # 构建镜像文件
+  --build-arg http_proxy=http://你的代理地址:端口 \
+  --build-arg https_proxy=http://你的代理地址:端口 \
+  --build-arg no_proxy=localhost,127.0.0.1 \
+  -t your-image-name:tag .
+
 docker ps -a  # 查看所以容器
 docker ps -q  # 列出所以运行中容器的ID,  -aq: 列出所有容器id
 docker stop/start 容器ID/名称    # 停止/启动容器
