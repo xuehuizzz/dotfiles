@@ -6,6 +6,20 @@ docker build \    # 构建镜像文件
   --build-arg no_proxy=localhost,127.0.0.1 \
   -t your-image-name:tag .     # 应与Dockerfile同一目录, 或使用 -f 指定dockerfile文件
 
+docker run \
+  -it \  #
+  --name my_container \  # 指定容器名称
+  --restart unless-stopped \  # 只有容器被手动停止,容器才不会尝试重启
+  --network bridge \  # docker的默认网络模式, 不需要显式指定
+  -p 8080:80 \  # 映射主机的端口8080到容器的端口80
+  -v /host/data:/container/data\  # 挂载主机的目录到容器的目录
+  --health-cmd="curl --fail http://localhost:8080 || exit 1" \
+  --health-interval=30s \   # 两次健康检查之间的时间间隔（默认30秒）
+  --health-timeout=5s \   # 健康检查命令的超时时间。如果超过这个时间，健康检查视为失败（默认30秒）
+  --health-retries=3 \   # 如果连续多少次健康检查失败，认为容器处于不健康状态（默认3次）
+  --health-start-period=30s \   # 容器启动后多长时间开始执行健康检查（默认0秒）。这可以为应用程序预留启动时间
+  my_image:latest  # 使用的镜像
+
 docker rename my_comtainer my_new_container  # 重命名容器
 docker ps -a  # 查看所以容器
 docker ps -q  # 列出所以运行中容器的ID,  -aq: 列出所有容器id
@@ -47,32 +61,14 @@ docker import [导入文件名].tar [新镜像名称]:[标签]
     docker import my_container.tar my_new_image:latest
 ```
 
-三.<mark>创建并启动容器</mark>
-
-```bash
-docker run \
-  -it \  #
-  --name my_container \  # 指定容器名称
-  --restart unless-stopped \  # 只有容器被手动停止,容器才不会尝试重启
-  --network bridge \  # docker的默认网络模式, 不需要显式指定
-  -p 8080:80 \  # 映射主机的端口8080到容器的端口80
-  -v /host/data:/container/data\  # 挂载主机的目录到容器的目录
-  --health-cmd="curl --fail http://localhost:8080 || exit 1" \
-  --health-interval=30s \   # 两次健康检查之间的时间间隔（默认30秒）
-  --health-timeout=5s \   # 健康检查命令的超时时间。如果超过这个时间，健康检查视为失败（默认30秒）
-  --health-retries=3 \   # 如果连续多少次健康检查失败，认为容器处于不健康状态（默认3次）
-  --health-start-period=30s \   # 容器启动后多长时间开始执行健康检查（默认0秒）。这可以为应用程序预留启动时间
-  my_image:latest  # 使用的镜像
-```
-
-四:<mark>docker容器重启策略</mark>
+三:<mark>docker容器重启策略</mark>
 
 - `no`: 默认策略, 不会自动重启容器
 - `on-failure`: 仅在容器已非零状态码退出时才会自动重启, 可以指定尝试重启的次数.  --restart=on-failure:5
 - `always`: 无论容器如何退出, 总是会自动重启容器
 - `unless-stopped`: 类似于`always`, 但当容器被手动停止(例如`docker stop`)时, 则不会自动重启
 
-五.<mark>docker容器网络概述(5种网络类型)</mark>
+四.<mark>docker容器网络概述(5种网络类型)</mark>
 
 ❗❗**在容器启动后，无法将其网络更改为其他网络类型**
 
