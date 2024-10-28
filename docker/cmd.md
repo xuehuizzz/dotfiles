@@ -52,6 +52,11 @@ docker run \
   --network bridge \  # docker的默认网络模式, 不需要显式指定
   -p 8080:80 \  # 映射主机的端口8080到容器的端口80
   -v /host/data:/container/data\  # 挂载主机的目录到容器的目录
+  --health-cmd="curl --fail http://localhost:8080 || exit 1" \
+  --health-interval=30s \   # 两次健康检查之间的时间间隔（默认30秒）
+  --health-timeout=5s \   # 健康检查命令的超时时间。如果超过这个时间，健康检查视为失败（默认30秒）
+  --health-retries=3 \   # 如果连续多少次健康检查失败，认为容器处于不健康状态（默认3次）
+  --health-start-period=30s \   # 容器启动后多长时间开始执行健康检查（默认0秒）。这可以为应用程序预留启动时间
   my_image:latest  # 使用的镜像
 ```
 
