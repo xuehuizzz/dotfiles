@@ -1,6 +1,8 @@
 ### install for mac
 
 ```bash
+docker run --name postgresql -e POSTGRES_PASSWORD=123456 -p 5432:5432 -v /Users/xuehuizzz/data:/var/lib/postgresql/data -d postgres
+或
 brew install postgresql    # 安装
 brew services start postgresql   # 启动服务
 createdb db_name  # 新建数据库
