@@ -19,7 +19,9 @@ select * from your_table order by 1,2  # 以查询的第一个,第二个字段�
 
 -- 查询用户及授权
 select * from pg_roles;  # 列出所有用户
-grant select on view1,view2,table1,table2 to user_name;    # 给用户授予查询权限(针对某几张视图/表格)
+grant select on view1,view2,table1,table2 to user_name;    # 给用户授予查询权限(针对某几张视图/表格), update, delete, insert
+grant select,delete on view1 to user_name;  # 同时赋予多个权限
+GRANT ALL PRIVILEGES ON view_name TO user_name;  # 授予用户所有权限
 
 SELECT * FROM your_table WHERE name !~ 'xx|xxx|xxxx';   # 查询name不包含多个条件
 
