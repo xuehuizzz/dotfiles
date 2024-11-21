@@ -14,6 +14,13 @@ GRANT ALL PRIVILEGES ON DATABASE mydatabase TO myuser;   # 为新用户授予访
 ### 使用
 
 ```sql
+-- 排序分组可以使用序号
+select * from your_table order by 1,2  # 以查询的第一个,第二个字段排序
+
+-- 查询用户及授权
+select * from pg_roles;  # 列出所有用户
+grant select on view1,view2,table1,table2 to user_name;    # 给用户授予查询权限(针对某几张视图/表格)
+
 SELECT * FROM your_table WHERE name !~ 'xx|xxx|xxxx';   # 查询name不包含多个条件
 
 -- CTE
