@@ -1,0 +1,16 @@
+git config --list   # 查看已有的配置信息
+git status    # 查看当前文件状态
+git clone xxx   # 从现有仓库克隆
+git add xxx  # 跟踪新文件
+git checkout  branch_name  # 切换分支
+git remote rename old_name new_name  # 远程仓库重命名
+git remote rm name  # 删除远程仓库
+
+
+
+git命令别名
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status”
+git config --global alias.
