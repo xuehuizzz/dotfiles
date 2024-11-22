@@ -1,5 +1,9 @@
 # 更多设置信息见: https://macos-defaults.com
 
+# 禁止重启系统后打开未关闭的软件
+defaults write com.apple.loginwindow TALLogoutSavesState -bool false
+defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
+
 defaults write com.apple.dock autohide-time-modifier -float 0 && killall Dock  # 使Dock的自动隐藏和显示立即发生
 defaults write com.apple.dock autohide-delay -int 0 && killall Dock   # 设置启动坞响应时间最短
 defaults delete com.apple.dock autohide-time-modifier && killall Dock    # 恢复启动坞默认动画时间
