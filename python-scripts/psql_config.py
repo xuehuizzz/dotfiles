@@ -1,6 +1,7 @@
 """This file is used to connect to PostgreSQL and perform basic operations.
 pip install psycopg2 python-dotenv
 """
+__all__ = ["PostgreSQLContext"]
 import os
 from typing import List, Optional, Any
 
