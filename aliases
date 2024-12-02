@@ -6,7 +6,7 @@ alias mac="neofetch --off --colors 3 4 5 6 2 2"
 alias woman="tldr"
 alias cat="ccat"    # or bat
 alias hist="history -i"
-alias rezsh="source ~/.zshrc"
+alias reload="exec ${SHELL} -l"   # 重新加载当前shell配置
 
 custom_open() {
     if [[ -f "$1" ]]; then
