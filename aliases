@@ -20,3 +20,6 @@ custom_open() {
     fi
 }
 alias open="custom_open"
+
+alias show .="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"  # 显示所有隐藏文件。
+alias hide .="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"  # 隐藏所有隐藏文件。
