@@ -1,3 +1,4 @@
+# source ~/.osx 使其生效
 # 更多设置信息见: https://macos-defaults.com
 
 # 禁止重启系统后打开未关闭的软件
@@ -18,11 +19,11 @@ defaults write com.apple.dock springboard-rows Default
 defaults write com.apple.dock springboard-columns Default
 killall Dock    # 重启 Dock 生效
 
-pwpolicy -clearaccountpolicies   # 取消 4 位数密码限制
+# pwpolicy -clearaccountpolicies   # 取消 4 位数密码限制
 
-open -n /Applications/WeChat.app/Contents/MacOS/WeChat    # 微信双开
+# open -n /Applications/WeChat.app/Contents/MacOS/WeChat    # 微信双开
 
-sudo spctl --master-disable    #禁用安装守护,允许安装未知来源
+# sudo spctl --master-disable    #禁用安装守护,允许安装未知来源
 
 defaults write com.apple.CrashReporter DialogType none    # 关闭崩溃报错
 defaults write com.apple.CrashReporter DialogType crashreport  # 恢复崩溃报错
@@ -48,7 +49,11 @@ defaults write com.apple.dock autohide-delay -float 0
 killall Dock
 
 # 修复 brew services异常, 重新安装
-brew untap homebrew/services
-brew tap homebrew/services
+# brew untap homebrew/services
+# brew tap homebrew/services
 
-# 添加环境变量, 使用 brew install 安装的包，添加环境变量时，最好使用 /opt/homebrew/opt/xxx(Apple Silicon),  /usr/local/opt/xxx(inter) 这样的路径,自动指向最新版本
+# 添加环境变量, 使用 brew install 安装的包，添加环境变量时，最好使用如下这样的路径,自动指向最新版本
+#    /opt/homebrew/opt/xxx(Apple Silicon), 
+#    /usr/local/opt/xxx(inter) 
+
+
