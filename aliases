@@ -16,7 +16,7 @@ custom_open() {
         # 如果是目录，直接用 Finder 打开
         command open "$1"
     else
-        echo "Error: '$1' is not a valid file or directory."
+        command open "$@"
     fi
 }
 alias open="custom_open"
