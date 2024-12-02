@@ -8,7 +8,7 @@ alias cat="ccat"    # or bat
 alias hist="history -i"
 alias reload="exec ${SHELL} -l"   # 重新加载当前shell配置
 
-custom_open() {
+custom_open() {    # for macOS
     if [[ -f "$1" ]]; then
         # 如果是文件，直接用 TextEdit 打开
         command open -a TextEdit "$1"
