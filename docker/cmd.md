@@ -22,6 +22,7 @@ docker run \
   --device-read-iops /dev/sda:1000 --device-write-iops /dev/sda:1000 \   # 限制每秒的IO操作数为1000
   my_image:latest  # 使用的镜像
 
+docker stats 容器ID/名称   # 查看容器状态
 docker rename my_comtainer my_new_container  # 重命名容器
 docker ps -a  # 查看所以容器
 docker ps -q  # 列出所以运行中容器的ID,  -aq: 列出所有容器id
