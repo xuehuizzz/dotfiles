@@ -7,4 +7,16 @@ alias woman="tldr"
 alias cat="ccat"    # or bat
 alias hist="history -i"
 alias rezsh="source ~/.zshrc"
-alias open="open -a TextEdit"    # 默认使用文本编辑打开文件
+
+custom_open() {
+    if [[ -f "$1" ]]; then
+        # 如果是文件，直接用 TextEdit 打开
+        command open -a TextEdit "$1"
+    elif [[ -d "$1" ]]; then
+        # 如果是目录，直接用 Finder 打开
+        command open "$1"
+    else
+        echo "Error: '$1' is not a valid file or directory."
+    fi
+}
+alias open="custom_open"
