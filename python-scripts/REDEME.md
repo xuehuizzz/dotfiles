@@ -233,10 +233,13 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
     *
         ```python
+        import sys
         from pathlib import Path
 
         current_dir = Path(__file__).resolve()   # 当前文件绝对路径,而不是工作目录中文件路径
-        parent_dir = current_dir.parent  # 当前文件的父级目录
+        # parent_dir = current_dir.parent  # 当前文件的父级目录
+        project_path = current_dir.parent.parent   # 获取项目的根路径, current_dir.parents[3] 也可以
+        sys.path.append(str(project_path))    # 将项目根路径加入到sys.path, 便于导入项目内的模块
 
         new_dir = parent_dir / "test/test_dir"
         new_dir.mkdir(parents=True, exist_ok=True)   # 创建文件夹, 若不存在的话
