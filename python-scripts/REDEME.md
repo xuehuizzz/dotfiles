@@ -161,7 +161,17 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
             -- 可以在一次事务中插入多行数据，这减少了事务的开销和网络通信的次数，提高了插入效率
             INSERT INTO table (column1, column2) VALUES (value1, value2), (value3, value4);
 
-        ````
+        ```
+
+*   关闭异常自动关联上下文
+
+    *
+        ```python
+            try:
+                print(1 / 0)
+            except Exception as e:
+                raise RuntimeError("Something bad happened") from None
+        ```
 
 *   **使用参数化SQL语句，强制区分数据和命令，避免产生SQL注入漏洞。**
 
@@ -375,7 +385,7 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
 #### 5.使用类型注解
 
-**<font color="red">0.</font>自动生成静态类型注解**
+**<font color="red"> 0️⃣.</font>自动生成静态类型注解**
 
 ```python
 # pip install monkeytype
