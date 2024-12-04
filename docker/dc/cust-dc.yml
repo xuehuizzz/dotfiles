@@ -13,6 +13,7 @@ x-environment: &default-environment # 定义一个全局环境变量配置块
 services: # 定义服务部分，每个服务对应一个容器
   web: # Web 服务
     image: nginx:alpine # 使用官方的 Nginx 镜像（基于 Alpine Linux）
+    container_name: container_name  # 指定生成的容器名称
     ports: 
       - "80:80" # 将主机的 80 端口映射到容器的 80 端口
     deploy:  # 用于配置服务在集群模式下（如 Docker Swarm）部署的详细信息。它提供了控制服务如何分布、扩展、以及服务的更新策略等功能。deploy 配置通常在生产环境中使用，而在单机开发环境中，Docker Compose 不支持 deploy 部分的配置
