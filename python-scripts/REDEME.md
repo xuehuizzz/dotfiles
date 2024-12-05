@@ -143,7 +143,7 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
 *   使用 `f-string` 格式化字符串, 使用`.join()`拼接字符串
 
-*   使用`enumerate()`同时遍历索引和值, 使用`isinstance()`进行类型检查,   3.10+ isinstance(1024, int | str)
+*   使用`enumerate()`同时遍历索引和值, 使用`isinstance()`进行类型检查,   isinstance(1, int | str) if version >= 3.10 else isinstance(1, (int, str))
 
 *   避免`import *`, 建议用`__all__`来定义模块中可被导出的变量名
 
