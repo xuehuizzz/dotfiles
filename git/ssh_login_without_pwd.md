@@ -45,5 +45,10 @@
 - 切换到 SSH URL：
   ```cmd
   git remote set-url origin git@github.com:xuehuizzz/dotfiles.git
+
+  " 然后再试 git push, 会将本地当前分支的提交推送到远程仓库中与其 关联的分支, 也可指定: git push origin branch_name
   ```
-- 然后再试 git push, 会将本地当前分支的提交推送到远程仓库中与其 关联的分支, 也可指定: git push origin branch_name
+- `git remote set-url`: 用于修改已有的远程仓库地址。
+- `origin`: 表示您要修改的远程仓库名称。在 Git 中，origin 是默认的远程仓库名称，通常指向您从中克隆代码的仓库。
+- `git@github.com:xuehuizzz/dotfiles.git`: 这是新的远程仓库 URL，使用 SSH 协议。它告诉 Git，今后与远程仓库的通信将通过 SSH，而不是 HTTPS。
+- 原因: 由于 GitHub 不再支持密码认证，您需要切换到 SSH 认证。为了让 Git 使用 SSH，而不是 HTTPS，需要修改远程仓库的 URL
