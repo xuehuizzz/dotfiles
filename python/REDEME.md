@@ -2,13 +2,13 @@
     <h2><img src="https://readme-typing-svg.herokuapp.com?font=Optima&size=35&duration=6000&color=FF5733&center=true&vCenter=true&width=800&lines=代码是写给人看的,+顺便能在机器上运行" alt="Typing SVG"/></h2>
 </div>
 
-###  Google开源项目风格指南
+###  <mark>Google开源项目风格指南</mark>
 ```bash
 https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/contents/#
 https://www.runoob.com/w3cnote/google-python-styleguide.html
 ```
 
-#### 1.格式化导包顺序 .isort.cfg
+#### 1.<mark>格式化导包顺序 .isort.cfg</mark>
 
 `pip install isort`
 
@@ -35,7 +35,7 @@ isort your_script.py    # 格式化单个文件
 isort .    # 格式化整个项目目录
 ```
 
-#### 2.代码风格和格式保持一致 .editorconfig
+#### 2.<mark>代码风格和格式保持一致 .editorconfig</mark>
 `用于在多个开发者和不同编辑器或IDE之间保持一致的代码风格和格式`
 
 `新建 .editorconfig 配置文件, 位于项目根目录, 内容如下:`
@@ -69,7 +69,7 @@ tab_width = 4
 indent_style = tab
 ```
 
-#### 3.使用环境文件 .env
+#### 3.<mark>使用环境文件 .env</mark>
 
 `.env 文件（全称为“环境文件”）通常用于存储项目的配置信息，如数据库连接字符串、API密钥等`
 
@@ -99,7 +99,7 @@ db_port = os.getenv("DB_PORT")   # 输出为: "3306"
 db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 ```
 
-#### 4.编码建议
+#### 4.<mark>编码建议</mark>
 
 *   <font color="red">掌握函数式编程</font>
 
@@ -383,9 +383,9 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
         )
         ```
 
-#### 5.使用类型注解
+#### 5.<mark>使用类型注解</mark>
 
-**<font color="red"> 0️⃣.</font>自动生成静态类型注解**
+**0️⃣.自动生成静态类型注解**
 
 ```python
 # pip install monkeytype
@@ -395,7 +395,7 @@ monkeytype stub your_script     # 打印出更改之后的样子
 monkeytype apply your_script    # 直接修改 your_script.py, 添加静态类型注解
 ```
 
-**<font color="red">①</font>基本类型注解**
+**①.基本类型注解**
 
 ```python
 # 对于简单类型，注解直接使用类型本身。例如，对于整数、浮点数和字符串：
@@ -410,7 +410,7 @@ def folder_data(static_folder: str | os.PathLike | None = "static",
   # 函数实现
 ```
 
-**<font color="red">②</font>容器和复合类型**
+**②.容器和复合类型**
 
 ```python
 # 对于列表、字典、元组等，可以使用typing模块中的泛型类型：
@@ -419,7 +419,7 @@ def analyze_data(points: List[float], lookup: Dict[str, int], info: Tuple[int, s
     # 函数实现
 ```
 
-**<font color="red">③</font>可选类型和联合类型**
+**③.可选类型和联合类型**
 
 ```python
 # 当一个参数可以有多种类型，或者可以为None时，可以使用Optional和Union：
@@ -428,7 +428,7 @@ def format_text(value: Optional[str], length: Union[int, float]) -> str:
     # 函数实现
 ```
 
-**<font color="red">④</font>自定义类型**
+**④.自定义类型**
 
 ```python
 # 你可以定义自己的类型（例如类）并在类型注解中使用它们：
@@ -440,7 +440,7 @@ def greet(person: Person) -> str:
     return f"Hello, {person.name}"
 ```
 
-**<font color="red">⑤</font>类型别名**
+**⑤.类型别名**
 
 ```python
 # 有时为了简化代码，可以定义类型别名：
@@ -450,7 +450,7 @@ def process_json(data: JSON) -> None:
     # 函数实现
 ```
 
-**<font color="red">⑥</font>函数类型**
+**⑥.函数类型**
 
 ```python
 # 如果你需要将函数作为参数传递，可以指定其调用签名：
@@ -464,11 +464,11 @@ def add(x: int, y: int) -> int:
 result = apply_function(add, 10, 20)
 ```
 
-#### 6.静态类型检查
+#### 6.<mark>静态类型检查</mark>
 
 `pip install mypy`
 
-\`\`mypy是一个流行的Python静态类型检查工具，用于检查类型注解的一致性\`
+`mypy是一个流行的Python静态类型检查工具，用于检查类型注解的一致性`
 
 `新建 .mypy.ini 或者 mypy.ini 配置文件, 位于项目根目录`
 
