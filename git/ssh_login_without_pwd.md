@@ -1,6 +1,6 @@
 ## 配置免密登录认证(使用 SSH 密钥认证)
 
-##### 1).生成 SSH 密钥
+##### 1).<mark>生成 SSH 密钥:</mark>
 
 - 打开终端并运行以下命令（按提示操作）：
   ```cmd
@@ -21,7 +21,7 @@
      - 私钥文件（默认 id_ed25519）：存储你的私钥，仅你自己拥有，绝对不能泄露。
      - 公钥文件（默认 id_ed25519.pub）：存储你的公钥，用于共享给服务器或协作方。
 
-##### 2).添加 SSH 密钥到 GitHub：
+##### 2).<mark>添加 SSH 密钥到 GitHub:</mark>
 
 - 复制公钥
   ```cmd
@@ -29,7 +29,7 @@
   ```
 - 打开 GitHub SSH 设置页面，点击 "New SSH key"。粘贴公钥内容并保存。
 
-##### 3).验证 SSH 配置：
+##### 3).<mark>验证 SSH 配置:</mark>
 
 - 验证 SSH 配置：
   ```cmd
@@ -40,7 +40,7 @@
   Hi xuehuizzz! You've successfully authenticated, but GitHub does not provide shell access.
   ```
 
-##### 4).更新 Git 仓库 URL：
+##### 4).<mark>更新 Git 仓库 URL:</mark>
 
 - 切换到 SSH URL：
   ```cmd
