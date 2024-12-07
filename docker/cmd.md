@@ -22,6 +22,7 @@ docker run \
   --device-read-iops /dev/sda:1000 --device-write-iops /dev/sda:1000 \   # 限制每秒的IO操作数为1000
   my_image:latest  # 使用的镜像
 
+docker info  # 列出docker环境详细信息
 docker stats 容器ID/名称   # 查看容器状态
 docker plugin ls  # 列出已安装的插件
 docker rename my_comtainer my_new_container  # 重命名容器
