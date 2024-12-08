@@ -69,7 +69,7 @@ tab_width = 4
 indent_style = tab
 ```
 
-#### 3.<mark>使用环境文件 .env</mark>
+#### 3.<mark>使用环境文件 .env (敏感数据保护)</mark>
 
 `.env 文件（全称为“环境文件”）通常用于存储项目的配置信息，如数据库连接字符串、API密钥等`
 
