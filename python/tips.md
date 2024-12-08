@@ -1,3 +1,16 @@
+## 注解
+
+```cmd
+# pip install monkeytype mypy
+# monkeytype自动生成注解
+# mypy是一个流行的Python静态类型检查工具，用于检查类型注解的一致性
+# mypy是基于类型注解工作的, 没有注解的代码部分将不会受到严格的类型检查
+
+monkeytype apply your_script.py    # 直接修改 your_script.py, 添加静态类型注解
+mypy your_script.py   # 检查单个文件
+mypy .  # 检查整个项目, 在项目根目录下执行
+```
+
 ## 格式化输出数据
 
 ```python
