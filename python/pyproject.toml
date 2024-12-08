@@ -53,10 +53,10 @@ ban-relative-imports = "all"  # 禁止相对导入
 [tool.isort]
 line_length = 100    # 指定每行代码的最大字符数
 multi_line_output = 3   # 定义多行导入的格式
-include_trailing_comma = True   # 在多行导入的最后一个模块后添加尾随逗号
+include_trailing_comma = true   # 在多行导入的最后一个模块后添加尾随逗号
 force_grid_wrap = 0    # 定义何时使用网格格式
-use_parentheses = True   # 使用圆括号而不是反斜杠
-ensure_newline_before_comments = True    # 在导入语句上方的注释之前确保有一个新行
+use_parentheses = true   # 使用圆括号而不是反斜杠
+ensure_newline_before_comments = true    # 在导入语句上方的注释之前确保有一个新行
 known_first_party = ['my_module', 'my_other_module']   # import my_module, from my_other_module import xxx
 default_section = 'THIRDPARTY'     # 为未分类模块设置默认第三方库
 sections = ['FUTURE', 'STDLIB', 'THIRDPARTY', 'FIRSTPARTY', 'LOCALFOLDER']     # 定义导入语句的排序顺序
