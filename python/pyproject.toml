@@ -29,6 +29,7 @@ documentation = "https://your-docs-url"
 
 # 代码质量格式检查
 [tool.ruff]
+ignore = ["E402"]  # 忽略该报错, 动态路径相关模块导入
 # 指定哪些文件或目录应被检查
 target-version = "py39"  # 目标 Python 版本
 line-length = 100        # 每行最大长度
