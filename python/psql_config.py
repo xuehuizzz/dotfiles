@@ -77,6 +77,7 @@ class PostgreSQLContext:
 
     def execute_queries(self, query: str, params: Optional[Any] = None) -> int:
         """Execute a single query or batch queries based on the parameters, with batch processing."""
+        # TODO: 待修改, 该方法主要使用insert
         try:
             if not params:
                 self.cursor.execute(query)
