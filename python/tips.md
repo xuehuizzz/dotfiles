@@ -49,3 +49,24 @@ ins._Kls__private()
 res = ins._Kls__age
 print(res)
 ```
+
+## 实现一个异步方法
+
+```python
+import asyncio
+
+# 定义一个异步方法
+async def fetch_data():
+    print("开始获取数据")
+    await asyncio.sleep(2)  # 模拟一个耗时的操作，比如网络请求
+    print("数据获取完成")
+    return {'data': 123}
+
+# 定义一个主异步方法来运行其他异步任务
+async def main():
+    data = await fetch_data()  # 调用异步方法并等待其完成
+    print(data)
+
+# 运行主异步方法
+asyncio.run(main())
+```
