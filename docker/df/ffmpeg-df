@@ -51,7 +51,8 @@ RUN apt-get update && \
     libsoxr-dev \
     frei0r-plugins-dev \
     libvidstab-dev && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean
 
 # 设置工作目录
 WORKDIR /tmp/ffmpeg_sources
