@@ -88,10 +88,8 @@ RUN cd ffmpeg && \
     make -j$(nproc) && \
     make install && \
     make distclean && \
+    rm -rf /tmp/ffmpeg_sources && \
     hash -r
-
-# 清理源代码
-RUN rm -rf /tmp/ffmpeg_sources
 
 # 验证 FFmpeg 是否正确安装
 RUN ffmpeg -version
