@@ -57,11 +57,9 @@ RUN apt-get update && \
 # 设置工作目录
 WORKDIR /tmp/ffmpeg_sources
 
-# 克隆 FFmpeg 源代码
-RUN git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
-
 # 编译和安装 FFmpeg
-RUN cd ffmpeg && \
+RUN git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg && \
+    cd ffmpeg && \
     ./configure \
     --prefix=/usr/local \
     --enable-gpl \
