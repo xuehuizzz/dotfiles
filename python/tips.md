@@ -102,3 +102,46 @@ async def main():
 # 运行主异步方法
 asyncio.run(main())
 ```
+
+## 元类
+
+```python
+# 定义元类
+class MetaExample(type):
+    def __new__(cls, name, bases, dct):
+        # 在创建类之前动态添加类属性
+        dct['auto_attribute'] = "This is an auto-generated attribute"
+        
+        # 定义一个自动生成的类方法
+        def auto_method(cls):
+            return f"{cls.__name__} says hello!"
+        
+        dct['auto_method'] = classmethod(auto_method)
+        
+        # 使用 type 创建类
+        return super().__new__(cls, name, bases, dct)
+    
+    def __init__(cls, name, bases, dct):
+        print(f"Class {name} has been created with MetaExample metaclass.")
+        super().__init__(name, bases, dct)
+
+# 使用元类创建类
+class ExampleClass(metaclass=MetaExample):
+    def normal_method(self):
+        return "This is a normal method."
+
+# 实例化和使用 ExampleClass
+example = ExampleClass()
+
+# 访问自动生成的类属性
+print(ExampleClass.auto_attribute)  # 输出: This is an auto-generated attribute
+
+# 调用自动生成的类方法
+print(ExampleClass.auto_method())  # 输出: ExampleClass says hello!
+
+# 调用普通方法
+print(example.normal_method())  # 输出: This is a normal method.
+
+# 检查 ExampleClass 的元类
+print(type(ExampleClass))  # 输出: <class '__main__.MetaExample'>
+```
