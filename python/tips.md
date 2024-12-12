@@ -1,7 +1,34 @@
-## 使用uvicorn部署项目
+## 使用uvicorn/guvicorn部署项目
 
-```python
-```
+1. 协议支持
+- Gunicorn：
+    - 主要用于 WSGI（Web Server Gateway Interface）应用，适合传统的 Python Web 框架，如 Flask 和 Django。
+    不支持异步编程。
+- Uvicorn：
+    - 主要用于 ASGI（Asynchronous Server Gateway Interface）应用，特别适合异步框架，如 FastAPI 和 Starlette。
+    支持异步编程，能够处理并发请求。
+2. 性能
+- Gunicorn：
+    通过多进程模型处理并发请求，适合 CPU 密集型任务，但在 I/O 密集型任务中表现不如 Uvicorn。
+- Uvicorn：
+    基于事件循环，能够高效处理 I/O 密集型任务，如网络请求和数据库操作，提供更好的性能。
+3. 使用场景
+- Gunicorn：
+    - 适合传统的同步 Web 应用，通常与 Flask、Django 等框架搭配使用。适合需要多进程处理的场景。
+- Uvicorn：
+    - 适合异步 Web 应用，通常与 FastAPI、Starlette 等框架搭配使用。更适合实时应用和高并发场景。
+4. 进程管理
+- Gunicorn：
+    - 使用多进程模型，允许多个工作进程同时运行，以处理多个请求。
+- Uvicorn：
+    - 支持单线程和异步处理，适合处理大量的并发请求。
+5. 集成使用
+- Gunicorn：
+    - 可以与 Uvicorn 配合使用，作为进程管理器来运行 ASGI 应用。例如，可以通过 gunicorn 配置 UvicornWorker 来运行 FastAPI 应用。
+- Uvicorn：
+    - 通常单独使用，也可以与其他工具（如 daphne、hypercorn）组合以适应不同的需求。
+  
+<mark>Gunicorn 适合传统的同步应用，而 Uvicorn 则更适合现代异步应用。在部署时，可以根据项目需求选择合适的服务器，或结合使用以获得最佳性能。</mark>
 
 ## 注解
 
