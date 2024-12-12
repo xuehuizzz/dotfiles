@@ -88,7 +88,5 @@ RUN git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg && \
     make install && \
     make distclean && \
     rm -rf /tmp/ffmpeg_sources && \
-    hash -r
-
-# 验证 FFmpeg 是否正确安装
-RUN ffmpeg -version
+    hash -r && \
+    ffmpeg -version
