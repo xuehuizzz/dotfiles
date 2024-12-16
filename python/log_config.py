@@ -1,4 +1,5 @@
 """A log config file, Use lazy % formatting in logging functions.
+from loguru import logger  # Third-party library, used directly
 """
 import logging
 from pathlib import Path
