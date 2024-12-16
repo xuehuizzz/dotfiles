@@ -27,7 +27,7 @@ def setup_logger(log_level=logging.INFO, console_level=None, logger_name='custom
 
     formatter = logging.Formatter(
         '%(asctime)s - %(levelname)-8s | %(filename)s [%(funcName)s:%(lineno)d] - %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S'
+        datefmt='%Y-%m-%d %H:%M:%S'    # '%Y-%m-%dT%H:%M:%S%z'  ISO 8601 格式
     )
 
     file_handler.setFormatter(formatter)
