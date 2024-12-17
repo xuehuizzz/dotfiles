@@ -1,35 +1,35 @@
 """A log config file, Use lazy % formatting in logging functions.
 from loguru import logger  # Third-party library, used directly
 """
+import atexit
 import sys
 import logging
 from pathlib import Path
 
 
-def setup_logger(log_level=logging.INFO, console_level=None, logger_name='custom_logger_name'):
+def setup_logger(log_level=logging.INFO, console_level=logging.INFO,
+                 logger_name='custom_logger_name'):
     """Sets up and returns a logger with both file and console handlers.
     """
-    log_dir = Path(__file__).parent / "logs"
+    if not logger_name:
+        logger_name = __name__
+    log_dir = Path(__file__).resolve().parent / "logs"  # Modify according to actual situation
     log_dir.mkdir(parents=True, exist_ok=True)
-
     log_file = log_dir / "task.log"
-    log_file.touch(exist_ok=True)
 
-    logger = logging.getLogger(logger_name)    # logging.getLogger(__name__)
+    logger = logging.getLogger(logger_name)
     logger.propagate = False
-    if logger.hasHandlers():
-        logger.handlers.clear()
     logger.setLevel(log_level)
 
     file_handler = logging.FileHandler(log_file, encoding='utf-8')
     file_handler.setLevel(log_level)
 
     console_handler = logging.StreamHandler(stream=sys.stdout)
-    console_handler.setLevel(console_level or log_level)
+    console_handler.setLevel(console_level)
 
     formatter = logging.Formatter(
         '%(asctime)s - %(levelname)-8s | %(filename)s [%(funcName)s:%(lineno)d] - %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S'    # '%Y-%m-%dT%H:%M:%S%z'  ISO 8601 格式
+        datefmt='%Y-%m-%d %H:%M:%S'
     )
 
     file_handler.setFormatter(formatter)
@@ -38,13 +38,14 @@ def setup_logger(log_level=logging.INFO, console_level=None, logger_name='custom
     logger.addHandler(file_handler)
     logger.addHandler(console_handler)
 
+    atexit.register(lambda: logger.handlers.clear())
     return logger
 
 
 if __name__ == '__main__':
     test_logger = setup_logger()
-    test_logger.debug('这是一个debug信息')
-    test_logger.info('这是一个info信息')
-    test_logger.warning('这是一个warning信息')
-    test_logger.error('这是一个error信息')
-    test_logger.critical('这是一个critical信息')
+    test_logger.debug('这是一个%s信息', 'debug')
+    test_logger.info('这是一个%s信息', 'info')
+    test_logger.warning('这是一个%s信息', 'warning')
+    test_logger.error('这是一个%s信息', 'error')
+    test_logger.critical('这是一个%s信息', 'critical')
