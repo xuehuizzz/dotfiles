@@ -14,7 +14,7 @@ def setup_logger(log_level=logging.INFO, console_level=None, logger_name='custom
     log_file = log_dir / "task.log"
     log_file.touch(exist_ok=True)
 
-    logger = logging.getLogger(logger_name)
+    logger = logging.getLogger(logger_name)    # logging.getLogger(__name__)
     logger.propagate = False
     if logger.hasHandlers():
         logger.handlers.clear()
