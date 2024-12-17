@@ -1,6 +1,7 @@
 """A log config file, Use lazy % formatting in logging functions.
 from loguru import logger  # Third-party library, used directly
 """
+import sys
 import logging
 from pathlib import Path
 
@@ -23,7 +24,7 @@ def setup_logger(log_level=logging.INFO, console_level=None, logger_name='custom
     file_handler = logging.FileHandler(log_file, encoding='utf-8')
     file_handler.setLevel(log_level)
 
-    console_handler = logging.StreamHandler()
+    console_handler = logging.StreamHandler(stream=sys.stdout)
     console_handler.setLevel(console_level or log_level)
 
     formatter = logging.Formatter(
