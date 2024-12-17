@@ -145,3 +145,20 @@ print(example.normal_method())  # 输出: This is a normal method.
 # 检查 ExampleClass 的元类
 print(type(ExampleClass))  # 输出: <class '__main__.MetaExample'>
 ```
+
+## ISO 8601格式化
+
+- %Y-%m-%dT%H:%M:%S%Z
+  - 这个格式表示日期时间并包含时区的名称（如 "UTC"、"CST" 等）。
+  - 例如：2024-12-17T14:30:00UTC
+- %Y-%m-%dT%H:%M:%S%z
+  - 这个格式表示日期时间，并包含时区的偏移量，通常以 +hhmm 或 -hhmm 形式表示，表示相对于UTC的时差。
+  - 例如：2024-12-17T14:30:00+0200（表示UTC时间+2小时）
+- %Y-%m-%dT%H:%M:%SZ
+  - 这个格式表示日期时间，并以 "Z"（表示零时区，即UTC时间）为时区标识。
+  - 例如：2024-12-17T14:30:00Z（表示UTC时间）
+ 
+简而言之：
+- `%Z` 显示时区名称（如 UTC、CST 等）。
+- `%z` 显示时区的偏移量（如 +0200，表示UTC+2小时）。
+- `%Z` 中的 "Z" 直接表示 UTC 时区，等同于 `%z` 中的 `+0000`
