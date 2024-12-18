@@ -5,6 +5,8 @@
   email = xuehuizzz103@gmail.com
 [commit]
   template = /Users/xuehuizzz/.stCommitMsg
+[pull]
+    rebase = true
 [http]
   sslVerify = true
 [alias]
