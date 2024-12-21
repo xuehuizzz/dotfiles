@@ -1,3 +1,13 @@
+## 安装配置docker
+
+```bash
+sudo curl -fsSL https://get.docker.com | sudo sh  # 官方安装脚本
+sudo systemctl start docker   # 开启docker服务
+sudo systemctl enable docker  # 设置开机自启
+sudo systemctl stop docker   # 停止docker服务
+sudo systemctl restart docker   # 重启docker服务
+```
+
 <mark>常用命令</mark>
 ```cmd
 docker build \    # 构建镜像文件
