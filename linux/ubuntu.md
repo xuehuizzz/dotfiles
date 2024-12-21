@@ -38,3 +38,11 @@ sudo ufw allow ssh   # 允许 SSH 连接
 sudo ufw enable      # 启用防火墙
 sudo ufw status      # 查看防火墙状态
 ```
+
+## 安装配置docker
+
+```bash
+sudo apt install -y docker.io docker-compose
+sudo systemctl enable docker  # 启动docker
+sudo systemctl start docker   # 启用docker服务
+```
