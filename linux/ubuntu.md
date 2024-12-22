@@ -23,20 +23,3 @@
   sudo netplan apply  # 应用新的网络配置
   ip a 或者 ping 8.8.8.8  # 检查网络接口的IP地址是否正确
   ```
-
-## 开启防火墙及SSH服务
-
-```bash
-sudo apt install openssh-server  # 安装 OpenSSH 服务器
-sudo systemctl start ssh  # 启动ssh服务
-sudo systemctl enable ssh  # 设置为开机自启
-sudo systemctl status ssh  # 检查ssh服务状态
-sudo systemctl restart ssh  # 重启ssh服务(需要的话)
-
-sudo apt install ufw  # 安装防火墙管理工具
-sudo ufw allow ssh   # 允许 SSH 连接
-sudo ufw enable      # 启用防火墙
-sudo ufw status      # 查看防火墙状态
-```
-
-
