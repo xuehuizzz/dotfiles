@@ -47,12 +47,4 @@ sudo ufw enable      # 启用防火墙
 sudo ufw status      # 查看防火墙状态
 ```
 
-## 安装配置docker
 
-```bash
-sudo curl -fsSL https://get.docker.com | sudo sh  # 官方安装脚本
-sudo systemctl start docker   # 开启docker服务
-sudo systemctl enable docker  # 设置开机自启
-sudo systemctl stop docker   # 停止docker服务
-sudo systemctl restart docker   # 重启docker服务
-```
