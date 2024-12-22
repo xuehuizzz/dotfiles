@@ -128,7 +128,7 @@ docker import [导入文件名].tar [新镜像名称]:[标签]
   ```
 
 ④. `容器网络 container`
-- 允许一个容器与另一个容器共享网络命名空间, 不需要单独分配IP地址
+- 允许一个容器与另一个容器共享网络命名空间, 不需要单独分配IP地址, 使用同一网卡、主机名、IP 地址
 - ```bash
   # 运行第一个容器
   docker run -d --name container1 my-image
