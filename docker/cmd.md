@@ -36,7 +36,7 @@ docker info  # 列出docker环境详细信息
 docker stats 容器ID/名称   # 查看容器状态
 docker plugin ls  # 列出已安装的插件
 docker rename my_comtainer my_new_container  # 重命名容器
-docker ps -a  # 查看所以容器
+docker ps -a  # 查看所以容器(完整写法: docker container ls -a)
 docker ps -q  # 列出所以运行中容器的ID,  -aq: 列出所有容器id
 docker stop/start 容器ID/名称    # 停止/启动容器
 docker restart 容器ID/名称    # 重启容器
@@ -44,7 +44,7 @@ docker restart $(docker ps -aq)   # 重启所有容器
 docker logs -f --tail num 容器ID/名称   # 查看docker日志最新xxx条
 docker inspect 容器ID/名称   # 查看容器的详细信息
 docker exec -it 容器ID/名称 bash   # 交互式进入容器内部
-docker iamges   # 查看所以镜像
+docker iamges   # 查看所有镜像(docker image ls)
 docker rm 容器ID/名称  # 删除已停止的容器, -f:强制删除运行中的容器, 谨慎使用
 docker rmi 镜像ID/名称  # 删除指定镜像, -f:强制删除镜像, 谨慎使用
 docker network ls   # 列出当前docker环境中所有网络, 一个docker容器可以连接多个网络
