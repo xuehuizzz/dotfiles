@@ -1,4 +1,4 @@
-## 安装配置<sub>(ubuntu、debian、centos)</sub>
+## 安装配置<sub>推荐官方脚本安装</sub>
 
 ```bash
 sudo curl -fsSL https://get.docker.com | sudo sh  # 官方安装脚本
