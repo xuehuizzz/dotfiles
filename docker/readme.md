@@ -114,6 +114,7 @@ docker import [导入文件名].tar [新镜像名称]:[标签]
 - 容器共享主机的网络栈, 没有网络隔离.  提高网络性能, 减少网络开销
 - 使用场景: 对网络性能要求高, 或需要容器直接使用主机网络的场景
 - ```bash
+  # 不能使用docker network create --driver方式创建
   docker run -d --name my-container --network host my-image
   ```
 
@@ -122,6 +123,7 @@ docker import [导入文件名].tar [新镜像名称]:[标签]
 - 允许不同主机上的容器像在同一网络中一样通信
 - ```bash
   # 创建覆盖网络
+  docker swarm init  #  将当前节点初始化为 Swarm 的管理节点
   docker network create -d overlay my-overlay-network
   # 在Swarm服务中使用覆盖网络
   docker service create --name my-service --network my-overlay-network my-image
