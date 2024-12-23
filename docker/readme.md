@@ -130,20 +130,43 @@ docker import [导入文件名].tar [新镜像名称]:[标签]
   # 在Swarm服务中使用覆盖网络
   docker service create --name my-service --network my-overlay-network my-image
   ```
+  
+④. `无网络 none`
+- 容器没有网络接口, 完全隔离, 适用于不需要网络通信的特殊场景
+- ```bash
+  docker run -d --name my-container --network none my-image
+  ```
 
-④. `容器网络 container`
+⑤. `macvlan`
+- macvlan 是一种将物理网卡虚拟化并分配多个 MAC 地址的网络模式。它允许每个容器表现为网络中的一个独立设备
+- 特点
+  - 独立 MAC 地址: 每个容器有一个唯一的 MAC 地址，就像一个物理设备。
+  - 直接连接到物理网络: 容器通过主机的物理网卡直接与外部网络通信。
+  - 隔离性强: 容器与主机在网络上是独立的，主机无法直接访问这些容器（需要额外配置）。
+  - 性能高: 类似裸机的网络性能，适用于高吞吐量的场景。
+- ```bash
+  docker network create --driver macvlan my-macvlan-network
+  ```
+
+⑥. `ipvlan`
+- ipvlan 是基于 IP 层的虚拟化网络模式，不需要为每个容器分配独立的 MAC 地址，而是使用主机的 MAC 地址。
+- 特点:
+  - 共享 MAC 地址: 所有容器共享主机的 MAC 地址，减少了 MAC 地址数量的需求。
+  - 直接连接到物理网络: 容器通过主机的物理网卡直接与外部网络通信。
+  - 模式简单: 提供更简单的网络拓扑结构。
+  - 性能稍逊于 macvlan: 因为流量需要更多的处理。
+- ```bash
+  docker network create -d macvlan my-macvlan-network
+  ```
+
+
+⑦. `其它网络模式`
 - 允许一个容器与另一个容器共享网络命名空间, 不需要单独分配IP地址, 使用同一网卡、主机名、IP 地址
 - ```bash
   # 运行第一个容器
   docker run -d --name container1 my-image
   # 运行第二个容器，并与第一个容器共享网络
   docker run -d --name container2 --network container:container1 my-image
-  ```
-
-⑤. `无网络 none`
-- 容器没有网络接口, 完全隔离, 适用于不需要网络通信的特殊场景
-- ```bash
-  docker run -d --name my-container --network none my-image
   ```
 
 六.<mark>docker run参数</mark>
