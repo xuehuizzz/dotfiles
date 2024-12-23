@@ -115,6 +115,7 @@ docker import [导入文件名].tar [新镜像名称]:[标签]
 - 使用场景: 对网络性能要求高, 或需要容器直接使用主机网络的场景
 - ```bash
   # 不能使用docker network create --driver方式创建
+  # 所以也不能对一个已存在的容器进行connect或disconnect
   docker run -d --name my-container --network host my-image
   ```
 
