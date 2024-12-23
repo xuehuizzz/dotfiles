@@ -49,7 +49,7 @@ docker rm 容器ID/名称  # 删除已停止的容器, -f:强制删除运行中�
 docker rmi 镜像ID/名称  # 删除指定镜像, -f:强制删除镜像, 谨慎使用
 docker network ls   # 列出当前docker环境中所有网络, 一个docker容器可以连接多个网络
 docker network inspect 网络ID/名称   # 查看某个网络的详细信息
-docker network create --driver bridge my-custom-network   # 创建一个新的自定义网络, 指定类型为 bridge
+docker network create --driver bridge my-custom-network   # 创建一个新的自定义网络, 指定类型为 bridge, docker network create -d xxx xxx
 docker network connect 网络ID/名称 容器ID/名称    # 将一个容器连接到一个指定的网络(一个容器可以连接多个网络, bridge、overlay、macvlan)
 docker network disconnect 网络ID/名称 容器ID/名称   # 断开连接网络
 docker network rm 网络ID/名称   # 删除网络
@@ -105,7 +105,7 @@ docker import [导入文件名].tar [新镜像名称]:[标签]
   # 查看当前网络
   docker network ls
   # 创建自定义桥接网络
-  docker network create my-bridge-network
+  docker network create --driver bridge my-bridge-network
   # 运行容器并连接到自定义桥接网络
   docker run -d --name my-container --network my-bridge-network my-image
   ```
