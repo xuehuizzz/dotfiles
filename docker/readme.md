@@ -95,7 +95,7 @@ docker import [导入文件名].tar [新镜像名称]:[标签]
 
 四.<mark>docker容器网络概述</mark>
 
-- 支持动态多网络连接: bridge、overlay、macvlan、ipvlan
+- 支持动态多网络连接: bridge、overlay、macvlan、ipvlan(每次只能连接1个,多次完成)
 - 不支持动态多网络连接: host、none
 
 ①. `桥接网络 bridge`
