@@ -105,6 +105,7 @@ docker import [导入文件名].tar [新镜像名称]:[标签]
 - ```bash
   # 查看当前网络
   docker network ls
+  docker network create network_name  # 默认创建bridge网络
   # 创建自定义桥接网络
   docker network create --driver bridge my-bridge-network
   # 运行容器并连接到自定义桥接网络
