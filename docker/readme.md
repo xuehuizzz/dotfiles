@@ -93,7 +93,10 @@ docker import [导入文件名].tar [新镜像名称]:[标签]
 - `always`: 无论容器如何退出, 总是会自动重启容器
 - `unless-stopped`: 类似于`always`, 但当容器被手动停止(例如`docker stop`)时, 则不会自动重启
 
-四.<mark>docker容器网络概述(5种网络类型)</mark>
+四.<mark>docker容器网络概述</mark>
+
+- 支持动态多网络连接: bridge、overlay、macvlan、ipvlan
+- 不支持动态多网络连接: host、none
 
 ❗❗**在容器启动后，无法将其网络更改为其他网络类型**
 
