@@ -68,6 +68,7 @@
     "search.searchEditor.singleClickBehaviour": "peekDefinition",
     "editor.stickyScroll.enabled": true,
     "workbench.tree.enableStickyScroll": true,
+    "workbench.tree.indent": 12,
     // 终端配置
     "terminal.integrated.shellIntegration.suggestEnabled": true,
     "terminal.integrated.stickyScroll.enabled": true,
