@@ -1,7 +1,7 @@
 ## 开启防火墙及SSH服务
 
 ```bash
-sudo yum install -y openssh-server ufw
+sudo apt/yum install -y openssh-server ufw
 sudo systemctl start sshd  # 开启ssh服务
 sudo systemctl enable sshd  # 设置开机自启
 sudo systemctl start ufw  # 开启防火墙
