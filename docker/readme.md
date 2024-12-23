@@ -62,6 +62,11 @@ docker compose ps   # 列出当前compose项目的容器
 docker compose restart  # 重启当前compose项目所有服务,  <service_name> 重启特定服务
 docker compose stop  # 停止所有服务
 docker compose start # 启动已停止的服务
+
+docker history 镜像ID/名称  # 查看镜像的构建信息,
+  --no-trunc：显示完整的输出信息（默认会截断过长的内容）。
+  --quiet 或 -q：只显示镜像层的 ID。
+  --human：以人类可读的格式显示镜像大小（默认启用）。
 ```
 
 一.<mark>使用save和load导出并导入镜像</mark>
