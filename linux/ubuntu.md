@@ -20,6 +20,8 @@
   ```
 
 - ```bash
+  sudo netplan generate  # 检查文本语法
+  sudo netplan try  # 测试配置
   sudo netplan apply  # 应用新的网络配置
   ip a 或者 ping 8.8.8.8  # 检查网络接口的IP地址是否正确
   ```
