@@ -32,6 +32,9 @@ docker run \
   --device-read-iops /dev/sda:1000 --device-write-iops /dev/sda:1000 \   # 限制每秒的IO操作数为1000
   my_image:latest  # 使用的镜像
 
+getent group docker  # 检查docker组是否存在
+sudo groupadd docker  # 创建docker组
+sudo usermod -aG docker username  # 添加用户到docker组, 重新登录或newgrp docker立即应用使其生效
 docker -v  # 列出docker客户端版本信息
 docker version  # 详细列出客户端和服务端的版本信息
 docker info  # 列出docker环境详细信息
