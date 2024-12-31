@@ -1,4 +1,4 @@
-## 使用uvicorn/guvicorn部署项目
+## 使用uvicorn/gunicorn部署项目
 
 1. 协议支持
 - Gunicorn：
