@@ -21,6 +21,9 @@ def setup_logger(log_level=logging.INFO, console_level=logging.INFO,
     logger.propagate = False
     logger.setLevel(log_level)
 
+    if logger.hasHandlers():
+        logger.handlers.clear()
+
     file_handler = logging.FileHandler(log_file, encoding='utf-8')
     file_handler.setLevel(log_level)
 
@@ -40,6 +43,9 @@ def setup_logger(log_level=logging.INFO, console_level=logging.INFO,
 
     atexit.register(lambda: logger.handlers.clear())
     return logger
+
+
+logger = setup_logger()
 
 
 if __name__ == '__main__':
