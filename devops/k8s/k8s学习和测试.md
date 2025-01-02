@@ -1,4 +1,5 @@
 ## <mark>本地创建和管理k8s集群(使用minikube)</mark> 
+<mark>minikube用于在本地环境中学习和测试 Kubernetes，但它并不适合在生产环境中搭建 Kubernetes 集群.</mark>
 1. **安装minikube**
     ```bash
     # https://minikube.sigs.k8s.io/docs/start  (官方文档)
