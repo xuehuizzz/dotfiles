@@ -1,3 +1,17 @@
+### docker安装
+```bash
+docker run -d \
+  --name mysql-container \
+  -e MYSQL_ROOT_PASSWORD=admin \
+  -e MYSQL_USER=admin \
+  -e MYSQL_PASSWORD=admin \
+  -e MYSQL_DATABASE=mydb \
+  -v /Users/xuehuizzz/db/mysql:/app \
+  -p 3306:3306 \
+  --restart always \
+  mysql:latest
+```
+
 ## 常用函数
 ```mysql
 select INET_ATON('192.168.3.100')    -- 将IPv4地址转换为 无符号32位整数
