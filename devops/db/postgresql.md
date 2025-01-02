@@ -4,7 +4,8 @@ docker run -d \
   --name psql \
   -e POSTGRES_USER=admin \
   -e POSTGRES_PASSWORD=admin \
-  -v /Users/xuehuizzz/db/postgresql:/var/lib/postgresql/data \
+  -e POSTGRES_DB=mydb \
+  -v /Users/xuehuizzz/db/postgresql:/app \
   -p 5432:5432 \
   --restart always \
   postgres:15
