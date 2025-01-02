@@ -41,7 +41,8 @@
     ```bash
     # kubectl 是 Kubernetes 的命令行工具，用于与 Kubernetes 集群进行交互
     # 推荐使用snap安装(它不依赖具体的系统库版本), 
-    sudo apt update && apt install -y snapd  # 确保系统安装了snapd
+    sudo apt update
+    sudo apt install -y snapd  # 确保系统安装了snapd
     sudo snap install kubectl --classic    
     kubectl version  # 验证安装
     ```
