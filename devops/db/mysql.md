@@ -1,7 +1,7 @@
 ### docker安装
 ```bash
 docker run -d \
-  --name mysql-container \
+  --name mysql \
   -e MYSQL_ROOT_PASSWORD=admin \
   -e MYSQL_USER=admin \
   -e MYSQL_PASSWORD=admin \
@@ -9,7 +9,7 @@ docker run -d \
   -v /Users/xuehuizzz/db/mysql:/app \
   -p 3306:3306 \
   --restart always \
-  mysql:latest
+  mysql:8.4
 ```
 
 ## 常用函数
