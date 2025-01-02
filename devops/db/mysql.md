@@ -8,6 +8,7 @@ docker run -d \
   -e MYSQL_DATABASE=mydb \
   -v /Users/xuehuizzz/db/mysql:/app \
   -p 3306:3306 \
+  -w /app \
   --restart always \
   mysql:8.4
 ```
