@@ -526,3 +526,20 @@ mypy .  # 检查整个项目, 在项目根目录下执行
 ```
 
 **注意:** `mypy`是基于类型注解工作的, 没有注解的代码部分将不会受到严格的类型检查
+
+#### 7.<mark>配置jupyter</mark>
+
+```bash
+jupyter notebook --generate-config --allow-root  # 生成配置文件, 位于~/.jupyter/jupyter_notebook_config.py
+jupyter notebook password    # 设置密码, 可选
+# sed -ie "s/#c.NotebookApp.ip = 'localhost'/c.NotebookApp.ip = '0.0.0.0'/g" ~/.jupyter/jupyter_notebook_config.py
+sed -ie 's/#c.NotebookApp.port = 8888/c.NotebookApp.port = 8888/g' ~/.jupyter/jupyter_notebook_config.py
+sed -ie 's/#c.NotebookApp.open_browser = True/c.NotebookApp.open_browser = False/g' ~/.jupyter/jupyter_notebook_config.py
+
+# 指定默认打开路径  # 指定默认打开路径
+echo "c.NotebookApp.notebook_dir = '/path/to/directory'" >> ~/.jupyter/jupyter_notebook_config.py
+nohup jupyter notebook --allow-root > jupyter.log 2>&1 &    # 后台启动
+----------------------------------------------------------------------------------------------------------------------
+ps aux | grep jupyter    # 找到    xxxxx/jupyter-notebook --allow-root 结尾的进程
+kill -9 PID 
+```
