@@ -14,23 +14,23 @@
     ```
 2. **mysql**
   - ```bash
-     docker run -d \
-      --name psql \
-      -e POSTGRES_USER=admin \
-      -e POSTGRES_PASSWORD=admin \
-      -e POSTGRES_DB=mydb \
-      -v /Users/xuehuizzz/db/postgresql:/app \
-      -p 5432:5432 \
-      -w /app \
-      --restart always \
-      postgres:15
+    docker run -d \
+    --name psql \
+    -e POSTGRES_USER=admin \
+    -e POSTGRES_PASSWORD=admin \
+    -e POSTGRES_DB=mydb \
+    -v /Users/xuehuizzz/db/postgresql:/app \
+    -p 5432:5432 \
+    -w /app \
+    --restart always \
+    postgres:15
     ```
 3. **jenkins**
   - ```bash
-     docker run -d \
-      --name jenkins \
-      -p 8080:8080 \
-      -p 50000:50000 \
-      -v /Users/xuehuizzz/jenkins:/var/jenkins_home \
-      jenkins/jenkins:lts
-  ```
+    docker run -d \
+    --name jenkins \
+    -p 8080:8080 \
+    -p 50000:50000 \
+    -v /Users/xuehuizzz/jenkins:/var/jenkins_home \
+    jenkins/jenkins:lts
+    ```
