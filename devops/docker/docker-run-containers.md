@@ -26,11 +26,11 @@
       postgres:15
     ```
 3. **jenkins**
-   - ```bash
+  - ```bash
      docker run -d \
       --name jenkins \
       -p 8080:8080 \
       -p 50000:50000 \
       -v /Users/xuehuizzz/jenkins:/var/jenkins_home \
       jenkins/jenkins:lts
-     ```
+  ```
