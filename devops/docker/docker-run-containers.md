@@ -55,7 +55,6 @@
 4. **arangodb**
   - ```bash
     docker run -e ARANGO_ROOT_PASSWORD=admin \
-    -e ARANGO_ROOT_USERNAME=admin \
     -d --name arangodb \
     -p 8529:8529 \
     -v /Users/xuehuizzz/db/arango/data:/var/lib/arangodb3 \
