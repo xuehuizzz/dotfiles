@@ -9,11 +9,11 @@
 
     minikube version  # 验证安装
     minikube start  # 启动minikube集群(下载并启动一个本地k8s集群)
-    minikube kubectl version  # 显示kubectl客户端的版本和k8s集群的版本(用法同kubectl)
+    minikube kubectl version  # 显示kubectl客户端的版本和k8s集群的版本(即Server Version)
     minikube kubectl cluster-info  # 查看k8s集群的状态
     minikube kubectl cluster-info dump  # 查看k8s集群的详细信息
     ```
-    - root用户启动minikube集群失败解决方案
+    - <font color=red>**root用户启动minikube集群失败解决方案**</font>
         1. 避免使用root用户运行minikube
             ```bash
             sudo usermod -aG docker $USER  # 切换到非root用户并将其添加到docker组
@@ -58,26 +58,40 @@
     minikube ip  # 获取minikube集群的ip地址
     minikube service list  # 列出minikube集群中所有可用的服务
     minikube service --all  # 列出所以服务的url,可以直接访问这些服务的外部地址
+    minikube service <service_name> --url  # 查看k8s集群中指定服务的url
     
-    # minikube kubectl get -o wide xxx  # `-o wide` 获取 xxx 的详细信息, -o 表示output, 还可以是`-o yaml`以yaml文件格式输出详细信息, `-o json`以json形式输出
-    # minikube kubectl get type name  # type/name 都可以, 例如: kubectl get po/my-nginx
-    minikube kubectl api-resources  # 显示所有资源的完整信息(复数形式/单数形式/缩写形式), 但首选复数形式 
-    minikube kubectl version  # 查看kubectl客户端版本和k8s集群版本
-    minikube kubectl get all  # 查看所以pod和服务
-    minikube kubectl cluster-info  # 查看本地k8s集群信息, 输出k8s control plane和CoreDNS地址, 其中ip为minukube容器的网络地址
-    minikube kubectl cluster-info dump  # 查看集群详细信息
-    minikube kubectl config use-context minikube  # 将kubectl的上下文切换到minikube集群
-    minikube kubectl get nodes  # 获取minikube集群的k8s配置信息
+    # minikube kubectl -- get -o wide type/name  # `-o wide` 扩展输出资源的简要信息, -o 表示output, 还可以是`-o yaml`以yaml文件格式输出详细信息, `-o json`以json形式输出
+    # minikube kubectl -- get type name  # type/name 都可以, 例如: kubectl get po/my-nginx, 也就是 kubectl get all 中的NAME列
+    # minikube kubectl --get -w type name  # 实时监控资源状态变化
+    minikube kubectl -- api-resources  # 显示所有资源的完整信息(复数形式/单数形式/缩写形式), 但首选复数形式 
+    minikube kubectl -- version  # 查看kubectl客户端版本和k8s集群版本
+    minikube kubectl -- get all  # 查看所以pod和服务
+    minikube kubectl -- get namespaces  # 列出所有命名空间
+    minikube kubectl -- cluster-info  # 查看本地k8s集群信息, 输出k8s control plane和CoreDNS地址, 其中ip为minukube容器的网络地址
+    minikube kubectl -- cluster-info dump  # 查看集群详细信息
+    minikube kubectl -- config use-context minikube  # 将kubectl的上下文切换到minikube集群
+    minikube kubectl -- get nodes  # 获取minikube集群的k8s配置信息
     minikube kubectl -- run <pod_name> --image=nginx --restart=Never  # 创建pod, 名称必须以字母或数字开头和结尾, 且只能包含小写字母(a-z),数字(0-9)和短横线(-)
-    minikube kubectl get replicasets  # 列出所有控制器对象
-    minikube kubectl get pods  # 列出所有pod
-    minikube kubectl get pods --all-namespaces  # 列出所有pod及命名空间
+    minikube kubectl -- get replicasets  # 列出所有控制器对象
+    minikube kubectl -- get pods  # 列出所有pod
+    minikube kubectl -- get pods -A  # 列出所有命名空间下的pod, 等于 --all-namespaces
     minikube kubectl -- get pods -n <namespace>  # 指定查看, kubectl get pods -n <namespace>
     minikube kubectl -- get services --all-namespaces  # 查看所有命令空间下的服务
-    minikube kubectl get services  # 查看当前命名空间下的服务, minikube kubectl get svc(简写)
-    minikube service <service_name> --url  # 查看k8s集群中指定服务的url
-    kubectl delete all --all   # 删除当前命名空间内所有资源
-    kubectl delete all --all -n <namespace-name> # 删除指定命名空间下的所有资源
+    minikube kubectl -- get services  # 查看当前命名空间下的服务, minikube kubectl get svc(简写)
+    minikube kubectl -- delete all --all   # 删除当前命名空间内所有资源
+    minikube kubectl -- delete all --all -n <namespace-name> # 删除指定命名空间下的所有资源
+    minikube kubectl -- describe type name  # 查看特定k8s资源的详细信息
+    minikube kubectl -- get events --watch-only  # 实时观察 Kubernetes 集群中事件流, --watch-only：开启“观察模式”，显示实时新增的事件，而不会列出已有事件
+
+
+    # 查看日志, type/name, 仅支持这种写法, 不能用空格, 
+    # kubectl logs只针对pod, 只有pod会产生日志, 
+    # 所以尽管查看的是deploy/my-nginx, 实际上输出的也是my-nginx这个deployment管理的pod的日志
+    minikube kubectl -- logs type/name   # 查看k8s资源对象的日志, 只能用/分隔开, 不能用空格
+    minikube kubectl -- logs type/name -f --tail 1  # 实时查看日志, 并只显示最近1条, -1 显示所有
+    minikube kubectl -- logs pod/pod-name -c container-name  # 查看pod中的容器的日志
+    minikube kubectl --logs pot/pod-name --all-containers=true  # 查看pod中所有容器日志
+    minikube kubectl -- logs -l app=<pod-label>   # 指定pod label查看日志
     ```
 4. **Pod**
     定义: `pod是k8s部署和管理容器化应用的最小单位. 是一个或多个容器的集合, 共享一个网络命名空间(IP地址和端口空间)以及存储卷(Volumes)`
@@ -111,7 +125,7 @@
     它主要用于：
     - 声明式管理容器应用程序: 定义应用程序应该运行的容器映像、实例数量、副本数量等。
     - 自动化部署与回滚: 支持版本更新、回滚到以前的版本，保证服务的高可用性。
-    - 水平扩展: 根据需求调整 Pod 副本的数量来满足负载需求。
+    - 水平扩展: 根据需求调整Pod 副本的数量来满足负载需求。
     - 自愈能力: 如果某些 Pod 异常退出或不可用，Deployment 会自动重新创建它们。
     - 命名规范同pod
     ```bash
@@ -126,5 +140,19 @@
     
     # 删除deploy
     kubectl delete deployment <deployment-name>  # 删除一个deployment(同时把附带的pod也会删除掉)
+    ```
+6. **exposing k8s ports**
+    ```bash
+    # 将名为my-nginx的k8s部署(deploy)暴露为一个服务(service),并通过指定的端口(8888)对外提供访问
+    kubectl expose deployment/my-nginx --port 8888 
+    
+    # 在k8s集群中创建并启动一个名为tmp-shell的pod, 使用bretfisher/netshoot镜像,并在该容器中启动一个 Bash shell 供用户进行操作。容器终止后会自动删除
+    kubectl run tmp-shell --rm -it --image bretfisher/netshoot -- bash 
+    
+    # create d nodeport service
+    kubectl expose deployment/httpenv --port 8888 --name httpenv-np --type NodePort
+    
+    # 删除服务
+    kubectl delete type/name  # 可同时删除多个, kubectl delete type/name type/name
     
     ```
