@@ -17,6 +17,7 @@ db = client.db(
 # 查询文档
 query = 'FOR doc IN users RETURN doc'
 cursor = db.aql.execute(query)  # 返回的是一个可迭代对象
+print(list(cursor))
 for i in cursor:
     print(i)
 
