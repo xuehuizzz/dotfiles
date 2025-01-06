@@ -39,11 +39,13 @@
 2. **安装kubectl<sub>(可选安装, minikube kubectl xxx用法一致)</sub>**
     ```bash
     # kubectl 是 Kubernetes 的命令行工具，用于与 Kubernetes 集群进行交互
-    sudo apt update && apt install -y apt-transport-https curl
-    wget -q https://packages.cloud.google.com/apt/doc/apt-key.gpg -O kubernetes.asc
-    sudo mv kubernetes.asc /etc/apt/trusted.gpg.d/kubernetes.asc
-    sudo apt-add-repository "deb https://apt.kubernetes.io/ kubernetes-$(lsb_release -c | awk '{print $2}') main"
-    sudo apt update && apt install -y kubectl
+    sudo apt/yum install -y snapd
+    # 确保 Snap 服务已启动并更新
+    sudo systemctl enable --now snapd
+    sudo snap install core
+    sudo snap refresh
+    sudo ln -s /var/lib/snapd/snap /snap   # 创建符号连接到正确路径
+    sudo snap install kubectl --classic
     ```
     
 3. **minikube 和 minikube kubectl常用命令<sub>(同kubectl用法一致)</sub>**
