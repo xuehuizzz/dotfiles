@@ -60,5 +60,5 @@
     -v /Users/xuehuizzz/db/arango/data:/var/lib/arangodb3 \
     -v /Users/xuehuizzz/db/arango/apps:/var/lib/arangodb3-apps \
     --restart always \
-    arangodb:3.10.12
+    arangodb:latest
     ```
