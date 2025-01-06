@@ -11,7 +11,7 @@ sudo nmcli con mod "Wired connection 1" ipv4.dns "8.8.8.8 8.8.4.4"
 sudo nmcli con mod "Wired connection 1" ipv4.method manual
 
 # 3. 激活连接
-nmcli con up "Wired connection 1"
+sudo nmcli con up "Wired connection 1"
 
 # ip a 或 ping 8.8.8.8  验证其是否生效
 ```
