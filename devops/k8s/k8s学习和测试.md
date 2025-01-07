@@ -94,7 +94,8 @@
     minikube kubectl -- logs -l app=<pod-label>   # 指定pod label查看日志
 
 
-    # minikube kubectl -- apply
+    # 使用kubectl apply -f, 文件形式, 可以创建和管理 Kubernetes 中的多种资源
+    # Pod、Deployment、StatefulSet、DaemonSet、Job、Cronjob等
     minikube kubectl -- apply -f myfile.yaml  # 创建或更新配置
     minikube kubectl -- apply -f myyaml/      # 递归创建或更新目录下所有的yaml或yml文件
     minikube kubectl -- apply -f url          # 会从指定的 URL 下载 YAML 配置文件，并对文件中的资源执行 kubectl apply 操作。URL 可以是指向一个单个文件或配置的地址
