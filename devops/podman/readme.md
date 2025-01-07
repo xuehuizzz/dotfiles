@@ -1,4 +1,16 @@
-Podman 和 Docker 都是容器管理工具，用于创建、运行和管理容器。但它们在架构、功能和设计理念上有一些显著的区别。以下是两者的主要区别：
+Podman 和 Docker 都是容器管理工具，用于创建、运行和管理容器。但它们在架构、功能和设计理念上有一些显著的区别。
+### 常用命令
+```bash
+# cli命令和docker大致相同, 可以直接使用docker的镜像
+podman -v  # 查看版本
+podman system connection list  # 列出管理连接, 为空的话需要初始化并启动podman虚拟机(只有初始化并启动虚拟机后才能进行对镜像容器文件的拉取和创建)
+podman machine init   # 初始化虚拟机
+podman machine start  # 启动虚拟机
+podman machine list   # 验证虚拟机状态, 确保虚拟机显示为 "Running"
+
+```
+
+以下是两者的主要区别：
 1. **架构设计**
    - Docker'
      - Docker 使用了客户端-服务端（Client-Server）架构。
