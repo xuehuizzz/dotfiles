@@ -92,6 +92,12 @@
     minikube kubectl -- logs pod/pod-name -c container-name  # 查看pod中的容器的日志
     minikube kubectl --logs pot/pod-name --all-containers=true  # 查看pod中所有容器日志
     minikube kubectl -- logs -l app=<pod-label>   # 指定pod label查看日志
+
+
+    # minikube kubectl -- apply
+    minikube kubectl -- apply -f myfile.yaml  # 创建或更新配置
+    minikube kubectl -- apply -f myyaml/      # 递归创建或更新目录下所有的yaml或yml文件
+    minikube kubectl -- apply -f url          # 会从指定的 URL 下载 YAML 配置文件，并对文件中的资源执行 kubectl apply 操作。URL 可以是指向一个单个文件或配置的地址
     ```
 4. **Pod**
     定义: `pod是k8s部署和管理容器化应用的最小单位. 是一个或多个容器的集合, 共享一个网络命名空间(IP地址和端口空间)以及存储卷(Volumes)`
