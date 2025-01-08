@@ -18,12 +18,12 @@ def setup_logger(log_level=logging.INFO, console_level=logging.INFO,
     log_dir.mkdir(parents=True, exist_ok=True)
     log_file = log_dir / "task.log"
 
-    logger = logging.getLogger(logger_name)
-    logger.propagate = False
-    logger.setLevel(log_level)
+    _logger = logging.getLogger(logger_name)
+    _logger.propagate = False
+    _logger.setLevel(log_level)
 
-    if logger.hasHandlers():
-        logger.handlers.clear()
+    if _logger.hasHandlers():
+        _logger.handlers.clear()
 
     file_handler = RotatingFileHandler(
         log_file, maxBytes=20 * 1024 * 1024, backupCount=7, encoding='utf-8'
@@ -41,11 +41,14 @@ def setup_logger(log_level=logging.INFO, console_level=logging.INFO,
     file_handler.setFormatter(formatter)
     console_handler.setFormatter(formatter)
 
-    logger.addHandler(file_handler)
-    logger.addHandler(console_handler)
+    _logger.addHandler(file_handler)
+    _logger.addHandler(console_handler)
 
-    atexit.register(lambda: logger.handlers.clear())
-    return logger
+    atexit.register(lambda: _logger.handlers.clear())
+    return _logger
+
+
+logger = setup_logger()
 
 
 logger = setup_logger()
