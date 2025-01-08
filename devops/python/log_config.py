@@ -51,9 +51,6 @@ def setup_logger(log_level=logging.INFO, console_level=logging.INFO,
 logger = setup_logger()
 
 
-logger = setup_logger()
-
-
 if __name__ == '__main__':
     test_logger = setup_logger()
     test_logger.debug('这是一个%s信息', 'debug')
