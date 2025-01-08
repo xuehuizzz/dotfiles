@@ -4,6 +4,7 @@ from loguru import logger  # Third-party library, used directly
 import atexit
 import sys
 import logging
+from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 
@@ -24,7 +25,9 @@ def setup_logger(log_level=logging.INFO, console_level=logging.INFO,
     if logger.hasHandlers():
         logger.handlers.clear()
 
-    file_handler = logging.FileHandler(log_file, encoding='utf-8')
+    file_handler = RotatingFileHandler(
+        log_file, maxBytes=20 * 1024 * 1024, backupCount=7, encoding='utf-8'
+    )
     file_handler.setLevel(log_level)
 
     console_handler = logging.StreamHandler(stream=sys.stdout)
