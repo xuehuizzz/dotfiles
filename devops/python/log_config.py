@@ -8,8 +8,7 @@ from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 
-def setup_logger(log_level=logging.INFO, console_level=logging.INFO,
-                 logger_name='custom_logger_name'):
+def setup_logger(log_level=logging.INFO, console_level=logging.INFO, logger_name='project_name'):
     """Sets up and returns a logger with both file and console handlers.
     """
     if not logger_name:
