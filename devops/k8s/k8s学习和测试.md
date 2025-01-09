@@ -63,7 +63,8 @@
     # minikube kubectl -- get -o wide type/name  # `-o wide` 扩展输出资源的简要信息, -o 表示output, 还可以是`-o yaml`以yaml文件格式输出详细信息, `-o json`以json形式输出
     # minikube kubectl -- get type name  # type/name 都可以, 例如: kubectl get po/my-nginx, 也就是 kubectl get all 中的NAME列
     # minikube kubectl --get -w type name  # 实时监控资源状态变化
-    minikube kubectl -- api-resources  # 显示所有资源的完整信息(复数形式/单数形式/缩写形式), 但首选复数形式 
+    minikube kubectl -- api-resources  # 列出 Kubernetes 集群中可用的 API 资源及其属性
+    minikube kubectl -- api-versions  # 列出k8s集群中所有可用的API版本,每一行显示一个可用的API版本
     minikube kubectl -- version  # 查看kubectl客户端版本和k8s集群版本
     minikube kubectl -- get all  # 查看所以pod和服务
     minikube kubectl -- get namespaces  # 列出所有命名空间
