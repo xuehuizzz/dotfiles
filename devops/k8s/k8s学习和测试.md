@@ -83,6 +83,7 @@
     minikube kubectl -- delete all --all -n <namespace-name> # 删除指定命名空间下的所有资源
     minikube kubectl -- describe type name  # 查看特定k8s资源的详细信息
     minikube kubectl -- get events --watch-only  # 实时观察 Kubernetes 集群中事件流, --watch-only：开启“观察模式”，显示实时新增的事件，而不会列出已有事件
+    minikube kubectl -- kubectl explain <type> --recursive   # 以递归方式详细解释 Kubernetes 中资源及其所有字段的定义和用途(pods/deployments/services)
 
 
     # 查看日志, type/name, 仅支持这种写法, 不能用空格, 
