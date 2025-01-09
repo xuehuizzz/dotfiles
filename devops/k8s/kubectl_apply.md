@@ -69,5 +69,6 @@ spec:
 ### <font color=red>常用命令</font>
 ```bash
 kubectl apply -f xxx.yaml   # 创建/更新资源
+kubectl explain <type> --recursive   # 以递归方式详细解释 Kubernetes 中资源及其所有字段的定义和用途(pods/deployments/services)
 
 ```
