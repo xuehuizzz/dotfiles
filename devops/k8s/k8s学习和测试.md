@@ -91,7 +91,7 @@
     minikube kubectl -- logs type/name   # 查看k8s资源对象的日志, 只能用/分隔开, 不能用空格
     minikube kubectl -- logs type/name -f --tail 1  # 实时查看日志, 并只显示最近1条, -1 显示所有
     minikube kubectl -- logs pod/pod-name -c container-name  # 查看pod中的容器的日志
-    minikube kubectl --logs pot/pod-name --all-containers=true  # 查看pod中所有容器日志
+    minikube kubectl -- logs pot/pod-name --all-containers=true  # 查看pod中所有容器日志
     minikube kubectl -- logs -l app=<pod-label>   # 指定pod label查看日志
 
 
