@@ -1,11 +1,16 @@
--------------macOS command aliases-----------------------------------------------
-alias ty="sudo spctl --master-disable"  #同意安装任意来源 for mac, 版本需低于macOS15.0
+通用-------------------------------------------------------------------------------------------------------------------------
+alias cat="bat"    
 alias jupyter="nohup jupyter notebook --allow-root > jupyter.log 2>&1 &"  #后台启动jupyter notebook
-alias mac="neofetch --off --colors 3 4 5 6 2 2"
-alias cat="ccat"    # or bat
-alias hist="history -i"
 alias reload="exec ${SHELL} -l"   # 重新加载当前shell配置
 
+
+
+MAC-------------------------------------------------------------------------------------------------------------------------
+alias ty="sudo spctl --master-disable"  #同意安装任意来源 for mac, 版本需低于macOS15.0
+alias mac="neofetch --off --colors 3 4 5 6 2 2"
+alias hist="history -i"  # just for /bin/zsh
+
+# 定义open函数, 可直接打开文件或目录
 custom_open() {    # for macOS
     if [[ -f "$1" ]]; then
         # 如果是文件，直接用 TextEdit 打开
@@ -21,3 +26,8 @@ alias open="custom_open"
 
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"  # 显示所有隐藏文件。
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"  # 隐藏所有隐藏文件。
+
+
+Linux-------------------------------------------------------------------------------------------------------------------------
+
+
