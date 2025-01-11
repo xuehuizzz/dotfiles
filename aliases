@@ -5,6 +5,9 @@ alias mv="mv -v"   # move file and explain
 alias mkdir="mkdir -pv"  # mkdir folder recursively and explain
 alias jupyter="nohup jupyter notebook --allow-root > jupyter.log 2>&1 &"  #后台启动jupyter notebook
 alias reload="exec ${SHELL} -l"   # 重新加载当前shell配置
+alias curl="curl --compressed"
+alias wget="wget -c"
+
 
 
 
