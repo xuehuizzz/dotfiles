@@ -7,6 +7,9 @@ _has() {
 if _has bat; then
     alias cat="bat"
 fi
+if _has nvim; then
+    alias vim="nvim"
+fi
 
 alias cp="cp -rv"  # copy file recursively and explain
 alias mv="mv -v"   # move file and explain
