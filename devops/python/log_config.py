@@ -51,9 +51,12 @@ logger = setup_logger()
 
 
 if __name__ == '__main__':
-    test_logger = setup_logger()
-    test_logger.debug('这是一个%s信息', 'debug')
-    test_logger.info('这是一个%s信息', 'info')
-    test_logger.warning('这是一个%s信息', 'warning')
-    test_logger.error('这是一个%s信息', 'error')
-    test_logger.critical('这是一个%s信息', 'critical')
+    try:
+        from loguru import logger
+    except ImportError:
+        from custom_func import logger
+    logger.debug('这是一个%s信息', 'debug')
+    logger.info('这是一个%s信息', 'info')
+    logger.warning('这是一个%s信息', 'warning')
+    logger.error('这是一个%s信息', 'error')
+    logger.critical('这是一个%s信息', 'critical')
