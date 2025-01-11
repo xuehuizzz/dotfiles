@@ -1,5 +1,8 @@
 通用-------------------------------------------------------------------------------------------------------------------------
-alias cat="bat"    
+alias cat="bat"
+alias cp="cp -rv" # copy file recursively and explain
+alias mv="mv -v" # move file and explain
+alias mkdir="mkdir -pv"  # 递归创建目录
 alias jupyter="nohup jupyter notebook --allow-root > jupyter.log 2>&1 &"  #后台启动jupyter notebook
 alias reload="exec ${SHELL} -l"   # 重新加载当前shell配置
 
