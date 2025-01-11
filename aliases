@@ -1,5 +1,13 @@
 通用-------------------------------------------------------------------------------------------------------------------------
-alias cat="bat"
+# 自定义方法, 判断命令存不存在
+_has() {
+    command -v "$1" > /dev/null 2>&1
+}
+
+if _has bat; then
+    alias cat="bat"
+fi
+
 alias cp="cp -rv"  # copy file recursively and explain
 alias mv="mv -v"   # move file and explain
 alias mkdir="mkdir -pv"  # mkdir folder recursively and explain
