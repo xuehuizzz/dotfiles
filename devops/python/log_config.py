@@ -51,6 +51,7 @@ logger = setup_logger()
 
 
 if __name__ == '__main__':
+    """
     try:
         from loguru import logger
     except ImportError:
@@ -60,3 +61,4 @@ if __name__ == '__main__':
     logger.warning('这是一个%s信息', 'warning')
     logger.error('这是一个%s信息', 'error')
     logger.critical('这是一个%s信息', 'critical')
+    """
