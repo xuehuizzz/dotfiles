@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  jupyter:
+    image: jupyter/base-notebook:latest
+    container_name: jupyter
+    ports:
+      - "8888:8888"
+    restart: always
+    volumes:
+      - /Users/xuehuizzz/jupyter:/home/jovyan/work  # 挂载工作目录
+      - /Users/xuehuizzz/jupyter/logs:/var/log/jupyter       # 持久化日志
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    command: >
+      start-notebook.sh
+      --NotebookApp.token=''
+      --NotebookApp.password=''
+      --NotebookApp.ip=0.0.0.0
+      --NotebookApp.open_browser=False
+      --NotebookApp.port=8888
+      --NotebookApp.notebook_dir=/home/jovyan/work
