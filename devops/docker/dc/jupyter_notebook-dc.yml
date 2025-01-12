@@ -8,7 +8,6 @@ services:
     restart: always
     volumes:
       - /Users/xuehuizzz/jupyter:/home/jovyan/work  # 挂载工作目录
-      - /Users/xuehuizzz/jupyter/logs:/var/log/jupyter       # 持久化日志
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     environment:
