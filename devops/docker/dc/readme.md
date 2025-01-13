@@ -9,7 +9,7 @@
 
 # 如果value值包含空格/特殊字符, 或者是以数字开头, 应当用引号引起来
 
-version: '3.7' # 指定 docker-compose 文件的版本, 一般不建议超过 docker-compose 本身的版本
+# version: '3.7' # 指定 docker-compose 文件的版本, 一般不建议超过 docker-compose 本身的版本, 新版本不在需要指定
 
 x-environment: &default-environment # 定义一个全局环境变量配置块
   TZ: Asia/Shanghai # 统一设置所有容器的时区为亚洲/上海
