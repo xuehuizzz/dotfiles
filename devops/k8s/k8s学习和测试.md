@@ -66,7 +66,7 @@
     minikube kubectl -- api-resources  # 列出 Kubernetes 集群中可用的 API 资源及其属性
     minikube kubectl -- api-versions  # 列出k8s集群中所有可用的API版本,每一行显示一个可用的API版本
     minikube kubectl -- version  # 查看kubectl客户端版本和k8s集群版本
-    minikube kubectl -- get all  # 查看所以pod和服务
+    minikube kubectl -- get all  # 查看所有pod和服务
     minikube kubectl -- get namespaces  # 列出所有命名空间
     minikube kubectl -- cluster-info  # 查看本地k8s集群信息, 输出k8s control plane和CoreDNS地址, 其中ip为minukube容器的网络地址
     minikube kubectl -- cluster-info dump  # 查看集群详细信息
