@@ -57,7 +57,7 @@
     minikube start -p <profile_name>  # 启动指定的配置
     minikube ip  # 获取minikube集群的ip地址
     minikube service list  # 列出minikube集群中所有可用的服务
-    minikube service --all  # 列出所以服务的url,可以直接访问这些服务的外部地址
+    minikube service --all  # 列出所有服务的url,可以直接访问这些服务的外部地址
     minikube service <service_name> --url  # 查看k8s集群中指定服务的url
     
     # minikube kubectl -- get -o wide type/name  # `-o wide` 扩展输出资源的简要信息, -o 表示output, 还可以是`-o yaml`以yaml文件格式输出详细信息, `-o json`以json形式输出
