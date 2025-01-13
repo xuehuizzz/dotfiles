@@ -1,7 +1,4 @@
 # 敏感信息建议存于 .env 
-
-version: "3"
-
 services:
   # 默认登录用户名密码: admin
   sonarqube:
