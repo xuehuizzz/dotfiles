@@ -29,6 +29,8 @@
     "editor.detectIndentation": false,
     "editor.tabSize": 4,
     "window.dialogStyle": "custom",
+    "window.nativeTabs": true,
+    "window.title": "${rootName}",
     "debug.showBreakpointsInOverviewRuler": true,
     // Tab 高度紧凑模式
     "window.density.editorTabHeight": "compact",
@@ -175,5 +177,6 @@
     },
     "files.eol": "\n", // 保存文件换行符为 unix 格式
     "files.insertFinalNewline": true, // 保存文件末尾自动添加空行
+    "extensions.autoUpdate": "onlyEnabledExtensions", // 自动更新扩展
     
 }
