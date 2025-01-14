@@ -1,6 +1,7 @@
 {
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
+    "editor.renderWhitespace": "boundary",
     "editor.smoothScrolling": true,
     "editor.cursorBlinking": "expand",
     "editor.cursorSmoothCaretAnimation": "on",
