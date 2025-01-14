@@ -88,6 +88,7 @@
     "workbench.list.fastScrollSensitivity": 10,
     "workbench.colorTheme": "Pretty Dark Theme",
     "editor.foldingImportsByDefault": true,
+    "workbench.editor.highlightModifiedTabs": true, // 高亮显示修改过的文件
     // index 替换成 目录名
     "workbench.editor.customLabels.patterns": {
         "**/index.vue": "${dirname}.vue",
@@ -162,5 +163,32 @@
       "**/.idea": true,
       // "**/.vscode": true,
       "**/node_modules":true
-    }
+    },
+    "search.exclude": {
+      "**/*.snap": true,
+      "**/*.svg": true,
+      "**/.git": true,
+      "**/.github": false,
+      "**/.nuxt": true,
+      "**/.output": true,
+      "**/.pnpm": true,
+      "**/.vscode": true,
+      "**/.yarn": true,
+      "**/assets": true,
+      "**/bower_components": true,
+      "**/dist/**": true,
+      "**/logs": true,
+      "**/node_modules": true,
+      "**/out/**": true,
+      "**/package-lock.json": true,
+      "**/pnpm-lock.yaml": true,
+      "**/public": true,
+      "**/temp": true,
+      "**/yarn.lock": true,
+      "**/CHANGELOG*": true,
+      "**/LICENSE*": true,
+    },
+    "files.eol": "\n", // 保存文件换行符为 unix 格式
+    "files.insertFinalNewline": true, // 保存文件末尾自动添加空行
+    
 }
