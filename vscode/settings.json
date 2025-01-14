@@ -72,6 +72,8 @@
     "workbench.tree.indent": 15,  // 设置目录树缩进
     // 终端配置
     "terminal.integrated.shellIntegration.suggestEnabled": true,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.stickyScroll.enabled": true,
     "terminal.integrated.inheritEnv": true,
     "terminal.integrated.gpuAcceleration": "on",
