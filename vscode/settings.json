@@ -153,5 +153,12 @@
         "'",
         "`"
     ],
-    "explorer.copyRelativePathSeparator": "/"
+    "explorer.copyRelativePathSeparator": "/",
+    "files.exclude": {   // 隐藏文件夹
+      "**/__pycache__": true,
+      "**/.ruff_cache": true,
+      "**/.idea": true,
+      "**/.vscode": true,
+      "**/node_modules":true
+    }
 }
