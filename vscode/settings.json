@@ -158,7 +158,7 @@
       "**/__pycache__": true,
       "**/.ruff_cache": true,
       "**/.idea": true,
-      "**/.vscode": true,
+      // "**/.vscode": true,
       "**/node_modules":true
     }
 }
