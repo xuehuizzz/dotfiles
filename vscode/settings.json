@@ -10,6 +10,7 @@
     "editor.wordWrap": "on",
     "editor.lineHeight": 1.5,
     "editor.fontSize": 11,
+    "editor.rulers": [100],  // 显式代码分割线
     "editor.fontFamily": "Consolas, '等线', monospace",
     "editor.fastScrollSensitivity": 10,
     "editor.guides.bracketPairs": true,
