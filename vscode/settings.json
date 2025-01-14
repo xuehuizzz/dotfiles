@@ -83,6 +83,7 @@
         "sound": "auto",
         "announcement": "auto"
     },
+    "workbench.fontAliasing": "antialiased",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.list.fastScrollSensitivity": 10,
     "workbench.colorTheme": "Pretty Dark Theme",
