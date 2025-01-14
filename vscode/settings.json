@@ -71,6 +71,7 @@
     "workbench.tree.enableStickyScroll": true,
     "workbench.tree.indent": 15,  // 设置目录树缩进
     // 终端配置
+    "code-runner.clearPreviousOutput": true,
     "terminal.integrated.shellIntegration.suggestEnabled": true,
     "terminal.integrated.cursorStyle": "line",
     "terminal.integrated.cursorBlinking": true,
