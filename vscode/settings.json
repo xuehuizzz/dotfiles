@@ -73,6 +73,7 @@
     // 终端配置
     "terminal.integrated.shellIntegration.suggestEnabled": true,
     "terminal.integrated.stickyScroll.enabled": true,
+    "terminal.integrated.inheritEnv": true,
     "terminal.integrated.gpuAcceleration": "on",
     "accessibility.signals.terminalCommandFailed": {
         "sound": "auto",
