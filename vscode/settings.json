@@ -185,4 +185,9 @@
     "cSpell.enable": true,
     "cSpell.allowCompoundWords": true,
     "cSpell.language": "en,en-US",
+    // prettier设置
+    "prettier.enable": false,
+    "prettier.printWidth": 100,
+    "prettier.semi": false,
+    "prettier.singleQuote": true,
 }
