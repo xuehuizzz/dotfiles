@@ -1,3 +1,4 @@
+// cmd+shift+p, >打开用户设置(JSON)
 {
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
