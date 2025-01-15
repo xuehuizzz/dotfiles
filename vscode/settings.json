@@ -180,12 +180,8 @@
       "**/node_modules":true
     },
     "files.eol": "\n", // 保存文件换行符为 unix 格式
-    "files.insertFinalNewline": true, // 保存文件末尾自动添加空行
     "files.simpleDialog.enable": true,
     "extensions.autoUpdate": "onlyEnabledExtensions", // 自动更新扩展
-    "cSpell.enable": true,
-    "cSpell.allowCompoundWords": true,
-    "cSpell.language": "en,en-US",
     // prettier设置
     "prettier.enable": false,
     "prettier.printWidth": 100,
