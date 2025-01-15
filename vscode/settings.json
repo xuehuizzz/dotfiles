@@ -89,6 +89,7 @@
     "workbench.iconTheme": "material-icon-theme",
     "workbench.list.fastScrollSensitivity": 10,
     "workbench.colorTheme": "Pretty Dark Theme",
+    "workbench.editor.tabActionLocation": "left",
     "editor.foldingImportsByDefault": true,
     "workbench.editor.highlightModifiedTabs": true, // 高亮显示修改过的文件
     // index 替换成 目录名
