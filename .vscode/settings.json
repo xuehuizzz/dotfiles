@@ -66,7 +66,7 @@
     "vue.autoInsert.dotValue": true,
     "files.autoGuessEncoding": true,
     // 保存自动删除末尾空格
-    "files.trimTrailingWhitespace": false,
+    "files.trimTrailingWhitespace": true,
     "path-intellisense.mappings": {
         "@": "${workspaceFolder}/src"
     },
@@ -190,6 +190,7 @@
     "explorer.openEditors.visible": 5,         // 隐藏“打开的编辑器”面板
     "window.restoreWindows": "all",           // 恢复之前打开的所有窗口和文件夹
     "workbench.editor.enablePreview": false,  // 禁用文件预览模式，确保双击时文件独立打开
+    "editor.inlineSuggest.enabled": false,
     "window.openFoldersInNewWindow": "on",
     "chat.commandCenter.enabled": false,  // 隐藏copilot
 }
