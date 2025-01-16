@@ -167,10 +167,6 @@
     "css.lint.unknownAtRules": "ignore",
     "scss.lint.unknownAtRules": "ignore",
     "less.lint.unknownAtRules": "ignore",
-    "togglequotes.chars": [
-        "'",
-        "`"
-    ],
     "explorer.copyRelativePathSeparator": "/",
     "files.exclude": {   // 隐藏文件夹
       "**/__pycache__": true,
