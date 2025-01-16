@@ -35,19 +35,8 @@
             # 如果你使用的是 Ubuntu 作为主机并且可以使用 Docker Desktop，可以尝试切换到 Docker Desktop 驱动，并避免使用 root 权限
             minikube start --driver=docker
             ```
-            
-2. **安装kubectl<sub>(可选安装, minikube kubectl xxx用法一致)</sub>**
-    ```bash
-    # kubectl 是 Kubernetes 的命令行工具，用于与 Kubernetes 集群进行交互
-    # 推荐使用snap安装(它不依赖具体的系统库版本), 
-    sudo apt update
-    sudo apt install -y snapd  # 确保系统安装了snapd
-    sudo snap install kubectl --classic    
-    sudo kubectl version  # 验证安装
-    ```
     
-3. **minikube 和 minikube kubectl常用命令<sub>(同kubectl用法一致)</sub>**
-    `minikube kubectl -- xxx  等于  kubectl xxx`
+3. **minikube常用命令**
     ```bash
     minikube start  # 启动minikube集群(即创建一个名为: minikube 的docker容器)
     minikube stop  # 停止minikube集群
