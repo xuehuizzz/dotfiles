@@ -1,4 +1,4 @@
-## <mark>本地创建和管理k8s集群(使用minikube)</mark> 
+# <mark>使用minikube搭建k8s集群</mark> 
 1. **安装minikube**
     ```bash
     # https://minikube.sigs.k8s.io/docs/start  (官方文档)
