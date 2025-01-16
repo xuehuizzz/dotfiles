@@ -191,4 +191,5 @@
     "window.restoreWindows": "all",           // 恢复之前打开的所有窗口和文件夹
     "workbench.editor.enablePreview": false,  // 禁用文件预览模式，确保双击时文件独立打开
     "window.openFoldersInNewWindow": "on",
+    "chat.commandCenter.enabled": false,  // 隐藏copilot
 }
