@@ -74,7 +74,8 @@ FOR doc IN users
    FILTER doc.city == "New York"
    // CONTAINS(doc.name, "A")    name包含`A`, 文档区分大小写
    // STARTS_WITH(doc.name, "A")   name以`A`开头的
-   // LIKE(doc.name, "%A")  name以`A`结尾
+   // LIKE(doc.name, "%A")  name以`A`结尾, A%是以A开头, %A%表示包含A
+   // REGEX(doc.name, "^A")  支持正则表达式, name以`A`开头,  ^A 表示以 "A" 开头的字符串
    // REGEX(doc.name, "A$")  支持正则表达式, name以`A`结尾,  A$ 表示以 "A" 结尾的字符串
    // concat(doc.name,'-', doc.age)  字符串拼接用concat
    SORT doc.age ASC
