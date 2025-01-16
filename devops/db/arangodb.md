@@ -75,8 +75,7 @@ FOR doc IN users
    // CONTAINS(doc.name, "A")    name包含`A`, 文档区分大小写
    // STARTS_WITH(doc.name, "A")   name以`A`开头的
    // LIKE(doc.name, "%A")  name以`A`结尾, A%是以A开头, %A%表示包含A
-   // REGEX(doc.name, "^A")  支持正则表达式, name以`A`开头,  ^A 表示以 "A" 开头的字符串
-   // REGEX(doc.name, "A$")  支持正则表达式, name以`A`结尾,  A$ 表示以 "A" 结尾的字符串
+   // REGEX(doc.name, "^A")  ^A 以 "A" 开头,  A$ 以"A"结尾, A或 .*A.*  表示包含A
    // concat(doc.name,'-', doc.age)  字符串拼接用concat
    SORT doc.age ASC
    LIMIT 0, 2   // 分页查询, 每页2条数据, 从第0条数据开始
