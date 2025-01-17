@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    ms-ceintl.vscode-language-pack-zh-hans,
+    ms-python.python,
+    ms-python.vscode-pylance,
+    ms-python.debugpy,
+    charliermarsh.ruff,
+    pkief.material-icon-theme,
+    cjl.pretty-dark-theme,
+    formulahendry.code-runner,
+    eamodio.gitlens,
+    mechatroner.rainbow-csv,
+    fittentech.fitten-code,
+    usernamehw.errorlens,
+    isudox.vscode-jetbrains-keybindings
+  ]
+}
