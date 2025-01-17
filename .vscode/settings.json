@@ -177,6 +177,7 @@
       "**/node_modules":true
     },
     "files.eol": "\n", // 保存文件换行符为 unix 格式
+    "files.encoding": "utf8",
     "files.simpleDialog.enable": true,
     "extensions.autoUpdate": "onlyEnabledExtensions", // 自动更新扩展
     // prettier设置
