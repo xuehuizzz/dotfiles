@@ -129,6 +129,7 @@
     "liveServer.settings.donotVerifyTags": true,
     "update.mode": "manual",
     "search.exclude": {
+      "**/*.sql": true,  
       "**/*.snap": true,
       "**/*.svg": true,
       "**/.git": true,
