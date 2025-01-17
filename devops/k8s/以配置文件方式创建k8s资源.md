@@ -3,7 +3,7 @@ k8s中`的kubectl apply -f file`命令用于创建和更新资源, 此命令可�
 - **Create**: 如果yaml文件中指定的资源(Pod、Deployment、Service等)不存在, `kubectl apply`将创建它
 - **Update**: 如果资源已经存在， kubectl apply将更新它以匹配 YAML 文件中定义的所需状态。它应用更改，无需显式删除现有资源并重新创建它
 
-## 创建一个Pod(pod.yaml)
+## 创建一个Pod(pod_xxx.yaml)
 ```yaml
 apiVersion: v1   # 指定核心资源的api版本,k8s中的 API 是按资源和功能模块分组管理的，核心资源(如 Pod、Service)属于核心API组, 其版本为 v1
 kind: Pod  # 定义资源的类型, `Pod`表示这是一个Pod配置
@@ -21,7 +21,7 @@ spec:   # 定义资源的规格, 描述资源的具体行为和属性
     image: nginx  # 指定容器运行的镜像, 默认会从docker hub拉取
 ```
 
-## 创建一个Deployment(deployment.yaml)
+## 创建一个Deployment(deploy_xxx.yaml)
 ```yaml
 # Deployment 用于管理和扩展 Pod 的副本集，保证系统的高可用性。
 apiVersion: apps/v1   # 指定该资源的API版本
@@ -46,7 +46,7 @@ spec:  # 定义 Deployment 的具体配置，包括副本数量、选择器规�
         - containerPort: 80
 ```
 
-## 创建一个Service(service.yaml)
+## 创建一个Service(svc_xxx.yaml)
 ```yaml
 apiVersion: v1   # 指定资源的API版本
 kind: Service    # 资源类型
