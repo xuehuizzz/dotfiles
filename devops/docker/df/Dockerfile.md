@@ -1,7 +1,7 @@
 ## Dockerfile编写
 ```dockerfile
 # 基于一个基础镜像
-from ubuntu:22.04  
+FROM ubuntu:22.04  
 
 # Dockerfile维护者
 LABEL maintainer="xuehui <xuehuizzz103@gmail.com>"   
