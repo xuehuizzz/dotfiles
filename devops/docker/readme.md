@@ -34,7 +34,7 @@ docker run \
 
 getent group docker  # 检查docker组是否存在
 sudo groupadd docker  # 创建docker组
-sudo usermod -aG docker username  # 添加用户到docker组, 重新登录或newgrp docker立即应用使其生效
+sudo usermod -aG docker username  # 添加用户到docker组, 重新登录(exec su - $USER)或修改当前会话组(newgrp docker)立即应用使其生效
 docker -v  # 列出docker客户端版本信息
 docker version  # 详细列出客户端和服务端的版本信息
 docker info  # 列出docker环境详细信息
