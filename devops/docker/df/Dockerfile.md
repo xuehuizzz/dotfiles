@@ -3,7 +3,7 @@
 # 基于一个基础镜像
 FROM ubuntu:22.04  
 
-# Dockerfile维护者
+# Dockerfile维护者, LABEL为 <key>=<value>结构
 LABEL maintainer="xuehui <xuehuizzz103@gmail.com>"   
 
 # 环境变量
