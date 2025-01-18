@@ -73,6 +73,13 @@ docker history 镜像ID/名称  # 查看镜像的构建信息,
   --no-trunc：显示完整的输出信息（默认会截断过长的内容）。
   --quiet 或 -q：只显示镜像层的 ID。
   --human：以人类可读的格式显示镜像大小（默认启用）。
+
+# 常用prune命令(不可逆操作, 慎用)
+docker container prune  # 清理未使用的容器
+docker image prune   # 清理所有无用的悬空镜像（dangling images），即没有被任何容器使用的镜像, -a 删除所有未使用的镜像
+docker network prune  # 清理未使用的网络(默认网络除外)
+docker volume prune  # 清理未使用的卷
+docker system prune  # 清理所有停止的容器、无用的镜像(dangling images）、未使用的网络、未使用的卷（添加 --volumes 参数时）
 ```
 
 一.<mark>使用save和load导出并导入镜像</mark>
