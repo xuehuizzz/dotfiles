@@ -71,8 +71,8 @@ docker compose start # 启动已停止的服务
 
 docker history 镜像ID/名称  # 查看镜像的构建信息,
   --no-trunc：显示完整的输出信息（默认会截断过长的内容）。
-  --quiet 或 -q：只显示镜像层的 ID。
-  --human：以人类可读的格式显示镜像大小（默认启用）。
+  -q 或 --quiet：只显示镜像层的 ID。
+  -h 或 --human：以人类可读的格式显示镜像大小（默认启用）。
 
 # 常用prune命令(不可逆操作, 慎用)
 docker container prune  # 清理未使用的容器
