@@ -40,7 +40,7 @@ docker version  # 详细列出客户端和服务端的版本信息
 docker info  # 列出docker环境详细信息
 docker stats 容器ID/名称   # 查看容器状态
 docker plugin ls  # 列出已安装的插件
-docker rename my_comtainer my_new_container  # 重命名容器
+docker rename 容器ID/名称 new_container_name  # 重命名容器
 docker ps -a  # 查看所有容器(等于: docker container ls -a), --no-trunc 显示完整的命令
 docker ps -q  # 列出所有运行中容器的ID,  -aq: 列出所有容器id
 docker stop/start 容器ID/名称    # 停止/启动容器
