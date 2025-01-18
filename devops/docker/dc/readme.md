@@ -1,4 +1,4 @@
-## docker-compose文件配置模板
+## docker-compose.yml
 ```yml
 # 如果有敏感信息存于 .env 文件当中, 使用如下命令运行容器
 # docker-compose --env-file envFilePath -f custom.yml up -d
