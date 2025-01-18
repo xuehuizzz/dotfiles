@@ -1,4 +1,4 @@
-## [k8s下载地址](https://www.downloadkubernetes.com)
+## [k8s下载地址, 点此跳转](https://www.downloadkubernetes.com)
 
 ### <mark>什么是k8s</mark>
 
