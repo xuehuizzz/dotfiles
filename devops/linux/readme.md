@@ -25,6 +25,7 @@ sudo snap clean  # 清理缓存
 sudo snap refresh  # 更新所有已安装的包, sudo snap refresh xxx 指定更新
 
 sudo snap services  # 列出所有 Snap 管理的服务及其状态
+sudo snap services xxx  # 查看xxx的服务状态
 sudo snap start xxx  # 启动xxx服务
 sudo snap stop xxx  # 停止xxx服务
 sudo snap restart xxx  # 重启xxx服务
