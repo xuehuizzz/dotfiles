@@ -1,8 +1,7 @@
 1. **环境准备**
     ```bash
     # 关闭交换分区：Kubernetes 要求禁用 swap
-    sudo swapoff -a  # 禁用 swap
-    sed -i '/ swap / s/^/#/' /etc/fstab  # 确保开机时不启用 swap
+    sudo swapoff -a && sudo sed -i '/ swap / s/^/#/' /etc/fstab  # 禁用swap并关闭开机自启
     
     #Kubernetes 需要容器运行时，常用 Docker 或 containerd
     # 安装docker
@@ -18,8 +17,10 @@
     sudo yum update -y                       # CentOS
     
     # 安装基础依赖
-    sudo apt install -y apt-transport-https ca-certificates curl software-properties-common  # Ubuntu/Debian
-    sudo yum install -y yum-utils device-mapper-persistent-data lvm2  # CentOS
+    # Ubuntu/Debian
+    sudo apt install -y apt-transport-https ca-certificates curl software-properties-common conntrack ethtool containerd 
+    # CentOS
+    sudo yum install -y yum-utils device-mapper-persistent-data lvm2 conntrack ethtool containerd
     ```
 2. **安装kubeadm、kubelet和kubectl**
     ```bash
