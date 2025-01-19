@@ -11,6 +11,23 @@ sudo ufw enable      # 启用防火墙
 sudo ufw status      # 查看防火墙状态
 ```
 
+## systemctl
+```bash
+systemctl list-units --type=service  # 查看所有已启动的服务, --all 查看所有服务
+systemctl list-unit-files --type=service  # 查看所有已知服务及其启用状态
+
+systemctl start xxx  # 启动xxx服务
+systemctl stop xxx  # 停止xxx服务
+systemctl restart xxx  # 重启xxx服务
+systemctl enable xxx  # 设置xxx服务开机自启
+systemctl disable xxx  # 禁用xxx服务的开机自启
+systemctl is-enabled xxx  # 查看xxx服务是否开机自启
+
+systemctl reboot  # 重启系统(推荐使用)
+systemctl poweroff  # 关机系统
+systemctl suspend  # 挂起系统
+```
+
 ## snap
 ```bash
 # Snap 是一种现代化的包管理和应用分发工具，适合需要快速分发、跨平台兼容性和安全隔离的场景。
@@ -29,4 +46,7 @@ sudo snap services xxx  # 查看xxx的服务状态
 sudo snap start xxx  # 启动xxx服务
 sudo snap stop xxx  # 停止xxx服务
 sudo snap restart xxx  # 重启xxx服务
+sudo snap enable xxx  # 设置xxx服务开机自启
+sudo snap disable xxx  # 禁用xxx服务开机自启
 ```
+
