@@ -7,8 +7,8 @@
     ```
 2. ## 下载Harbor离线安装包
     ```bash
-    wget -c https://github.com/goharbor/harbor/releases/download/v2.8.0/harbor-offline-installer-v2.8.0.tgz  # 可自行选择版本
-    tar -zxvf harbor-offline-installer-v2.8.0.tgz   # 解压安装包
+    wget -c https://github.com/goharbor/harbor/releases/download/v2.12.2/harbor-offline-installer-v2.12.2.tgz  # 可自行选择版本
+    tar -zxvf harbor-offline-installer-v2.12.2.tgz   # 解压安装包
     ```
 3. ## 配置Harbor
     - 复制配置文件模板
