@@ -41,7 +41,8 @@ systemctl restart xxx  # 重启xxx服务
 systemctl enable xxx  # 设置xxx服务开机自启
 systemctl disable xxx  # 禁用xxx服务的开机自启
 systemctl is-enabled xxx  # 查看xxx服务是否开机自启
-
+systemctl mask xxx  # 屏蔽xxx服务, 以防止它被启动，无论是手动启动还是自动启动
+systemctl unmask xxx  # 取消屏蔽xxx服务
 systemctl reboot  # 重启系统(推荐使用)
 systemctl poweroff  # 关机系统
 systemctl suspend  # 挂起系统
