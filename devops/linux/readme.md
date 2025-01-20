@@ -11,6 +11,25 @@ sudo ufw enable      # 启用防火墙
 sudo ufw status      # 查看防火墙状态
 ```
 
+## journalctl
+```bash
+# journalctl 是 Linux 系统中用来查看和管理系统日志的工具。它是 systemd 系统日志管理器的一部分，用于访问由 journald 守护进程记录的日志信息
+# 查看日志
+journalctl  # 查看所有日志
+journalctl -f  # 实时查看日志
+journalctl --since "YYYY-MM-DD"  # 查看某一天的日志
+journalctl --since "YYYY-MM-DD HH:MM:SS" --until "YYYY-MM-DD HH:MM:SS"  # 查看特定时间段的日志
+journalctl -u 服务名.service  # 查看某个服务的日志
+journalctl -k  # 查看内核日志
+journalctl -b  # 查看当前启动的日志
+    journalctl -b -1  # 查看上一次启动的日志
+    journalctl -b -2  # 查看两次前启动的日志
+
+# 清理日志
+journalctl --vacuum-size=500M  # 按大小清理, e.g. 仅保留500MB的日志, 其余清除
+journalctl --vacuum-time=2weeks  # 仅保留过去2周的日志
+```
+
 ## systemctl
 ```bash
 systemctl list-units --type=service  # 查看所有已启动的服务, --all 查看所有服务
