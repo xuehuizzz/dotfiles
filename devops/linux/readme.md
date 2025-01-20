@@ -1,5 +1,23 @@
-## 开启防火墙及SSH服务
+## <mark>使用openssl生成HTTPS自签名证书</mark>
+```bash
+openssl genrsa -out server.key 4096    # 首先生成私钥（RSA 4096位）
+openssl req -new -key server.key -out server.csr -subj "/C=CN/ST=State/L=City/O=Organization/OU=Unit/CN=localhost"   # 生成证书签名请求（CSR）
+openssl x509 -req -days 36500 -in server.csr -signkey server.key -out server.crt   # 生成一个长期有效的自签名证书（这里设置有效期为36500天，约100年）
+```
+完成后你会得到以下文件：
 
+- server.key ：私钥文件
+- server.crt ：证书文件
+- server.csr ：证书签名请求文件（生成证书后可以删除）
+注意事项：
+
+1. 请妥善保管私钥文件（server.key）
+2. 自签名证书在浏览器中会显示不受信任的警告，这是正常的
+3. 如果需要在生产环境使用，建议购买受信任的CA机构颁发的证书
+4. 生成证书时的CN（Common Name）要匹配你的域名，上面例子中使用的是localhost
+如果你需要修改证书的信息（比如域名），可以在生成CSR时修改-subj参数中的值。
+
+## <mark>开启防火墙及SSH服务</mark>
 ```bash
 sudo apt/yum install -y openssh-server ufw   # centos 先安装 epel-release, 在安装ufw
 sudo systemctl start sshd  # 开启ssh服务
@@ -11,7 +29,7 @@ sudo ufw enable      # 启用防火墙
 sudo ufw status      # 查看防火墙状态
 ```
 
-## journalctl
+## <mark>journalctl</mark>
 ```bash
 # journalctl 是 Linux 系统中用来查看和管理系统日志的工具。它是 systemd 系统日志管理器的一部分，用于访问由 journald 守护进程记录的日志信息
 # 查看日志
@@ -30,7 +48,7 @@ journalctl --vacuum-size=500M  # 按大小清理, e.g. 仅保留500MB的日志, 
 journalctl --vacuum-time=2weeks  # 仅保留过去2周的日志
 ```
 
-## systemctl
+## <mark>systemctl</mark>
 ```bash
 systemctl list-units --type=service  # 查看所有已启动的服务, --all 查看所有服务
 systemctl list-unit-files --type=service  # 查看所有已知服务及其启用状态
@@ -48,7 +66,7 @@ systemctl poweroff  # 关机系统
 systemctl suspend  # 挂起系统
 ```
 
-## snap
+## <mark>snap</mark>
 ```bash
 # Snap 是一种现代化的包管理和应用分发工具，适合需要快速分发、跨平台兼容性和安全隔离的场景。
 # 核心是通过一种称为 Snap 包（snap package）的格式，提供了一种跨平台、独立的方式来分发和管理软件
