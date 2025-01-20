@@ -19,7 +19,7 @@ journalctl  # 查看所有日志
 journalctl -f  # 实时查看日志
 journalctl --since "YYYY-MM-DD"  # 查看某一天的日志
 journalctl --since "YYYY-MM-DD HH:MM:SS" --until "YYYY-MM-DD HH:MM:SS"  # 查看特定时间段的日志
-journalctl -u 服务名.service  # 查看某个服务的日志
+journalctl -u 服务名.service  # 查看某个服务的日志, e.g. sudo journalctl -u snap.kubelet.daemon -n 50  
 journalctl -k  # 查看内核日志
 journalctl -b  # 查看当前启动的日志
     journalctl -b -1  # 查看上一次启动的日志
