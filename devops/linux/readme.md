@@ -34,7 +34,7 @@ systemctl suspend  # 挂起系统
 # 核心是通过一种称为 Snap 包（snap package）的格式，提供了一种跨平台、独立的方式来分发和管理软件
 # 它为开发者提供了便利，为用户带来了简化的安装体验，但可能在资源消耗和启动速度上有所折衷。
 sudo apt update && sudo apt install -y snapd
-sudo snap install xxx  # 安装xxx包
+sudo snap install xxx  # 安装xxx包 cannot specify mode for multiple store snaps (only for one store snap or several local ones)
 sudo snap remove xxx  # 卸载xxx包
 sudo snap list  # 列出已安装的snap包
 sudo snap find xxx  # 查找xxx包
