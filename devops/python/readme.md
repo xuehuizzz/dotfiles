@@ -23,7 +23,7 @@ project_name/
 ├── tests/   # 测试用例目录(包含单元测试、集成测试等)
 │   ├── __init__.py
 │   └── test_*.py
-├── examples/       # 示例代码
+├── samples/        # 示例代码
 ├── scripts/        # 工具脚本
 └── project_name/   # 主要源代码目录
     ├── __init__.py
