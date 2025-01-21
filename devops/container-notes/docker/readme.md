@@ -17,12 +17,13 @@ docker build \    # 构建镜像文件
   -t your-image-name:tag .     # 应与Dockerfile同一目录, 或使用 -f 指定dockerfile文件
 
 docker run \
-  -it \  #
+  -itd \  #
   --name my_container \  # 指定容器名称
   --restart unless-stopped \  # 只有容器被手动停止,容器才不会尝试重启
   --network bridge \  # docker的默认网络模式, 不需要显式指定, 这里的bridge指的是 `docker network ls`中的NAME, 而不是DRIVER
   -p 8080:80 \  # 映射主机的端口8080到容器的端口80
-  -v /host/data:/container/data\  # 挂载主机的目录到容器的目录
+  -v /host/data:/container/data \  # 挂载主机的目录到容器的目录
+  -w /container/data \  # 设置工作路径,即进入容器内部默认路径
   --health-cmd="curl --fail http://localhost:8080 || exit 1" \
   --health-interval=30s \   # 两次健康检查之间的时间间隔（默认30秒）
   --health-timeout=5s \   # 健康检查命令的超时时间。如果超过这个时间，健康检查视为失败（默认30秒）
