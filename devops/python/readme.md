@@ -28,9 +28,9 @@ project_name/
 └── project_name/   # 主要源代码目录
     ├── __init__.py
     ├── __main__.py  # 程序入口
-    ├── core/
-    ├── utils/
-    └── config/
+    ├── core/   # 核心功能代码
+    ├── utils/   # 工具函数
+    └── config/   # # 配置文件
 ```
 
 #### 1.<mark>格式化导包顺序 .isort.cfg</mark>
