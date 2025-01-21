@@ -1,5 +1,6 @@
-### docker安装
+### 安装
 ```bash
+# 使用Docker安装
 docker run -d \
   --name psql \
   -e POSTGRES_USER=admin \
@@ -10,10 +11,8 @@ docker run -d \
   -w /app \
   --restart always \
   postgres:15
-```
 
-### install for mac
-```bash
+# install by brew for mac
 brew install postgresql    # 安装
 brew services start postgresql   # 启动服务
 createdb db_name  # 新建数据库
