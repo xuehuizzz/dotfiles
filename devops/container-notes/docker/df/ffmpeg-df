@@ -45,5 +45,6 @@ RUN apt-get update && \
         libxcb-shm0 libxcb-xfixes0 libsndio7.0 libxv1 libva-drm2 && \
     rm -rf /var/lib/apt/lists/* && ldconfig
 
+WORKDIR /home/ffmpeg
 # 验证安装
 RUN ffmpeg -version
