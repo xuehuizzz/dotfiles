@@ -17,7 +17,7 @@ docker build \    # 构建镜像文件
   -t your-image-name:tag .     # 应与Dockerfile同一目录, 或使用 -f 指定dockerfile文件
 
 docker run \
-  -itd \  #
+  -itd \  # 以交互式后台运行容器
   --name my_container \  # 指定容器名称
   --restart unless-stopped \  # 只有容器被手动停止,容器才不会尝试重启
   --network bridge \  # docker的默认网络模式, 不需要显式指定, 这里的bridge指的是 `docker network ls`中的NAME, 而不是DRIVER
