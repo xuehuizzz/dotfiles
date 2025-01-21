@@ -8,6 +8,32 @@ https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/c
 https://www.runoob.com/w3cnote/google-python-styleguide.html
 ```
 
+#### 0.<mark>项目目录结构</mark>
+```plaintext
+project_name/
+├── .gitignore   # Git忽略文件
+├── README.md    # 项目说明文档
+├── requirements.txt   # 项目依赖
+├── setup.py   # 安装脚本
+├── docs/   # 项目文档目录(使用 Sphinx 等工具生成文档)
+│   ├── conf.py
+│   └── index.rst
+├── tests/   # 测试用例目录(包含单元测试、集成测试等)
+│   ├── __init__.py
+│   └── test_*.py
+└── project_name/   # 主要源代码目录
+    ├── __init__.py
+    ├── core/   # 核心功能代码
+    │   ├── __init__.py
+    │   └── main.py
+    ├── utils/   # 工具函数
+    │   ├── __init__.py
+    │   └── helpers.py
+    └── config/   # 配置文件
+        ├── __init__.py
+        └── settings.py
+```
+
 #### 1.<mark>格式化导包顺序 .isort.cfg</mark>
 
 `pip install isort`
