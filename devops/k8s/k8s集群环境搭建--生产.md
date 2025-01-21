@@ -18,14 +18,19 @@
     
     # 安装基础依赖
     # Ubuntu/Debian
-    sudo apt install -y apt-transport-https ca-certificates curl software-properties-common conntrack ethtool containerd 
+    sudo apt install -y apt-transport-https ca-certificates curl software-properties-common conntrack ethtool containerd cgroup-tools 
     # CentOS
-    sudo yum install -y yum-utils device-mapper-persistent-data lvm2 conntrack ethtool containerd
+    sudo yum install -y yum-utils device-mapper-persistent-data lvm2 conntrack ethtool containerd libcgroup-tools
     ```
 2. **安装kubeadm、kubelet和kubectl**
     ```bash
-    sudo apt update
-    sudo apt install -y snapd  # 确保系统安装了snapd
+    # 配置官方k8s仓库安装
+    curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg   # 首先添加 Kubernetes GPG 密钥
+    echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list  # 添加 Kubernetes apt 仓库
+    sudo apt update && sudo apt install -y kubelet kubeadm kubectl  # 更新apt包索引并安装
+    
+    # 使用snap安装
+    sudo apt update && sudo apt install -y snapd  # 确保系统安装了snapd
     sudo snap install kubeadm kubelet kubectl --classic 
     sudo kubeadm version  # 验证安装
     sudo kubelet --version  # 验证安装
@@ -47,4 +52,28 @@
     ```bash
     kubeadm config print init-defaults > kubeadm-init-temp.yaml  # 生成默认的 Kubernetes 初始化配置文件
     sudo kubeadm init --config kubeadm-init-temp.yaml  # 自定义修改文件后初始化k8s集群
+    ```
+5. **更新/删除仓库配置**
+    - 更新仓库版本
+    ```bash
+    # 首先备份原有的密钥和配置（可选但推荐）
+    sudo cp /etc/apt/keyrings/kubernetes-apt-keyring.gpg /etc/apt/keyrings/kubernetes-apt-keyring.gpg.bak
+    sudo cp /etc/apt/sources.list.d/kubernetes.list /etc/apt/sources.list.d/kubernetes.list.bak
+    # 删除旧的秘钥
+    sudo rm /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    # 下载新版本的密钥
+    curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    # 更新仓库配置
+    echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+    # 更新包索引
+    sudo apt update
+    ```
+    - 删除仓库配置
+    ```bash
+    # 删除仓库秘钥
+    sudo rm /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    # 删除仓库配置文件
+    sudo rm /etc/apt/sources.list.d/kubernetes.list
+    # 更新包索引并卸载
+    sudo apt update && sudo apt remove kubelet kubeadm kubectl
     ```
