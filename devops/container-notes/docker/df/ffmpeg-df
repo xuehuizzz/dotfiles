@@ -2,7 +2,9 @@
 FROM ubuntu:22.04 AS builder
 
 # 更换镜像源并配置 APT
-RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list && \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates && \
+    update-ca-certificates && apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    sed -i 's|http://archive.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list && \
     sed -i 's|http://security.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list && \
     echo 'Acquire::Queue-Mode "access";' > /etc/apt/apt.conf.d/99parallel && \
     echo 'Acquire::http::Pipeline-Depth "200";' >> /etc/apt/apt.conf.d/99parallel && \
@@ -12,13 +14,13 @@ RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.ed
 WORKDIR /tmp/ffmpeg_sources
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        autoconf automake build-essential ca-certificates cmake git libass-dev \
+        autoconf automake build-essential cmake git libass-dev libvidstab-dev \
         libfreetype6-dev libsdl2-dev libtool libva-dev libvdpau-dev libvorbis-dev \
         libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo wget \
         zlib1g-dev nasm yasm libx264-dev libx265-dev libnuma-dev libvpx-dev \
         libfdk-aac-dev libmp3lame-dev libopus-dev libxvidcore-dev libssl-dev \
         libaom-dev libdav1d-dev libbluray-dev libtheora-dev libopenjp2-7-dev \
-        libsoxr-dev frei0r-plugins-dev libvidstab-dev && \
+        libsoxr-dev frei0r-plugins-dev && \
     git clone --depth 1 https://git.ffmpeg.org/ffmpeg.git ffmpeg && \
     cd ffmpeg && \
     ./configure --prefix=/usr/local --enable-gpl --enable-libass --enable-libfreetype \
