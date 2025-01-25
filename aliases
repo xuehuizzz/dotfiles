@@ -18,7 +18,7 @@ alias jupyter="nohup jupyter notebook --allow-root > jupyter.log 2>&1 &"  #后�
 alias reload="exec ${SHELL} -l"   # 重新加载当前shell配置
 alias curl="curl --compressed"
 alias wget="wget -c"
-alias ps="ps aux | sort -k3,3rn"  # 按CPU使用率排序
+alias ps="ps aux --sort=-%cpu"  # 按CPU使用率排序
 
 
 
