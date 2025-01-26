@@ -19,7 +19,8 @@ alias reload="exec ${SHELL} -l"   # 重新加载当前shell配置
 alias curl="curl --compressed"
 alias wget="wget -c"
 alias ps="ps aux --sort=-%cpu"  # 按CPU使用率排序
-
+alias tarc="tar -czvf"  # 压缩文件   tarc xxx.tar.gz file1 file2 folder1  # 可以同时归档文件和目录并压缩
+alias tarx="tar -xzvf"  # 解压文件   tarx xxx.tar.gz
 
 
 MAC-------------------------------------------------------------------------------------------------------------------------
