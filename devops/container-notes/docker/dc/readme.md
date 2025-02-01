@@ -7,9 +7,7 @@
 # 同理, 如果使用了自定义文件启动, 那么在downd的时候也应指定该文件,否则默认 docker-compose.yml
 #     docker-compose -f custom.yml down
 
-# 如果value值包含空格/特殊字符, 或者是以数字开头, 应当用引号引起来
-
-# version: '3.7' # 指定 docker-compose 文件的版本, 一般不建议超过 docker-compose 本身的版本, 新版本不在需要指定
+# 文件中的value值若包含空格/特殊字符, 或者是以数字开头, 应当用引号引起来
 
 x-environment: &default-environment # 定义一个全局环境变量配置块
   TZ: Asia/Shanghai # 统一设置所有容器的时区为亚洲/上海
