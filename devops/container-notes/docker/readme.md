@@ -10,6 +10,7 @@ sudo systemctl restart docker   # 重启docker服务
 
 <mark>常用命令</mark>
 ```cmd
+# 在构建镜像的时候, 如果这个镜像需要上传到镜像仓库, 那么名称应该为: 仓库地址/项目名称/镜像名称:tag
 docker build \    # 构建镜像文件
   --build-arg http_proxy=http://你的代理地址:端口 \
   --build-arg https_proxy=http://你的代理地址:端口 \
