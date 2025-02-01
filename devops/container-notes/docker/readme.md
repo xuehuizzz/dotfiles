@@ -54,7 +54,10 @@ docker inspect 容器ID/名称(镜像ID/镜像名称)   # 查看容器/镜像的
 docker exec -it 容器ID/名称 bash   # 交互式进入容器内部
 docker iamges   # 查看所有镜像(docker image ls)
 docker rm 容器ID/名称  # 删除已停止的容器, -f:强制删除运行中的容器, 谨慎使用
-docker rmi 镜像ID/名称  # 删除指定镜像, -f:强制删除镜像, 谨慎使用
+docker rmi 镜像ID  # 删除指定镜像, -f:强制删除镜像, 谨慎使用
+docker rmi 镜像名称:tag  # 删除镜像文件(只有这一个标签的话), 如果一个镜像文件有多个标签, 则只会删除这一个标签
+docker tag new_image_name:new_tag old_image_name:old_tag   # 为镜像打一个新的标签(可以理解为别名), 即是同一个镜像id的多个引用
+
 docker network ls   # 列出当前docker环境中所有网络, 一个docker容器可以连接多个网络
 docker network inspect 网络ID/名称   # 查看某个网络的详细信息
 docker network create --driver bridge my-custom-network   # 创建一个新的自定义网络, 指定类型为 bridge, docker network create -d xxx xxx
