@@ -69,7 +69,20 @@
     user: admin
     pwd: Harbor12345   # 见harbor.yml
     ```
+9. ## 推送镜像到仓库
+    ```bash
+    # docker images
+    # REPOSITORY                                 TAG       IMAGE ID       CREATED          SIZE
+    # harbor.kubeimooc.com/kubeimooc/kubeimooc   v1.0      beeb9cb4f193   30 minutes ago   64.4MB
     
+    # 先在仓库创建项目, 在推送镜像(Web端登录创建)
+    # 首先登录到私有镜像仓库
+    docker login 198.19.249.14  # 198.19.249.14 改为你的IP或域名
+    # 给现有镜像打上新的标签，指向私有仓库地址
+    docker tag harbor.kubeimooc.com/kubeimooc/kubeimooc:v1.0 198.19.249.14/kubeimooc/kubeimooc:v1.0
+    # 推送镜像到私有仓库
+    docker push 198.19.249.14/kubeimooc/kubeimooc:v1.0
+    ```
 ## <mark>常见问题:</mark>
 ```bash
 # 如果遇到证书问题，可以将证书复制到 Docker 的证书目录
