@@ -24,6 +24,7 @@
     }
   ],
   "live-restore": true,
+  "insecure-registries": []
   "registry-mirrors": [
     "https://mirror.ccs.tencentyun.com",
     "https://hub-mirror.c.163.com",
