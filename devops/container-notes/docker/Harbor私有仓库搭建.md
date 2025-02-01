@@ -62,7 +62,12 @@
     ```
 8. ## 登录测试
     ```bash
-    docker login your-domain.com
+    docker login your-domain.com/ip
+
+    # web端访问
+    http://ip
+    user: admin
+    pwd: Harbor12345   # 见harbor.yml
     ```
     
 ## <mark>常见问题:</mark>
