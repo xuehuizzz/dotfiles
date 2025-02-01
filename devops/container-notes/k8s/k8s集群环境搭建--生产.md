@@ -54,7 +54,7 @@
     ```
 4. **设置Docker守护进程**
     - 设置 Docker 使用 systemd 作为 cgroup 驱动
-        ```json
+        ```jsonc
         {
             /*
             /etc/docker/daemon.json
