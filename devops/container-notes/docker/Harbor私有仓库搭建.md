@@ -73,17 +73,10 @@
     `命令格式: docker push <harbor地址>/<项目名称>/<镜像名称>:<tag>`
    
     ```bash
-    # docker images
-    # REPOSITORY                                 TAG       IMAGE ID       CREATED          SIZE
-    # harbor.kubeimooc.com/kubeimooc/kubeimooc   v1.0      beeb9cb4f193   30 minutes ago   64.4MB
-    
     # 先在仓库创建项目, 在推送镜像(Web端登录创建)
-    # 首先登录到私有镜像仓库
-    docker login 198.19.249.14  # 198.19.249.14 改为你的IP或域名
-    # 给现有镜像打上新的标签，指向私有仓库地址
-    docker tag harbor.kubeimooc.com/kubeimooc/kubeimooc:v1.0 198.19.249.14/kubeimooc/kubeimooc:v1.0
-    # 推送镜像到私有仓库
-    docker push 198.19.249.14/kubeimooc/kubeimooc:v1.0
+    docker login 198.19.249.14  # 先登录镜像仓库
+    # docker tag <仓库地址>/<项目名称>/<镜像名称>:tag <imageName>:tag   # 如果镜像名不包含仓库地址和项目名称的话, 则重新打个tag
+    docker push <harbor地址>/<项目名称>/<镜像名称>:<tag>
     ```
 ## <mark>常见问题:</mark>
 ```bash
