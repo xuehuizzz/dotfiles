@@ -70,6 +70,8 @@
     pwd: Harbor12345   # 见harbor.yml
     ```
 9. ## 推送镜像到仓库
+    `命令格式: docker push <harbor地址>/<项目名称>/<镜像名称>:<tag>`
+   
     ```bash
     # docker images
     # REPOSITORY                                 TAG       IMAGE ID       CREATED          SIZE
