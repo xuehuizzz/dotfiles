@@ -9,6 +9,10 @@
 
 # 文件中的value值若包含空格/特殊字符, 或者是以数字开头, 应当用引号引起来
 # 使用 volumes 映射路径时, 容器内的目录会如果不存在则自动创建, 宿主机的话, 如果使用绝对路径且不存在则不会自动创建, 相对路径可以
+# 如果相对路径只有名称 testPath 而不是 ./testPath, 那么生成的数据卷的名称为 项目名_testPath(项目名即是docker-compose文件的目录)
+# 数据卷位于:   Linux:  /var/lib/docker/volumes/
+#              Mac:   ~/Library/Containers/com.docker.docker/Data/vms/0/data/
+#              Windows: C:\ProgramData\Docker\volumes\
 
 
 x-environment: &default-environment # 定义一个全局环境变量配置块
