@@ -26,9 +26,12 @@
     ```bash
     # 配置官方k8s仓库安装
     # ubuntu
-    curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg   # 首先添加 Kubernetes GPG 密钥
-    echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list  # 添加 Kubernetes apt 仓库
-    sudo apt update && sudo apt install -y kubelet kubeadm kubectl  # 更新apt包索引并安装
+    # 首先添加 Kubernetes GPG 密钥
+    curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    # 添加 Kubernetes apt 仓库
+    echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+    # 更新apt包索引并安装
+    sudo apt update && sudo apt install -y kubelet kubeadm kubectl  
     
     # centos
     
