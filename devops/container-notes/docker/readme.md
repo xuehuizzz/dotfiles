@@ -65,6 +65,7 @@ docker network connect 网络ID/名称 容器ID/名称    # 将一个容器连�
 docker network disconnect 网络ID/名称 容器ID/名称   # 断开连接网络
 docker network rm 网络ID/名称   # 删除网络
 
+# 若使用 -f 指定配置文件, 则如下操作: docker compose -f xxx.yaml xxx
 docker compose config # 检查docker-compose.yml文件是否有语法错误,  -f <file_path> 指定检查文件, --format=json 以json格式输出
 docker compose up -d  # 后台创建并运行容器(在docker-compose.yml同一目录下), 可指定文件, docker compose -f file_path up -d
 docker compose down   # 停止并删除容器(在docker-compose.yml同一目录下), 同上 docker compose -f file_path down,  --volumes  保留数据卷
