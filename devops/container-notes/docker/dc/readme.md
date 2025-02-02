@@ -8,6 +8,8 @@
 #     docker-compose -f custom.yml down
 
 # 文件中的value值若包含空格/特殊字符, 或者是以数字开头, 应当用引号引起来
+# 使用 volumes 映射路径时, 容器内的目录会如果不存在则自动创建, 宿主机的话, 如果使用绝对路径且不存在则不会自动创建, 相对路径可以
+
 
 x-environment: &default-environment # 定义一个全局环境变量配置块
   TZ: Asia/Shanghai # 统一设置所有容器的时区为亚洲/上海
