@@ -52,6 +52,7 @@ services: # 定义服务部分，每个服务对应一个容器
       - web_data:/usr/share/nginx/html # 挂载卷，将数据持久化到宿主机
       # - /etc/timezone:/etc/timezone   # 也可通过这种方式配置容器内时间(当TZ不适用时)
       # - /etc/localtime:/etc/localtime
+    working_dir: container_path  # 指定工作目录
     environment: 
       <<: *default-environment # 引用全局环境变量配置
       - NGINX_HOST=${NGINX_HOST} # 从 .env 文件中读取 NGINX_HOST 变量, 设置环境变量 NGINX_HOST 为 localhost
