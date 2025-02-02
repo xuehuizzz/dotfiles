@@ -1,3 +1,12 @@
+## <mark>生成SSH秘钥对</mark>
+```bash
+# ED25519（推荐，更安全）
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+# RSA（广泛支持）
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
 ## <mark>使用openssl生成HTTPS自签名证书</mark>
 ```bash
 openssl genrsa -out server.key 4096    # 首先生成私钥（RSA 4096位）
