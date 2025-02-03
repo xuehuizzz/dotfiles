@@ -23,6 +23,8 @@ alias ps="ps aux --sort=-%cpu"  # 按CPU使用率排序
 alias tarc="tar -zcvf"  # 压缩文件   tarc xxx.tar.gz file1 file2 folder1  # 可以同时归档文件和目录并压缩
 alias tarx="tar -zxvf"  # 解压文件   tarx xxx.tar.gz
 alias treed="tree -d"  # 只显示目录
+# yamllint xxx.yaml  # 检测是否有语法错误
+
 
 MAC-------------------------------------------------------------------------------------------------------------------------
 alias ty="sudo spctl --master-disable"  #同意安装任意来源 for mac, 版本需低于macOS15.0
