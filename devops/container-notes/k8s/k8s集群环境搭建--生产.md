@@ -95,6 +95,24 @@
     # 验证是否成功
     kubectl get pods -n kube-system
     ```
+    <mark>报错异常解决: </mark>
+    ```bash
+    若有以下错误:
+    [ERROR FileAvailable--etc-kubernetes-manifests-kube-apiserver.yaml]: /etc/kubernetes/manifests/kube-apiserver.yaml already exists
+    [ERROR FileAvailable--etc-kubernetes-manifests-kube-controller-manager.yaml]: /etc/kubernetes/manifests/kube-controller-manager.yaml already exists
+    [ERROR FileAvailable--etc-kubernetes-manifests-kube-scheduler.yaml]: /etc/kubernetes/manifests/kube-scheduler.yaml already exists
+    [ERROR FileAvailable--etc-kubernetes-manifests-etcd.yaml]: /etc/kubernetes/manifests/etcd.yaml already exists
+    [ERROR DirAvailable--var-lib-etcd]: /var/lib/etcd is not empty
+
+    解决方案如下:
+    rm -rf /etc/kubernetes/manifests/kube-apiserver.yaml
+    rm -rf /etc/kubernetes/manifests/kube-controller-manager.yaml
+    rm -rf /etc/kubernetes/manifests/kube-scheduler.yaml
+    rm -rf /etc/kubernetes/manifests/etcd.yaml
+    rm -rf /var/lib/etcd/*     
+    kubeadm reset -f
+    sudo kubeadm init --config kubeadm-init-temp.yaml   # 重新初始化即可
+    ```
 7. **更新/删除仓库配置**
     - 更新仓库版本
     ```bash
