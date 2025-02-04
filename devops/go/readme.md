@@ -85,3 +85,31 @@ go install github.com/air-verse/air@latest
 air init  # 在项目根目录创建配置文件 .air.toml
 air  # 然后直接运行, 当你修改代码时，Air 会自动检测变化并重新编译运行，不需要手动重启服务器
 ```
+## 使用 .env 文件
+```go
+// go get github.com/joho/godotenv
+
+import (
+    "fmt"
+    "log"
+    "os"
+    "github.com/joho/godotenv"
+)
+
+func main() {
+    // 加载 .env 文件
+    err := godotenv.Load()
+    if err != nil {
+        log.Fatal("Error loading .env file")
+    }
+
+    // 使用 os.Getenv 获取环境变量
+    dbHost := os.Getenv("DB_HOST")
+    dbUser := os.Getenv("DB_USER")
+    apiKey := os.Getenv("API_KEY")
+
+    fmt.Printf("DB Host: %s\n", dbHost)
+    fmt.Printf("DB User: %s\n", dbUser)
+    fmt.Printf("API Key: %s\n", apiKey)
+}
+```
