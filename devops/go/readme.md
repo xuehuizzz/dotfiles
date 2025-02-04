@@ -23,76 +23,65 @@ myproject/
 └── go.mod             # 依赖管理文件
 ```
 
-## <font color=red>**创建一个简单的项目**</font>
-1. 新建项目
-    ```bash
-    mkdir myproject
-    cd myproject
-    ```
-2. 初始化
-    ```bash
-    go mod init myproject  # 新建go.mod文件, 这个文件是Go 模块管理系统的核心文件(只需在项目初始化时执行一次)
-    # go mod tidy  # 推荐使用, 下载并整理依赖(会自动移除未使用的依赖)
-    
-    # 配置国内代理加速下载
-    go env -w GOPROXY=https://goproxy.cn,direct
-    go env -w GOSUMDB="sum.golang.google.cn"
-    ```
-3. 安装常用开发工具
-    ```bash
-    go install golang.org/x/tools/gopls@latest
-    go install github.com/go-delve/delve/cmd/dlv@latest
-    
-    # 自动合并和排序 import 语句
-    go install golang.org/x/tools/cmd/goimports@latest   
-        # goimports -w your_file.go  # 单个文件
-        # goimports -w .  # 当前目录下所以go文件
-    ```
-4. 下载项目依赖
-    ```bash
-    // 使用 go get 下载项目依赖
-    go get github.com/gin-gonic/gin  # 下载gin框架(假设项目框架为gin)
-    ```
-5. 配置参数分离
-    ```golang
-    // go get github.com/spf13/viper  go语言管理配置文件的依赖
-    package initiallize
+## <font color=red>**项目基本配置**</font>
+```bash
+go mod init myproject  # 新建go.mod文件, 这个文件是Go 模块管理系统的核心文件(只需在项目初始化时执行一次)
+# go mod tidy  # 推荐使用, 下载并整理依赖(会自动移除未使用的依赖)
 
-    import (
-    	"github.com/spf13/viper"
-    	"kubeimooc/global"
-    )
-    
-    func Viper() {
-    	v := viper.New()
-    	v.SetConfigName("config.yml")
-    	v.SetConfigType("yml")
-    	v.AddConfigPath(".") // 配置指定路径下搜索配置文件, .表示当前路径
-    	err := v.ReadInConfig()
-    	if err != nil {
-    		panic(err.Error())
-    	}
-    	err = v.Unmarshal(&global.CONF)
-    	if err != nil {
-    		panic(err.Error())
-    	}
+# 配置国内代理加速下载
+go env -w GOPROXY=https://goproxy.cn,direct
+go env -w GOSUMDB="sum.golang.google.cn"
+
+# 安装常用开发工具
+go install golang.org/x/tools/gopls@latest
+go install github.com/go-delve/delve/cmd/dlv@latest
+go install github.com/air-verse/air@latest  # 项目热重载, 方便调试接口
+go install golang.org/x/tools/cmd/goimports@latest    # 自动合并和排序 import 语句
+    # goimports -w your_file.go  # 单个文件
+    # goimports -w .  # 当前目录下所以go文件
+
+# 下载项目依赖
+go get xxx  # 例如: go get github.com/gin-gonic/gin
+
+# 运行go文件
+go run main.go  # 这里假设 main.go 为项目入口文件
+```
+
+## 配置参数分离
+```golang
+// go get github.com/spf13/viper  go语言管理配置文件的依赖
+package initiallize
+
+import (
+    "github.com/spf13/viper"
+    "kubeimooc/global"
+)
+
+func Viper() {
+    v := viper.New()
+    v.SetConfigName("config.yml")
+    v.SetConfigType("yml")
+    v.AddConfigPath(".") // 配置指定路径下搜索配置文件, .表示当前路径
+    err := v.ReadInConfig()
+    if err != nil {
+        panic(err.Error())
     }
-    ```
-6. 运行项目
-    ```bash
-    go run cmd/main.go   # 假设项目入口文件为cmd/main.go
-    ```
+    err = v.Unmarshal(&global.CONF)
+    if err != nil {
+        panic(err.Error())
+    }
+}
+```
 ## <font color=red>**集成k8s**</font>
-    ```bash
-    go get k8s.io/client-go  
-    ```
+```bash
+go get k8s.io/client-go  
+```
 ## 项目热重载
-    ```bash
-    # 安装
-    go install github.com/air-verse/air@latest
+```bash
+# 安装
+go install github.com/air-verse/air@latest
 
-    # 使用
-    air init  # 在项目根目录创建配置文件 .air.toml
-    air  # 然后直接运行, 当你修改代码时，Air 会自动检测变化并重新编译运行，不需要手动重启服务器
-    
-    ```
+# 使用
+air init  # 在项目根目录创建配置文件 .air.toml
+air  # 然后直接运行, 当你修改代码时，Air 会自动检测变化并重新编译运行，不需要手动重启服务器
+```
