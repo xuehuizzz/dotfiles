@@ -1,13 +1,18 @@
-# Python-generated files
+# python
 __pycache__/
 *.py[oc]
 build/
 dist/
 wheels/
 *.egg-info
-
-# Virtual environments
-.venv
+.venv/
 
 # macOS
 **/.DS_Store
+
+# project
+.kube/
+.idea/
+.vscode/
+.env
+*.toml
