@@ -8,7 +8,7 @@ https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/c
 https://www.runoob.com/w3cnote/google-python-styleguide.html
 ```
 
-#### 0.<mark>项目目录结构</mark>
+#### 0.<mark>项目结构建议</mark>
 ```plaintext
 project_name/
 ├── .gitignore   # Git忽略文件
