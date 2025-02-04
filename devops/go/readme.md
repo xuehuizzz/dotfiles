@@ -86,4 +86,13 @@ myproject/
     ```bash
     go get k8s.io/client-go  
     ```
+## 项目热重载
+    ```bash
+    # 安装
+    go install github.com/cosmtrek/air@latest
 
+    # 使用
+    air init  # 在项目根目录创建配置文件 .air.toml
+    air  # 然后直接运行, 当你修改代码时，Air 会自动检测变化并重新编译运行，不需要手动重启服务器
+    
+    ```
