@@ -89,7 +89,7 @@ myproject/
 ## 项目热重载
     ```bash
     # 安装
-    go install github.com/cosmtrek/air@latest
+    go install github.com/air-verse/air@latest
 
     # 使用
     air init  # 在项目根目录创建配置文件 .air.toml
