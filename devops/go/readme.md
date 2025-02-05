@@ -25,6 +25,7 @@ myproject/
 
 ## <font color=red>**项目基本配置**</font>
 ```bash
+同一个包（package）下的所有文件可以直接互相访问其中的函数、变量、类型等，不需要 import.
 go mod init myproject  # 新建go.mod文件, 这个文件是Go 模块管理系统的核心文件(只需在项目初始化时执行一次)
 # go mod tidy  # 推荐使用, 下载并整理依赖(会自动移除未使用的依赖)
 
