@@ -1,6 +1,12 @@
 # source ~/.osx 使其生效
 # 更多设置信息见: https://macos-defaults.com
 
+# 关闭自动开机, 仅限Apple Silicon芯片, 需要运行 macOS Sequoia 或更高版本
+sudo nvram BootPreference=%00   # 在打开盖子或连接电源时均不启动电脑
+sudo nvram BootPreference=%01   # 仅希望在打开盖子时不启动电脑
+sudo nvram BootPreference=%02   # 仅希望在连接电源时不启动电脑
+sudo nvram -d BootPreference    # 恢复打开盖子时的自动启动功能
+
 # 禁止重启系统后打开未关闭的软件
 defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
