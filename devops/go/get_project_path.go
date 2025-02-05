@@ -1,5 +1,5 @@
 // 获取项目根目录, 推荐使用如下方式
-package main
+package global
 
 import (
 	"fmt"
@@ -8,19 +8,19 @@ import (
 	"runtime"
 )
 
-var ProjectRoot string
-
 func findProjectRoot(startPath string) (string, error) {
 	dir := startPath
 	for {
-		// 检查是否存在 go.mod 文件
-		if _, err := os.Stat(filepath.Join(dir, "go.mod")); err == nil {
-			return dir, nil
+		// 检查多个可能的项目标识文件
+		projectFiles := []string{"go.mod", "Makefile", ".gitignore"}
+		for _, file := range projectFiles {
+			if _, err := os.Stat(filepath.Join(dir, file)); err == nil {
+				return dir, nil
+			}
 		}
 
 		// 获取父目录
 		parent := filepath.Dir(dir)
-		fmt.Println(parent)
 		// 如果已经到达根目录，则停止
 		if parent == dir {
 			return "", fmt.Errorf("找不到项目根目录")
@@ -35,10 +35,5 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	ProjectRoot = root
-}
-
-// GetProjectRoot 添加一个导出函数来获取项目根目录
-func GetProjectRoot() string {
-	return ProjectRoot
+	ProjectPath = root
 }
