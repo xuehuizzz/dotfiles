@@ -19,6 +19,9 @@ myproject/
 ├── api/               # API 协议定义
 ├── configs/           # 配置文件
 ├── docs/              # 文档
+├── deploy               # 部署配置文件
+│   ├── Dockerfile
+│   └── docker-compose.yaml
 ├── test/              # 测试文件
 └── go.mod             # 依赖管理文件
 ```
