@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/sirupsen/logrus"
 	"io"
-	"kubeimooc/initiallize"
 	"os"
 	"path/filepath"
 )
@@ -41,8 +40,8 @@ func (f *CustomFormatter) Format(entry *logrus.Entry) ([]byte, error) {
 
 func InitLogger() *logrus.Logger {
 	logger := logrus.New()
-	projectPath := initiallize.GetProjectRoot()
-	logPath := projectPath + "/logs/app.log"
+
+	logPath := "app.log"
 
 	logFile, err := os.OpenFile(logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
@@ -67,4 +66,9 @@ func InitLogger() *logrus.Logger {
 	logger.SetLevel(logrus.DebugLevel)
 
 	return logger
+}
+
+func main() {
+	logger := InitLogger()
+	logger.Info("Hello, world!")
 }
