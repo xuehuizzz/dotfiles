@@ -5,14 +5,14 @@ tmp_dir = "tmp"
 [build]
   args_bin = []
   bin = "./tmp/main"
-  cmd = "go build -o ./tmp/main ./api"   # 修改为自己的编译命令, 假设main.go 放在api目录下
+  cmd = "go build -o ./tmp/main ./cmd"   # 修改为自己的编译命令, 假设main.go 放在cmd目录下
   delay = 1000
   exclude_dir = ["assets", "tmp", "vendor", "testdata"]
   exclude_file = []
   exclude_regex = ["_test.go"]
   exclude_unchanged = false
   follow_symlink = false
-  full_bin = "cd ./api && ../tmp/main"    # 修改为自己的执行命令，确保在正确目录下运行
+  full_bin = "cd ./cmd && ../tmp/main"    # 修改为自己的执行命令，确保在正确目录下运行
   include_dir = []
   include_ext = ["go", "tpl", "tmpl", "html"]
   include_file = []
