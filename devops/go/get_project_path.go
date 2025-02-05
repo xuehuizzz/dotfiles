@@ -1,4 +1,11 @@
-// 获取项目根目录, 推荐使用如下方式
+/*
+  获取项目根目录, 推荐使用如下方式
+  建议放在global包下, 配置全局变量使用
+
+    // projectName/global/global.go
+	package global
+	var ProjectPath   string
+*/ 
 package global
 
 import (
