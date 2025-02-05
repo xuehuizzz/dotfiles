@@ -20,6 +20,9 @@ project_name/
 ├── docs/   # 项目文档目录(使用 Sphinx 等工具生成文档)
 │   ├── conf.py
 │   └── index.rst
+├── deploy               # 部署配置文件
+│   ├── Dockerfile
+│   └── docker-compose.yaml
 ├── tests/   # 测试用例目录(包含单元测试、集成测试等)
 │   ├── __init__.py
 │   └── test_*.py
