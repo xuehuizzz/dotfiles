@@ -26,17 +26,6 @@ openssl x509 -req -days 36500 -in server.csr -signkey server.key -out server.crt
 4. 生成证书时的CN（Common Name）要匹配你的域名，上面例子中使用的是localhost
 如果你需要修改证书的信息（比如域名），可以在生成CSR时修改-subj参数中的值。
 
-## <mark>开启防火墙及SSH服务</mark>
-```bash
-sudo apt/yum install -y openssh-server ufw   # centos 先安装 epel-release, 在安装ufw
-sudo systemctl start sshd  # 开启ssh服务
-sudo systemctl enable sshd  # 设置开机自启
-sudo systemctl start ufw  # 开启防火墙
-sudo systemctl enable ufw  # 设置开机自启
-sudo ufw allow ssh   # 允许 SSH 连接
-sudo ufw enable      # 启用防火墙
-sudo ufw status      # 查看防火墙状态
-```
 
 ## <mark>journalctl</mark>
 ```bash
