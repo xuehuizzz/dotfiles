@@ -23,6 +23,8 @@
 "        zb      "将当前行移动到屏幕底端
 "        /       "向后搜索
 "        ?       "向前搜索
+"
+"  在粘贴内容时,  :set paste  会关闭自动缩进等功能，使粘贴更快速, 粘贴结束再输入 :set nopaste 关闭粘贴模式
 "**********************************************************************************************
 
 
@@ -30,6 +32,8 @@
 colorscheme default   " 替换成你喜欢的主题名称
 set background=dark   " 如果是暗色背景主题
 set mouse=a " 启用鼠标
+set lazyredraw  " 关闭显示重绘
+set ttyfast  " 提高性能的其他选项
 set nocompatible " 关闭 vi 兼容模式
 syntax on " 自动语法高亮
 set number " 显示行号
