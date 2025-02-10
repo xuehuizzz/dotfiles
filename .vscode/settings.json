@@ -75,6 +75,7 @@
     "editor.stickyScroll.enabled": true,
     "workbench.tree.enableStickyScroll": true,
     "workbench.tree.indent": 15,  // 设置目录树缩进
+    "workbench.list.openMode":"doubleClick",  // 双击打开文件
     // 终端配置
     "code-runner.clearPreviousOutput": true,
     "terminal.integrated.persistentSessionReviveProcess": "never",
