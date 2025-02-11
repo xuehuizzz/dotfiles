@@ -25,6 +25,15 @@ myproject/
 ├── test/              # 测试文件
 └── go.mod             # 依赖管理文件
 ```
+## go版本管理工具`gvm`
+```bash
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+source ~/.zshrc
+
+# 使用
+gvm install go1.17.8
+gvm use go1.17.8
+```
 
 ## <font color=red>**项目基本配置**</font>
 ```bash
