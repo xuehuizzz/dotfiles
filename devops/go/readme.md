@@ -5,8 +5,12 @@
 go version  # 验证安装
 
 # Linux/Mac  配置环境变量
-export GOPATH=$HOME/go
+export GOPATH=$HOME/go   # Go 工作空间
+export GOROOT=/usr/local/go  # Go 安装路径
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GOSUMDB="sum.golang.org"
+export GOPROXY=https://goproxy.cn,direct
 ```
 
 ## 项目结构建议
