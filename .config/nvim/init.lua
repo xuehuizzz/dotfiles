@@ -24,6 +24,7 @@ require("lazy").setup(require("plugins"))
 vim.opt.number = true                -- 显示行号
 -- vim.opt.relativenumber = true        -- 显示相对行号
 vim.opt.guicursor = "n-v-c-sm-i-ci-ve-r-cr-o:ver25"  -- 设置任何模式下都使用竖线光标
+vim.opt.guifont = "JetBrainsMono Nerd Font:h14"   -- 设置字体为 JetBrains Mono，字体大小为 14
 vim.opt.expandtab = true            -- 将制表符展开为空格
 vim.opt.tabstop = 4                 -- 制表符等于4个空格
 vim.opt.shiftwidth = 4              -- 缩进宽度为4个空格
