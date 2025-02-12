@@ -60,5 +60,6 @@ vim.opt.foldmethod = 'syntax'           -- 语法折叠
 vim.opt.foldcolumn = '0'                -- 折叠区域宽度
 vim.opt.foldlevel = 1                   -- 折叠层数
 
+vim.cmd('syntax on')   -- 启用语法高亮
 vim.cmd('filetype plugin indent on')   -- 启用文件类型检测
 -- vim.cmd('colorscheme tokyonight')         -- 配置主题
