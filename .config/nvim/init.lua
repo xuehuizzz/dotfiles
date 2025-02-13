@@ -24,6 +24,7 @@ require("lazy").setup{
 	require 'plugins.indent-blankline',
 	require 'plugins.treesitter',
 	require 'plugins.lualine',
+	require 'plugins.comment',
 }
 
 
