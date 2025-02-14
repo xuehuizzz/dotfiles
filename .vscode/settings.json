@@ -12,9 +12,7 @@
     "editor.mouseWheelZoom": true,
     "editor.wordWrap": "on",
     "editor.lineHeight": 1.5,
-    "editor.fontSize": 11,
     "editor.rulers": [100],  // 显式代码分割线
-    "editor.fontFamily": "Consolas, '等线', monospace",
     "editor.fastScrollSensitivity": 10,
     "editor.guides.bracketPairs": true,
     "editor.bracketPairColorization.enabled": true,
@@ -90,6 +88,10 @@
         "announcement": "auto"
     },
     "workbench.fontAliasing": "antialiased",
+    "editor.fontFamily": "JetBrains Mono, 'Courier New', monospace",
+    "editor.fontSize": 14,
+    "editor.fontWeight": "normal",
+    "editor.fontLigatures": true,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.list.fastScrollSensitivity": 10,
     "workbench.colorTheme": "Pretty Dark Theme",
