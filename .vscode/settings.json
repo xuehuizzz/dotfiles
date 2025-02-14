@@ -195,4 +195,51 @@
     "editor.inlineSuggest.enabled": false,
     "window.openFoldersInNewWindow": "on",
     "chat.commandCenter.enabled": false,  // 隐藏copilot
+    // 单独配置代码颜色
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": ["keyword"],
+                "settings": {
+                    "foreground": "#CC7832"  // 关键字 橙色
+                }
+            },
+            {
+                "scope": ["string"],
+                "settings": {
+                    "foreground": "#6A8759"  // 字符串 绿色
+                }
+            },
+            {
+                "scope": ["comment"],
+                "settings": {
+                    "foreground": "#808080"  // 注释 灰色
+                }
+            },
+            {
+                "scope": ["entity.name.function"],
+                "settings": {
+                    "foreground": "#FFC66D"  // 函数名 黄色
+                }
+            },
+            {
+                "scope": ["constant.numeric"],
+                "settings": {
+                    "foreground": "#6897BB"  // 数字 蓝色
+                }
+            },
+            {
+                "scope": ["storage.type"],
+                "settings": {
+                    "foreground": "#CC7832"  // 类型声明 橙色
+                }
+            },
+            {
+                "scope": ["support.class", "entity.name.class"],
+                "settings": {
+                    "foreground": "#A9B7C6"  // 类名 浅灰色
+                }
+            }
+        ]
+    }
 }
