@@ -197,49 +197,94 @@
     "chat.commandCenter.enabled": false,  // 隐藏copilot
     // 单独配置代码颜色
     "editor.tokenColorCustomizations": {
-        "textMateRules": [
-            {
-                "scope": ["keyword"],
-                "settings": {
-                    "foreground": "#CC7832"  // 关键字 橙色
-                }
-            },
-            {
-                "scope": ["string"],
-                "settings": {
-                    "foreground": "#6A8759"  // 字符串 绿色
-                }
-            },
-            {
-                "scope": ["comment"],
-                "settings": {
-                    "foreground": "#808080"  // 注释 灰色
-                }
-            },
-            {
-                "scope": ["entity.name.function"],
-                "settings": {
-                    "foreground": "#FFC66D"  // 函数名 黄色
-                }
-            },
-            {
-                "scope": ["constant.numeric"],
-                "settings": {
-                    "foreground": "#6897BB"  // 数字 蓝色
-                }
-            },
-            {
-                "scope": ["storage.type"],
-                "settings": {
-                    "foreground": "#CC7832"  // 类型声明 橙色
-                }
-            },
-            {
-                "scope": ["support.class", "entity.name.class"],
-                "settings": {
-                    "foreground": "#A9B7C6"  // 类名 浅灰色
-                }
+    "textMateRules": [
+        {
+            "scope": ["keyword"],
+            "settings": {
+                "foreground": "#CC7832"  // 关键字 橙色
             }
-        ]
-    }
+        },
+        {
+            "scope": ["string"],
+            "settings": {
+                "foreground": "#6A8759"  // 字符串 绿色
+            }
+        },
+        {
+            "scope": ["comment"],
+            "settings": {
+                "foreground": "#808080"  // 注释 灰色
+            }
+        },
+        {
+            "scope": ["entity.name.function"],
+            "settings": {
+                "foreground": "#FFC66D"  // 普通函数名 黄色
+            }
+        },
+        {
+            "scope": ["support.function"],
+            "settings": {
+                "foreground": "#BBB529"  // 内置函数名 暗黄色
+            }
+        },
+        {
+            "scope": ["meta.method"],
+            "settings": {
+                "foreground": "#FF9B4F"  // 方法名 橙色
+            }
+        },
+        {
+            "scope": ["constant.numeric"],
+            "settings": {
+                "foreground": "#6897BB"  // 数字 蓝色
+            }
+        },
+        {
+            "scope": ["storage.type"],
+            "settings": {
+                "foreground": "#CC7832"  // 类型声明 橙色
+            }
+        },
+        {
+            "scope": [
+                "variable.other.readwrite",
+                "variable.other.readwrite.python",
+                "variable.parameter",
+                "variable.other",
+                "meta.function-call.arguments"
+            ],
+            "settings": {
+                "foreground": "#A9B7C6"
+            }
+        },
+        {
+            "scope": ["string.quoted.docstring"],
+            "settings": {
+                "foreground": "#629755"  // docstring 使用 PyCharm 风格的文档字符串颜色
+            }
+        },
+        {
+            "scope": [
+                "variable.other.readwrite.python"
+            ],
+            "settings": {
+                "foreground": "#A9B7C6"  // 普通变量设置为浅灰白色
+            }
+        },
+        {
+            "scope": [
+                "variable.parameter.function.language.special.self.python",
+                "variable.language.special.self.python",
+                "variable.parameter.function.language.special.cls.python",
+                "variable.language.special.cls.python",
+                "variable.language.special.super.python",
+                "variable.parameter.function.language.special.mcs.python"
+            ],
+            "settings": {
+                "foreground": "#9876AA"  // 特殊参数统一设置为浅紫色
+            }
+        }
+    ]
+}
 }
