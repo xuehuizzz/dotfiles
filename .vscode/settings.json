@@ -225,6 +225,7 @@
         "statusBar.debuggingBackground": "#1a1a1a", // 调试时的状态栏背景
         "statusBar.border": "#1a1a1a", // 状态栏边框
         "statusBarItem.activeBackground": "#1a1a1a", // 状态栏项目激活时的背景
-        "statusBarItem.hoverBackground": "#1a1a1a" // 状态栏项目悬停时的背景
+        "statusBarItem.hoverBackground": "#1a1a1a", // 状态栏项目悬停时的背景
+        "editorGutter.background": "#1a1a1a"  // 设置行号区域背景色
     }
 }
