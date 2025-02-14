@@ -12,7 +12,9 @@
     "editor.mouseWheelZoom": true,
     "editor.wordWrap": "on",
     "editor.lineHeight": 1.5,
-    "editor.rulers": [100],  // 显式代码分割线
+    "editor.rulers": [
+        100
+    ], // 显式代码分割线
     "editor.fastScrollSensitivity": 10,
     "editor.guides.bracketPairs": true,
     "editor.bracketPairColorization.enabled": true,
@@ -72,8 +74,8 @@
     "search.searchEditor.singleClickBehaviour": "peekDefinition",
     "editor.stickyScroll.enabled": true,
     "workbench.tree.enableStickyScroll": true,
-    "workbench.tree.indent": 15,  // 设置目录树缩进
-    "workbench.list.openMode":"doubleClick",  // 双击打开文件
+    "workbench.tree.indent": 15, // 设置目录树缩进
+    "workbench.list.openMode": "doubleClick", // 双击打开文件
     // 终端配置
     "code-runner.clearPreviousOutput": true,
     "terminal.integrated.persistentSessionReviveProcess": "never",
@@ -133,29 +135,29 @@
     "liveServer.settings.donotVerifyTags": true,
     "update.mode": "manual",
     "search.exclude": {
-      "**/*.sql": true,  
-      "**/*.snap": true,
-      "**/*.svg": true,
-      "**/.git": true,
-      "**/.github": false,
-      "**/.nuxt": true,
-      "**/.output": true,
-      "**/.pnpm": true,
-      "**/.vscode": true,
-      "**/.yarn": true,
-      "**/assets": true,
-      "**/bower_components": true,
-      "**/dist/**": true,
-      "**/logs": true,
-      "**/node_modules": true,
-      "**/out/**": true,
-      "**/package-lock.json": true,
-      "**/pnpm-lock.yaml": true,
-      "**/public": true,
-      "**/temp": true,
-      "**/yarn.lock": true,
-      "**/CHANGELOG*": true,
-      "**/LICENSE*": true,
+        "**/*.sql": true,
+        "**/*.snap": true,
+        "**/*.svg": true,
+        "**/.git": true,
+        "**/.github": false,
+        "**/.nuxt": true,
+        "**/.output": true,
+        "**/.pnpm": true,
+        "**/.vscode": true,
+        "**/.yarn": true,
+        "**/assets": true,
+        "**/bower_components": true,
+        "**/dist/**": true,
+        "**/logs": true,
+        "**/node_modules": true,
+        "**/out/**": true,
+        "**/package-lock.json": true,
+        "**/pnpm-lock.yaml": true,
+        "**/public": true,
+        "**/temp": true,
+        "**/yarn.lock": true,
+        "**/CHANGELOG*": true,
+        "**/LICENSE*": true,
     },
     // 配置文件关联
     "files.associations": {
@@ -173,12 +175,12 @@
     "scss.lint.unknownAtRules": "ignore",
     "less.lint.unknownAtRules": "ignore",
     "explorer.copyRelativePathSeparator": "/",
-    "files.exclude": {   // 隐藏文件夹
-      "**/__pycache__": true,
-      "**/.ruff_cache": true,
-      "**/.idea": true,
-      // "**/.vscode": true,
-      "**/node_modules":true
+    "files.exclude": { // 隐藏文件夹
+        "**/__pycache__": true,
+        "**/.ruff_cache": true,
+        "**/.idea": true,
+        // "**/.vscode": true,
+        "**/node_modules": true
     },
     "files.eol": "\n", // 保存文件换行符为 unix 格式
     "files.encoding": "utf8",
@@ -189,102 +191,120 @@
     "prettier.printWidth": 100,
     "prettier.semi": false,
     "prettier.singleQuote": true,
-    "explorer.openEditors.visible": 5,         // 隐藏“打开的编辑器”面板
-    "window.restoreWindows": "all",           // 恢复之前打开的所有窗口和文件夹
-    "workbench.editor.enablePreview": false,  // 禁用文件预览模式，确保双击时文件独立打开
+    "explorer.openEditors.visible": 5, // 隐藏“打开的编辑器”面板
+    "window.restoreWindows": "all", // 恢复之前打开的所有窗口和文件夹
+    "workbench.editor.enablePreview": false, // 禁用文件预览模式，确保双击时文件独立打开
     "editor.inlineSuggest.enabled": false,
     "window.openFoldersInNewWindow": "on",
-    "chat.commandCenter.enabled": false,  // 隐藏copilot
+    "chat.commandCenter.enabled": false, // 隐藏copilot
     // 单独配置代码颜色
     "editor.tokenColorCustomizations": {
-    "textMateRules": [
-        {
-            "scope": ["keyword"],
-            "settings": {
-                "foreground": "#CC7832"  // 关键字 橙色
+        "textMateRules": [
+            {
+                "scope": [
+                    "keyword"
+                ],
+                "settings": {
+                    "foreground": "#CC7832" // 关键字 橙色
+                }
+            },
+            {
+                "scope": [
+                    "string"
+                ],
+                "settings": {
+                    "foreground": "#6A8759" // 字符串 绿色
+                }
+            },
+            {
+                "scope": [
+                    "comment"
+                ],
+                "settings": {
+                    "foreground": "#808080" // 注释 灰色
+                }
+            },
+            {
+                "scope": [
+                    "entity.name.function"
+                ],
+                "settings": {
+                    "foreground": "#FFC66D" // 普通函数名 黄色
+                }
+            },
+            {
+                "scope": [
+                    "support.function"
+                ],
+                "settings": {
+                    "foreground": "#BBB529" // 内置函数名 暗黄色
+                }
+            },
+            {
+                "scope": [
+                    "meta.method"
+                ],
+                "settings": {
+                    "foreground": "#FF9B4F" // 方法名 橙色
+                }
+            },
+            {
+                "scope": [
+                    "constant.numeric"
+                ],
+                "settings": {
+                    "foreground": "#6897BB" // 数字 蓝色
+                }
+            },
+            {
+                "scope": [
+                    "storage.type"
+                ],
+                "settings": {
+                    "foreground": "#CC7832" // 类型声明 橙色
+                }
+            },
+            {
+                "scope": [
+                    "variable.other.readwrite",
+                    "variable.other.readwrite.python",
+                    "variable.parameter",
+                    "variable.other",
+                    "meta.function-call.arguments"
+                ],
+                "settings": {
+                    "foreground": "#A9B7C6"
+                }
+            },
+            {
+                "scope": [
+                    "string.quoted.docstring"
+                ],
+                "settings": {
+                    "foreground": "#629755" // docstring 使用 PyCharm 风格的文档字符串颜色
+                }
+            },
+            {
+                "scope": [
+                    "variable.other.readwrite.python"
+                ],
+                "settings": {
+                    "foreground": "#A9B7C6" // 普通变量设置为浅灰白色
+                }
+            },
+            {
+                "scope": [
+                    "variable.parameter.function.language.special.self.python",
+                    "variable.language.special.self.python",
+                    "variable.parameter.function.language.special.cls.python",
+                    "variable.language.special.cls.python",
+                    "variable.language.special.super.python",
+                    "variable.parameter.function.language.special.mcs.python"
+                ],
+                "settings": {
+                    "foreground": "#9876AA" // 特殊参数统一设置为浅紫色
+                }
             }
-        },
-        {
-            "scope": ["string"],
-            "settings": {
-                "foreground": "#6A8759"  // 字符串 绿色
-            }
-        },
-        {
-            "scope": ["comment"],
-            "settings": {
-                "foreground": "#808080"  // 注释 灰色
-            }
-        },
-        {
-            "scope": ["entity.name.function"],
-            "settings": {
-                "foreground": "#FFC66D"  // 普通函数名 黄色
-            }
-        },
-        {
-            "scope": ["support.function"],
-            "settings": {
-                "foreground": "#BBB529"  // 内置函数名 暗黄色
-            }
-        },
-        {
-            "scope": ["meta.method"],
-            "settings": {
-                "foreground": "#FF9B4F"  // 方法名 橙色
-            }
-        },
-        {
-            "scope": ["constant.numeric"],
-            "settings": {
-                "foreground": "#6897BB"  // 数字 蓝色
-            }
-        },
-        {
-            "scope": ["storage.type"],
-            "settings": {
-                "foreground": "#CC7832"  // 类型声明 橙色
-            }
-        },
-        {
-            "scope": [
-                "variable.other.readwrite",
-                "variable.other.readwrite.python",
-                "variable.parameter",
-                "variable.other",
-                "meta.function-call.arguments"
-            ],
-            "settings": {
-                "foreground": "#A9B7C6"
-            }
-        },
-        {
-            "scope": ["string.quoted.docstring"],
-            "settings": {
-                "foreground": "#629755"  // docstring 使用 PyCharm 风格的文档字符串颜色
-            }
-        },
-        {
-            "scope": [
-                "variable.other.readwrite.python"
-            ],
-            "settings": {
-                "foreground": "#A9B7C6"  // 普通变量设置为浅灰白色
-            }
-        },
-        {
-            "scope": [
-                "variable.parameter.function.language.special.self.python",
-                "variable.language.special.self.python",
-                "variable.parameter.function.language.special.cls.python",
-                "variable.language.special.cls.python",
-                "variable.language.special.super.python",
-                "variable.parameter.function.language.special.mcs.python"
-            ],
-            "settings": {
-                "foreground": "#9876AA"  // 特殊参数统一设置为浅紫色
-            }
-        }
-    ]
-}
+        ]
+    }
 }
