@@ -237,7 +237,7 @@
                     "support.function"
                 ],
                 "settings": {
-                    "foreground": "#BBB529" // 内置函数名 暗黄色
+                    "foreground": "#9876AA" // 内置函数名 浅紫色
                 }
             },
             {
