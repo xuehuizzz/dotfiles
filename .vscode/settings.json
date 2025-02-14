@@ -197,7 +197,7 @@
     "editor.inlineSuggest.enabled": false,
     "window.openFoldersInNewWindow": "on",
     "chat.commandCenter.enabled": false, // 隐藏copilot
-    // 自定义背景颜色
+    // 自定义背景颜色    #333333
     "workbench.colorCustomizations": {
         "editor.background": "#0D0D0D", // 更深的编辑器背景色
         "sideBar.background": "#0D0D0D", // 侧边栏背景色
