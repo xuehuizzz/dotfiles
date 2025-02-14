@@ -67,7 +67,7 @@
     // 保存自动删除末尾空格
     "files.trimTrailingWhitespace": false,
     "path-intellisense.mappings": {
-        "@": "${workspaceFolder}/src"
+        "@": "/${workspaceFolder}/src"
     },
     // 搜索吸附目录
     "search.searchEditor.singleClickBehaviour": "peekDefinition",
@@ -78,7 +78,7 @@
     // 终端配置
     "code-runner.clearPreviousOutput": true,
     "terminal.integrated.persistentSessionReviveProcess": "never",
-    "terminal.integrated.shellIntegration.suggestEnabled": true,
+    "terminal.integrated.shellIntegration.enabled": true,
     "terminal.integrated.cursorStyle": "line",
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.stickyScroll.enabled": true,
@@ -107,7 +107,7 @@
         "**/index.jsx": "${dirname}.jsx",
         "**/index.tsx": "${dirname}.tsx"
     },
-    "markdown.experimental.updateLinksOnPaste": true,
+    "markdown.updateLinksOnFileMove.enabled": "prompt",
     "[markdown]": {
         "files.trimTrailingWhitespace": false
     },
