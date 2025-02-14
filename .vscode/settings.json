@@ -121,7 +121,12 @@
         "strings": true
     },
     "editor.wordSeparators": "`~!@%^&*()=+[{]}\\|;:'\",.<>/?（），。；：",
-    "editor.minimap.enabled": false,
+    // 配置代码缩略图
+    "editor.minimap.enabled": true, // 启用/禁用缩略图
+    "editor.minimap.maxColumn": 120, // 设置缩略图最大宽度
+    "editor.minimap.renderCharacters": true, // 是否渲染实际字符
+    "editor.minimap.side": "right", // 缩略图位置（right/left）
+    "editor.minimap.showSlider": "mouseover", // 滑块显示方式
     "editor.foldingStrategy": "indentation",
     "editor.foldingHighlight": false,
     // JSX
