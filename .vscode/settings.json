@@ -21,6 +21,9 @@
     "editor.acceptSuggestionOnEnter": "smart",
     "editor.suggestSelection": "recentlyUsedByPrefix",
     "editor.suggest.insertMode": "replace",
+    // 设置滚动条, hidden始终隐藏, visible始终显示
+    "editor.scrollbar.vertical": "auto",
+    "editor.scrollbar.horizontal": "auto",
     // 补全括号选择
     "editor.autoClosingBrackets": "beforeWhitespace",
     "editor.autoClosingDelete": "always",
