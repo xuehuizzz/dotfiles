@@ -88,7 +88,7 @@
         "announcement": "auto"
     },
     "workbench.fontAliasing": "antialiased",
-    "editor.fontFamily": "JetBrains Mono, 'Courier New', monospace",
+    "editor.fontFamily": "Consolas, '等线', monospace",
     "editor.fontSize": 14,
     "editor.fontWeight": "normal",
     "editor.fontLigatures": true,
@@ -119,6 +119,7 @@
     "editor.wordSeparators": "`~!@%^&*()=+[{]}\\|;:'\",.<>/?（），。；：",
     "editor.minimap.enabled": false,
     "editor.foldingStrategy": "indentation",
+    "editor.foldingHighlight": false,
     // JSX
     "emmet.includeLanguages": {
         "javascript": "javascriptreact",
