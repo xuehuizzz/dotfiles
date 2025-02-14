@@ -89,7 +89,7 @@
     },
     "workbench.fontAliasing": "antialiased",
     "editor.fontFamily": "Consolas, '等线', monospace",
-    "editor.fontSize": 14,
+    "editor.fontSize": 11,
     "editor.fontWeight": "normal",
     "editor.fontLigatures": true,
     "workbench.iconTheme": "material-icon-theme",
