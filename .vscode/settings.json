@@ -198,34 +198,34 @@
     "chat.commandCenter.enabled": false, // 隐藏copilot
     // 自定义背景颜色    #333333
     "workbench.colorCustomizations": {
-        "editor.background": "#1B1A18", // 更深的编辑器背景色
-        "sideBar.background": "#1B1A18", // 侧边栏背景色
-        "terminal.background": "#1B1A18", // 终端背景色
-        "panel.background": "#1B1A18", // 面板背景色
-        "activityBar.background": "#1B1A18", // 添加这一行来设置活动栏背景色
-        "tab.activeBackground": "#1B1A18", // 活动标签背景
-        "tab.inactiveBackground": "#1B1A18", // 非活动标签背景
-        "editorGroupHeader.tabsBackground": "#1B1A18", // 标签栏整体背景
-        "list.activeSelectionBackground": "#1B1A18", // 选中项的背景色
-        "list.inactiveSelectionBackground": "#1B1A18", // 非焦点时选中项的背景色
-        "list.hoverBackground": "#1B1A18", // 鼠标悬停时的背景色
-        "list.inactiveFocusBackground": "#1B1A18", // 非焦点时的背景色
+        "editor.background": "#2D2D2D", // 更深的编辑器背景色
+        "sideBar.background": "#2D2D2D", // 侧边栏背景色
+        "terminal.background": "#2D2D2D", // 终端背景色
+        "panel.background": "#2D2D2D", // 面板背景色
+        "activityBar.background": "#2D2D2D", // 添加这一行来设置活动栏背景色
+        "tab.activeBackground": "#2D2D2D", // 活动标签背景
+        "tab.inactiveBackground": "#2D2D2D", // 非活动标签背景
+        "editorGroupHeader.tabsBackground": "#2D2D2D", // 标签栏整体背景
+        "list.activeSelectionBackground": "#2D2D2D", // 选中项的背景色
+        "list.inactiveSelectionBackground": "#2D2D2D", // 非焦点时选中项的背景色
+        "list.hoverBackground": "#2D2D2D", // 鼠标悬停时的背景色
+        "list.inactiveFocusBackground": "#2D2D2D", // 非焦点时的背景色
         "list.inactiveSelectionForeground": "#ffffff", // 非焦点时选中项的文字颜色
-        "sideBarSectionHeader.background": "#1B1A18", // 侧边栏分组标题的背景色
-        "list.dropBackground": "#1B1A18", // 拖放时的背景色
-        "titleBar.activeBackground": "#1B1A18", // 标题栏背景色
-        "titleBar.inactiveBackground": "#1B1A18", // 非活动标题栏背景色
-        "titleBar.border": "#1B1A18", // 标题栏边框颜色
-        "breadcrumb.background": "#1B1A18", // 面包屑导航背景
-        "breadcrumbPicker.background": "#1B1A18", // 面包屑选择器背景
-        "editorGroupHeader.border": "#1B1A18", // 编辑器组标题栏边框
-        "statusBar.background": "#1B1A18", // 状态栏背景色
-        "statusBar.noFolderBackground": "#1B1A18", // 未打开文件夹时的状态栏背景
-        "statusBar.debuggingBackground": "#1B1A18", // 调试时的状态栏背景
-        "statusBar.border": "#1B1A18", // 状态栏边框
-        "statusBarItem.activeBackground": "#1B1A18", // 状态栏项目激活时的背景
-        "statusBarItem.hoverBackground": "#1B1A18", // 状态栏项目悬停时的背景
-        "editorGutter.background": "#1B1A18", // 设置行号区域背景色
-        "sideBar.border": "#1B1A18", // 设置为透明
+        "sideBarSectionHeader.background": "#2D2D2D", // 侧边栏分组标题的背景色
+        "list.dropBackground": "#2D2D2D", // 拖放时的背景色
+        "titleBar.activeBackground": "#2D2D2D", // 标题栏背景色
+        "titleBar.inactiveBackground": "#2D2D2D", // 非活动标题栏背景色
+        "titleBar.border": "#2D2D2D", // 标题栏边框颜色
+        "breadcrumb.background": "#2D2D2D", // 面包屑导航背景
+        "breadcrumbPicker.background": "#2D2D2D", // 面包屑选择器背景
+        "editorGroupHeader.border": "#2D2D2D", // 编辑器组标题栏边框
+        "statusBar.background": "#2D2D2D", // 状态栏背景色
+        "statusBar.noFolderBackground": "#2D2D2D", // 未打开文件夹时的状态栏背景
+        "statusBar.debuggingBackground": "#2D2D2D", // 调试时的状态栏背景
+        "statusBar.border": "#2D2D2D", // 状态栏边框
+        "statusBarItem.activeBackground": "#2D2D2D", // 状态栏项目激活时的背景
+        "statusBarItem.hoverBackground": "#2D2D2D", // 状态栏项目悬停时的背景
+        "editorGutter.background": "#2D2D2D", // 设置行号区域背景色
+        "sideBar.border": "#2D2D2D", // 设置为透明
     },
 }
