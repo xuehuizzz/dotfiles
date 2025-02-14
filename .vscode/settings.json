@@ -226,6 +226,7 @@
         "statusBar.border": "#0D0D0D", // 状态栏边框
         "statusBarItem.activeBackground": "#0D0D0D", // 状态栏项目激活时的背景
         "statusBarItem.hoverBackground": "#0D0D0D", // 状态栏项目悬停时的背景
-        "editorGutter.background": "#0D0D0D" // 设置行号区域背景色
+        "editorGutter.background": "#0D0D0D", // 设置行号区域背景色
+        "sideBar.border": "#00000000", // 设置为透明
     },
 }
