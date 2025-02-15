@@ -230,7 +230,7 @@
         "statusBar.background": "#2B2B2B", // 状态栏背景色
         // "statusBar.noFolderBackground": "#2B2B2B", // 未打开文件夹时的状态栏背景
         // "statusBar.debuggingBackground": "#2B2B2B", // 调试时的状态栏背景
-        // "statusBar.border": "#2B2B2B", // 状态栏边框
+        "statusBar.border": "#2B2B2B", // 状态栏边框
         // "statusBarItem.activeBackground": "#2B2B2B", // 状态栏项目激活时的背景
         // "statusBarItem.hoverBackground": "#2B2B2B", // 状态栏项目悬停时的背景
         "editorGutter.background": "#2B2B2B", // 设置行号区域背景色
