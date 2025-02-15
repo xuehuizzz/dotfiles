@@ -38,8 +38,7 @@
     "debug.showBreakpointsInOverviewRuler": true,
     // Tab 高度紧凑模式
     "window.density.editorTabHeight": "compact",
-    // 文件夹紧凑模式
-    "explorer.compactFolders": true,
+    "explorer.compactFolders": false, // 展开文件夹
     "notebook.compactView": true,
     // 自动补齐`HTML`尖括号
     "editor.linkedEditing": true,
@@ -122,7 +121,7 @@
     },
     "editor.wordSeparators": "`~!@%^&*()=+[{]}\\|;:'\",.<>/?（），。；：",
     // 配置代码缩略图
-    "editor.minimap.enabled": true, // 启用/禁用缩略图
+    "editor.minimap.enabled": false, // 启用/禁用缩略图
     "editor.minimap.maxColumn": 120, // 设置缩略图最大宽度
     "editor.minimap.renderCharacters": true, // 是否渲染实际字符
     "editor.minimap.side": "right", // 缩略图位置（right/left）
@@ -204,7 +203,7 @@
     "editor.inlineSuggest.enabled": false,
     "window.openFoldersInNewWindow": "on",
     "chat.commandCenter.enabled": false, // 隐藏copilot
-    // 自定义背景颜色    #333333
+    // 自定义背景颜色  
     "workbench.colorCustomizations": {
         "editor.background": "#2B2B2B", // 更深的编辑器背景色
         "sideBar.background": "#2B2B2B", // 侧边栏背景色
