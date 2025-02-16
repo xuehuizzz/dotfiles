@@ -129,6 +129,8 @@
     "editor.minimap.showSlider": "mouseover", // 滑块显示方式
     "editor.foldingStrategy": "indentation",
     "editor.foldingHighlight": false,
+    "editor.snippetSuggestions": "top",
+    "extensions.ignoreRecommendations": true,
     // JSX
     "emmet.includeLanguages": {
         "javascript": "javascriptreact",
