@@ -68,6 +68,7 @@
     "files.autoGuessEncoding": true,
     // 保存自动删除末尾空格
     "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
     "path-intellisense.mappings": {
         "@": "/${workspaceFolder}/src"
     },
@@ -203,7 +204,19 @@
     "editor.inlineSuggest.enabled": false,
     "window.openFoldersInNewWindow": "on",
     "chat.commandCenter.enabled": false, // 隐藏copilot
-    // 自定义背景颜色  
+    "editor.lightbulb.enabled": "off",
+    "breadcrumbs.enabled": false,
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "comment",
+                "settings": { // 设置代码的注释部分为斜体
+                    "fontStyle": "italic"
+                }
+            }
+        ]
+    },
+    // 自定义背景颜色
     "workbench.colorCustomizations": {
         // "editor.background": "#2B2B2B", // 更深的编辑器背景色
         "sideBar.background": "#2B2B2B", // 侧边栏背景色
@@ -214,7 +227,7 @@
         "activityBar.background": "#2B2B2B", // 添加这一行来设置活动栏背景色
         "tab.activeBackground": "#2B2B2B", // 活动标签背景
         "tab.inactiveBackground": "#2B2B2B", // 非活动标签背景
-        "tab.border": "#2B2B2B",  // 标签边框颜色
+        "tab.border": "#2B2B2B", // 标签边框颜色
         "editorGroupHeader.tabsBackground": "#2B2B2B", // 标签栏整体背景
         // "list.activeSelectionBackground": "#3E66C5", // 选中项的背景色
         "list.inactiveSelectionBackground": "#15293D", // 非焦点时选中项的背景色
