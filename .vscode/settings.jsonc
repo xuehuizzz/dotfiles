@@ -62,16 +62,10 @@
     "typescript.suggest.autoImports": true,
     "javascript.preferences.quoteStyle": "single",
     "typescript.preferences.quoteStyle": "single",
-    "vue.updateImportsOnFileMove.enabled": true,
-    "vue.inlayHints.missingProps": true,
-    "vue.autoInsert.dotValue": true,
     "files.autoGuessEncoding": true,
     // 保存自动删除末尾空格
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
-    "path-intellisense.mappings": {
-        "@": "/${workspaceFolder}/src"
-    },
     // 搜索吸附目录
     "search.searchEditor.singleClickBehaviour": "peekDefinition",
     "editor.stickyScroll.enabled": true,
@@ -251,8 +245,8 @@
         // "statusBarItem.hoverBackground": "#2B2B2B", // 状态栏项目悬停时的背景
         "editorGutter.background": "#2B2B2B", // 设置行号区域背景色
         "editorGroupHeader.tabsBorder": "#00000000", // 设置头部标签颜色
-        "panel.border": "#00000000",  // 隐藏终端面板与编辑器边框
-        "sideBarSectionHeader.border": "#00000000",   // 隐藏大纲与时间线边界色
+        "panel.border": "#00000000", // 隐藏终端面板与编辑器边框
+        "sideBarSectionHeader.border": "#00000000", // 隐藏大纲与时间线边界色
         "activityBar.border": "#00000000", // 隐藏活动栏分隔侧边栏边框
     },
 }
