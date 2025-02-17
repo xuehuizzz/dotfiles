@@ -252,5 +252,6 @@
         "editorGutter.background": "#2B2B2B", // 设置行号区域背景色
         "editorGroupHeader.tabsBorder": "#00000000", // 设置头部标签颜色
         "panel.border": "#00000000",  // 隐藏终端面板与编辑器边框
+        "sideBarSectionHeader.border": "#00000000",   // 隐藏大纲与时间线边界色
     },
 }
