@@ -69,7 +69,7 @@
     "files.insertFinalNewline": true,
     // 搜索吸附目录
     "search.searchEditor.singleClickBehaviour": "peekDefinition",
-    "editor.stickyScroll.enabled": true,
+    "editor.stickyScroll.enabled": false, // 禁用粘性滚动功能
     "workbench.tree.enableStickyScroll": true,
     "workbench.tree.indent": 15, // 设置目录树缩进
     "workbench.list.openMode": "doubleClick", // 双击打开文件
