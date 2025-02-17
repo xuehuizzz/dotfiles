@@ -135,7 +135,6 @@
         "typescript"
     ],
     "search.followSymlinks": false,
-    "liveServer.settings.donotVerifyTags": true,
     "update.mode": "manual",
     "search.exclude": {
         "**/*.sql": true,
