@@ -250,5 +250,6 @@
         // "statusBarItem.activeBackground": "#2B2B2B", // 状态栏项目激活时的背景
         // "statusBarItem.hoverBackground": "#2B2B2B", // 状态栏项目悬停时的背景
         "editorGutter.background": "#2B2B2B", // 设置行号区域背景色
+        "editorGroupHeader.tabsBorder": "#2B2B2B",  // 设置头部标签颜色
     },
 }
