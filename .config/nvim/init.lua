@@ -25,6 +25,7 @@ require("lazy").setup{
 	require 'plugins.treesitter',
 	require 'plugins.lualine',
 	require 'plugins.comment',
+	require 'plugins.toggleterm', -- 打开终端, Ctrl+ j
 }
 
 
