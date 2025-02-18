@@ -28,3 +28,9 @@ collapse_simple_statement = "Never"
 single_statement = false
 # 是否在操作符周围添加空格
 spaces_around_operators = true
+# 是否在最后一个表项后添加逗号
+trailing_table_separator = "Always"
+# 是否对齐连续的赋值语句
+align_continuous_assign_statements = true
+# 是否对齐连续的表字段
+align_continuous_table_statements = true
