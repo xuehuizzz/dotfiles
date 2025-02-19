@@ -82,6 +82,7 @@
     "terminal.integrated.stickyScroll.enabled": true,
     "terminal.integrated.inheritEnv": true,
     "terminal.integrated.gpuAcceleration": "on",
+    "terminal.integrated.cursorStyleInactive":"line",
     "accessibility.signals.terminalCommandFailed": {
         "sound": "auto",
         "announcement": "auto"
