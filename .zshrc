@@ -23,6 +23,9 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH=/opt/theos/bin:$PATH
 export THEOS=/opt/theos
 
+alias cp="cp -rv"  # copy file recursively and explain
+alias mv="mv -v"   # move file and explain
+alias mkdir="mkdir -pv"  # mkdir folder recursively and explain
 alias cat="bat"
 alias bi="brew install"
 alias bs="brew services"
