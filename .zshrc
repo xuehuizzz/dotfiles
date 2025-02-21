@@ -1,5 +1,7 @@
+# 设置中文
 export LANG=zh_CN.UTF-8
 export LC_ALL=zh_CN.UTF-8
+# omz setup
 ZSH_DISABLE_COMPFIX=true
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
@@ -12,18 +14,15 @@ DISABLE_AUTO_TITLE="true"   # 禁用动态标题
 ENABLE_CORRECTION="true"  # 启用自动纠正功能
 DISABLE_UNTRACKED_FILES_DIRTY="true" 
 plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
-source $ZSH/oh-my-zsh.sh
 
-
-source ~/.bash_profile
+# cus setup
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 export PATH="/usr/local/opt/apr-util/bin:$PATH"
-
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-
 export PATH=/opt/theos/bin:$PATH
 export THEOS=/opt/theos
+source $ZSH/oh-my-zsh.sh
+source ~/.bash_profile
 
 alias cp="cp -rv"  # copy file recursively and explain
 alias mv="mv -v"   # move file and explain
