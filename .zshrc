@@ -1,6 +1,7 @@
 # 设置中文
 export LANG=zh_CN.UTF-8
 export LC_ALL=zh_CN.UTF-8
+
 # omz setup
 ZSH_DISABLE_COMPFIX=true
 export PATH=$HOME/bin:/usr/local/bin:$PATH
