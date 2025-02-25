@@ -39,14 +39,12 @@ vim.opt.tabstop = 4                 -- 制表符等于4个空格
 vim.opt.shiftwidth = 4              -- 缩进宽度为4个空格
 vim.opt.autoindent = true           -- 自动缩进
 vim.opt.cursorline = true           -- 高亮当前行
-vim.opt.linebreak = true            -- 如果自动换行, 在单词边界处换行
 vim.opt.mouse = 'a'                 -- 启用鼠标支持
 vim.opt.lazyredraw = true                 -- 关闭显示重绘
 vim.opt.ttyfast = true                    -- 提高性能
 vim.opt.compatible = false                -- 关闭 vi 兼容模式
 vim.opt.syntax = "on"                     -- 语法高亮
 vim.opt.ruler = true                     -- 显示状态栏标尺
-vim.opt.wrap = false                     -- 禁用自动换行
 vim.opt.cmdheight = 1                    -- 命令行高度
 vim.opt.laststatus = 2                   -- 显示状态栏
 vim.opt.softtabstop = 4                  -- 退格键一次删除4个空格
@@ -80,6 +78,9 @@ vim.opt.swapfile = false    -- 禁用交换文件（swap file）的创建，这�
 vim.opt.writebackup = false  -- 不允许其他程序同时编辑同一文件
 vim.opt.conceallevel = 0     -- 不隐藏任何语法标记(如 Markdown 中的 `` )
 vim.opt.cmdheight = 1          -- 命令行高度为1行
+vim.opt.wrap = true        -- 启用自动换行
+vim.opt.linebreak = true   -- 在单词之间换行
+vim.opt.breakindent = true -- 保持换行后的缩进
 
 vim.cmd('filetype plugin indent on')   -- 启用文件类型检测
 vim.cmd("syntax enable")
