@@ -54,8 +54,11 @@ go install golang.org/x/tools/gopls@latest
 go install github.com/go-delve/delve/cmd/dlv@latest
 go install github.com/air-verse/air@latest  # 项目热重载, 方便调试接口
 go install golang.org/x/tools/cmd/goimports@latest    # 自动合并和排序 import 语句
-    # goimports -w your_file.go  # 单个文件
-    # goimports -w .  # 当前目录下所以go文件
+    # goimports -w xxx.go  # 单个文件
+    # goimports -w .  # 当前目录下所有go文件
+go install github.com/daixiang0/gci@latest    # 另一个排序合并 import 语句的模块
+    # gci write -s standard -s blank -s default -s blank -s "prefix(projectName)" -s blank xxx.go   # 单个文件
+    # gci write -s standard -s blank -s default -s blank -s "prefix(projectName)" .         # 当前目录下
 
 # 下载项目依赖
 go get xxx  # 例如: go get github.com/gin-gonic/gin
