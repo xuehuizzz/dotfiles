@@ -56,7 +56,7 @@ go install github.com/air-verse/air@latest  # 项目热重载, 方便调试接�
 go install golang.org/x/tools/cmd/goimports@latest    # 自动合并和排序 import 语句
     # goimports -w xxx.go  # 单个文件
     # goimports -w .  # 当前目录下所有go文件
-go install github.com/daixiang0/gci@latest    # 另一个排序合并 import 语句的模块
+go install github.com/daixiang0/gci@latest    # 另一个排序合并 import 语句的模块 (推荐使用)
     # gci write -s standard -s blank -s default -s blank -s "prefix(projectName)" -s blank xxx.go   # 单个文件
     # gci write -s standard -s blank -s default -s blank -s "prefix(projectName)" .         # 当前目录下
 
