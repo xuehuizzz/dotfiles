@@ -50,8 +50,8 @@ go env -w GOPROXY=https://goproxy.cn,direct
 go env -w GOSUMDB="sum.golang.google.cn"
 
 # 安装常用开发工具
-go install golang.org/x/tools/gopls@latest
-go install github.com/go-delve/delve/cmd/dlv@latest
+go install golang.org/x/tools/gopls@latest    # go语言服务器
+go install github.com/go-delve/delve/cmd/dlv@latest   # 代码调试工具
 go install github.com/air-verse/air@latest  # 项目热重载, 方便调试接口
 go install golang.org/x/tools/cmd/goimports@latest    # 自动合并和排序 import 语句
     # goimports -w xxx.go  # 单个文件
