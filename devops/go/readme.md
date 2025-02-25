@@ -5,13 +5,13 @@
 go version  # 验证安装
 
 # Linux/Mac  配置环境变量
-export GOPATH=$HOME/go/bin   # Go 工作空间
+export GOPATH=$HOME/go   # Go 工作空间
 export GOBIN=$HOME/go/bin   # 指定通过 go install 安装的可执行文件的位置, 如果未显示设置, 则默认安装到 $GOPATH/bin 目录
-export GOROOT=/usr/local/go  # Go 安装路径
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin:$GOPATH:$GOBIN
+export GOROOT=/opt/homebrew/Cellar/go@1.23/1.23.6/libexec  # Go 安装路径
 export GOSUMDB="sum.golang.org"
+export GO111MODULE=on
 export GOPROXY=https://goproxy.cn,direct
+export PATH=$PATH:$GOROOT:$GOPATH:$GOBIN
 ```
 
 ## 项目结构建议
