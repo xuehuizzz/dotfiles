@@ -27,7 +27,11 @@
 "  在粘贴内容时,  :set paste  会关闭自动缩进等功能，使粘贴更快速, 粘贴结束再输入 :set nopaste 关闭粘贴模式
 "**********************************************************************************************
 
-
+set wrap           " 启用自动换行
+set linebreak      " 在单词边界处换行
+set nolist        " 关闭 list 模式以避免干扰 linebreak
+set showbreak=↪   " 显示换行符标记（可选）
+set breakindent   " 保持换行后的缩进（可选）
 " :colorscheme <Tab> 查看已支持的主题
 colorscheme default   " 替换成你喜欢的主题名称
 set background=dark   " 如果是暗色背景主题
