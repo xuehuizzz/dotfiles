@@ -36,12 +36,18 @@ project_name/
     └── config/   # # 配置文件
 ```
 
-#### 1.<mark>格式化导包顺序 .isort.cfg</mark>
+#### 1.<mark>模块导入规范</mark>
 
-`pip install isort`
 
-`新建 .isort.cfg 配置文件, 位于项目根目录, 内容如下:`
-
+>`pip install isort`
+>
+>标准库导入
+>
+>第三方库导入
+>
+>本地模块导入
+>
+>`新建 .isort.cfg 配置文件, 位于项目根目录, 内容如下:`
 ```bash
 [tool.isort]
 line_length = 100    # 指定每行代码的最大字符数
