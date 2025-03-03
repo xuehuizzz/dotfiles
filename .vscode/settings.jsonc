@@ -126,6 +126,7 @@
     "editor.foldingStrategy": "indentation",
     "editor.foldingHighlight": false,
     "editor.snippetSuggestions": "top",
+    "editor.tabCompletion": "on",
     "extensions.ignoreRecommendations": true,
     // JSX
     "emmet.includeLanguages": {
