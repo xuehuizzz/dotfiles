@@ -129,20 +129,18 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
 #### 4.<mark>编码建议</mark>
 
+* 函数嵌套的层数不建议超过2层, 过多的嵌套会导致可读性和维护性下降.
+
 * 优先执行操作并捕获异常，而不是先检查后执行
 
     *
         ```python
         import base64
-        
-        
         s = "SGVsbG8gV29ybGQh"  # "Hello World!" 的 Base64 编码
-        
         try:
             decoded_value = base64.b64decode(s).decode("utf-8")
         except ValueError as _:
             decoded_value = s
-        
         print(decoded_value)
         ```
 
