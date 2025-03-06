@@ -1,5 +1,5 @@
 return {
-	"akinsho/toggleterm.nvim",
+"akinsho/toggleterm.nvim",
 	lazy = false,
 	priority = 1000,
 	config = function()
