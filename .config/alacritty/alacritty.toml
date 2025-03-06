@@ -1,17 +1,9 @@
-[[keyboard.bindings]]
-action = "Paste"
-key = "V"
-mods = "Command"
-
-[[keyboard.bindings]]
-action = "Copy"
-key = "C"
-mods = "Command"
-
-[[keyboard.bindings]]
-action = "SpawnNewInstance"
-key = "N"
-mods = "Command"
+[keyboard]
+bindings = [
+    { key = "V", mods = "Command", action = "Paste" },
+    { key = "C", mods = "Command", action = "Copy" },
+    { key = "N", mods = "Command", action = "SpawnNewInstance" },
+]
 
 [env]
 TERM = "xterm-256color"
@@ -45,30 +37,27 @@ cyan = "#70c0b1"
 white = "#eaeaea"
 
 [cursor]
-style = { shape = "Beam", blinking = "Always" }  # # 设置光标为竖线且总是闪烁
+style = { shape = "Beam", blinking = "Always" } # 设置光标为竖线且总是闪烁
 
 [selection]
-save_to_clipboard = true  # 选中文本自动复制
+save_to_clipboard = true # 选中文本自动复制
 
 [font]
-# brew install --cask font-jetbrains-mono-nerd-font
 size = 12.0
 normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
-bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }     # 粗体
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }      # 粗体
 italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }  # 斜体
 
 [window]
-dimensions = { columns = 120, lines = 50 }  # 窗口尺寸
+dimensions = { columns = 120, lines = 50 } # 窗口尺寸
 padding = { x = 10, y = 10 }
 dynamic_padding = true
-opacity = 0.85   # 设置透明度
-title = "terminal"   # 设置窗口标题
+opacity = 0.85                             # 设置透明度
+title = "terminal"                         # 设置窗口标题
 
 [general]
 live_config_reload = true
 # decorations_theme_variant = "Light"  # 设置窗口主题
 
 [terminal]
-osc52 = "CopyPaste"  #设定复制黏贴行为 默认只能复制
-
-# [keyboard]
+osc52 = "CopyPaste" # 设定复制黏贴行为 默认只能复制
