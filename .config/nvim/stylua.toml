@@ -16,13 +16,9 @@ quote_style = "AutoPreferDouble"
 call_parentheses = "Always"
 # 是否对表中的键进行排序
 sort_requires = true
-# 是否在函数调用时总是添加括号
-call_parentheses = "Always"
 # 是否保持多行注释的格式
 preserve_newlines = true
 # 表达式周围是否需要空格
-collapse_simple_statement = "Never"
-# 是否在 if 条件后换行
 collapse_simple_statement = "Never"
 # 是否允许单行表达式
 single_statement = false
