@@ -15,7 +15,7 @@ mkdir -p $PROJECT_NAME/{docs,deploy,tests,samples,scripts,$PROJECT_NAME/{core,ut
 # 创建文件
 touch $PROJECT_NAME/.gitignore
 touch $PROJECT_NAME/.env
-touch $PROJECT_NAME/.editconfig
+touch $PROJECT_NAME/.editorconfig
 touch $PROJECT_NAME/README.md
 touch $PROJECT_NAME/requirements.txt
 touch $PROJECT_NAME/setup.py
@@ -138,4 +138,56 @@ clean:
 	find . -type f -name "*.pyc" -delete
 EOF
 
+# 添加基本的 editorconfig 文件内容
+cat > $PROJECT_NAME/.editorconfig << EOF
+root = true 
+
+[*]
+indent_style = space   # tab or space
+end_of_line = lf   # 设置换行符的类型,lf（Unix 风格）、cr（Mac 风格）或 crlf（Windows 风格）
+insert_final_newline = true  # 设置是否在文件末尾插入一个空行
+charset = utf-8  # 设置文件编码
+trim_trailing_whitespace = true  # 设置是否删除行尾空白字符
+max_line_length = 100  # 设置每行的最大字符数 
+
+[*.py]
+indent_size = 4  # 设置每个缩进级别的空格数
+
+[*.go]
+indent_style = tab
+indent_size = 4
+tab_width = 4
+
+[Makefile]
+indent_style = tab
+
+[*.{css,html,js,json,jsx,scss,ts,tsx,yaml,yml}]
+indent_size = 2
+
+[**.{md,rst}]
+trim_trailing_whitespace = false
+
+[.git*]
+indent_size = tab
+indent_style = tab
+
+[{**.*sh,test/run,**.bats}]
+indent_size = tab
+indent_style = tab
+
+shell_variant      = bash
+binary_next_line   = true  # like -bn
+switch_case_indent = true  # like -ci
+space_redirects    = true  # like -sr
+keep_padding       = false # like -kp
+end_of_line        = lf
+charset            = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[**.bats]
+indent_size = tab
+indent_style = tab
+shell_variant	= bats
+EOF
 echo "项目 $PROJECT_NAME 创建完成！"
