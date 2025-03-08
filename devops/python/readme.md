@@ -9,31 +9,31 @@ https://www.runoob.com/w3cnote/google-python-styleguide.html
 ```
 
 #### <mark>项目结构建议</mark>
-```plaintext
+```plaintext    
 project_name/
+├── .env   # 环境变量文件
 ├── .gitignore   # Git忽略文件
+├── Makefile   # 项目管理脚本
 ├── README.md   # 项目说明文档
-├── requirements.txt   # 项目依赖
-├── setup.py   # 安装脚本
-├── pyproject.toml   # 现代Python项目构建配置
-├── Makefile        # 项目管理脚本
 ├── docs/   # 项目文档目录(使用 Sphinx 等工具生成文档)
-│   ├── conf.py
-│   └── index.rst
+│   ├── conf.py
+│   └── index.rst
 ├── deploy               # 部署配置文件
 │   ├── Dockerfile
 │   └── docker-compose.yaml
-├── tests/   # 测试用例目录(包含单元测试、集成测试等)
-│   ├── __init__.py
-│   └── test_*.py
-├── samples/        # 示例代码
-├── scripts/        # 工具脚本
-└── project_name/   # 主要源代码目录
-    ├── __init__.py
-    ├── __main__.py  # 程序入口
-    ├── core/   # 核心功能代码
-    ├── utils/   # 工具函数
-    └── config/   # # 配置文件
+├── project_name/   # 主要源代码目录
+│   ├── __init__.py
+│   ├── __main__.py   # 程序入口
+│   ├── config/   # 配置文件
+│   ├── core/   # 核心功能代码
+│   └── utils/   # 工具函数
+├── pyproject.toml   # 现代Python项目构建配置
+├── requirements.txt   # 项目依赖
+├── samples/   # 示例代码
+├── scripts/   # 工具脚本
+├── setup.py   # 安装脚本
+└── tests/   # 测试用例目录(包含单元测试、集成测试等)
+    └── test_example.py
 ```
 
 #### 1.<mark>模块导入规范</mark>
