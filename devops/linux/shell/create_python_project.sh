@@ -10,7 +10,7 @@ fi
 PROJECT_NAME=$1
 
 # 创建主要目录结构
-mkdir -p $PROJECT_NAME/{docs,tests,samples,scripts,$PROJECT_NAME/{core,utils,config}}
+mkdir -p $PROJECT_NAME/{docs,deploy,tests,samples,scripts,$PROJECT_NAME/{core,utils,config}}
 
 # 创建文件
 touch $PROJECT_NAME/.gitignore
@@ -24,6 +24,10 @@ touch $PROJECT_NAME/Makefile
 # 创建 docs 目录下的文件
 touch $PROJECT_NAME/docs/conf.py
 touch $PROJECT_NAME/docs/index.rst
+
+# 创建 deploy 目录下的文件
+touch $PROJECT_NAME/deploy/Dockerfile
+touch $PROJECT_NAME/deploy/docker-compose.yaml
 
 # 创建测试目录下的文件
 touch $PROJECT_NAME/tests/__init__.py
