@@ -15,6 +15,7 @@ mkdir -p $PROJECT_NAME/{docs,deploy,tests,samples,scripts,$PROJECT_NAME/{core,ut
 # 创建文件
 touch $PROJECT_NAME/.gitignore
 touch $PROJECT_NAME/.env
+touch $PROJECT_NAME/.editconfig
 touch $PROJECT_NAME/README.md
 touch $PROJECT_NAME/requirements.txt
 touch $PROJECT_NAME/setup.py
