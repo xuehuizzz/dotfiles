@@ -81,6 +81,7 @@ vim.opt.cmdheight = 1          -- 命令行高度为1行
 vim.opt.wrap = true        -- 启用自动换行
 vim.opt.linebreak = true   -- 在单词之间换行
 vim.opt.breakindent = true -- 保持换行后的缩进
+vim.opt.showbreak = "↪ " -- 显示换行符号
 
 vim.cmd('filetype plugin indent on')   -- 启用文件类型检测
 vim.cmd("syntax enable")
