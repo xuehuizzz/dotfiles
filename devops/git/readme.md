@@ -1,3 +1,5 @@
+## cmd
+```bash
 git config --global pull.rebase true   # 全局配置, 这样，当你运行 git pull 时，Git 会自动使用 --rebase
 git pull --rebase  # 获取远程分支的最新更新。 将你的本地提交从远程分支的最新状态“重放”到当前分支之上，而不是直接合并
 git pull 等同于 (git fetch git marge)
@@ -23,3 +25,4 @@ git config --global alias.br branch
 git config --global alias.ci commit
 git config --global alias.st status”
 git config --global alias.hist 'log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short'   # 查看日志, git hist
+```
