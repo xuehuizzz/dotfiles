@@ -1,4 +1,4 @@
-# python
+# Python
 __pycache__/
 *.py[oc]
 build/
@@ -10,9 +10,10 @@ wheels/
 # macOS
 **/.DS_Store
 
-# project
+# Custom
 .kube/
 .idea/
 .vscode/
 .env
 *.toml
+*.editorconfig
