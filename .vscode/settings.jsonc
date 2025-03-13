@@ -191,7 +191,7 @@
     "files.encoding": "utf8",
     "files.simpleDialog.enable": true,
     "extensions.autoUpdate": "onlyEnabledExtensions", // 自动更新扩展
-    "explorer.openEditors.visible": 5, // 隐藏“打开的编辑器”面板
+    "explorer.openEditors.visible": 5, // “打开编辑器”窗格中显示的初始编辑器数上限。超过此限制将显示滚动条，并允许调整窗格大小以显示更多项目。
     "window.restoreWindows": "all", // 恢复之前打开的所有窗口和文件夹
     "workbench.editor.enablePreview": false, // 禁用文件预览模式，确保双击时文件独立打开
     "editor.inlineSuggest.enabled": false,
