@@ -1,4 +1,5 @@
 {
+    "window.titleBarStyle": "native",
     "window.customTitleBarVisibility": "never", // 隐藏顶部自定义标题栏
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
