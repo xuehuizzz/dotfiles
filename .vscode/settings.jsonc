@@ -1,6 +1,7 @@
 {
     "window.titleBarStyle": "native",
     "window.customTitleBarVisibility": "never", // 隐藏顶部自定义标题栏
+    "editor.find.addExtraSpaceOnTop": false,  // 控制查找禁止在编辑器顶部添加额外的行
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
     // "editor.renderWhitespace": "boundary",
