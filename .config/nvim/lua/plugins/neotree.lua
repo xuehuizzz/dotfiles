@@ -63,6 +63,7 @@ return {
             "node_modules",
             ".idea",
             ".ruff_cache",
+            "__pycache__",
           },
           hide_by_pattern = { -- 使用 lua 模式匹配语法
             "*.meta",
