@@ -46,6 +46,7 @@ docker diff 容器ID/名称  # 查看容器文件系统的自创建以来的变�
 docker rename 容器ID/名称 new_container_name  # 重命名容器
 docker ps -a  # 查看所有容器(等于: docker container ls -a), --no-trunc 显示完整的命令
 docker ps -q  # 列出所有运行中容器的ID,  -aq: 列出所有容器id
+docker ps --format "{{.Names}}\t{{.ID}}"    # 仅列出容器名称和容器ID
 docker stop/start 容器ID/名称    # 停止/启动容器
 docker restart 容器ID/名称    # 重启容器
 docker restart $(docker ps -aq)   # 重启所有容器
