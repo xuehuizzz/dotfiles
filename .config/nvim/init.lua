@@ -16,6 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "  -- 设置全局 leader 键为空格键
 vim.g.maplocalleader = " "   -- 设置局部 leader 键为空格键
 
+require("config.keymaps")
 -- 初始化 lazy.nvim
 require("lazy").setup{
 	require "plugins.colortheme",
