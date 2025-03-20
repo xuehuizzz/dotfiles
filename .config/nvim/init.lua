@@ -83,6 +83,8 @@ vim.opt.wrap = true        -- 启用自动换行
 vim.opt.linebreak = true   -- 在单词之间换行
 vim.opt.breakindent = true -- 保持换行后的缩进
 vim.opt.showbreak = "↪ " -- 显示换行符号
+vim.opt.laststatus = 3  -- 使用全局状态栏
+vim.opt.cmdheight = 0   -- 将命令行高度设为 0，即隐藏命令行
 
 vim.cmd('filetype plugin indent on')   -- 启用文件类型检测
 vim.cmd("syntax enable")
