@@ -85,7 +85,8 @@ vim.opt.breakindent = true -- 保持换行后的缩进
 vim.opt.showbreak = "↪ " -- 显示换行符号
 vim.opt.laststatus = 3  -- 使用全局状态栏
 vim.opt.cmdheight = 0   -- 将命令行高度设为 0，即隐藏命令行
+vim.opt.filetype = "on"        -- 启用文件类型检测
+vim.opt.syntax = "enable"      -- 启用语法高亮
+vim.g.netrw_liststyle = 3     -- netrw 的显示样式设置为树状结构
 
-vim.cmd('filetype plugin indent on')   -- 启用文件类型检测
-vim.cmd("syntax enable")
-vim.cmd("let g:netrw_liststyle = 3")
+vim.cmd('language en_US.UTF-8')
