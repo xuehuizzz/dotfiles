@@ -74,7 +74,6 @@ return {
             "thumbs.db",
           },
         },
-        follow_current_file = true,
         hijack_netrw_behavior = "open_current", 
       },
       window = {
