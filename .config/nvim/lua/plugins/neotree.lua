@@ -7,7 +7,7 @@ return {
   },
   config = function()
     require("neo-tree").setup({
-      close_if_last_window = true, -- 如果是最后一个窗口则关闭
+      close_if_last_window = false, -- 如果是最后一个窗口则关闭
       popup_border_style = "rounded",
       enable_git_status = true,
       enable_diagnostics = true,
