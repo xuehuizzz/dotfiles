@@ -40,6 +40,8 @@ return {
         },
       },
       filesystem = {
+        follow_current_file = true,     -- 打开自动跟随
+        hijack_netrw_behavior = "open_default",  -- 使用默认行为
         components = {
           icon = false,
         },
