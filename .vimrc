@@ -128,20 +128,22 @@ else
 echoerr "Sorry, this version of (g)vim was not compiled with +multi_byte"
 endif
 
-" Buffers操作快捷方式!
-nnoremap <C-RETURN> :bnext<CR>
-nnoremap <C-S-RETURN> :bprevious<CR>
+" 普通模式下的全选
+nnoremap <C-a> ggVG
+" 插入模式和可视模式下的全选
+inoremap <C-a> <Esc>ggVG
+vnoremap <C-a> <Esc>ggVG
 
-" Tab操作快捷方式!
-nnoremap <C-TAB> :tabnext<CR>
-nnoremap <C-S-TAB> :tabprev<CR>
+" 选中状态(即可视模式)下 Ctrl+c 复制
+vmap <C-c> "+y
 
-"关于tab的快捷键
-" map tn :tabnext<cr>
-" map tp :tabprevious<cr>
-" map td :tabnew .<cr>
-" map te :tabedit
-" map tc :tabclose<cr>
+" 可视模式下的缩进，保持选中状态
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+" 普通模式下的缩进
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
 
 "窗口分割时,进行切换的按键热键需要连接两次,比如从下方窗口移动
 "光标到上方窗口,需要<c-w><c-w>k,非常麻烦,现在重映射为<c-k>,切换的
@@ -161,13 +163,6 @@ nnoremap <leader>4 :set filetype=php<CR>
 " nmap <leader>fd :se fileformat=dos<CR>
 " nmap <leader>fu :se fileformat=unix<CR>
 
-" use Ctrl+[l|n|p|cc] to list|next|previous|jump to count the result
-" map <C-x>l <ESC>:cl<CR>
-" map <C-x>n <ESC>:cn<CR>
-" map <C-x>p <ESC>:cp<CR>
-" map <C-x>c <ESC>:cc<CR>
-
-
 " 让 Tohtml 产生有 CSS 语法的 html
 " syntax/2html.vim，可以用:runtime! syntax/2html.vim
 let html_use_css=1
@@ -175,9 +170,6 @@ let html_use_css=1
 " Python 文件的一般设置，比如不要 tab 等
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 autocmd FileType python map <F12> :!python %<CR>
-
-" 选中状态下 Ctrl+c 复制
-vmap <C-c> "+y
 
 " 打开javascript折叠
 let b:javascript_fold=1
