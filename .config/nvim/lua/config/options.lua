@@ -30,7 +30,6 @@ vim.opt.errorbells = false -- 关闭错误提示音
 vim.opt.visualbell = false -- 关闭可视响铃
 vim.opt.magic = true -- 设置魔术
 vim.opt.backspace = "indent,eol,start" -- 设置退格键行为
-vim.opt.statusline = " %<%F[%1*%M%*%n%R%H]%= %y %0(%{&fileformat} %{&encoding} %c:%l/%L%) " -- 自定义状态栏
 vim.opt.foldenable = true -- 开启折叠
 vim.opt.foldmethod = "syntax" -- 语法折叠
 vim.opt.foldcolumn = "0" -- 折叠区域宽度
