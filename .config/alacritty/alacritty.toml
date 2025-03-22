@@ -59,7 +59,6 @@ title = "terminal"                         # 设置窗口标题
 
 [general]
 live_config_reload = true
-# decorations_theme_variant = "Light"  # 设置窗口主题
 
 [terminal]
 osc52 = "CopyPaste" # 设定复制黏贴行为 默认只能复制
