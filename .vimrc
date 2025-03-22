@@ -31,6 +31,8 @@
 "     :set nopaste   "关闭粘贴模式
 "**********************************************************************************************
 
+" set list  " 显示不可见符号
+" set listchars=tab:>-,trail:·,eol:$,space:·,extends:>,precedes:<
 autocmd InsertLeave * set nopaste  " 离开插入模式时自动关闭 paste 模式
 set wrap           " 启用自动换行
 set linebreak      " 在单词边界处换行
