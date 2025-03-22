@@ -28,8 +28,6 @@
 "     :set nopaste   "关闭粘贴模式
 "**********************************************************************************************
 
-highlight LineNr ctermfg=DarkGrey guifg=#666666   " 设置普通行号的颜色
-highlight CursorLineNr ctermfg=DarkRed guifg=#F98A4E   " 设置当前行号的颜色
 autocmd InsertLeave * set nopaste  " 离开插入模式时自动关闭 paste 模式
 set wrap           " 启用自动换行
 set linebreak      " 在单词边界处换行
@@ -82,6 +80,9 @@ setlocal foldlevel=1 " 设置折叠层数为
 " set foldclose=all " 设置为自动关闭折叠 
 " nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 " 用空格键来开关折叠
+
+highlight LineNr ctermfg=DarkGrey guifg=#666666   " 设置普通行号的颜色
+highlight CursorLineNr ctermfg=DarkRed guifg=#F98A4E   " 设置当前行号的颜色
 
 " 定义获取当前模式的函数
 function! GetMode()
