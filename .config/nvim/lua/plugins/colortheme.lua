@@ -44,8 +44,7 @@ return {
 				colors.fg_gutter = fg_gutter
 				colors.fg_sidebar = fg_dark
 			end,
-            -- 侧边栏设置
-			sidebars = {
+			sidebars = {  -- 侧边栏设置
 				"qf",
 				"vista_kind",
 				"terminal",
@@ -53,7 +52,7 @@ return {
 				"spectre_panel",
 				"help",
 			},
-            border = "rounded",  -- 边框样式 "none", "single", "double", "rounded"
+      border = "rounded",  -- 边框样式 "none", "single", "double", "rounded"
 			day_brightness = 0.3, -- 日间模式的亮度
 			dim_inactive = false, -- 降低不活动窗口的亮度
 			lualine_bold = false, -- 使用 lualine 主题
