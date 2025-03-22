@@ -169,6 +169,32 @@ else
 echoerr "Sorry, this version of (g)vim was not compiled with +multi_byte"
 endif
 
+" 注释快捷键  支持普通模式和插入模式的, ctrl -
+nnoremap <C-_> :call ToggleComment()<CR>
+vnoremap <C-_> :call ToggleComment()<CR>
+inoremap <C-_> <ESC>:call ToggleComment()<CR>i
+ 
+func! ToggleComment()
+    let l:line = getline(".")
+    if l:line =~ '^\s*#' || l:line =~ '^\s*\/\/' || l:line =~ '^\s*"'
+        if &filetype == 'python' || &filetype == 'shell'
+            execute "normal! ^x"
+        elseif &filetype == 'vim'
+            execute "normal! ^x"
+        else
+            execute "normal! ^2x"
+        endif
+    else
+        if &filetype == 'python' || &filetype == 'shell'
+            execute "normal! I# "
+        elseif &filetype == 'vim'
+            execute "normal! I\" "
+        else
+            execute "normal! I// "
+        endif
+    endif
+endfunc
+
 " 普通模式下的全选
 nnoremap <C-a> ggVG
 " 插入模式和可视模式下的全选
