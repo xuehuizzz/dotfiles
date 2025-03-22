@@ -117,7 +117,7 @@ function! GetFileFormat()
 endfunction
 
 " 设置状态栏显示信息，调用 GetMode() 函数
-set statusline=%{GetMode()}%M%*%R%=\ %0(%{GetFileFormat()}\ %{&encoding}\ %c:%l%)
+set statusline=%{GetMode()}%M%*%R%=\ %f%=\ %0(%{GetFileFormat()}\ %{&encoding}\ %c:%l%)
 
 " return OS type, eg: windows, or linux, mac, et.st..
 function! MySys()
