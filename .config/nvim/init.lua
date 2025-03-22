@@ -29,6 +29,3 @@ require("lazy").setup({     -- 加载插件
 	require 'plugins.comment',
 	require 'plugins.toggleterm',
 }
-
-vim.cmd('language en_US.UTF-8')
-
