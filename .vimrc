@@ -219,4 +219,4 @@ autocmd filetype javascript set dictionary=$VIMFILES/dict/javascript.dict
 autocmd filetype css set dictionary=$VIMFILES/dict/css.dict
 autocmd filetype php set dictionary=$VIMFILES/dict/php.dict
 
-highlight StatusLine cterm=bold ctermfg=231 ctermbg=239 guifg=#ffffff guibg=#4a5568
+highlight StatusLine cterm=bold ctermfg=231 ctermbg=NONE guifg=#ffffff guibg=NONE
