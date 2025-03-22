@@ -28,6 +28,8 @@
 "     :set nopaste   "关闭粘贴模式
 "**********************************************************************************************
 
+highlight LineNr ctermfg=DarkGrey guifg=#666666   " 设置普通行号的颜色
+highlight CursorLineNr ctermfg=Yellow guifg=#FFD700   " 设置当前行号的颜色
 autocmd InsertLeave * set nopaste  " 离开插入模式时自动关闭 paste 模式
 set wrap           " 启用自动换行
 set linebreak      " 在单词边界处换行
