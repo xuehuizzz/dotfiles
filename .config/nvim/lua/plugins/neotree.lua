@@ -60,12 +60,8 @@ return {
           hide_hidden = true, -- 隐藏系统隐藏文件
           hide_by_name = {
             ".git",
-            ".DS_Store",
-            "thumbs.db",
             "node_modules",
-            ".idea",
             ".ruff_cache",
-            "__pycache__",
           },
           hide_by_pattern = { -- 使用 lua 模式匹配语法
             "*.meta",
@@ -74,6 +70,8 @@ return {
           never_show = { -- 永远不显示这些文件
             ".DS_Store",
             "thumbs.db",
+            ".idea",
+            "__pycache__",
           },
         },
       },
