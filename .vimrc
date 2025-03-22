@@ -22,6 +22,9 @@
 "        zb      "将当前行移动到屏幕底端
 "        /       "向后搜索
 "        ?       "向前搜索
+"        :colorscheme <Tab>   " 查看已支持的主题
+"        :colorscheme default   " 替换成你喜欢的主题名称
+"        :set background=dark   " 如果是暗色背景主题
 "
 " set paste  暂时禁用所有的自动缩进和代码格式化功能，使得粘贴代码时保持原有的格式, 按需使用
 "     :set paste     "粘贴模式
@@ -34,9 +37,6 @@ set linebreak      " 在单词边界处换行
 set nolist        " 关闭 list 模式以避免干扰 linebreak
 set showbreak=↪   " 显示换行符标记（可选）
 set breakindent   " 保持换行后的缩进（可选）
-" :colorscheme <Tab> 查看已支持的主题
-colorscheme default   " 替换成你喜欢的主题名称
-set background=dark   " 如果是暗色背景主题
 set mouse=a " 启用鼠标
 set lazyredraw  " 关闭显示重绘
 set ttyfast  " 提高性能的其他选项
@@ -62,15 +62,14 @@ set hlsearch " 搜索时高亮显示被找到的文本
 set noerrorbells " 关闭错误信息响铃
 set novisualbell " 关闭使用可视响铃代替呼叫
 set t_vb= " 置空错误铃声的终端代码
-"set showmatch " 插入括号时，短暂地跳转到匹配的对应括号
-"set matchtime=2 " 短暂跳转到匹配括号的时间
+" set showmatch " 插入括号时，短暂地跳转到匹配的对应括号
+" set matchtime=2 " 短暂跳转到匹配括号的时间
 set magic " 设置魔术
 set hidden " 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
 set guioptions-=T " 隐藏工具栏
 set guioptions-=m " 隐藏菜单栏
 set smartindent " 开启新行时使用智能自动缩进
-set backspace=indent,eol,start
-" 不设定在插入状态无法用退格键和 Delete 键删除回车符
+set backspace=indent,eol,start  " 不设定在插入状态无法用退格键和 Delete 键删除回车符
 set cmdheight=1 " 设定命令行的行数为 1
 set laststatus=2 " 显示状态栏 (默认值为 1, 无法显示状态栏)
 set foldenable " 开始折叠
@@ -78,9 +77,9 @@ set foldmethod=syntax " 设置语法折叠
 set foldcolumn=0 " 设置折叠区域的宽度
 setlocal foldlevel=1 " 设置折叠层数为
 " set foldclose=all " 设置为自动关闭折叠 
-" nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-" 用空格键来开关折叠
+" nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>   " 用空格键来开关折叠
 
+highlight Comment cterm=italic gui=italic  " 设置注释为斜体
 highlight LineNr ctermfg=DarkGrey guifg=#666666   " 设置普通行号的颜色
 highlight CursorLineNr ctermfg=DarkRed guifg=#F98A4E   " 设置当前行号的颜色
 
