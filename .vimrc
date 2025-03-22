@@ -29,6 +29,7 @@
 "     :set nopaste   "关闭粘贴模式
 "**********************************************************************************************
 
+autocmd InsertLeave * set nopaste  " 离开插入模式时自动关闭 paste 模式
 set wrap           " 启用自动换行
 set linebreak      " 在单词边界处换行
 set nolist        " 关闭 list 模式以避免干扰 linebreak
