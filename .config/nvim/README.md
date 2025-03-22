@@ -14,3 +14,5 @@ u 撤销上一步
   - <mark>ctrl + j</mark>
 - 全选
   - <mark>ctrl + a</mark> (NORMAL, VISUAL, INSERT)
+- 注释
+  - <mark>ctrl + /</mark> (NORMAL, VISUAL)
