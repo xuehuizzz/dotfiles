@@ -103,8 +103,21 @@ function! GetMode()
     endif
 endfunction
 
+" 定义文件格式显示转换函数
+function! GetFileFormat()
+    let l:ff = &fileformat
+    if l:ff ==# 'unix'
+        return 'LF'
+    elseif l:ff ==# 'dos'
+        return 'CRLF'
+    elseif l:ff ==# 'mac'
+        return 'CR'
+    endif
+    return l:ff
+endfunction
+
 " 设置状态栏显示信息，调用 GetMode() 函数
-set statusline=\ %{GetMode()}[%1*%M%*%n%R%H]%=\ %0(%{&fileformat}\ %{&encoding}\ %c:%l%)\
+set statusline=%{GetMode()}%M%*%R%=\ %0(%{GetFileFormat()}\ %{&encoding}\ %c:%l%)
 
 " return OS type, eg: windows, or linux, mac, et.st..
 function! MySys()
