@@ -9,3 +9,16 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end,
 })
 
+-- 退出插入模式时, 自动关闭粘贴模式
+vim.api.nvim_create_autocmd("InsertLeave", {
+	pattern = "*",
+	command = "set nopaste",
+})
+
+-- 打开下列类型文件时, 关闭代码隐藏功能
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "json", "jsonc", "markdown" },
+	callback = function()
+		vim.opt.conceallevel = 0
+	end,
+})
