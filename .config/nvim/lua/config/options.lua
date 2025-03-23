@@ -5,6 +5,7 @@ vim.g.maplocalleader = " " -- 设置局部 leader 键为空格键
 vim.opt.guifont = "JetBrainsMono Nerd Font:h12"
 vim.opt.number = true -- 显示行号
 -- vim.opt.relativenumber = true        -- 显示相对行号
+-- vim.opt.title = true  -- 显示文件标题
 vim.opt.guicursor = "n-v-c-sm-i-ci-ve-r-cr-o:ver25" -- 设置任何模式下都使用竖线光标
 vim.opt.expandtab = true -- 将制表符展开为空格
 vim.opt.tabstop = 4 -- 制表符等于4个空格
@@ -52,10 +53,10 @@ vim.opt.wrap = true -- 启用自动换行
 vim.opt.linebreak = true -- 在单词之间换行
 vim.opt.breakindent = true -- 保持换行后的缩进
 vim.opt.showbreak = "↪ " -- 显示换行符号
-vim.opt.filetype = "on"        -- 启用文件类型检测
-vim.opt.syntax = "enable"      -- 启用语法高亮
+vim.opt.filetype = "on" -- 启用文件类型检测
+vim.opt.syntax = "enable" -- 启用语法高亮
 vim.opt.encoding = "utf-8"  -- 设置编码为 UTF-8
 vim.opt.fileencoding = "utf-8"  -- 设置文件编码为 UTF-8
--- vim.opt.title = true  -- 显示文件标题
+vim.opt.langremap = false  -- 禁用语言映射
 
-vim.cmd('language en_US.UTF-8')
+vim.cmd("language en_US.UTF-8")
