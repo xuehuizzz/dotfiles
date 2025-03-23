@@ -12,10 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- 设置 leader 键，建议在初始化 lazy 之前设置
-vim.g.mapleader = " " -- 设置全局 leader 键为空格键
-vim.g.maplocalleader = " " -- 设置局部 leader 键为空格键
-
 require("lazy").setup({ -- 加载插件
 	require("plugins.colortheme"),
 	require("plugins.autocompletion"),
