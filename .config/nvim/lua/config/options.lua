@@ -17,7 +17,7 @@ vim.opt.ttyfast = true -- 提高性能
 vim.opt.compatible = false -- 关闭 vi 兼容模式
 vim.opt.syntax = "on" -- 语法高亮
 vim.opt.ruler = true -- 显示状态栏标尺
-vim.opt.cmdheight = 1 -- 命令行高度
+vim.opt.cmdheight = 0 -- 命令行高度
 vim.opt.laststatus = 2 -- 显示状态栏
 vim.opt.softtabstop = 4 -- 退格键一次删除4个空格
 vim.opt.smartindent = true -- 智能自动缩进
@@ -48,14 +48,14 @@ vim.opt.backup = false -- 不创建备份文件
 vim.opt.swapfile = false -- 禁用交换文件（swap file）的创建，这些文件通常用于在编辑时进行备份
 vim.opt.writebackup = false -- 不允许其他程序同时编辑同一文件
 vim.opt.conceallevel = 0 -- 不隐藏任何语法标记(如 Markdown 中的 `` )
-vim.opt.cmdheight = 1 -- 命令行高度为1行
 vim.opt.wrap = true -- 启用自动换行
 vim.opt.linebreak = true -- 在单词之间换行
 vim.opt.breakindent = true -- 保持换行后的缩进
 vim.opt.showbreak = "↪ " -- 显示换行符号
-vim.opt.laststatus = 3  -- 使用全局状态栏
-vim.opt.cmdheight = 0   -- 将命令行高度设为 0，即隐藏命令行
 vim.opt.filetype = "on"        -- 启用文件类型检测
 vim.opt.syntax = "enable"      -- 启用语法高亮
+vim.opt.encoding = "utf-8"  -- 设置编码为 UTF-8
+vim.opt.fileencoding = "utf-8"  -- 设置文件编码为 UTF-8
+-- vim.opt.title = true  -- 显示文件标题
 
 vim.cmd('language en_US.UTF-8')
