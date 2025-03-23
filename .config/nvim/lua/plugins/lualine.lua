@@ -77,6 +77,6 @@ return {
       },
       tabline = {},
       extensions = { "fugitive" },
-		})
+	  })
   end,
 }
