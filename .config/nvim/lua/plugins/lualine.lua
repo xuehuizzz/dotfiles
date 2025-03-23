@@ -78,5 +78,5 @@ return {
       tabline = {},
       extensions = { "fugitive" },
 		})
-	end,
+  end,
 }
