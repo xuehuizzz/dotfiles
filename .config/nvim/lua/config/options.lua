@@ -1,3 +1,7 @@
+-- 设置 leader 键，建议在初始化 lazy 之前设置
+vim.g.mapleader = " " -- 设置全局 leader 键为空格键
+vim.g.maplocalleader = " " -- 设置局部 leader 键为空格键
+
 vim.opt.guifont = "JetBrainsMono Nerd Font:h12"
 vim.opt.number = true -- 显示行号
 -- vim.opt.relativenumber = true        -- 显示相对行号
