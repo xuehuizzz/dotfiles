@@ -29,21 +29,12 @@ alias cp="cp -rv"  # copy file recursively and explain
 alias mv="mv -v"   # move file and explain
 alias mkdir="mkdir -pv"  # mkdir folder recursively and explain
 alias cat="bat"
-alias bi="brew install"
-alias bs="brew services"
-alias bui="brew uninstall"
-alias bd="brew doctor"
 alias c="clear"
 alias sudo="sudo "
 alias reload="exec ${SHELL} -l"
 alias purge="sudo purge"
 alias hist="history -i"
-alias remysql="sudo /usr/local/mysql/support-files/mysql.server restart"  #重启mysql服务
 alias jupyter="nohup jupyter notebook --allow-root > jupyter.log 2>&1 &"  #后台启动jupyter notebook
-alias mysql=/usr/local/mysql/bin/mysql
 alias mac="neofetch --off --colors 3 4 5 6 2 2"
 #alias opena="open -a TextEdit"
 alias ca="conda activate"
-
-
-
