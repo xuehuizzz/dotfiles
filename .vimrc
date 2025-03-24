@@ -33,7 +33,6 @@
 
 " set list  " 显示不可见符号
 " set listchars=tab:>-,trail:·,eol:$,space:·,extends:>,precedes:<
-autocmd InsertLeave * set nopaste  " 离开插入模式时自动关闭 paste 模式
 set wrap           " 启用自动换行
 set linebreak      " 在单词边界处换行
 set nolist        " 关闭 list 模式以避免干扰 linebreak
@@ -85,6 +84,12 @@ setlocal foldlevel=1 " 设置折叠层数为
 highlight Comment cterm=italic gui=italic  " 设置注释为斜体
 highlight LineNr ctermfg=DarkGrey guifg=#666666   " 设置普通行号的颜色
 highlight CursorLineNr ctermfg=DarkRed guifg=#F98A4E   " 设置当前行号的颜色
+
+" 离开插入模式时自动关闭 paste 模式
+augroup auto_nopaste
+  autocmd!
+  autocmd InsertLeave * set nopaste
+augroup END
 
 " 定义获取当前模式的函数
 function! GetMode()
