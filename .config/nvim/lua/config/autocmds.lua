@@ -20,3 +20,15 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "json", "jsonc", "markdown" },
 	command = "set conceallevel=0",
 })
+
+-- 除了python、c、cpp外，其他文件使用2空格缩进
+local four_spaces = { python = true, c = true, cpp = true }
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"*"},
+  callback = function()
+    if not four_spaces[vim.bo.filetype] then
+      vim.bo.tabstop = 2
+      vim.bo.shiftwidth = 2
+    end
+  end
+})
