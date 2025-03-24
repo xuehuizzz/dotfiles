@@ -45,3 +45,10 @@ vim.api.nvim_create_autocmd("FileType", {
     end
   end
 })
+
+-- 设置当前行高亮显示下划线, 而不是块状高亮
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "CursorLine", { underline = true, bg = "NONE" })
+  end,
+})
