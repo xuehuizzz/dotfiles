@@ -90,10 +90,10 @@
         "announcement": "auto"
     },
     "workbench.fontAliasing": "antialiased",
-    "editor.fontFamily": "Consolas, '等线', monospace",
+    "editor.fontFamily": "Maple Mono NF CN, Menlo, Consolas, Maple UI, PingFang, 'Microsoft YaHei', monospace",
+    "editor.fontLigatures": "'calt', 'cv01', 'ss01', 'zero'",
     "editor.fontSize": 11,
     "editor.fontWeight": "normal",
-    "editor.fontLigatures": true,
     "workbench.iconTheme": null, // "material-icon-theme",
     "workbench.list.fastScrollSensitivity": 10,
     "workbench.colorTheme": "JetBrains Darcula Theme",
