@@ -11,14 +11,14 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- 退出插入模式时, 自动关闭粘贴模式
 vim.api.nvim_create_autocmd("InsertLeave", {
-	pattern = "*",
-	command = "set nopaste",
+  pattern = "*",
+  command = "set nopaste",
 })
 
 -- 打开下列类型文件时, 关闭代码隐藏功能
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "json", "jsonc", "markdown" },
-	command = "set conceallevel=0",
+  pattern = { "json", "jsonc", "markdown" },
+  command = "set conceallevel=0",
 })
 
 -- 定义使用4空格缩进的语言
