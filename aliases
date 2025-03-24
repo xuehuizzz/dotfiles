@@ -9,6 +9,7 @@ if _has bat; then
 fi
 if _has nvim; then
     alias vim="nvim"
+    alias vi="nvim"
 fi
 
 alias cp="cp -rv"  # copy file recursively and explain
