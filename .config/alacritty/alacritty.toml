@@ -44,11 +44,18 @@ style = { shape = "Beam", blinking = "Always" } # 设置光标为竖线且总是
 save_to_clipboard = true # 选中文本自动复制
 
 [font]
-# brew install --cask font-jetbrains-mono-nerd-font
+# brew install --cask font-maple-mono
+# brew install --cask font-maple-mono-nf
+# brew install --cask font-maple-mono-cn
+# brew install --cask font-maple-mono-nf-cn
+# brew install --cask font-maple-mono-normal
+# brew install --cask font-maple-mono-normal-nf
+# brew install --cask font-maple-mono-normal-cn
+# brew install --cask font-maple-mono-normal-nf-cn
 size = 12.0
-normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
-bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }      # 粗体
-italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }  # 斜体
+normal = { family = "Maple Mono NF CN", style = "Regular" }
+bold = { family = "Maple Mono NF CN", style = "Bold" }      # 粗体
+italic = { family = "Maple Mono NF CN", style = "Italic" }  # 斜体
 
 [window]
 dimensions = { columns = 120, lines = 50 } # 窗口尺寸
