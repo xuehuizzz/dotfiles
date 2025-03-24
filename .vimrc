@@ -31,6 +31,7 @@
 "     :set nopaste   "关闭粘贴模式
 "**********************************************************************************************
 
+let mapleader = " "  " 将 leader 键设置为空格
 " set list  " 显示不可见符号
 " set listchars=tab:>-,trail:·,eol:$,space:·,extends:>,precedes:<
 set wrap           " 启用自动换行
