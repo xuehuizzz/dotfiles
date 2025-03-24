@@ -58,5 +58,6 @@ vim.opt.syntax = "enable" -- 启用语法高亮
 vim.opt.encoding = "utf-8"  -- 设置编码为 UTF-8
 vim.opt.fileencoding = "utf-8"  -- 设置文件编码为 UTF-8
 vim.opt.langremap = false  -- 禁用语言映射
+vim.opt.virtualedit = "onemore"  -- 允许光标移动到最后一个字符之后
 
 vim.cmd("language en_US.UTF-8")
