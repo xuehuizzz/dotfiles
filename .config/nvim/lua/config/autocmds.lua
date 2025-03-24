@@ -21,8 +21,21 @@ vim.api.nvim_create_autocmd("FileType", {
 	command = "set conceallevel=0",
 })
 
--- 除了python、c、cpp外，其他文件使用2空格缩进
-local four_spaces = { python = true, c = true, cpp = true }
+-- 定义使用4空格缩进的语言
+local four_spaces = {
+  python = true,
+  c = true,
+  cpp = true,
+  java = true,
+  cs = true,    -- C#
+  swift = true,
+  rust = true,
+  go = true,
+  kotlin = true,
+  php = true
+}
+
+-- 其他文件使用2空格缩进
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {"*"},
   callback = function()
