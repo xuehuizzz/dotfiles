@@ -45,6 +45,7 @@ set ttyfast  " 提高性能的其他选项
 set nocompatible " 关闭 vi 兼容模式
 syntax on " 自动语法高亮
 set number " 显示行号
+set virtualedit=onemore " 允许光标移动到最后一个字符之后(非插入模式)
 set cursorline " 突出显示当前行
 set ruler " 打开状态栏标尺
 set nobackup " 不创建备份文件
