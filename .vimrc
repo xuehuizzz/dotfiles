@@ -240,16 +240,26 @@ nnoremap <leader>4 :set filetype=php<CR>
 let html_use_css=1
 
 " Python 文件的一般设置，比如不要 tab 等
-autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
-autocmd FileType python map <F12> :!python %<CR>
+augroup python_settings
+    autocmd!
+    " Python 缩进设置
+    autocmd FileType python setlocal tabstop=4
+    autocmd FileType python setlocal shiftwidth=4
+    autocmd FileType python setlocal expandtab
+    " Python 运行快捷键
+    autocmd FileType python nnoremap <F12> :!python %<CR>
+augroup END
 
 " 打开javascript折叠
 let b:javascript_fold=1
 " 打开javascript对dom、html和css的支持
 let javascript_enable_domhtmlcss=1
 " 设置字典 ~/.vim/dict/文件的路径
-autocmd filetype javascript set dictionary=$VIMFILES/dict/javascript.dict
-autocmd filetype css set dictionary=$VIMFILES/dict/css.dict
-autocmd filetype php set dictionary=$VIMFILES/dict/php.dict
+augroup file_dictionaries
+    autocmd!
+    autocmd FileType javascript setlocal dictionary=$VIMFILES/dict/javascript.dict
+    autocmd FileType css setlocal dictionary=$VIMFILES/dict/css.dict
+    autocmd FileType php setlocal dictionary=$VIMFILES/dict/php.dict
+augroup END
 
 highlight StatusLine cterm=bold ctermfg=231 ctermbg=NONE guifg=#ffffff guibg=NONE
