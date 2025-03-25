@@ -58,11 +58,6 @@ return {
           hide_dotfiles = false, -- 隐藏以点开头的文件
           hide_gitignored = false, -- 隐藏 git ignore 的文件
           hide_hidden = true, -- 隐藏系统隐藏文件
-          hide_by_name = {
-            ".git",
-            "node_modules",
-            ".ruff_cache",
-          },
           hide_by_pattern = { -- 使用 lua 模式匹配语法
             "*.meta",
             "*/src/*/tsconfig.json",
@@ -72,6 +67,10 @@ return {
             "thumbs.db",
             ".idea",
             "__pycache__",
+            ".idea",
+            ".git",
+            "ruff_cache",
+            "node_modules",
           },
         },
       },
