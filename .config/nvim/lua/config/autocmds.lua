@@ -52,3 +52,16 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "CursorLine", { underline = true, bg = "NONE" })
   end,
 })
+
+-- 保存时自动删除空行中的空格字符
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    -- 保存当前的搜索标记和光标位置
+    local save_cursor = vim.fn.getpos(".")
+    -- 删除空行中的空格
+    vim.cmd([[%s/^\s\+$//e]])
+    -- 恢复光标位置
+    vim.fn.setpos(".", save_cursor)
+  end,
+})
