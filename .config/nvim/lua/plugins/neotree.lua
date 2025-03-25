@@ -57,7 +57,7 @@ return {
           visible = false, -- 当设置为 true 时会显示被过滤的项目
           hide_dotfiles = false, -- 隐藏以点开头的文件
           hide_gitignored = false, -- 隐藏 git ignore 的文件
-          hide_hidden = true, -- 隐藏系统隐藏文件
+          hide_hidden = false, -- 隐藏系统隐藏文件
           hide_by_pattern = { -- 使用 lua 模式匹配语法
             "*.meta",
             "*/src/*/tsconfig.json",
@@ -77,23 +77,22 @@ return {
       window = {
         width = 30,
         mappings = {
-          ["<space>"] = "toggle_node",
-          ["<cr>"] = "open",
-          ["v"] = "open_vsplit",
-          ["s"] = "open_split",
-          ["t"] = "open_tabnew",
-          ["w"] = "open_with_window_picker",
-          ["C"] = "close_node",
-          ["a"] = "add",
-          ["A"] = "add_directory",
-          ["d"] = "delete",
-          ["r"] = "rename",
-          ["y"] = "copy_to_clipboard",
-          ["x"] = "cut_to_clipboard",
-          ["p"] = "paste_from_clipboard",
-          ["c"] = "copy",
-          ["m"] = "move",
-          ["q"] = "close_window",
+          ["O"] = "expand_all_nodes",   -- 大写 O 展开所有目录
+          ["C"] = "close_all_nodes",    -- 大写 C 关闭所有目录
+          ["<space>"] = "toggle_node",  -- 空格键, 打开/关闭当前目录
+          ["<cr>"] = "open",  -- 回车键, 打开文件
+          ["v"] = "open_vsplit",  -- 垂直分屏打开文件
+          ["s"] = "open_split",   -- 水平分屏打开文件
+          ["a"] = "add",  -- 新建文件
+          ["A"] = "add_directory",  -- 新建目录
+          ["d"] = "delete",  -- 删除文件/目录
+          ["r"] = "rename",  -- 重命名文件/目录
+          ["y"] = "copy_to_clipboard",  -- 复制到剪贴板
+          ["x"] = "cut_to_clipboard",  -- 剪切到剪贴板
+          ["p"] = "paste_from_clipboard",  -- 从剪贴板粘贴
+          ["c"] = "copy",  -- 复制文件/目录
+          ["m"] = "move",  -- 移动文件/目录
+          -- ["q"] = "close_window",
         },
       },
     })
