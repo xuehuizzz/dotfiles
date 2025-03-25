@@ -91,6 +91,12 @@ augroup auto_nopaste
   autocmd InsertLeave * set nopaste
 augroup END
 
+" 保存时自动删除空行中的空格字符
+augroup RemoveTrailingSpaces
+    autocmd!
+    autocmd BufWritePre * let save_cursor = getpos(".") | %s/^\s\+$//e | call setpos('.', save_cursor)
+augroup END
+
 " 定义获取当前模式的函数
 function! GetMode()
     let l:mode = mode()
