@@ -8,9 +8,15 @@ return {
     priority = 1000,
     config = function()
       vim.cmd([[colorscheme darcula-solid]])
-      -- 如果需要透明背景
-      vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+  
+      local function set_highlights(transparent_bg)
+        local bg_color = transparent_bg and "none" or "#2B2B2B"
+        vim.api.nvim_set_hl(0, "Normal", { bg = bg_color })
+        vim.api.nvim_set_hl(0, "NormalFloat", { bg = bg_color })
+      end
+  
+      -- 默认使用非透明背景
+      set_highlights(false)
     end,
   },
 }
