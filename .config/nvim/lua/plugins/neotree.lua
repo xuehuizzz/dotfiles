@@ -92,7 +92,6 @@ return {
           ["p"] = "paste_from_clipboard",  -- 从剪贴板粘贴
           ["c"] = "copy",  -- 复制文件/目录
           ["m"] = "move",  -- 移动文件/目录
-          -- ["q"] = "close_window",
         },
       },
     })
