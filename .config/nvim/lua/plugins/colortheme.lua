@@ -13,10 +13,13 @@ return {
         local bg_color = transparent_bg and "none" or "#2B2B2B"
         vim.api.nvim_set_hl(0, "Normal", { bg = bg_color })
         vim.api.nvim_set_hl(0, "NormalFloat", { bg = bg_color })
+        vim.api.nvim_set_hl(0, "Visual", {
+          bg = "#2F4F75",  -- 可视模式背景色
+          fg = "NONE"      -- 保持文字颜色不变
+        })
       end
-  
-      -- 默认使用非透明背景
-      set_highlights(false)
+      
+      set_highlights(false)   -- 默认使用非透明背景
     end,
   },
 }
