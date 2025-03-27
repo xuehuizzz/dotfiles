@@ -61,3 +61,24 @@ vim.opt.langremap = false  -- 禁用语言映射
 vim.opt.virtualedit = "onemore"  -- 允许光标移动到最后一个字符之后
 
 vim.cmd("language en_US.UTF-8")
+
+-- 完全禁用诊断图标和符号
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = false,  -- 直接设置为 false
+  update_in_insert = false,
+  underline = true,
+  severity_sort = true,
+  float = {
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
+})
+
+-- 清除所有诊断标记的定义
+for type in pairs({ Error = 0, Warn = 0, Info = 0, Hint = 0 }) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = "", texthl = hl, numhl = hl })
+end
