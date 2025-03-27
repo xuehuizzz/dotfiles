@@ -15,7 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({ -- 加载插件
   require("plugins.colortheme"),
   require("plugins.autocompletion"),
-  require("plugins.neotree"),
+  require("plugins.nvimtree"),
   require("plugins.indent-blankline"),
   require("plugins.treesitter"),
   require("plugins.lualine"),
