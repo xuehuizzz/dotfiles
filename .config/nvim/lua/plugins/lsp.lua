@@ -7,33 +7,6 @@ return {
     { "folke/neodev.nvim", opts = {} },
   },
   config = function()
-    vim.diagnostic.config({
-      virtual_text = {
-        format = function(diagnostic)
-          if diagnostic.code == "E501" then
-            return nil
-          end
-          return diagnostic.message
-        end,
-      },
-      signs = {
-        active = true,
-        values = {
-          { name = "DiagnosticSignError", text = " " },
-          { name = "DiagnosticSignWarn", text = " " },
-          { name = "DiagnosticSignHint", text = "󰠠 " },
-          { name = "DiagnosticSignInfo", text = " " },
-        },
-        severity = function(diagnostic)
-          if diagnostic.code == "E501" then
-            return nil
-          end
-          return diagnostic.severity
-        end,
-      },
-      severity_sort = true,
-    })
-  
     -- import lspconfig plugin
     local lspconfig = require("lspconfig")
   
@@ -96,13 +69,6 @@ return {
   
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
-  
-    -- Change the Diagnostic symbols in the sign column (gutter)
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
   
     mason_lspconfig.setup_handlers({
       -- default handler for installed servers
