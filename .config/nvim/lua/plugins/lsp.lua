@@ -112,8 +112,22 @@ return {
               completion = {
                 callSnippet = "Replace",
               },
+              workspace = {
+                checkThirdParty = false,
+                library = {
+                  [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                  [vim.fn.stdpath("config") .. "/lua"] = true,
+                },
+              },
+              telemetry = {
+                enable = false,
+              },
             },
           },
+          root_dir = function()
+            return vim.fn.getcwd()
+          end,
+          single_file_support = true,
         })
       end,
     })
