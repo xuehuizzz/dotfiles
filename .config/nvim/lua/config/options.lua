@@ -63,6 +63,7 @@ vim.opt.virtualedit = "onemore"  -- 允许光标移动到最后一个字符之�
 vim.cmd("language en_US.UTF-8")
 
 -- 完全禁用诊断图标和符号
+-- TODO: 过滤 #501, #402 告警
 vim.diagnostic.config({
   virtual_text = {
     prefix = "", -- 设置虚拟文本的前缀为空
