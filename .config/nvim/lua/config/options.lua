@@ -76,9 +76,3 @@ vim.diagnostic.config({
     prefix = "",
   },
 })
-
--- 清除所有诊断标记的定义
-for type in pairs({ Error = 0, Warn = 0, Info = 0, Hint = 0 }) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = "", texthl = hl, numhl = hl })
-end
