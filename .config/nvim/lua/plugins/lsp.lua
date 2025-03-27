@@ -7,6 +7,33 @@ return {
     { "folke/neodev.nvim", opts = {} },
   },
   config = function()
+    vim.diagnostic.config({
+      virtual_text = {
+        format = function(diagnostic)
+          if diagnostic.code == "E501" then
+            return nil
+          end
+          return diagnostic.message
+        end,
+      },
+      signs = {
+        active = true,
+        values = {
+          { name = "DiagnosticSignError", text = " " },
+          { name = "DiagnosticSignWarn", text = " " },
+          { name = "DiagnosticSignHint", text = "󰠠 " },
+          { name = "DiagnosticSignInfo", text = " " },
+        },
+        severity = function(diagnostic)
+          if diagnostic.code == "E501" then
+            return nil
+          end
+          return diagnostic.severity
+        end,
+      },
+      severity_sort = true,
+    })
+  
     -- import lspconfig plugin
     local lspconfig = require("lspconfig")
   
@@ -70,10 +97,8 @@ return {
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
   
-  
     -- Change the Diagnostic symbols in the sign column (gutter)
-    -- (not in youtube nvim video)
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
@@ -90,11 +115,10 @@ return {
         -- configure svelte server
         lspconfig["svelte"].setup({
           capabilities = capabilities,
-          on_attach = function(client, bufnr)
+          on_attach = function(client)
             vim.api.nvim_create_autocmd("BufWritePost", {
               pattern = { "*.js", "*.ts" },
               callback = function(ctx)
-                -- Here use ctx.match instead of ctx.file
                 client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
               end,
             })
@@ -112,7 +136,16 @@ return {
         -- configure emmet language server
         lspconfig["emmet_ls"].setup({
           capabilities = capabilities,
-          filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+          filetypes = {
+            "html",
+            "typescriptreact",
+            "javascriptreact",
+            "css",
+            "sass",
+            "scss",
+            "less",
+            "svelte",
+          },
         })
       end,
       ["lua_ls"] = function()
