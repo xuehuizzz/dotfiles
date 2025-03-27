@@ -64,14 +64,21 @@ vim.cmd("language en_US.UTF-8")
 
 -- 完全禁用诊断图标和符号
 vim.diagnostic.config({
-  virtual_text = true,
-  signs = false,  -- 直接设置为 false
+  virtual_text = {
+    prefix = "", -- 设置虚拟文本的前缀为空
+    spacing = 4, -- 设置间距
+    source = true,
+    severity = {
+      min = vim.diagnostic.severity.INFO
+    },
+  },
+  signs = false,  -- 禁用行号列的图标
   update_in_insert = false,
   underline = true,
   severity_sort = true,
   float = {
     border = "rounded",
-    source = "always",
+    source = true,
     header = "",
     prefix = "",
   },
