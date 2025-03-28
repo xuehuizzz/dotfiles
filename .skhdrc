@@ -1,0 +1,3 @@
+# skhd 是一个 macOS 的热键守护程序（hotkey daemon），用于设置系统级的快捷键，可以执行各种命令和操作
+# brew install skhd
+
