@@ -45,6 +45,9 @@ syntax on " 自动语法高亮
 set number " 显示行号
 set virtualedit=onemore " 允许光标移动到最后一个字符之后(非插入模式)
 set cursorline " 突出显示当前行
+set scroll=10  " 设置 Ctrl-U 和 Ctrl-D 滚动的行数
+set scrolljump=1  " 当光标移出屏幕时滚动的行数
+set scrolloff=8  " 保持光标上下文可见行数，让滚动更平滑
 set ruler " 打开状态栏标尺
 set nobackup " 不创建备份文件
 set noswapfile " 不创建交换文件
