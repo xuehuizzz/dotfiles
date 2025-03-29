@@ -25,6 +25,9 @@ return {
       clear_env = false,
       auto_scroll = true,
       shell = vim.o.shell,
+      on_create = function()
+        vim.opt.laststatus = 3  -- 使用全局状态栏
+      end,
     })
   end,
 }
