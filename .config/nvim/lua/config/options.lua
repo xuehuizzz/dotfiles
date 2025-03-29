@@ -59,6 +59,9 @@ vim.opt.encoding = "utf-8"  -- 设置编码为 UTF-8
 vim.opt.fileencoding = "utf-8"  -- 设置文件编码为 UTF-8
 vim.opt.langremap = false  -- 禁用语言映射
 vim.opt.virtualedit = "onemore"  -- 允许光标移动到最后一个字符之后
+vim.opt.scroll = 10  -- 设置 Ctrl-U 和 Ctrl-D 滚动的行数
+vim.opt.scrolljump = 1  -- 当光标移出屏幕时滚动的行数
+vim.opt.scrolloff = 8  -- 保持光标上下文可见行数，让滚动更平滑
 
 vim.cmd("language en_US.UTF-8")
 
