@@ -20,3 +20,13 @@ select INET_NTOA(3232236388)      -- 将一个无符号32位整数, 转换回对
 
 select name, age from users where name regexp 'a|b|c|d|e';    -- 查询name包含a或b或c或d或e的用户
 ```
+
+## 命令行工具-mysql
+```bash
+# 使用命令行工具访问数据库的时候, 如果不显示中文, 如下操作可解决
+# 在连接的时候指定字符集
+mysql -u root -p --default-character-set=utf8mb4
+
+# 在已经连接到会话中修改
+set name utf8mb4;
+```
