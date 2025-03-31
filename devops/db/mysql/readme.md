@@ -1,5 +1,6 @@
 ### docker安装
 ```bash
+# 默认用户: root, 密码为空, 最高权限
 docker run -d \
   --name mysql \
   -e MYSQL_ROOT_PASSWORD=admin \
