@@ -1,13 +1,19 @@
 ### docker安装
 ```bash
-# 默认用户: root, 密码为空, 最高权限
+# 创建一个名为`mysql`的容器, 并为root用户配置密码: `admin`, 新建用户/密码: admin, 默认host: %
+# /Users/xuehuizzz/db/mysql/data:/app/data  数据持久化
+# -v /Users/xuehuizzz/db/mysql/conf/my.cnf:/etc/mysql/my.cnf  映射自定义MySQL配置文件
+# -v /Users/xuehuizzz/db/mysql/logs:/var/log/mysql 可以在宿主机直接查看日志
+
 docker run -d \
   --name mysql \
   -e MYSQL_ROOT_PASSWORD=admin \
   -e MYSQL_USER=admin \
   -e MYSQL_PASSWORD=admin \
   -e MYSQL_DATABASE=mydb \
-  -v /Users/xuehuizzz/db/mysql:/app \
+  -v /Users/xuehuizzz/db/mysql/data:/app/data \
+  -v /Users/xuehuizzz/db/mysql/conf/my.cnf:/etc/mysql/my.cnf \
+  -v /Users/xuehuizzz/db/mysql/logs:/var/log/mysql \
   -p 3306:3306 \
   -w /app \
   --restart always \
