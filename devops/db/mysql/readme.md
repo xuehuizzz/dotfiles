@@ -5,6 +5,7 @@
 # -v /Users/xuehuizzz/db/mysql/conf/my.cnf:/etc/mysql/my.cnf  映射自定义MySQL配置文件
 # -v /Users/xuehuizzz/db/mysql/logs:/var/log/mysql 可以在宿主机直接查看日志
 # 执行命令前先创建 /Users/xuehuizzz/db/mysql/conf/my.cnf 文件, 因为docker只会自动创建目录而不是文件
+
 docker run -d \
   --name mysql \
   -e MYSQL_ROOT_PASSWORD=admin \
