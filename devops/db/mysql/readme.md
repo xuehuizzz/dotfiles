@@ -24,6 +24,7 @@ docker run -d \
 ## <mark>实用触发器推荐</mark>
 ```sql
 -- 修改数据时自动更新时间戳(没有显式修改updated_at时才会触发), 以显式声明的优先
+-- 任何方式更新都会生效(直接执行SQL语句、通过orm框架、通过数据库管理工具修改)
 DELIMITER //
 CREATE TRIGGER before_update_timestamp
 BEFORE UPDATE ON students
