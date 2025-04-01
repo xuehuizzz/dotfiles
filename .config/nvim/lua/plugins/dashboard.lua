@@ -7,10 +7,28 @@ return {
   config = function()
     local dashboard = require("dashboard")
   
+    -- 添加自动命令来处理 Telescope 窗口的退出
+    require('telescope').setup({
+            defaults = {
+                mappings = {
+                    i = {
+                        ["<esc>"] = "close",
+                    },
+                    n = {
+                        ["<esc>"] = "close",
+                    },
+                },
+            },
+        })
+  
+  
     dashboard.setup({
       theme = "doom",
+  
       config = {
+  
         header = {
+          "                                                       ",
           "                                                       ",
           "                                                       ",
           " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
@@ -23,15 +41,15 @@ return {
           "                                                       ",
         },
         center = {
-          {
-            icon = "  ",
-            icon_hl = "Title",
-            desc = "Projects",
-            desc_hl = "String",
-            key = "p",
-            key_hl = "Number",
-            action = "Telescope project",
-          },
+          -- {
+          -- 	icon = "  ",
+          -- 	icon_hl = "Title",
+          -- 	desc = "Projects",
+          -- 	desc_hl = "String",
+          -- 	key = "p",
+          -- 	key_hl = "Number",
+          -- 	action = "Telescope project theme=dropdown",
+          -- },
           {
             icon = "  ",
             icon_hl = "Title",
@@ -39,7 +57,7 @@ return {
             desc_hl = "String",
             key = "r",
             key_hl = "Number",
-            action = "Telescope oldfiles",
+            action = "Telescope oldfiles theme=ivy",
           },
           {
             icon = "  ",
@@ -48,7 +66,7 @@ return {
             desc_hl = "String",
             key = "f",
             key_hl = "Number",
-            action = "Telescope find_files",
+            action = "Telescope find_files theme=ivy",
           },
           {
             icon = "  ",
@@ -57,7 +75,7 @@ return {
             desc_hl = "String",
             key = "w",
             key_hl = "Number",
-            action = "Telescope live_grep",
+            action = "Telescope live_grep theme=dropdown",
           },
           {
             icon = "  ",
