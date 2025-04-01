@@ -21,6 +21,33 @@ docker run -d \
   mysql:8.4
 ```
 
+## <mark>实用触发器推荐</mark>
+```sql
+-- 修改数据时自动更新时间戳
+DELIMITER //
+CREATE TRIGGER before_update_timestamp
+BEFORE UPDATE ON students
+FOR EACH ROW
+BEGIN
+    SET NEW.updated_at = CURRENT_TIMESTAMP;
+END;//
+DELIMITER ;
+
+-- 级联删除, 无需外键约束
+DELIMITER //
+CREATE TRIGGER cascade_delete_order
+BEFORE DELETE ON orders
+FOR EACH ROW
+BEGIN
+    DELETE FROM order_details WHERE order_id = OLD.id;
+END;//
+DELIMITER ;
+```
+
+
+
+
+
 ## 常用函数
 ```mysql
 select INET_ATON('192.168.3.100')    -- 将IPv4地址转换为 无符号32位整数
