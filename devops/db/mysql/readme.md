@@ -20,6 +20,25 @@ docker run -d \
   --restart always \
   mysql:8.4
 ```
+## 建表
+```sql
+-- ON UPDATE CURRENT_TIMESTAMP 无论修改数据时有没有显式更新updated_at, 这个值都会被更新
+CREATE TABLE xxx (
+    id INT PRIMARY KEY AUTO_INCREMENT COMMENT '主键ID',  -- 自增id
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+    deleted_at TIMESTAMP NULL DEFAULT NULL COMMENT '删除时间（软删除）'
+    created_by BIGINT NOT NULL COMMENT '创建者ID'
+    updated_by BIGINT NOT NULL COMMENT '更新者ID'
+    status TINYINT NOT NULL DEFAULT 1 COMMENT '状态：0-禁用，1-启用'
+    is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '是否删除：0-否，1-是'
+    version INT NOT NULL DEFAULT 1 COMMENT '版本号'
+    remark VARCHAR(255) DEFAULT NULL COMMENT '备注',
+    
+    -- UNIQUE KEY `idx_username` (`username`),  -- 唯一索引
+    -- KEY `idx_email` (`email`)    -- 普通索引
+);
+```
 
 ## <mark>实用触发器推荐</mark><sub>只能对单表配置</sub>
 ```sql
