@@ -9,19 +9,17 @@ return {
   
     -- 添加自动命令来处理 Telescope 窗口的退出
     require('telescope').setup({
-            defaults = {
-                mappings = {
-                    i = {
-                        ["<esc>"] = "close",
-                    },
-                    n = {
-                        ["<esc>"] = "close",
-                    },
-                },
-            },
-        })
-  
-  
+      defaults = {
+        mappings = {
+          i = {
+            ["<esc>"] = "close",
+          },
+          n = {
+            ["<esc>"] = "close",
+          },
+        },
+      },
+    })
     dashboard.setup({
       theme = "doom",
   
