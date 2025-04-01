@@ -23,13 +23,15 @@ docker run -d \
 
 ## <mark>实用触发器推荐</mark>
 ```sql
--- 修改数据时自动更新时间戳
+-- 修改数据时自动更新时间戳(没有显式修改updated_at时才会触发), 以显式声明的优先
 DELIMITER //
 CREATE TRIGGER before_update_timestamp
 BEFORE UPDATE ON students
 FOR EACH ROW
 BEGIN
-    SET NEW.updated_at = CURRENT_TIMESTAMP;
+    IF NEW.updated_at = OLD.updated_at THEN 
+        SET NEW.updated_at = CURRENT_TIMESTAMP;
+    END IF;
 END;//
 DELIMITER ;
 
