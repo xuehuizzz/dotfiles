@@ -26,3 +26,15 @@ git config --global alias.ci commit
 git config --global alias.st status”
 git config --global alias.hist 'log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short'   # 查看日志, git hist
 ```
+
+## 停止追踪log文件
+```bash
+# 如果 .gitignore中已经添加 *.log 配置了, 但是还会追踪log文件,
+# 原因是: .gitignore 只能忽略那些之前没有被 git 追踪的文件。如果某个文件已经被添加到 git 的版本控制中（即已经 commit 过），那么即使你后来在 .gitignore 中添加了相应的规则，该文件仍然会继续被追踪
+
+# 在项目根目录, 查看具体哪些log文件被git追踪
+git ls-files | grep '\.log$'
+# 然后针对具体的文件路径进行移除
+git rm --cached path/to/specific.log    # 或 git rm --cached -f "*.log"   移除所有被追踪的log文件
+# 接着commit 和 push
+```
