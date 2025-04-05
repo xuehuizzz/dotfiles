@@ -1,3 +1,11 @@
+## 备份与恢复
+```bash
+# 备份脚本见: my_dump.sh,  恢复脚本见: my_load.sh
+
+
+
+```
+
 ### docker安装
 ```bash
 # 创建一个名为`mysql`的容器, 并为root用户配置密码: `admin`, 新建用户/密码: admin, 默认host: %
@@ -20,6 +28,7 @@ docker run -d \
   --restart always \
   mysql:8.4
 ```
+
 ## 建表
 ```sql
 -- ON UPDATE CURRENT_TIMESTAMP 无论修改数据时有没有显式更新updated_at, 这个值都会被更新
