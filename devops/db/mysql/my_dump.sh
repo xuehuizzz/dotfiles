@@ -29,7 +29,7 @@ backup_table() {
 
     # 检查表是否存在
     if ! mysql $MYSQL_CHARSET_OPTS -u$DB_USER -N -e "SHOW TABLES LIKE '$TABLE'" $DB_NAME | grep -q "$TABLE"; then
-        echo "错误: 表 $TABLE 在数据库 $DB_NAME 中不存在"
+        echo "Error: Table \`$DB_NAME.$TABLE\` does not exist"
         exit 1
     fi
 
@@ -41,7 +41,7 @@ backup_table() {
         AND TABLE_NAME = '$TABLE'")
 
     # 创建备份目录结构
-    local BACKUP_DIR="${BACKUP_ROOT}/${DATE_DIR}/${DB_NAME}_${TABLE}_${DATE}"
+    local BACKUP_DIR="${BACKUP_ROOT}/${DATE_DIR}/${DB_NAME}.${TABLE}_${DATE}"
     local STRUCTURE_DIR="${BACKUP_DIR}/structure"
     local DATA_DIR="${BACKUP_DIR}/data"
     local TRIGGER_DIR="${BACKUP_DIR}/triggers"
@@ -51,7 +51,7 @@ backup_table() {
     mkdir -p "$TRIGGER_DIR"
 
     if [ "$IS_VIEW" -eq 1 ]; then
-        echo "正在备份视图: $TABLE"
+        echo "正在备份表: $TABLE"
         mysqldump $MYSQL_CHARSET_OPTS -u$DB_USER \
             --no-data \
             --skip-triggers \
@@ -99,10 +99,10 @@ backup_table() {
 
     # 压缩备份
     cd "${BACKUP_ROOT}/${DATE_DIR}"
-    tar -czf "${DB_NAME}_${TABLE}_${DATE}.tar.gz" "${DB_NAME}_${TABLE}_${DATE}"
+    tar -czf "${DB_NAME}.${TABLE}_${DATE}.tar.gz" "${DB_NAME}.${TABLE}_${DATE}"
     rm -rf "${BACKUP_DIR}"
 
-    echo "表/视图 $DB_NAME.$TABLE 备份完成"
+    echo "表 $DB_NAME.$TABLE 备份完成"
 }
 
 # 函数：备份单个数据库
@@ -112,7 +112,7 @@ backup_database() {
 
     # 检查数据库是否存在
     if ! mysql $MYSQL_CHARSET_OPTS -u$DB_USER -N -e "SHOW DATABASES LIKE '$DB_NAME'" | grep -q "$DB_NAME"; then
-        echo "错误: 数据库 $DB_NAME 不存在"
+        echo "Error: Database \`$DB_NAME\` does not exist"
         exit 1
     fi
 
