@@ -10,6 +10,7 @@ sh mysql_backup.sh -d dbname -t tablename  # 指定备份单张表所有信息, 
 # 恢复, 直接指定文件
 # mydb_20250405_150344.tar.gz  即恢复 mydb 数据库的所有信息
 # mydb.students_20250405_142438.tar.gz  即恢复数据库 mydb 下的表 students 的信息
+# -s xxx.tar.gz 只恢复结构,  -d xxx.tar.gz 只恢复数据
 sh mysql_restore.sh xxx.tar.gz  
 ```
 
