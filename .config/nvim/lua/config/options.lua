@@ -15,7 +15,6 @@ vim.opt.cursorline = true -- 高亮当前行
 vim.opt.mouse = "a" -- 启用鼠标支持
 vim.opt.lazyredraw = true -- 关闭显示重绘
 vim.opt.ttyfast = true -- 提高性能
-vim.opt.compatible = false -- 关闭 vi 兼容模式
 vim.opt.syntax = "on" -- 语法高亮
 vim.opt.ruler = true -- 显示状态栏标尺
 vim.opt.cmdheight = 0 -- 命令行高度
@@ -86,3 +85,20 @@ vim.diagnostic.config({
     prefix = "",
   },
 })
+
+-- 禁用一些不需要的内置插件
+local disabled_built_ins = {
+  "netrw",
+  "netrwPlugin",
+  "netrwSettings",
+  "netrwFileHandlers",
+  "gzip",
+  "zip",
+  "zipPlugin",
+  "tar",
+  "tarPlugin",
+}
+
+for _, plugin in pairs(disabled_built_ins) do
+  vim.g["loaded_" .. plugin] = 1
+end
