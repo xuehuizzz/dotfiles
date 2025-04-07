@@ -34,7 +34,7 @@ docker run -d \
   -p 3306:3306 \
   -w /app \
   --restart always \
-  mysql:8.4
+  mysql:8.0.36
 ```
 
 ## 建表
