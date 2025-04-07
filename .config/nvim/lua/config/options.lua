@@ -22,7 +22,6 @@ vim.opt.cmdheight = 0 -- 命令行高度
 vim.opt.laststatus = 2 -- 显示状态栏
 vim.opt.softtabstop = 4 -- 退格键一次删除4个空格
 vim.opt.smartindent = true -- 智能自动缩进
-vim.opt.backup = false -- 不创建备份文件
 vim.opt.autochdir = true -- 自动切换工作目录
 vim.opt.backupcopy = "yes" -- 备份时的行为为覆盖
 vim.opt.hidden = true -- 允许在有未保存的修改时切换缓冲区
