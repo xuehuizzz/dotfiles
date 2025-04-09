@@ -15,18 +15,26 @@ project_name/
 ├── .gitignore   # Git忽略文件
 ├── Makefile   # 项目管理脚本
 ├── README.md   # 项目说明文档
-├── deploy               # 部署配置文件
+├── deploy      # 部署配置文件
 │   ├── Dockerfile
 │   └── docker-compose.yaml
-├── docs/   # 项目文档目录(使用 Sphinx 等工具生成文档)
+├── docs   # 项目文档目录(使用 Sphinx 等工具生成文档)
 │   ├── conf.py
 │   └── index.rst
 ├── project_name/   # 主要源代码目录
 │   ├── __init__.py
 │   ├── __main__.py   # 程序入口
-│   ├── config/   # 配置文件
-│   ├── core/   # 核心功能代码
-│   └── utils/   # 工具函数
+│   ├── api   # 接口文件包
+│   │   └── __init__.py
+│   ├── config   # 配置信息
+│   │   ├── __init__.py
+│   │   └── settings.py
+│   ├── core  # 核心代码
+│   │   └── __init__.py
+│   ├── models   # 模型映射
+│   │   └── __init__.py
+│   └── utils  # 工具类通用代码
+│       └── __init__.py
 ├── pyproject.toml   # 现代Python项目构建配置
 ├── requirements.txt   # 项目依赖
 ├── samples/   # 示例代码
