@@ -222,7 +222,13 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
                 raise RuntimeError("Something bad happened") from None
         ```
 
-*   **使用参数化SQL语句，强制区分数据和命令，避免产生SQL注入漏洞。**
+*   **<mark>使用参数化查询SQL语句</mark>**
+
+    > **原样数据保存**: 特殊字符会被正确转义并保持原样
+    > 
+    > **防止SQL注入**: 参数值与SQL语句分开处理，不会被解释为SQL代码
+    > 
+    > **提高性能**: 数据库可以缓存执行计划
 
     *
         ```python
