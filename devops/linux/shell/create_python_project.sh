@@ -107,8 +107,8 @@ setup(
 )
 EOF
 
-# 添加基本的 requirements-dev.txt 内容
-cat > $PROJECT_NAME/requirements-dev.txt << EOF
+# 添加基本的 requirements.txt 内容
+cat > $PROJECT_NAME/requirements.txt << EOF
 # 开发依赖
 pytest>=6.2.0
 pytest-cov>=2.10.1
