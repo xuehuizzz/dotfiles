@@ -40,6 +40,9 @@ touch $PROJECT_NAME/$PROJECT_NAME/__main__.py
 touch $PROJECT_NAME/$PROJECT_NAME/core/__init__.py
 touch $PROJECT_NAME/$PROJECT_NAME/utils/__init__.py
 touch $PROJECT_NAME/$PROJECT_NAME/config/__init__.py
+touch $PROJECT_NAME/$PROJECT_NAME/config/settings.py
+touch $PROJECT_NAME/$PROJECT_NAME/models/__init__.py
+touch $PROJECT_NAME/$PROJECT_NAME/api/__init__.py
 
 # 添加基本的 .gitignore 内容
 cat > $PROJECT_NAME/.gitignore << EOF
