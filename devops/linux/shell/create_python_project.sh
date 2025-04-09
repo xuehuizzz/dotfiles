@@ -10,7 +10,7 @@ fi
 PROJECT_NAME=$1
 
 # 创建主要目录结构
-mkdir -p $PROJECT_NAME/{docs,deploy,tests,samples,scripts,$PROJECT_NAME/{core,utils,config}}
+mkdir -p $PROJECT_NAME/{docs,deploy,tests,samples,scripts,$PROJECT_NAME/{core,utils,config,models,api}}
 
 # 创建文件
 touch $PROJECT_NAME/.gitignore
