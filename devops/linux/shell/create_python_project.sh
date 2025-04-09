@@ -104,6 +104,19 @@ setup(
 )
 EOF
 
+# 添加基本的 requirements-dev.txt 内容
+cat > $PROJECT_NAME/requirements-dev.txt << EOF
+# 开发依赖
+pytest>=6.2.0
+pytest-cov>=2.10.1
+black>=20.8b1
+ruff>=0.0.270
+mypy>=0.800
+sphinx>=3.4.0
+pre-commit>=2.9.3
+python-dotenv>=0.15.0
+EOF
+
 # 添加基本的 pyproject.toml 内容
 cat > $PROJECT_NAME/pyproject.toml << EOF
 [build-system]
@@ -115,9 +128,13 @@ line-length = 88
 target-version = ['py37']
 include = '\.pyi?$'
 
-[tool.isort]
-profile = "black"
-multi_line_output = 3
+[tool.ruff]
+# 启用 isort 规则
+select = ["E", "F", "I"]
+line-length = 88
+target-version = "py37"
+# 排序导入
+fix = true
 EOF
 
 # 添加基本的 Makefile 内容
