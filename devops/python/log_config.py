@@ -24,9 +24,15 @@ def setup_logger(log_level=logging.DEBUG, console_level=logging.DEBUG, logger_na
     if _logger.hasHandlers():
         _logger.handlers.clear()
 
+    # 基于文件大小轮换
     file_handler = RotatingFileHandler(
         log_file, maxBytes=20 * 1024 * 1024, backupCount=7, encoding='utf-8'
     )
+    
+    # 基于时间轮换
+    # file_handler = TimedRotatingFileHandler(
+    #     log_file, when=midnight, backupCount=7, encoding='utf-8'
+    # )
     file_handler.setLevel(log_level)
 
     console_handler = logging.StreamHandler(stream=sys.stdout)
