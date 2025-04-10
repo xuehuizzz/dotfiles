@@ -77,6 +77,8 @@
     "workbench.list.openMode": "doubleClick", // 双击打开文件
     // 终端配置
     "code-runner.clearPreviousOutput": true,
+    "code-runner.runInTerminal": true,
+    "terminal.integrated.copyOnSelection": true, 
     "terminal.integrated.persistentSessionReviveProcess": "never",
     "terminal.integrated.shellIntegration.enabled": true,
     "terminal.integrated.cursorStyle": "line",
