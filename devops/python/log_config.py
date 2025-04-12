@@ -67,4 +67,5 @@ if __name__ == '__main__':
     logger.warning('这是一个%s信息', 'warning')
     logger.error('这是一个%s信息', 'error')
     logger.critical('这是一个%s信息', 'critical')
+    logger.exception("自带堆栈信息")
     """
