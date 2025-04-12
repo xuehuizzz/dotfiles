@@ -55,6 +55,3 @@ alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && kill
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"  # 隐藏所有隐藏文件。
 
 
-Linux-------------------------------------------------------------------------------------------------------------------------
-
-
