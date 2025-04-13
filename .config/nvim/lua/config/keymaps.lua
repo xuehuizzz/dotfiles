@@ -1,18 +1,32 @@
+local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 
+-- Do things without affecting the registers
+keymap.set("n", "x", '"_x')
+keymap.set("n", "<Leader>p", '"0p')
+keymap.set("n", "<Leader>P", '"0P')
+keymap.set("v", "<Leader>p", '"0p')
+keymap.set("n", "<Leader>c", '"_c')
+keymap.set("n", "<Leader>C", '"_C')
+keymap.set("v", "<Leader>c", '"_c')
+keymap.set("v", "<Leader>C", '"_C')
+keymap.set("n", "<Leader>d", '"_d')
+keymap.set("n", "<Leader>D", '"_D')
+keymap.set("v", "<Leader>d", '"_d')
+keymap.set("v", "<Leader>D", '"_D')
 
 -- 可视模式下的 Tab 缩进
-vim.keymap.set('v', '<Tab>', '>gv', opts)
-vim.keymap.set('v', '<S-Tab>', '<gv', opts)
+keymap.set('v', '<Tab>', '>gv', opts)
+keymap.set('v', '<S-Tab>', '<gv', opts)
 
 -- 普通模式下的 Tab 缩进
-vim.keymap.set('n', '<Tab>', '>>_', opts)
-vim.keymap.set('n', '<S-Tab>', '<<_', opts)
+keymap.set('n', '<Tab>', '>>_', opts)
+keymap.set('n', '<S-Tab>', '<<_', opts)
 
 -- 设置 Ctrl+A 全选
-vim.keymap.set('n', '<C-a>', 'ggVG', opts)
-vim.keymap.set({'i', 'v'}, '<C-a>', '<Esc>ggVG', opts)
+keymap.set('n', '<C-a>', 'ggVG', opts)
+keymap.set({'i', 'v'}, '<C-a>', '<Esc>ggVG', opts)
 
 -- 禁用 Command+A
-vim.keymap.set({'n', 'i', 'v'}, '<D-a>', '<Nop>', opts)
+keymap.set({'n', 'i', 'v'}, '<D-a>', '<Nop>', opts)
