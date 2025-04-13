@@ -210,6 +210,10 @@ func! ToggleComment()
     endif
 endfunc
 
+" 向下粘贴当前行, 类似于jetbrains
+nnoremap <C-d> "+yy"+p
+inoremap <C-d> <Esc>"+yy"+p<i
+
 " 普通模式下的全选
 nnoremap <C-a> ggVG
 " 插入模式和可视模式下的全选
