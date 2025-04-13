@@ -30,3 +30,7 @@ keymap.set({'i', 'v'}, '<C-a>', '<Esc>ggVG', opts)
 
 -- 禁用 Command+A
 keymap.set({'n', 'i', 'v'}, '<D-a>', '<Nop>', opts)
+
+-- 复制当前行并粘贴到下一行
+keymap.set('n', '<C-d>', 'yyp', opts)
+keymap.set('i', '<C-d>', '<Esc>yypi', opts)
