@@ -62,6 +62,8 @@ vim.opt.virtualedit = "onemore" -- 允许光标移动到最后一个字符之后
 vim.opt.scroll = 10 -- 设置 Ctrl-U 和 Ctrl-D 滚动的行数
 vim.opt.scrolljump = 1 -- 当光标移出屏幕时滚动的行数
 vim.opt.scrolloff = 8 -- 保持光标上下文可见行数，让滚动更平滑
+vim.opt.path:append({ "**" }) -- 支持递归地在子目录中搜索文件
+vim.opt.wildignore:append({ "*/node_modules/*" }) -- 文件搜索时忽略指定目录
 vim.cmd("language en_US.UTF-8")
 
 -- 完全禁用诊断图标和符号
