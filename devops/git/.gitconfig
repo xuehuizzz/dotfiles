@@ -18,7 +18,7 @@
   type = cat-file -t
   dump = cat-file -p
   lg = --no-pager log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short   //终极日志格式
-  lg- = log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago' --author=your name  //查看自己上周的更改
+  lg- = log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago' --author=xuehui  //查看自己近一周的更改
 [safe]
   directory = /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core
   directory = /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask
