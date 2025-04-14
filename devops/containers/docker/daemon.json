@@ -1,0 +1,34 @@
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m",
+    "max-file": "3"
+  },
+  "storage-driver": "overlay2",
+  "data-root": "/var/lib/docker",
+  "default-ulimits": {
+    "nofile": {
+      "Name": "nofile",
+      "Hard": 64000,
+      "Soft": 64000
+    }
+  },
+  "dns": ["8.8.8.8", "114.114.114.114"],
+  "max-concurrent-downloads": 10,
+  "max-concurrent-uploads": 5,
+  "default-address-pools": [
+    {
+      "base": "172.16.0.0/16",
+      "size": 24
+    }
+  ],
+  "live-restore": true,
+  "insecure-registries": []
+  "registry-mirrors": [
+    "https://mirror.ccs.tencentyun.com",
+    "https://hub-mirror.c.163.com",
+    "https://registry-1.docker.io",
+    "https://mirror.baidubce.com"
+  ]
+}

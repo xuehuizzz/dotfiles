@@ -1,0 +1,34 @@
+# 敏感信息建议存于 .env 
+services:
+  # 默认登录用户名密码: admin
+  sonarqube:
+    image: sonarqube:latest
+    container_name: sonarqube
+    ports:
+      - "127.0.0.1:9000:9000"  # 仅绑定到 localhost
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+      - SONAR_JDBC_URL=jdbc:postgresql://db:5432/sonar
+      - SONAR_JDBC_USERNAME=sonar
+      - SONAR_JDBC_PASSWORD=sonar
+      -TZ: Asia/Shanghai
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:latest   # 推荐使用psql
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+      - POSTGRES_DB=sonar
+      -TZ: Asia/Shanghai
+    ports:
+      - "5432:5432"  
+    volumes:
+      - /Users/xuehuizzz/data/psql_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgresql_data:

@@ -1,0 +1,82 @@
+services:
+  elasticsearch:
+    image: ${ELASTICSEARCH_IMAGE}
+    container_name: elk-elasticsearch
+    environment:
+      - cluster.name=${CLUSTER_NAME}
+      # - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - xpack.license.self_generated.type=trial
+    ulimits:
+      memlock: -1
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+          cpus: '1.0'
+        reservations:
+          memory: 1g
+          cpus: '0.5'
+    networks:
+      - elk
+    healthcheck:
+      test: curl --fail http://localhost:9200 || exit 1
+      interval: 1m
+      timeout: 10s
+      retries: 5
+
+  logstash:
+    image: ${LOGSTASH_IMAGE}
+    container_name: elk-logstash
+    volumes:
+      - ./logstash-pipeline:/usr/share/logstash/pipeline
+    depends_on:
+      - elasticsearch
+    ports:
+      - 5000:5000
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+          cpus: '0.5'
+        reservations:
+          memory: 512m
+          cpus: '0.25'
+    networks:
+      - elk
+
+  kibana:
+    image: ${KIBANA_IMAGE}
+    container_name: elk-kibana
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    ports:
+      - 5601:5601
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+          cpus: '0.5'
+        reservations:
+          memory: 512m
+          cpus: '0.25'
+    networks:
+      - elk
+
+volumes:
+  elasticsearch-data:
+
+networks:
+  elk:
+
