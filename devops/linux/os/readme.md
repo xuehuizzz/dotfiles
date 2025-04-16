@@ -7,7 +7,7 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 
 # 为别的用户创建公钥, 该用户没有ssh协议的话
-sudo ssh-keygen -t rsa -b 4096 -C "b_sftp@hostname" -f /home/b/.ssh/sftp_key
+# sudo ssh-keygen -t rsa -b 4096 -C "b_sftp@hostname" -f /home/b/.ssh/sftp_key
 ```
 
 ## <mark>使用openssl生成HTTPS自签名证书</mark>
