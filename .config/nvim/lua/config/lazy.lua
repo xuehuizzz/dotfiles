@@ -24,5 +24,5 @@ require("lazy").setup({ -- 加载插件
   require("plugins.mason"),
   require("plugins.lsp"),
   require("plugins.telescope"),
-  require("plugins.dashboard"),
+  require("plugins.alpha"),
 })
