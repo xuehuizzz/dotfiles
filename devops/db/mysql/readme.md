@@ -3,7 +3,7 @@
 
 ## 备份与恢复
 ```bash
-# 备份脚本见: my_dump.sh,  恢复脚本见: my_load.sh
+# 备份脚本见: mysql_backup.sh,  恢复脚本见: mysql_restore.sh
 
 # 备份
 sh mysql_backup.sh    # 备份所有数据库信息
