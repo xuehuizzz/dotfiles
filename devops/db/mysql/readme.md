@@ -1,3 +1,6 @@
+<mark>**注意**</mark>:
+> 分页查询必须使用**ORDER BY**, 这是确保分页结果一致性的唯一可靠方法
+
 ## 备份与恢复
 ```bash
 # 备份脚本见: my_dump.sh,  恢复脚本见: my_load.sh
@@ -84,10 +87,6 @@ END;//
 DELIMITER ;
 ```
 
-
-
-
-
 ## 常用函数
 ```mysql
 select INET_ATON('192.168.3.100')    -- 将IPv4地址转换为 无符号32位整数
@@ -102,5 +101,5 @@ select INET_NTOA(3232236388)      -- 将一个无符号32位整数, 转换回对
 mysql -u root -p --default-character-set=utf8mb4  # 在连接的时候指定字符集
 set names utf8mb4;  # 在已经连接到会话中修改
 
-
 ```
+
