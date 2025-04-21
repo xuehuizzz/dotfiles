@@ -26,6 +26,8 @@ homepage = "https://your-homepage.com"
 repository = "https://github.com/your-repo"
 documentation = "https://your-docs-url"
 
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
 
 # 代码质量格式检查
 [tool.ruff]
