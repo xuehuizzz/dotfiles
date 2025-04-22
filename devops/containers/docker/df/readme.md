@@ -14,6 +14,9 @@ ENV TZ=Asia/Shanghai
 # 指定工作路径, 如果该路径不存在, WORKDIR会自动递归创建
 WORKDIR /home/app
 
+# => Install uv globally by copying the binary from the official container
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
 # 复制文件/目录, 主机路径 容器路径
 # . 表示复制到容器当前工作路径, 如果未使用WORKDIR指定工作路径的话, 则会复制到容器的根目录下
 COPY test.txt .
