@@ -39,5 +39,5 @@ alias jupyter="nohup jupyter notebook --allow-root > jupyter.log 2>&1 &"  #后�
 alias mac="neofetch --off --colors 3 4 5 6 2 2"
 #alias opena="open -a TextEdit"
 alias ca="conda activate"
-alias tarc="tar -czvf" # 压缩
-alias tarx="tar -xzvf" # 解压
+alias tarc="tar -czvf"  # 压缩文件   tarc xxx.tar.gz file1 file2 folder1  # 可以同时归档文件和目录并压缩
+alias tarx="tar -xzvf"  # 解压文件   tarx xxx.tar.gz
