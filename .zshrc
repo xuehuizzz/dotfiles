@@ -39,3 +39,5 @@ alias jupyter="nohup jupyter notebook --allow-root > jupyter.log 2>&1 &"  #后�
 alias mac="neofetch --off --colors 3 4 5 6 2 2"
 #alias opena="open -a TextEdit"
 alias ca="conda activate"
+alias tarc="tar -czvf" # 压缩
+alias tarx="tar -xzvf" # 解压
