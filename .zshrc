@@ -25,6 +25,7 @@ export THEOS=/opt/theos
 source $ZSH/oh-my-zsh.sh
 source ~/.bash_profile
 
+alias rsync="rsync -avz --progress" # 适合大文件传输, 支持断点续传
 alias cp="cp -rv"  # copy file recursively and explain
 alias mv="mv -v"   # move file and explain
 alias mkdir="mkdir -pv"  # mkdir folder recursively and explain
