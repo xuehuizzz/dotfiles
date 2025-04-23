@@ -44,19 +44,16 @@ project_name/
     └── test_example.py
 ```
 
-#### 1.<mark>模块导入规范</mark>
+#### 1.<mark>模块导入规范</mark><sub> pip install isort</sub>
 
-
->`pip install isort`
->
 >标准库导入
 >
 >第三方库导入
 >
 >本地模块导入
->
->`新建 .isort.cfg 配置文件, 位于项目根目录, 内容如下:`
+
 ```bash
+# `touch .isort.cfg, 一般位于项目根目录, 推荐内容如下:`
 [tool.isort]
 line_length = 100    # 指定每行代码的最大字符数
 multi_line_output = 3   # 定义多行导入的格式
