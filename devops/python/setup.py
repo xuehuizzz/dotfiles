@@ -18,4 +18,13 @@ setup(
     version="0.1",
     packages=find_packages(exclude=["tests*", "samples*"]),  # 排除以 xxx开头的包
     # package_dir={"": "src"},  # 如果是 project_name/src/project_name 结构才需要配置, project_name/project_name则不需要
+
+    # 项目依赖
+    install_requires=[
+        'requests>=2.31.0',  # HTTP 请求库
+        'aiohttp>=3.9.1',    # 异步 HTTP 请求库
+        ...
+    ],
+    # Python版本要求
+    python_requires=">=3.10",
 )
