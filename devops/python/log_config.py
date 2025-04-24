@@ -1,5 +1,15 @@
 """A log config file, Use lazy % formatting in logging functions.
 from loguru import logger  # Third-party library, used directly
+
+TODO: 输出json格式
+{
+    "level": "info",  //日志等级
+    "ts": "2025-04-20T20:18:04.242819Z",  //ISO 8601格式
+    "caller": "xxx.py:88",  //文件路径:记录行数
+    "msg": "", //日志内容
+    "address": "https:127.0.0.1:8080", //服务器地址
+    ...
+}
 """
 import atexit
 import sys
@@ -24,15 +34,18 @@ def setup_logger(log_level=logging.DEBUG, console_level=logging.DEBUG, logger_na
     if _logger.hasHandlers():
         _logger.handlers.clear()
 
-    # 基于文件大小轮换
-    file_handler = RotatingFileHandler(
-        log_file, maxBytes=20 * 1024 * 1024, backupCount=7, encoding='utf-8'
-    )
+    # 1. 基于文件大小轮换
+    # file_handler = RotatingFileHandler(
+    #     log_file, maxBytes=20 * 1024 * 1024, backupCount=7, encoding='utf-8'
+    # )
     
-    # 基于时间轮换
+    # 2. 基于时间轮换
     # file_handler = TimedRotatingFileHandler(
     #     log_file, when=midnight, backupCount=7, encoding='utf-8'
     # )
+
+    # 3. 文件格式(普通)
+    file_handler = FileHandler(log_file, encoding='utf-8')
     file_handler.setLevel(log_level)
 
     console_handler = logging.StreamHandler(stream=sys.stdout)
