@@ -1,46 +1,33 @@
 #!/bin/bash
 
-# 获取项目名称作为参数, e.g.  ./create_project.sh your_project_name
+# 获取项目名称作为参数, e.g.  ./create_project.sh project_name
 if [ $# -eq 0 ]; then
     echo "请提供项目名称作为参数"
     echo "使用方法: $0 project_name"
     exit 1
 fi
-
 PROJECT_NAME=$1
 
 # 创建主要目录结构
 mkdir -p $PROJECT_NAME/{docs,deploy,tests,samples,scripts,$PROJECT_NAME/{core,utils,config,models,api}}
 
 # 创建文件
-touch $PROJECT_NAME/.gitignore
-touch $PROJECT_NAME/.env
-touch $PROJECT_NAME/.editorconfig
-touch $PROJECT_NAME/README.md
-touch $PROJECT_NAME/requirements.txt
-touch $PROJECT_NAME/setup.py
-touch $PROJECT_NAME/pyproject.toml
-touch $PROJECT_NAME/Makefile
+touch $PROJECT_NAME/{.gitignore,.env,.editorconfig,README.md,requirements.txt,setup.py,pyproject.toml,Makefile}
 
 # 创建 docs 目录下的文件
-touch $PROJECT_NAME/docs/conf.py
-touch $PROJECT_NAME/docs/index.rst
+touch $PROJECT_NAME/docs/{conf.py,index.rst}
 
 # 创建 deploy 目录下的文件
-touch $PROJECT_NAME/deploy/Dockerfile
-touch $PROJECT_NAME/deploy/docker-compose.yaml
+touch $PROJECT_NAME/deploy/{Dockerfile,docker-compose.yaml}
 
 # 创建测试目录下的文件
-touch $PROJECT_NAME/tests/__init__.py
 touch $PROJECT_NAME/tests/test_example.py
 
 # 创建主源代码目录下的文件
-touch $PROJECT_NAME/$PROJECT_NAME/__init__.py
-touch $PROJECT_NAME/$PROJECT_NAME/__main__.py
+touch $PROJECT_NAME/$PROJECT_NAME/{__init__.py,__main__.py}
 touch $PROJECT_NAME/$PROJECT_NAME/core/__init__.py
 touch $PROJECT_NAME/$PROJECT_NAME/utils/__init__.py
-touch $PROJECT_NAME/$PROJECT_NAME/config/__init__.py
-touch $PROJECT_NAME/$PROJECT_NAME/config/settings.py
+touch $PROJECT_NAME/$PROJECT_NAME/config/{__init__.py,settings.py}
 touch $PROJECT_NAME/$PROJECT_NAME/models/__init__.py
 touch $PROJECT_NAME/$PROJECT_NAME/api/__init__.py
 
