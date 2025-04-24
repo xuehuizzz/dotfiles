@@ -100,7 +100,7 @@ from setuptools import setup, find_packages
 setup(
     name="$PROJECT_NAME",
     version="0.1.0",
-    packages=find_packages(),
+    packages=find_packages(where="project_name", exclude=["tests*", "samples*"]),
     install_requires=[
         # 在这里添加项目依赖
     ],
