@@ -16,7 +16,7 @@ from setuptools import setup, find_packages
 setup(
     name="project_name",  # 包的名字
     version="0.1",
-    packages=find_packages(exclude=["tests*", "samples*"]),  # 排除以 xxx开头的包
+    packages=find_packages(where="project_name", exclude=["tests*", "samples*"]),  # 排除以 xxx开头的包
     # package_dir={"": "src"},  # 如果是 project_name/src/project_name 结构才需要配置, project_name/project_name则不需要
 
     # 项目依赖
