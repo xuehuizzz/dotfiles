@@ -12,7 +12,7 @@ PROJECT_NAME=$1
 mkdir -p $PROJECT_NAME/{docs,deploy,tests,samples,scripts,$PROJECT_NAME/{core,utils,config,models,api}}
 
 # 创建文件
-touch $PROJECT_NAME/{.gitignore,.env,.editorconfig,README.md,requirements.txt,setup.py,pyproject.toml,Makefile}
+touch $PROJECT_NAME/{.gitignore,.env,.editorconfig,README.md,requirements.txt,pyproject.toml,Makefile}
 
 # 创建 docs 目录下的文件
 touch $PROJECT_NAME/docs/{conf.py,index.rst}
@@ -78,20 +78,6 @@ pip install -e .
 
 ## 许可证
 待补充
-EOF
-
-# 添加基本的 setup.py 内容
-cat > $PROJECT_NAME/setup.py << EOF
-from setuptools import setup, find_packages
-
-setup(
-    name="$PROJECT_NAME",
-    version="0.1.0",
-    packages=find_packages(where="project_name", exclude=["tests*", "samples*"]),
-    install_requires=[
-        # 在这里添加项目依赖
-    ],
-)
 EOF
 
 # 添加基本的 requirements.txt 内容
