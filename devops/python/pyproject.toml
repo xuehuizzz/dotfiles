@@ -49,9 +49,6 @@ exclude = [
     "docs/_build/",
 ]
 
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
-
 # 代码质量格式检查
 [tool.ruff]
 fix = true  # 启用自动修复功能
