@@ -6,31 +6,57 @@
 # mypy path/to/your_file.py 检测单个文件并手动修改
 # mypy path1 path2 检测该路径下所以py文件并手动修改
 
-
 [build-system]
-requires = ["setuptools>=42", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
 
-
-# 项目信息
+# 项目元数据
 [project]
 name = "my_package"  # 项目名称
 version = "0.1.0"  # 项目版本
 description = "A sample Python package"  # 项目描述
-authors = [
-  { name = "Your Name", email = "your.email@example.com" }
+maintainers = [{name = "Your Name", email = "your.email@example.com"}]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.25", 
+    "numpy>=1.21"
 ]
-dependencies = ["requests>=2.25", "numpy>=1.21"]  # 依赖项
+
 [project.urls]
 homepage = "https://your-homepage.com"
 repository = "https://github.com/your-repo"
 documentation = "https://your-docs-url"
+
+[project.optional-dependencies]
+async = ["asgiref>=3.2"]
+dotenv = ["python-dotenv"]
+
+[tool.flit.module]
+name = ""   # 项目主模块
+
+[tool.flit.sdist]  # 打包时包含或排除的文件/夹
+include = [
+    "docs/",
+    "examples/",
+    "requirements/",
+    "tests/",
+    "CHANGES.rst",
+    "CONTRIBUTING.rst",
+    "tox.ini",
+]
+exclude = [
+    "docs/_build/",
+]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
 
 # 代码质量格式检查
 [tool.ruff]
+fix = true  # 启用自动修复功能
+show-fixes = true  # 在运行时显示修复的详细信息
+output-format = "full"  # 显示完整的检查报告
 ignore = ["E402", "E501"]  # 忽略该报错, 动态路径相关模块导入
 # 指定哪些文件或目录应被检查
 target-version = "py39"  # 目标 Python 版本
@@ -41,15 +67,23 @@ extend-exclude = [
     ".venv/",
     "tests/",
 ]                        # 忽略特定目录
-# 启用或禁用特定规则
-select = ["F", "E", "W", "C90", "B"]  # 启用的规则 (如 Flake8, Black, etc.)
 # 对特定插件进行配置
 [tool.ruff.flake8-tidy-imports]
 ban-relative-imports = "all"  # 禁止相对导入
+
 # 针对特定文件或目录忽略特定规则
 [tool.ruff.per-file-ignores]
 "tests/test_*.py" = ["F401", "F403"]  # 忽略未使用的导入和 * 导入
 
+[tool.ruff.lint]
+select = [
+    "B",  # flake8-bugbear
+    "E",  # pycodestyle error
+    "F",  # pyflakes
+    "I",  # isort
+    "UP",  # pyupgrade
+    "W",  # pycodestyle warning
+]
 
 # 导包排序
 [tool.isort]
@@ -92,10 +126,10 @@ plugins = []                       # 插件列表
 
 # 为某些包禁用类型检查
 [[tool.mypy.overrides]]
-module = "some_library.*"
+module = [
+    "asgiref.*",
+    "dotenv.*",
+    "cryptography.*",
+    "importlib_metadata",
+]
 ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "test_file"
-ignore_errors = true               # 忽略这个文件中的所有类型检查错误
-
