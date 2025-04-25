@@ -12,8 +12,8 @@ TODO: 输出json格式
 }
 """
 import atexit
-import sys
 import logging
+import sys
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
