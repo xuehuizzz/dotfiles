@@ -17,9 +17,6 @@ touch $PROJECT_NAME/{.gitignore,.env,.editorconfig,README.md,requirements.txt,py
 # 创建 docs 目录下的文件
 touch $PROJECT_NAME/docs/{conf.py,index.rst}
 
-# 创建 deploy 目录下的文件
-touch $PROJECT_NAME/deploy/{Dockerfile,docker-compose.yaml}
-
 # 创建测试目录下的文件
 touch $PROJECT_NAME/tests/test_example.py
 
