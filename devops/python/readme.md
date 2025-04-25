@@ -15,9 +15,7 @@ project_name/
 ├── .gitignore   # Git忽略文件
 ├── Makefile   # 项目管理脚本
 ├── README.md   # 项目说明文档
-├── deploy      # 部署配置文件
-│   ├── Dockerfile
-│   └── docker-compose.yaml
+├── deploy/      # 项目部署目录, Dockerfile, docker-compose.yaml等
 ├── docs   # 项目文档目录(使用 Sphinx 等工具生成文档)
 │   ├── conf.py
 │   └── index.rst
@@ -39,9 +37,7 @@ project_name/
 ├── requirements.txt   # 项目依赖
 ├── samples/   # 示例代码
 ├── scripts/   # 工具脚本
-├── setup.py   # 安装脚本
-└── tests/   # 测试用例目录(包含单元测试、集成测试等)
-    └── test_example.py
+└── tests/   # 测试用例目录
 ```
 
 #### 1.<mark>模块导入规范</mark><sub> pip install isort</sub>
