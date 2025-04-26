@@ -94,6 +94,7 @@ HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
     ```
 - **ENTRYPOINT指令**:
   - 用途: 定义容器启动时的主命令, 通常用于固定的任务. 即使用户提供了参数, `ENTRYPOINT` 指令不会被覆盖, 而是将用户提供的参数作为 `ENTRYPOINT` 的附加参数
+  - <mark>使用场景: 工具类应用, 如: ffmpeg, 配置 ENTRYPOINT ["ffmpeg"] 后可直接使用镜像文件, 而无需生成容器: docker run --rm ffmpegName:tag xxx</mark>
   - 格式:
     - Shell 格式: `ENTRYPOINT <command>`
     - Exec 格式: `ENTRYPOINT ["executable", "param1", "param2"]`
