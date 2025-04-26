@@ -56,3 +56,6 @@ RUN apt-get update && \
 WORKDIR /home/ffmpeg
 # 验证安装
 RUN ffmpeg -version
+
+ENTRYPOINT ["ffmpeg"]
+CMD ["-h"]
