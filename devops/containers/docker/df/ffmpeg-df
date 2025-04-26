@@ -57,7 +57,6 @@ WORKDIR /home/ffmpeg
 # 验证安装
 RUN ffmpeg -version
 
-# 设置入口点, 镜像直接作为 ffmpeg命令使用, 无需创建容器使用
+# 设置入口点, 镜像直接作为 ffmpeg 命令使用, 无需创建容器使用(必须如此配置)
 # 使用方式: docker run --rm <ffmpeg_image> 具体的命令参数 
 ENTRYPOINT ["ffmpeg"]
-CMD ["-h"]
