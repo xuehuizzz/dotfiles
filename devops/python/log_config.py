@@ -1,21 +1,14 @@
 """A log config file, Use lazy % formatting in logging functions.
 from loguru import logger  # Third-party library, used directly
 
-TODO: 输出json格式
-{
-    "level": "info",  //日志等级
-    "ts": "2025-04-20T20:18:04.242819Z",  //ISO 8601格式
-    "caller": "xxx.py:88",  //文件路径:记录行数
-    "msg": "", //日志内容
-    "address": "https:127.0.0.1:8080", //服务器地址
-    ...
-}
+pip install python-json-logger
 """
 import atexit
 import logging
 import sys
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
+from pythonjsonlogger.json import JsonFormatter
 
 
 def setup_logger(log_level=logging.DEBUG, console_level=logging.DEBUG, logger_name='project_name'):
@@ -45,7 +38,7 @@ def setup_logger(log_level=logging.DEBUG, console_level=logging.DEBUG, logger_na
     # )
 
     # 3. 文件格式(普通)
-    file_handler = FileHandler(log_file, encoding='utf-8')
+    file_handler = logging.FileHandler(log_file, encoding='utf-8')
     file_handler.setLevel(log_level)
 
     console_handler = logging.StreamHandler(stream=sys.stdout)
@@ -55,8 +48,21 @@ def setup_logger(log_level=logging.DEBUG, console_level=logging.DEBUG, logger_na
         '%(asctime)s - %(levelname)-8s | %(filename)s [%(funcName)s: %(lineno)3d] - %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S'
     )
+    # 输出JSON格式
+    json_formatter = JsonFormatter(
+        fmt='%(levelname)s %(asctime)s %(name)s %(message)s %(filename)s %(funcName)s %(lineno)d',
 
-    file_handler.setFormatter(formatter)
+        datefmt='%Y-%m-%dT%H:%M:%S',
+        rename_fields={
+            'levelname': 'level',
+            'asctime': 'ts',
+            'message': 'msg',
+            'filename': 'caller'
+        },
+        json_ensure_ascii=False
+    )
+    
+    file_handler.setFormatter(json_formatter)  # or formatter
     console_handler.setFormatter(formatter)
 
     _logger.addHandler(file_handler)
