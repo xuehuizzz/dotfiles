@@ -51,7 +51,6 @@ def setup_logger(log_level=logging.DEBUG, console_level=logging.DEBUG, logger_na
     # 输出JSON格式
     json_formatter = JsonFormatter(
         fmt='%(levelname)s %(asctime)s %(name)s %(message)s %(filename)s %(funcName)s %(lineno)d',
-
         datefmt='%Y-%m-%dT%H:%M:%S',
         rename_fields={
             'levelname': 'level',
