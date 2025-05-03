@@ -1,10 +1,10 @@
 ## <mark>生成SSH秘钥对</mark>
 ```bash
-# ED25519（推荐，更安全）
-ssh-keygen -t ed25519 -C "your_email@example.com"
+ssh-keygen -t ed25519 -C "your_email@example.com"    # ED25519（推荐，更安全）
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"   # RSA（广泛支持）
 
-# RSA（广泛支持）
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+# 设置免密登录, 将你的 SSH 公钥复制到远程服务器的授权密钥文件中, 就可以使用 SSH 密钥进行身份验证，而不需要每次登录时输入密码
+ssh-copy-id 用户名@远程主机
 
 # 为别的用户创建公钥, 该用户没有ssh协议的话
 # sudo ssh-keygen -t rsa -b 4096 -C "b_sftp@hostname" -f /home/b/.ssh/sftp_key
