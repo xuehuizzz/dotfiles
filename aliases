@@ -12,6 +12,8 @@ if _has nvim; then
     alias vi="nvim"
 fi
 
+# rsync -avz file.txt user@yourserver.com:/home/user/  # 从本地传输到远程服务器
+# rsync -avz user@yourserver.com:/home/user/file.txt file.txt  # 从远程服务器下载文件到本地
 alias rsync="rsync -avz --progress" # 适合大文件传输, 支持断点续传
 alias cp="cp -rv"  # copy file recursively and explain
 alias mv="mv -v"   # move file and explain
