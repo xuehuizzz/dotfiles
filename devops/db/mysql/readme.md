@@ -35,7 +35,6 @@ docker run -d \
   -v /Users/xuehuizzz/db/mysql/conf/my.cnf:/etc/mysql/my.cnf \
   -v /Users/xuehuizzz/db/mysql/logs/:/var/log/ \
   -p 3306:3306 \
-  -w /app \
   --restart always \
   mysql:8.4.3
 ```
