@@ -8,7 +8,6 @@ docker run -d \
   -e POSTGRES_DB=mydb \
   -v /Users/xuehuizzz/db/postgresql:/app \
   -p 5432:5432 \
-  -w /app \
   --restart always \
   postgres:15
 
