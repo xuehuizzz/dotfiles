@@ -57,7 +57,7 @@ CREATE TABLE xxx (
     
     -- UNIQUE KEY `idx_username` (`username`),  -- 唯一索引
     -- KEY `idx_email` (`email`)    -- 普通索引
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ```
 
 ## <mark>实用触发器推荐</mark><sub>只能对单表配置</sub>
