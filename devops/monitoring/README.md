@@ -1,5 +1,5 @@
-## 访问
-- grafana:
+## Web访问
+- Grafana:
   - host: http://localhost:3000
   - user: admin
   - pwd: admin
