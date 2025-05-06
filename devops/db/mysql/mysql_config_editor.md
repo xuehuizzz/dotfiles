@@ -1,5 +1,5 @@
 # mysql_config_editor 命令介绍
-mysql_config_editor 是 MySQL 自带的一个命令行工具，用来安全地存储和加密 MySQL 客户端连接所需的敏感信息，比如用户名和密码。
+**`mysql_config_editor`** 是包含在 MySQL 客户端工具 **`mysql-client`** 中的一个实用程序，用来安全地存储和加密 MySQL 客户端连接所需的敏感信息，比如用户名和密码。
 它将这些加密后的信息保存在 ~/.mylogin.cnf 文件中，供 mysql、mysqldump 等命令行工具使用，避免明文密码出现在 my.cnf 文件或脚本中
 
 # .mylogin.cnf 文件介绍
