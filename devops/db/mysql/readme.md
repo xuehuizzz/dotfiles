@@ -32,7 +32,7 @@ docker run -d \
   -e MYSQL_PASSWORD=admin \
   -e MYSQL_DATABASE=mydb \
   -v /Users/xuehuizzz/db/mysql/data/:/var/lib/mysql/ \
-  -v /Users/xuehuizzz/db/mysql/conf/my.cnf:/etc/mysql/my.cnf \
+  -v /Users/xuehuizzz/db/mysql/conf/my.cnf:/etc/my.cnf \
   -v /Users/xuehuizzz/db/mysql/logs/:/var/log/mysql/ \
   -p 3306:3306 \
   --restart always \
