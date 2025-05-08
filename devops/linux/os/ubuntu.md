@@ -2,21 +2,21 @@
 
 - ```yaml
   network:
-  version: 2
-  ethernets:
-    eth0:   # eth0是网络接口的名称
-      dhcp4: false  # 默认为true, 表示启用DHCP,自动获取IP地址, 这里改为false
-      # dhcp-identifier: mac
-      # 以下内容为配置静态ip自行添加
-      addresses:
-        - 198.19.249.76/24  # 设置静态 IP 地址和子网掩码, 可配置多个
-      routes:
-        - to: default
-          via: 198.19.249.1  # 默认网关
-      nameservers:
+    version: 2
+    ethernets:
+      eth0:   # eth0是网络接口的名称
+        dhcp4: false  # 默认为true, 表示启用DHCP,自动获取IP地址, 这里改为false
+        # dhcp-identifier: mac
+        # 以下内容为配置静态ip自行添加
         addresses:
-          - 8.8.8.8          # 设置 DNS 服务器
-          - 8.8.4.4
+          - 198.19.249.76/24  # 设置静态 IP 地址和子网掩码, 可配置多个
+        routes:
+          - to: default
+            via: 198.19.249.1  # 默认网关
+        nameservers:
+          addresses:
+            - 8.8.8.8          # 设置 DNS 服务器
+            - 8.8.4.4
   ```
 
 - ```bash
