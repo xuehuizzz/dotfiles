@@ -3,6 +3,10 @@ bindings = [
     { key = "V", mods = "Command", action = "Paste" },
     { key = "C", mods = "Command", action = "Copy" },
     { key = "N", mods = "Command", action = "SpawnNewInstance" },
+    { key = "Left",  mods = "Command", chars = "\u001bOH"  },# jump word start
+    { key = "Right", mods = "Command", chars =  "\u001bOF" },# jump word end
+    { key = "Up",  mods = "Command", chars = "\u001bB"   },# Skip word left
+    { key = "Down", mods = "Command", chars = "\u001bF"   },# Skip word right
 ]
 
 [env]
