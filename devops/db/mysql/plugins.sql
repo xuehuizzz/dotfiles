@@ -12,5 +12,6 @@ SHOW VARIABLES LIKE 'plugin_dir';
 
 
 -- 推荐安装插件如下:
-INSTALL PLUGIN validate_password SONAME 'validate_password.so';  -- 验证MySQL密码
+INSTALL PLUGIN validate_password SONAME 'validate_password.so';   -- 验证MySQL密码
 INSTALL PLUGIN rpl_semi_sync_source SONAME 'semisync_source.so';  -- 半同步复制插件
+INSTALL PLUGIN group_replication SONAME 'group_replication.so';   -- MGR组复制插件
