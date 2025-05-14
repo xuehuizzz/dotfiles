@@ -1,7 +1,7 @@
 ## <font color=red>Dockerfile</font>
 ```dockerfile
-# 基于一个基础镜像
-FROM ubuntu:22.04  
+# 基于一个基础镜像, 优先使用使用官方 Slim 或 Alpine 基础镜像
+FROM node:18-alpine
 
 # 使用 LABEL 添加镜像的元信息，例如作者、版本和描述
 LABEL maintainer="xuehui <xuehuizzz103@gmail.com>"
