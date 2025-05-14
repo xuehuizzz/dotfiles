@@ -88,7 +88,7 @@ sudo snap restart xxx  # 重启xxx服务
 sudo snap enable xxx  # 设置xxx服务开机自启
 sudo snap disable xxx  # 禁用xxx服务开机自启
 ```
-## cmds
-```bash
-echo xxx >> file   # 将内容追加到文件末尾, 文件不存在会创建,  > 是覆盖, 含有空格或特殊字符或多行用引号引起来
-```
+## 建议
+> echo xxx >> file   # 将内容追加到文件末尾, 文件不存在会创建,  > 是覆盖, 含有空格或特殊字符或多行用引号引起来
+> grep "error" file.txt  # 简单的搜索不用再 cat file.txt | grep "error"
+
