@@ -57,8 +57,6 @@ set softtabstop=4 " 使得按退格键时可以一次删掉 4 个空格
 set tabstop=4 " 设定 tab 长度为 4
 set nobackup " 覆盖文件时不备份
 set autochdir " 自动切换当前目录为当前文件所在的目录
-set fillchars=eob:\ ,fold:\ ,vert:\│    " 完全隐藏波浪号
-filetype plugin indent on " 开启插件
 set backupcopy=yes " 设置备份时的行为为覆盖
 set ignorecase smartcase " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
 set nowrapscan " 禁止在搜索到文件两端时重新搜索
@@ -138,51 +136,6 @@ endfunction
 
 " 设置状态栏显示信息，调用 GetMode() 函数
 set statusline=%{GetMode()}%M%*%R%=\ %f%=\ %0(%{GetFileFormat()}\ %{&encoding}\ %c:%l%)
-
-" return OS type, eg: windows, or linux, mac, et.st..
-function! MySys()
-if has("win16") || has("win32") || has("win64") || has("win95")
-return "windows"
-elseif has("unix")
-return "linux"
-endif
-endfunction
-
-" 用户目录变量$VIMFILES
-if MySys() == "windows"
-let $VIMFILES = $VIM.'/vimfiles'
-elseif MySys() == "linux"
-let $VIMFILES = $HOME.'/.vim'
-endif
-
-" 设定doc文档目录
-let helptags=$VIMFILES.'/doc'
-
-" 设置字体 以及中文支持
-if has("win32")
-set guifont=Inconsolata:h12:cANSI
-endif
-
-" 配置多语言环境
-if has("multi_byte")
-" UTF-8 编码
-set encoding=utf-8
-set termencoding=utf-8
-set formatoptions+=mM
-set fencs=utf-8,gbk
-
-if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)'
-set ambiwidth=double
-endif
-
-if has("win32")
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-language messages zh_CN.utf-8
-endif
-else
-echoerr "Sorry, this version of (g)vim was not compiled with +multi_byte"
-endif
 
 " 注释快捷键  支持普通模式和插入模式的, ctrl -
 nnoremap <C-_> :call ToggleComment()<CR>
