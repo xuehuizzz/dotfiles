@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# 通用 MySQL 安装脚本
-# 适用于各种 Linux 发行版
+# 通用 MySQL 安装脚本, 适用于各种 Linux 发行版
 
 # 输出彩色文本的函数
 print_info() {
