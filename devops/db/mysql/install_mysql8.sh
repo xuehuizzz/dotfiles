@@ -39,7 +39,7 @@ fi
 
 # 设置默认 MySQL 密码
 MYSQL_ROOT_PASSWORD=""
-read -p "请设置 MySQL root 用户密码 [默认为空:]: " USER_INPUT
+read -p "请设置 MySQL root 用户密码 [默认为空]: " USER_INPUT
 if [ -n "$USER_INPUT" ]; then
     MYSQL_ROOT_PASSWORD=$USER_INPUT
 fi
