@@ -21,13 +21,15 @@ openssl x509 -req -days 36500 -in server.csr -signkey server.key -out server.crt
 - server.key ：私钥文件
 - server.crt ：证书文件
 - server.csr ：证书签名请求文件（生成证书后可以删除）
-注意事项：
 
-1. 请妥善保管私钥文件（server.key）
-2. 自签名证书在浏览器中会显示不受信任的警告，这是正常的
-3. 如果需要在生产环境使用，建议购买受信任的CA机构颁发的证书
-4. 生成证书时的CN（Common Name）要匹配你的域名，上面例子中使用的是localhost
-如果你需要修改证书的信息（比如域名），可以在生成CSR时修改-subj参数中的值。
+注意事项：
+> 1. 请妥善保管私钥文件（server.key）
+> 
+> 2. 自签名证书在浏览器中会显示不受信任的警告，这是正常的
+> 
+> 3. 如果需要在生产环境使用，建议购买受信任的CA机构颁发的证书
+> 
+> 4. 生成证书时的CN（Common Name）要匹配你的域名，上面例子中使用的是localhost, 如果你需要修改证书的信息（比如域名），可以在生成CSR时修改-subj参数中的值。
 
 
 ## <mark>journalctl</mark>
