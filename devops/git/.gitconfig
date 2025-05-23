@@ -1,10 +1,10 @@
 [core]
-  excludesfile = /Users/xuehuizzz/.gitignore_global
+  excludesfile = $HOME/.gitignore_global
 [user]
   name = xuehui
   email = xuehuizzz103@gmail.com
 [commit]
-  template = /Users/xuehuizzz/.stCommitMsg
+  template = $HOME/.stCommitMsg
 [pull]
     rebase = true
 [http]
@@ -28,3 +28,6 @@
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
+[blame]
+  coloring = highlightRecent
+  date = relative
