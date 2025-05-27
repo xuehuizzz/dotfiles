@@ -73,6 +73,11 @@ RETURN DATE_ISO8601(DATE_NOW())     // 获取当前时间, utc
 RETURN DATE_ISO8601(DATE_ADD(DATE_NOW(), INTERVAL 8 HOUR))   // cst时间
 RETURN DATE_ISO8601(CONVERT_TZ(DATE_NOW(), 'UTC', 'Asia/Shanghai'))    // 指定时区
 
+// 去重
+For doc IN users
+  // RETURN DISTINCT doc.name
+  COLLECT res = doc.name
+  RETURN res
 
 // 查询用户表中city="New York"的记录并按照age顺序查询
 FOR doc IN users
