@@ -9,39 +9,38 @@ BLUE=$(tput setaf 4)
 
 # 日志函数：标签和内容都带颜色
 # info() {
-#   echo -e "${BLUE}[INFO] $*${RESET}"
+#   printf "%s[INFO] %s%s\n" "$BLUE" "$*" "$RESET"
 # }
 #
 # success() {
-#   echo -e "${GREEN}[SUCCESS] $*${RESET}"
+#   printf "%s[SUCCESS] %s%s\n" "$GREEN" "$*" "$RESET"
 # }
 #
 # warn() {
-#   echo -e "${YELLOW}[WARN] $*${RESET}" >&2
+#   printf "%s[WARN] %s%s\n" "$YELLOW" "$*" "$RESET" >&2
 # }
 #
 # error() {
-#   echo -e "${RED}[ERROR] $*${RESET}" >&2
+#   printf "%s[ERROR] %s%s\n" "$RED" "$*" "$RESET" >&2
 #   exit 1
 # }
 
 
-
 # 仅标签是彩色, 内容是白色
 info() {
-  echo -e "${BLUE}[INFO]${RESET} $*"
+  printf "%s[INFO]%s %s\n" "$BLUE" "$RESET" "$*"
 }
 
 success() {
-  echo -e "${GREEN}[SUCCESS]${RESET} $*"
+  printf "%s[SUCCESS]%s %s\n" "$GREEN" "$RESET" "$*"
 }
 
 warn() {
-  echo -e "${YELLOW}[WARN]${RESET} $*" >&2
+  printf "%s[WARN]%s %s\n" "$YELLOW" "$RESET" "$*" >&2
 }
 
 error() {
-  echo -e "${RED}[ERROR]${RESET} $*" >&2
+  printf "%s[ERROR]%s %s\n" "$RED" "$RESET" "$*" >&2
   exit 1
 }
 
@@ -50,4 +49,5 @@ error() {
 info "这是蓝色信息内容"
 success "这是绿色成功内容"
 warn "这是黄色警告内容"
-error "这是红色错误内容，脚本退出"
+# error "这是红色错误内容，脚本退出"
+
