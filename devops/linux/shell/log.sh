@@ -12,7 +12,7 @@ BLUE=$(tput setaf 4)
 #   printf "%s[INFO] %s%s\n" "$BLUE" "$*" "$RESET"
 # }
 #
-# succ() {
+# success() {
 #   printf "%s[SUCCESS] %s%s\n" "$GREEN" "$*" "$RESET"
 # }
 #
@@ -20,7 +20,7 @@ BLUE=$(tput setaf 4)
 #   printf "%s[WARN] %s%s\n" "$YELLOW" "$*" "$RESET" >&2
 # }
 #
-# err() {
+# error() {
 #   printf "%s[ERROR] %s%s\n" "$RED" "$*" "$RESET" >&2
 #   exit 1
 # }
@@ -31,7 +31,7 @@ info() {
   printf "%s[INFO]%s %s\n" "$BLUE" "$RESET" "$*"
 }
 
-succ() {
+success() {
   printf "%s[SUCCESS]%s %s\n" "$GREEN" "$RESET" "$*"
 }
 
@@ -39,7 +39,7 @@ warn() {
   printf "%s[WARN]%s %s\n" "$YELLOW" "$RESET" "$*" >&2
 }
 
-err() {
+error() {
   printf "%s[ERROR]%s %s\n" "$RED" "$RESET" "$*" >&2
   exit 1
 }
@@ -47,7 +47,7 @@ err() {
 
 # 测试调用
 info "这是蓝色信息内容"
-succ "这是绿色成功内容"
+success "这是绿色成功内容"
 warn "这是黄色警告内容"
-# err "这是红色错误内容，脚本退出"
+# error "这是红色错误内容，脚本退出"
 
