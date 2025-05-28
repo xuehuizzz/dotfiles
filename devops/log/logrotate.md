@@ -1,5 +1,4 @@
 `logrotate 是一个用于管理日志文件的工具，广泛用于自动化日志文件的轮换、压缩和删除，以确保日志不会占用过多的磁盘空间`
-`轮换的日志文件默认保存在原始日志所在目录中, logrotate本身不支持自定义日志轮换输出路径`
 ## Logrotate 的主要功能：
   1. 日志轮换：将旧日志文件重命名或归档（例如，将 logfile 重命名为 logfile.1）。
   2. 日志压缩：通过 gzip、bzip2 等工具压缩旧日志文件。
@@ -36,15 +35,16 @@ logrotate --version  # 验证是否安装成功
     ```
 - 单独应用配置示例: /etc/logrotate.d/myapp
   - ```conf
-    /var/log/myapp/*.log {     # 原始日志, 即logrotate要处理的日志文件
-        daily                  # 每天轮换, weekly,monthly, yearly
-        rotate 7               # 保留 7 个轮换文件
-        compress               # 压缩旧日志, 通常为 .gz 格式, nocompress(不压缩旧日志)
-        delaycompress          # 延迟一轮压缩(需配合 compress 使用)
-        missingok              # 如果日志丢失，不报错
-        notifempty             # 如果日志文件是空的, 则不进行轮转
-        copytruncate           # 复制日志后截断原始日志文件
-        postrotate             # 在轮换后执行的命令
+    /var/log/myapp/*.log {       # 原始日志, 即logrotate要处理的日志文件
+        daily                    # 每天轮换, weekly,monthly, yearly
+        rotate 7                 # 保留 7 个轮换文件
+        compress                 # 压缩旧日志, 通常为 .gz 格式, nocompress(不压缩旧日志)
+        delaycompress            # 延迟一轮压缩(需配合 compress 使用)
+        missingok                # 如果日志丢失，不报错
+        notifempty               # 如果日志文件是空的, 则不进行轮转
+        copytruncate             # 复制日志后截断原始日志文件
+        olddir /cus_path/myapp   # 自定义轮换日志生成路径
+        postrotate               # 在轮换后执行的命令
             systemctl reload myapp.service
         endscript
     }
