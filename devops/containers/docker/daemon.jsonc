@@ -1,0 +1,34 @@
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],  // 设置docker的守护进程选项, 这里指定使用systemd 作为 cgroup 驱动
+  "log-driver": "json-file",  // 设置容器日志的驱动程序为json-file
+  "log-opts": {  // 日志配置
+    "max-size": "100m",   // 单个文件最大为100MB
+    "max-file": "3"  // 最多保留3个日志文件
+  },
+  "storage-driver": "overlay2",  // 使用 overlay2 作为存储驱动, 这是 Docker 推荐的存储驱动
+  "data-root": "/var/lib/docker",  // 数据存储的根目录
+  "default-ulimits": {   // 设置容器的默认资源限制
+    "nofile": {
+      "Name": "nofile",
+      "Hard": 64000,
+      "Soft": 64000
+    }
+  },
+  "dns": ["8.8.8.8", "114.114.114.114"],
+  "max-concurrent-downloads": 10,  // 最大并发下载数为 10
+  "max-concurrent-uploads": 5,  // 最大并发上传数为 5
+  "default-address-pools": [
+    {
+      "base": "172.16.0.0/16",
+      "size": 24
+    }
+  ],
+  "live-restore": true,   // 启用该选项后, 在 docker 守护进程崩溃或升级时, 容器仍然可以继续运行
+  "insecure-registries": [],
+  "registry-mirrors": [
+    "https://mirror.ccs.tencentyun.com",
+    "https://hub-mirror.c.163.com",
+    "https://registry-1.docker.io",
+    "https://mirror.baidubce.com"
+  ]
+}
