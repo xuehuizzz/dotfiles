@@ -30,7 +30,7 @@ logrotate --version  # 验证是否安装成功
     rotate 4            # 保留最近的 4 个旧日志
     create              # 轮换后创建新日志文件
     compress            # 压缩旧日志
-    dateext             # 使用日期作为旧日志文件的后缀
+    dateext             # 使用类似 log.2025-05-28 而不是 log.1 的格式作为备份后缀
     include /etc/logrotate.d  # 包含其他配置文件目录
     ```
 - 单独应用配置示例:
@@ -39,9 +39,9 @@ logrotate --version  # 验证是否安装成功
         daily                  # 每天轮换, weekly,monthly, yearly
         rotate 7               # 保留 7 个轮换文件
         compress               # 压缩旧日志, 通常为 .gz 格式, nocompress(不压缩旧日志)
-        delaycompress          # 延迟到下一次轮换时再压缩
+        delaycompress          # 延迟一轮压缩(需配合 compress 使用)
         missingok              # 如果日志丢失，不报错
-        notifempty             # 如果日志为空，不进行轮换
+        notifempty             # 如果日志文件是空的, 则不进行轮转
         copytruncate           # 复制日志后截断原始日志文件
         postrotate             # 在轮换后执行的命令
             systemctl reload myapp.service
@@ -60,5 +60,6 @@ logrotate 通常通过 cron 或 systemd 定期执行：
 - 在传统的系统中，cron 任务通常会调用 /etc/cron.daily/logrotate。
 - 在现代的 systemd 中，logrotate 可能以定时任务的方式运行。
 ```bash
-systemctl status logrotate.timer
+systemctl status logrotate.timer  # 查看定时器状态
+systemctl enable --now logrotate.timer  # 启用并立即运行定时器
 ```
