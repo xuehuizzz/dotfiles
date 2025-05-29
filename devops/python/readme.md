@@ -134,6 +134,26 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
 #### 4.<mark>编码建议</mark>
 
+* 用哨兵对象代替None表示缺省值
+
+    *
+        ```python
+        _sentinel = object()  # 创建唯一的哨兵对象
+
+        def func(x=_sentinel):
+            if x is _sentinel:
+                print("参数未提供")
+            elif x is None:
+                print("参数显式设为 None")
+            else:
+                print("提供了参数:", x)
+        
+        
+        func()            # 参数未提供
+        func(None)        # 参数显式设为 None
+        func("hello")     # 提供了参数: hello
+        ```
+
 * 函数嵌套的层数不建议超过2层, 过多的嵌套会导致可读性和维护性下降.
 
 * 小型项目用相对导入, **中大型项目用绝对导入**, 配置setup.py则不需要再文件里手动管理sys.path
