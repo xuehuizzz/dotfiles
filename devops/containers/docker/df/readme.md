@@ -3,6 +3,10 @@
 # 基于一个基础镜像, 优先使用使用官方 Slim 或 Alpine 基础镜像
 FROM node:18-alpine
 
+# 创建并切换到一个非root用户 appuser, 以下操作都是以 appuser 的身份运行
+RUN adduser --disabled-password --gecos '' appuser
+USER appuser
+
 # 使用 LABEL 添加镜像的元信息，例如作者、版本和描述
 LABEL maintainer="xuehui <xuehuizzz103@gmail.com>"
 LABEL version="1.0"
