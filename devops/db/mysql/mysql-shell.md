@@ -4,9 +4,9 @@ MySQL Shell 可以用于数据库管理、数据迁移、自动化任务以及�
 
 ```bash
 # 安装
-brew install mysql-shell
-sudo apt-get install mysql-shell
-sudo yum install mysql-shell
+wget https://dev.mysql.com/get/Downloads/MySQL-Shell/mysql-shell_8.3.0-1ubuntu22.04_amd64.deb
+sudo dpkg -i mysql-shell_8.3.0-1ubuntu22.04_amd64.deb
+
 
 # 连接数据库
 mysqlsh --uri user@host:port  # 在启动 MySQL Shell 时使用
