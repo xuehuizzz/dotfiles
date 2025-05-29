@@ -65,4 +65,7 @@ logrotate 通常通过 cron 或 systemd 定期执行：
 ```bash
 systemctl status logrotate.timer  # 查看定时器状态
 systemctl enable --now logrotate.timer  # 启用并立即运行定时器
+
+# 使用cronjob配置定时执行, 特定模块单独定时轮转
+0 0 * * * /usr/sbin/logrotate -s /var/lib/logrotate.status /etc/logrotate.d/myapp
 ```
