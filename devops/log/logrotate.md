@@ -43,6 +43,8 @@ logrotate --version  # 验证是否安装成功
         missingok                # 如果日志丢失，不报错
         notifempty               # 如果日志文件是空的, 则不进行轮转
         copytruncate             # 复制日志后截断原始日志文件
+        dateext
+        dateformat -%Y%m%d       # 名称包含日期
         olddir /cus_path/myapp   # 自定义轮换日志生成路径
         postrotate               # 在轮换后执行的命令
             systemctl reload myapp.service
