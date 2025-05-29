@@ -143,6 +143,7 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
         def func(x=_sentinel):
             if x is _sentinel:
                 print("参数未提供")
+                # x = 相同类型的零值
             elif x is None:
                 print("参数显式设为 None")
             else:
