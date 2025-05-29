@@ -3,7 +3,7 @@ MySQL Shell 是一个高级的命令行工具, 专门用于与 MySQL 数据库�
 MySQL Shell 可以用于数据库管理、数据迁移、自动化任务以及与 MySQL InnoDB Cluster 的交互
 
 ```bash
-# 安装
+# 安装   https://dev.mysql.com/downloads/shell/
 wget https://dev.mysql.com/get/Downloads/MySQL-Shell/mysql-shell_8.3.0-1ubuntu22.04_amd64.deb
 sudo dpkg -i mysql-shell_8.3.0-1ubuntu22.04_amd64.deb
 
