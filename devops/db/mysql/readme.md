@@ -6,15 +6,15 @@
 # 备份脚本见: mysql_backup.sh,  恢复脚本见: mysql_restore.sh
 
 # 备份
-sh mysql_backup.sh    # 备份所有数据库信息
-sh mysql_backup.sh -d dbname  # 指定备份数据库信息
-sh mysql_backup.sh -d dbname -t tablename  # 指定备份单张表所有信息, 结构,数据,触发器
+bash mysql_backup.sh    # 备份所有数据库信息
+bash mysql_backup.sh -d dbname  # 指定备份数据库信息
+bash mysql_backup.sh -d dbname -t tablename  # 指定备份单张表所有信息, 结构,数据,触发器
 
 # 恢复, 直接指定文件
 # mydb_20250405_150344.tar.gz  即恢复 mydb 数据库的所有信息
 # mydb.students_20250405_142438.tar.gz  即恢复数据库 mydb 下的表 students 的信息
 # -s xxx.tar.gz 只恢复结构,  -d xxx.tar.gz 只恢复数据
-sh mysql_restore.sh xxx.tar.gz  
+bash mysql_restore.sh xxx.tar.gz  
 ```
 
 ### docker安装
