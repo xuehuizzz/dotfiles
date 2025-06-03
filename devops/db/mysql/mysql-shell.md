@@ -6,16 +6,41 @@ MySQL Shell 可以用于数据库管理、数据迁移、自动化任务以及�
 # 安装   https://dev.mysql.com/downloads/shell/
 wget https://dev.mysql.com/get/Downloads/MySQL-Shell/mysql-shell_8.3.0-1ubuntu22.04_amd64.deb
 sudo dpkg -i mysql-shell_8.3.0-1ubuntu22.04_amd64.deb
+```
 
-
+### 配置Innodb cluster
+```bash
 # 连接数据库
-mysqlsh --uri user@host:port  # 在启动 MySQL Shell 时使用
-或者
-mysqlsh
-\connect user@host:port    # 在MySQL shell内部使用
+mysqlsh --js
+\c user@host:port    # 连接一个节点
 
-# 使用不同的脚本语言
-\sql  // 切换到 SQL 模式
-\js   // 切换到 JavaScript 模式
-\py   // 切换到 Python 模式
+// 检查实例配置
+dba.checkInstanceConfiguration()  // 默认检查当前节点的状态
+// dba.checkInstanceConfiguration('mysql_user@node2:3306')  // 指定检查节点
+
+// 如果有配置问题，可以自动修复
+dba.configureInstance()  // 默认修复当前节点
+// dba.configureInstance('mysql_user@node2:3306')   // 指定修复有问题的节点 
+
+// 创建集群
+var cls = dba.createCluster('myCluster')
+cls.status()  // 检查集群状态
+
+// 添加节点
+cls.addInstance('mgr@node2')
+cls.addInstance('mgr@node3')
+cls.status()
+
+// 查看已有集群
+var cls = dba.getCluster()  // 查看当前节点所属集群
+// var cls = dba.getCluster('myCluster')  // 查看指定集群
+cls.status()
+
+
+// 删除指定集群
+var cls = dba.getCluster('myCluster')
+cls.dissolve()
+
+// 切换主节点
+cls.setPrimaryInstance('mgr@node2:3306')  
 ```
