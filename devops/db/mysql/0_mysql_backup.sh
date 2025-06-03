@@ -1,6 +1,31 @@
 #!/bin/bash
 set -euo pipefail
 
+# 配置日志
+RESET=$(tput sgr0)
+RED=$(tput setaf 1)
+YELLOW=$(tput setaf 3)
+GREEN=$(tput setaf 2)
+BLUE=$(tput setaf 4)
+
+# 仅标签是彩色, 内容是白色
+info() {
+  printf "%s[INFO]%s %s\n" "$BLUE" "$RESET" "$*"
+}
+
+success() {
+  printf "%s[SUCCESS]%s %s\n" "$GREEN" "$RESET" "$*"
+}
+
+warn() {
+  printf "%s[WARN]%s %s\n" "$YELLOW" "$RESET" "$*" >&2
+}
+
+error() {
+  printf "%s[ERROR]%s %s\n" "$RED" "$RESET" "$*" >&2
+  exit 1
+}
+
 # 设置变量
 DB_USER="xxx"        # MySQL 用户
 DB_PASS="xxx"        # MySQL 密码
@@ -29,10 +54,10 @@ show_usage() {
 backup_table() {
     local DB_NAME=$1
     local TABLE=$2
-    echo "开始备份表: $DB_NAME.$TABLE"
+    info "开始备份表: $DB_NAME.$TABLE"
 
     if ! mysql $MYSQL_CHARSET_OPTS -u$DB_USER -N -e "SHOW TABLES LIKE '$TABLE'" "$DB_NAME" | grep -q "$TABLE"; then
-        echo "错误: 表 $DB_NAME.$TABLE 不存在"
+        error "表 $DB_NAME.$TABLE 不存在"
         exit 1
     fi
 
@@ -44,7 +69,7 @@ backup_table() {
     mkdir -p "$BACKUP_DIR"/{structure,data,triggers}
 
     if [ "$IS_VIEW" -eq 1 ]; then
-        echo "正在备份视图: $TABLE"
+        info "正在备份视图: $TABLE"
         mysqldump $DUMP_COMMON \
             --no-data --skip-triggers --skip-add-drop-table \
             "$DB_NAME" "$TABLE" > "${BACKUP_DIR}/structure/${TABLE}.sql"
@@ -77,16 +102,16 @@ backup_table() {
 
     (cd "${BACKUP_ROOT}/${DATE_DIR}" && tar -czf "${DB_NAME}.${TABLE}_${DATE}.tar.gz" "$(basename "$BACKUP_DIR")")
     rm -rf "$BACKUP_DIR"
-    echo "表 $DB_NAME.$TABLE 备份完成"
+    success "表 $DB_NAME.$TABLE 备份完成"
 }
 
 # 备份数据库
 backup_database() {
     local DB_NAME=$1
-    echo "开始备份数据库: $DB_NAME"
+    info "开始备份数据库: $DB_NAME"
 
     if ! mysql $MYSQL_CHARSET_OPTS -u$DB_USER -N -e "SHOW DATABASES LIKE '$DB_NAME'" | grep -q "$DB_NAME"; then
-        echo "错误: 数据库 $DB_NAME 不存在"
+        error "数据库 $DB_NAME 不存在"
         exit 1
     fi
 
@@ -97,12 +122,12 @@ backup_database() {
         --no-data --no-create-info --routines --events --skip-triggers \
         "$DB_NAME" > "${BACKUP_DIR}/database_objects.sql"
 
-    echo "正在备份视图..."
+    info "正在备份视图..."
     mysql $MYSQL_CHARSET_OPTS -u$DB_USER -N -e "
         SELECT TABLE_NAME FROM information_schema.VIEWS
         WHERE TABLE_SCHEMA='$DB_NAME'" | while read VIEW_NAME; do
         [ -n "$VIEW_NAME" ] && {
-            echo "  → 视图: $VIEW_NAME"
+            info "  → 视图: $VIEW_NAME"
             mysqldump $DUMP_COMMON \
                 --no-data --skip-triggers --skip-add-drop-table \
                 "$DB_NAME" "$VIEW_NAME" > "${BACKUP_DIR}/views/${VIEW_NAME}.sql"
@@ -114,7 +139,7 @@ backup_database() {
         WHERE TABLE_SCHEMA='$DB_NAME' AND TABLE_TYPE='BASE TABLE'")
 
     for TABLE in $TABLES; do
-        echo "正在备份表: $TABLE"
+        info "正在备份表: $TABLE"
         mysqldump $DUMP_COMMON --no-data --skip-triggers "$DB_NAME" "$TABLE" > "${BACKUP_DIR}/structure/${TABLE}.sql"
         mysqldump $DUMP_COMMON --no-create-info --skip-triggers "$DB_NAME" "$TABLE" > "${BACKUP_DIR}/data/${TABLE}.sql"
 
@@ -143,7 +168,7 @@ backup_database() {
 
     (cd "${BACKUP_ROOT}/${DATE_DIR}" && tar -czf "${DB_NAME}_${DATE}.tar.gz" "$(basename "$BACKUP_DIR")")
     rm -rf "$BACKUP_DIR"
-    echo "数据库 $DB_NAME 备份完成"
+    success "数据库 $DB_NAME 备份完成"
 }
 
 # 主逻辑
@@ -169,7 +194,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ -z "$DB_NAME" && -z "$TABLE_NAME" ]]; then
-    echo "未指定数据库，将备份所有数据库"
+    info "未指定数据库，将备份所有数据库"
     DATABASES=$(mysql $MYSQL_CHARSET_OPTS -u$DB_USER -N -e "SHOW DATABASES" | grep -Ev "^(information_schema|performance_schema|mysql|sys)$")
     for DB in $DATABASES; do
         backup_database "$DB"
@@ -179,6 +204,6 @@ elif [[ -n "$DB_NAME" && -z "$TABLE_NAME" ]]; then
 elif [[ -n "$DB_NAME" && -n "$TABLE_NAME" ]]; then
     backup_table "$DB_NAME" "$TABLE_NAME"
 else
-    echo "错误: 必须先指定数据库(-d)才能指定表(-t)"
+    error "必须先指定数据库(-d)才能指定表(-t)"
     show_usage
 fi
