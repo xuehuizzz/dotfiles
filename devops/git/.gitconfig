@@ -11,6 +11,8 @@
   sslVerify = true
 [alias]
   unadd = restore --staged
+  # 撤销最近一次提交,保留修改内容在工作区
+  uncommit = reset HEAD~1                   
   co = checkout
   ci = commit
   st = status
