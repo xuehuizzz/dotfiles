@@ -21,7 +21,7 @@
   # 终极日志格式：一行输出 git log，带图形、时间、提交人、备注
   lg = !git --no-pager log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
   # 查看最近一周自己的提交, git lg- xuehui
-  lg- = "!f() { git log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago' --author=\"$1\"; }; f"
+  lgu = "!f() { git log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago' --author=\"$1\"; }; f"
 [safe]
   directory = /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core
   directory = /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask
