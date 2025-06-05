@@ -10,6 +10,7 @@ git config --global user.email "your email"  # 设置邮箱
 git status    # 查看当前文件状态
 git clone xxx   # 从现有仓库克隆
 git add xxx  # 跟踪新文件
+git restore --staged xxx   # 取消单个文件的git add
 git branch name  # 新建分支
 git branch -d name  # 删除分支
 git checkout branch_name  # 切换分支, git checkout -b name 新建并切换分支
