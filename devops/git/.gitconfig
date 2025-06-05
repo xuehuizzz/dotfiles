@@ -10,6 +10,7 @@
 [http]
   sslVerify = true
 [alias]
+  unadd = restore --staged
   co = checkout
   ci = commit
   st = status
