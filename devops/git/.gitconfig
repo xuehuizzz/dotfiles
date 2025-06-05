@@ -15,7 +15,9 @@
 [alias]
   unadd = restore --staged
   # 撤销最近一次提交,保留修改内容在工作区
-  uncommit = reset HEAD~1                   
+  uncommit = reset HEAD~1
+  # 把你当前所在分支的提交，推送到远程仓库的同名分支，并设置跟踪关系
+  done = !git push -u origin HEAD
   co = checkout
   ci = commit
   s = status
