@@ -19,5 +19,5 @@ wheels/
 *.editorconfig
 
 # sonarqube
-*.sonar-project.properties
+sonar-project.properties
 .scannerwork
