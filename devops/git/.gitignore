@@ -8,7 +8,7 @@ wheels/
 .venv/
 
 # macOS
-**/.DS_Store
+*.DS_Store
 
 # Custom
 .kube/
@@ -17,3 +17,7 @@ wheels/
 .env
 *.toml
 *.editorconfig
+
+# sonarqube
+*.sonar-project.properties
+.scannerwork
