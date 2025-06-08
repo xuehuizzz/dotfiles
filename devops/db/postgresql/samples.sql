@@ -50,3 +50,9 @@ SELECT AGE(NOW(), '2000-01-01');  -- 返回两个日期之间的差异
 SELECT column_name, ROW_NUMBER() OVER (ORDER BY column_name) FROM table_name;   -- 为结果集的行分配唯一的连续编号
 SELECT column_name, RANK() OVER (ORDER BY column_name) FROM table_name; -- 为结果集的行分配排名，允许并列排名
 
+-- 清理僵尸会话
+SELECT count(*) FROM pg_stat_activity WHERE state = 'idle in transaction';    -- 列出僵尸会话连接数   or idle,   datname='xxx'  指定数据库查询
+SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE state = 'idle in transaction' AND pid <> pg_backend_pid();   -- 强制关闭僵尸会话连接
+-- pg_stat_activity：此系统视图提供了有关当前数据库会话的信息。 state：表示会话的当前状态。常见状态有:
+   idle：连接空闲，等待客户端执行新的命令。
+   idle in transaction：会话正在事务中空闲，没有执行任何活动。
