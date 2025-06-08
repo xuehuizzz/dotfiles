@@ -1,14 +1,12 @@
 ## <mark>生成SSH秘钥对</mark>
 ```bash
-ssh-keygen -t ed25519 -C "your_email@example.com"    # ED25519（推荐，更安全）
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"   # RSA（广泛支持）
+ssh-keygen -t ed25519 -C "user email"    # ED25519（推荐，更安全）
+ssh-keygen -t rsa -b 4096 -C "user email"   # RSA（广泛支持）
 
 # 设置免密登录, 将你的 SSH 公钥复制到远程服务器的授权密钥文件中, 就可以使用 SSH 密钥进行身份验证，而不需要每次登录时输入密码
 ssh-copy-id 用户名@远程主机
-
-# 为别的用户创建公钥, 该用户没有ssh协议的话
-# sudo ssh-keygen -t rsa -b 4096 -C "b_sftp@hostname" -f /home/b/.ssh/sftp_key
 ```
+> `-C`选项是在`ssh-keygen`命令中添加一条**注释**到生成的SSH公钥中, 方便人类识别, 不影响SSH功能
 
 ## <mark>使用openssl生成HTTPS自签名证书</mark>
 ```bash
