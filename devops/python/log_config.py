@@ -27,17 +27,17 @@ def setup_logger(log_level=logging.DEBUG, console_level=logging.DEBUG, logger_na
     if _logger.hasHandlers():
         _logger.handlers.clear()
 
-    # 1. 基于文件大小轮换
+    # 1. 文件自动轮换: 基于文件大小
     # file_handler = RotatingFileHandler(
     #     log_file, maxBytes=20 * 1024 * 1024, backupCount=7, encoding='utf-8'
     # )
     
-    # 2. 基于时间轮换
+    # 2. 文件自动轮换: 基于时间
     # file_handler = TimedRotatingFileHandler(
     #     log_file, when=midnight, backupCount=7, encoding='utf-8'
     # )
 
-    # 3. 文件格式(普通)
+    # 3. 不轮换: 文件格式(普通)
     file_handler = logging.FileHandler(log_file, encoding='utf-8')
     file_handler.setLevel(log_level)
 
