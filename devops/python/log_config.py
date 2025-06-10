@@ -12,8 +12,7 @@ from pythonjsonlogger.json import JsonFormatter
 
 
 def setup_logger(log_level=logging.DEBUG, console_level=logging.DEBUG, logger_name='project_name'):
-    """Sets up and returns a logger with both file and console handlers.
-    """
+    """Sets up and returns a logger with both file and console handlers."""
     if not logger_name:
         logger_name = __name__
     log_dir = Path(__file__).resolve().parent / "logs"  # Modify according to actual situation
