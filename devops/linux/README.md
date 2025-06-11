@@ -91,6 +91,5 @@ sudo snap disable xxx  # 禁用xxx服务开机自启
 
 
 ## commands
-> 在命令前使用空格, 以将其排除在 ~/.bash_history 之外
->
-> grep "error" file.txt  # 简单的搜索不用再 cat file.txt | grep "error"
+- 在命令前使用空格, 以将其排除在 ~/.bash_history 之外
+- `grep "error" file.txt`  # 简单的搜索不用再 cat file.txt | grep "error"
