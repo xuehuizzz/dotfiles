@@ -1,58 +1,68 @@
-return { -- Highlight, edit, and navigate code
+return {
   "nvim-treesitter/nvim-treesitter",
-  dependencies = {
-    "p00f/nvim-ts-rainbow",
-  },
   build = ":TSUpdate",
-  main = "nvim-treesitter.configs", -- Sets main module to use for opts
+  dependencies = {
+    "HiPhish/rainbow-delimiters.nvim",
+  },
+  main = "nvim-treesitter.configs",
   opts = {
     ensure_installed = {
       "lua",
       "python",
       "javascript",
       "typescript",
-      "vimdoc",
       "vim",
-      "regex",
-      "terraform",
-      "sql",
-      "dockerfile",
-      "toml",
+      "vimdoc",
+      "bash",
+      "html",
+      "css",
       "json",
-      "java",
-      "groovy",
-      "go",
-      "gitignore",
-      "graphql",
       "yaml",
-      "make",
-      "cmake",
       "markdown",
       "markdown_inline",
-      "bash",
+      "dockerfile",
+      "go",
+      "sql",
+      "terraform",
+      "toml",
+      "gitignore",
+      "java",
+      "groovy",        -- 如果你确实需要，可保留，否则建议移除
+      "graphql",
+      "make",
+      "cmake",
       "tsx",
-      "css",
-      "html",
     },
-    -- Autoinstall languages that are not installed
     auto_install = true,
     highlight = {
       enable = true,
-      -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-      --  If you are experiencing weird indenting issues, add the language to
-      --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-      additional_vim_regex_highlighting = { "ruby" },
+      additional_vim_regex_highlighting = {},
     },
-    rainbow = {
+    indent = {
       enable = true,
-      extended_mode = true,
-      max_file_lines = nil,
-      colors = {
-        "#F9D749",
-        "#CC78D1",
-        "#479FF8",
-      },
+      disable = { "ruby" },  -- 你原本指定的内容仍保留
     },
-    indent = { enable = true, disable = { "ruby" } },
   },
+  config = function(_, opts)
+    require("nvim-treesitter.configs").setup(opts)
+  
+    -- rainbow-delimiters 配置
+    local rainbow_delimiters = require("rainbow-delimiters")
+    vim.g.rainbow_delimiters = {
+      strategy = {
+        [""] = rainbow_delimiters.strategy["global"],
+        vim = rainbow_delimiters.strategy["local"],
+      },
+      query = {
+        [""] = "rainbow-delimiters",
+        lua = "rainbow-blocks",
+      },
+      highlight = {
+        "RainbowDelimiterYellow",
+        "RainbowDelimiterViolet",
+        "RainbowDelimiterBlue",
+      },
+    }
+  end,
 }
+
