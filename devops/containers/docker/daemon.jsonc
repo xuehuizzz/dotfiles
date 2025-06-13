@@ -2,7 +2,7 @@
   "exec-opts": ["native.cgroupdriver=systemd"],  // 设置docker的守护进程选项, 这里指定使用systemd 作为 cgroup 驱动
   "log-driver": "json-file",  // 设置容器日志的驱动程序为json-file
   "log-opts": {  // 日志配置
-    "max-size": "100m",   // 单个文件最大为100MB
+    "max-size": "10m",   // 单个文件最大为10MB
     "max-file": "3"  // 最多保留3个日志文件
   },
   "storage-driver": "overlay2",  // 使用 overlay2 作为存储驱动, 这是 Docker 推荐的存储驱动
