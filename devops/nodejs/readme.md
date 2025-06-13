@@ -9,6 +9,9 @@ sudo apt update && sudo apt install nodejs npm
 node -v
 npm -v    # npm是 Node.js 的包管理器
 npx -v
+
+# 配置国内淘宝镜像
+npm config set registry https://registry.npmmirror.com
 ```
 
 # yarn
