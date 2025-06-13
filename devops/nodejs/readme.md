@@ -13,6 +13,7 @@ npx -v
 # 配置国内淘宝镜像
 npm config set registry https://registry.npmmirror.com
 ```
+> 优先使用npx创建项目, 例如: npx create-next-app@latest report-system --typescript
 
 # yarn
 ```bash
