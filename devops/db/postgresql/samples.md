@@ -1,3 +1,30 @@
+## 创建一张标准数据表
+```sql
+CREATE TABLE xxx (
+    id SERIAL PRIMARY KEY,  -- 自增主键 ID
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,  -- 创建时间
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,  -- 更新时间（需配合触发器实现自动更新）
+    deleted_at TIMESTAMP DEFAULT NULL,  -- 软删除时间
+    -- expired_at TIMESTAMP DEFAULT NULL,  -- 可选：过期时间
+    created_by INTEGER NOT NULL,  -- 创建者 ID
+    updated_by INTEGER NOT NULL,  -- 更新者 ID
+    status SMALLINT NOT NULL DEFAULT 1,  -- 状态 0-禁用，1-启用
+    is_deleted SMALLINT NOT NULL DEFAULT 0,  -- 是否删除：0-否，1-是
+    version INTEGER NOT NULL DEFAULT 1,  -- 版本号
+    remark VARCHAR(255),  -- 备注
+    tuition NUMERIC(5, 2) NOT NULL DEFAULT 0.00  -- 小数类型
+);
+
+COMMENT ON TABLE xxx IS '一张相对规范的表结构';
+COMMENT ON COLUMN xxx.id IS '主键ID';
+COMMENT ON COLUMN xxx.created_at IS '创建时间';
+COMMENT ON COLUMN xxx.updated_at IS '更新时间';
+COMMENT ON COLUMN xxx.deleted_at IS '删除时间(软删除)';
+COMMENT ON COLUMN xxx.tuition IS '小数类型';
+```
+
+## 常用
+```sql
 -- 排序分组可以使用序号
 select * from your_table order by 1,2  # 以查询的第一个,第二个字段排序
 
@@ -56,3 +83,4 @@ SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE state = 'idle in tr
 -- pg_stat_activity：此系统视图提供了有关当前数据库会话的信息。 state：表示会话的当前状态。常见状态有:
    idle：连接空闲，等待客户端执行新的命令。
    idle in transaction：会话正在事务中空闲，没有执行任何活动。
+```
