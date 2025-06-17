@@ -1,4 +1,5 @@
 # pip install hvac
+
 import hvac
 from typing import Optional
 
@@ -52,6 +53,8 @@ if __name__ == "__main__":
     )
 
     # 获取整个密文
+    # 假设已经用cli方式写入了MySQL登录信息
+    # vault kv put secret/mysql/admin username="admin" password="admin"
     creds = vault.get_kv_v2_secret("mysql/admin")
     print("所有字段:", creds)
 
