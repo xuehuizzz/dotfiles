@@ -1,8 +1,14 @@
 # 镜像漏洞扫描工具
 1. Trivy
    ```bash
+   # 安装
    brew install trivy
+
+   # 基于容器镜像扫描
    trivy image ffmpeg:v1
+
+   # 基于dockerfile扫描
+   trivy config Dockerfile
    ```
 # 镜像瘦身
 ```bash
