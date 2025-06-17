@@ -14,8 +14,9 @@ CREATE TABLE xxx (
     remark VARCHAR(255) DEFAULT NULL COMMENT '备注',
     tuition DECIMAL(5, 2) NOT NULL DEFAULT 0 COMMENT '小数类型',
     
-    -- UNIQUE KEY `idx_username` (`username`),  -- 唯一索引
-    -- KEY `idx_email` (`email`),    -- 普通索引
+    -- UNIQUE KEY idx_username (username),  -- 唯一索引
+    -- KEY idx_email (email),   -- 普通索引
+    -- KEY idx_name_email (name, email),  -- 联合索引
     -- FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE  -- 物理外键,级联删除
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT '一张相对规范的表结构';
 ```
