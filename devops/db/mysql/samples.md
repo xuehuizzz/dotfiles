@@ -1,4 +1,4 @@
-## 创建一张标准的数据表
+## MySQL8 创建一张标准的数据表
 ```sql
 CREATE TABLE xxx (
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT '主键ID',  -- 自增id
@@ -20,6 +20,11 @@ CREATE TABLE xxx (
     -- FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE  -- 物理外键,级联删除
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT '一张相对规范的表结构';
 ```
+> utf8mb4_0900_ai_ci 是 MySQL 8.0 中引入的一种字符集排序规则（collation），它由几个部分组成:
+   - utf8mb4 : 字符集，支持完整的 Unicode 字符集，包括 emoji 表情符号和其他特殊字符（最多可存储 4 字节的 UTF-8 字符）
+   - 0900 : 表示基于 Unicode 9.0.0 标准, 比旧版本的排序规则更加完善
+   - ai : 代表 accent-insensitive (不区分重音), 例如 'a', 'á', 'à', 'ä' 在排序和比较时被视为相同字符
+   - ci : 代表 case-insensitive (不区分大小写), 例如 'A' 和 'a' 在排序和比较时被视为相同字符
 
 ## 用户管理
 ```sql
