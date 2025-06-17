@@ -12,7 +12,7 @@ CREATE TABLE xxx (
     is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '是否删除：0-否，1-是',
     version INT NOT NULL DEFAULT 1 COMMENT '版本号',
     remark VARCHAR(255) DEFAULT NULL COMMENT '备注',
-    tuition DECIMAL(5, 2) NOT NULL DEFAULT '0' COMMENT '小数类型',
+    tuition DECIMAL(5, 2) NOT NULL DEFAULT 0 COMMENT '小数类型',
     
     -- UNIQUE KEY `idx_username` (`username`),  -- 唯一索引
     -- KEY `idx_email` (`email`),    -- 普通索引
