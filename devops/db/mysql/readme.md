@@ -39,30 +39,4 @@ docker run -d \
   mysql:8.4.3
 ```
 
-## <mark>实用触发器推荐</mark><sub>只能对单表配置</sub>
-```sql
--- 修改数据时自动更新时间戳(没有显式修改updated_at时才会触发), 以显式声明的优先
--- 任何方式更新都会生效(直接执行SQL语句、通过orm框架、通过数据库管理工具修改)
-DELIMITER //
-CREATE TRIGGER before_update_timestamp
-BEFORE UPDATE ON students
-FOR EACH ROW
-BEGIN
-    IF NEW.updated_at = OLD.updated_at THEN 
-        SET NEW.updated_at = CURRENT_TIMESTAMP;
-    END IF;
-END;//
-DELIMITER ;
-
--- 级联删除, 无需外键约束
-DELIMITER //
-CREATE TRIGGER cascade_delete_order
-BEFORE DELETE ON orders
-FOR EACH ROW
-BEGIN
-    DELETE FROM order_details WHERE order_id = OLD.id;
-END;//
-DELIMITER ;
-```
-
 
