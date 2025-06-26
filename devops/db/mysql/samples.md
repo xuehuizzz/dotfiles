@@ -48,6 +48,13 @@ DROP USER IF EXISTS 'username'@'hostname';
 >
 > `WITH GRANT OPTION` 表示该用户还能将**自己拥有的权限**授予给其他用户
 
+## 创建事件调度器
+```sql
+-- 从 2025-05-01 起，每天早上 7:30 自动执行某个存储过程
+CREATE EVENT whatever_event_name_that_is
+ON SCHEDULE EVERY 1 DAY STARTS '2025-05-01 07:30:00'
+  CALL whatever_procedure_that_is();
+```
 
 ## 常用查询
 ```sql
