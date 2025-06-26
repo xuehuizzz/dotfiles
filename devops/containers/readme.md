@@ -23,3 +23,15 @@ mv dist_mac/docker-slim-sensor /usr/local/bin/
 # 基本使用
 docker-slim build --http-probe=false --continue-after=exec 镜像ID or name:tag
 ```
+# Dockerfile语法检测
+```bash
+# macos
+brew install hadolint
+
+# linux
+wget -O /usr/local/bin/hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-$(uname -s)-$(uname -m)
+chmod +x /usr/local/bin/hadolint
+
+# use
+hadolint Dockerfile
+```
