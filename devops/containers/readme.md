@@ -1,15 +1,16 @@
-# 镜像漏洞扫描工具
-1. Trivy
-   ```bash
-   # 安装
-   brew install trivy
+# Dockerfile语法检测
+```bash
+# macos
+brew install hadolint
 
-   # 基于容器镜像扫描
-   trivy image ffmpeg:v1
+# linux
+wget -O /usr/local/bin/hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-$(uname -s)-$(uname -m)
+chmod +x /usr/local/bin/hadolint
 
-   # 基于dockerfile扫描
-   trivy config Dockerfile
-   ```
+# use
+hadolint Dockerfile
+```
+
 # 镜像瘦身
 ```bash
 # 使用Homebrew安装
@@ -23,15 +24,15 @@ mv dist_mac/docker-slim-sensor /usr/local/bin/
 # 基本使用
 docker-slim build --http-probe=false --continue-after=exec 镜像ID or name:tag
 ```
-# Dockerfile语法检测
+
+# 镜像漏洞扫描工具(Trivy)
 ```bash
-# macos
-brew install hadolint
+# 安装
+brew install trivy
 
-# linux
-wget -O /usr/local/bin/hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-$(uname -s)-$(uname -m)
-chmod +x /usr/local/bin/hadolint
+# 基于容器镜像扫描
+trivy image ffmpeg:v1
 
-# use
-hadolint Dockerfile
+# 基于dockerfile扫描
+trivy config Dockerfile
 ```
