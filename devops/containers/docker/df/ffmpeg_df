@@ -1,8 +1,9 @@
-# 第一阶段：构建阶段
-FROM ubuntu:22.04 AS builder
+# 第一阶段
+FROM ubuntu:22.04 as builder
 
-# 更换镜像源并配置 APT
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates && \
+# 换源 + apt 配置
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates && \
     update-ca-certificates && apt-get clean && rm -rf /var/lib/apt/lists/* && \
     sed -i 's|http://archive.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list && \
     sed -i 's|http://security.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list && \
@@ -10,8 +11,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     echo 'Acquire::http::Pipeline-Depth "200";' >> /etc/apt/apt.conf.d/99parallel && \
     echo 'Acquire::https::Pipeline-Depth "200";' >> /etc/apt/apt.conf.d/99parallel
 
-# 安装编译依赖并编译 FFmpeg
-WORKDIR /tmp/ffmpeg_sources
+# 安装构建依赖
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         autoconf automake build-essential cmake git libass-dev libvidstab-dev \
@@ -20,30 +20,38 @@ RUN apt-get update && \
         zlib1g-dev nasm yasm libx264-dev libx265-dev libnuma-dev libvpx-dev \
         libfdk-aac-dev libmp3lame-dev libopus-dev libxvidcore-dev libssl-dev \
         libaom-dev libdav1d-dev libbluray-dev libtheora-dev libopenjp2-7-dev \
-        libsoxr-dev frei0r-plugins-dev && \
-    git clone --depth 1 https://git.ffmpeg.org/ffmpeg.git ffmpeg && \
-    cd ffmpeg && \
-    ./configure --prefix=/usr/local --enable-gpl --enable-libass --enable-libfreetype \
+        libsoxr-dev frei0r-plugins-dev
+
+# 拉取源码
+WORKDIR /tmp/ffmpeg_sources
+RUN git clone --depth 1 https://git.ffmpeg.org/ffmpeg.git
+
+# 编译
+WORKDIR /tmp/ffmpeg_sources/ffmpeg
+RUN ./configure --prefix=/usr/local --enable-gpl --enable-libass --enable-libfreetype \
         --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx \
         --enable-libx264 --enable-libx265 --enable-libfdk-aac --enable-libxvid \
         --enable-libtheora --enable-libopenjpeg --enable-libbluray --enable-libaom \
         --enable-libdav1d --enable-libsoxr --enable-frei0r --enable-libvidstab \
         --enable-openssl --enable-version3 --enable-nonfree && \
-    make -j"$(nproc)" && make install && make distclean && \
-	cd .. && rm -rf ffmpeg && \
-    apt-get remove -y autoconf automake build-essential cmake git \
+    make -j"$(nproc)" && \
+    make install && \
+    make distclean
+
+# 清理
+RUN apt-get remove -y autoconf automake build-essential cmake git \
         libass-dev libfreetype6-dev libsdl2-dev libtool libva-dev \
         libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev \
         libxcb-xfixes0-dev pkg-config texinfo wget zlib1g-dev nasm yasm && \
     apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# 第二阶段：运行阶段
+# 第二阶段
 FROM ubuntu:22.04
 
-# 复制运行时必需的库文件
+# 复制
 COPY --from=builder /usr/local /usr/local
 
-# 安装运行时依赖
+# 运行期依赖
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         libass9 libfreetype6 libsdl2-2.0-0 libva2 libvdpau1 libvorbis0a libx264-163 \
@@ -53,10 +61,11 @@ RUN apt-get update && \
         libxcb-shm0 libxcb-xfixes0 libsndio7.0 libxv1 libva-drm2 && \
     rm -rf /var/lib/apt/lists/* && ldconfig
 
+# 工作目录
 WORKDIR /home/ffmpeg
-# 验证安装
+
+# 测试
 RUN ffmpeg -version
 
-# 设置入口点, 镜像直接作为 ffmpeg 命令使用, 无需创建容器使用(必须如此配置)
-# 使用方式: docker run --rm <ffmpeg_image> 具体的命令参数 
+# 入口
 ENTRYPOINT ["ffmpeg"]
