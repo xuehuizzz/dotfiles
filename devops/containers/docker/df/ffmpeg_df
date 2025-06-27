@@ -29,7 +29,7 @@ RUN apt-get update && \
         --enable-libtheora --enable-libopenjpeg --enable-libbluray --enable-libaom \
         --enable-libdav1d --enable-libsoxr --enable-frei0r --enable-libvidstab \
         --enable-openssl --enable-version3 --enable-nonfree && \
-    make -j$(nproc) && make install && make distclean && \
+    make -j"$(nproc)" && make install && make distclean && \
 	cd .. && rm -rf ffmpeg && \
     apt-get remove -y autoconf automake build-essential cmake git \
         libass-dev libfreetype6-dev libsdl2-dev libtool libva-dev \
