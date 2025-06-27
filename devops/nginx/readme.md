@@ -1,7 +1,9 @@
 ```bash
-nginx -t    # 测试配置文件是否正确, 检查nginx的默认配置文件
-nginx -t -c filr_path  # 指定文件检查
-nginx -s reload  # 重新加载配置文件, 无需重启服务
+sudo nginx -t   # 测试配置是否语法正确
+sudo nginx -s reload   # 强制重新加载配置文件
+sudo nginx -s stop    # 快速停止
+sudo nginx -s quit   # 优雅停止
+
 openssl x509 -in /path/to/server.crt -noout -enddate  # 查看nginx证书过期时间
 openssl s_client -connect ip:port -showcerts  # 查看要代理地址的证书过期时间   
 ```
