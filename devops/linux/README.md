@@ -1,3 +1,26 @@
+## 创建管理员用户
+```bash
+sudo adduser adminuser
+sudo usermod -aG sudo adminuser  # Ubuntu
+sudo usermod -aG wheel adminuser  # Red Hat
+```
+## 禁用直接 root SSH 访问
+```bash
+sudo nano /etc/ssh/sshd_config
+# Set:
+PermitRootLogin no
+```
+## 自动禁止暴力破解 IP
+```bash
+sudo apt install fail2ban         # Ubuntu
+sudo dnf install fail2ban         # Red Hat
+sudo systemctl enable fail2ban
+sudo systemctl start fail2ban
+```
+
+
+
+
 ## <mark>生成SSH秘钥对</mark>
 ```bash
 ssh-keygen -t ed25519 -C "user email"    # ED25519（推荐，更安全）
