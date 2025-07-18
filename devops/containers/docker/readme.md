@@ -105,7 +105,7 @@ docker load -i [导入文件名].tar
     docker load -i my_image.tar
 ```
 
-二.<mark>使用export和import导出并导入容器文件系统为镜像</mark>
+二.使用export和import导出并导入容器文件系统为镜像
 
 ```markdown
 # 导出容器文件
