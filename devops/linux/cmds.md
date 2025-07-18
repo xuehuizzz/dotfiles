@@ -12,4 +12,7 @@ rsync [options] user@remote_host:/path/to/source /local/destination
 
 ```bash
 curl -s --head www.baidu.com | head -n 1    # 检测网站是否可访问, 200或301表示可以访问
+
+scp xxx.file user@ip:path  # 推送文件到远程
+scp user@ip:file path  # 获取文件到本地
 ```
