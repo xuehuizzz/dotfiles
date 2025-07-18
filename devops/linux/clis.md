@@ -8,3 +8,8 @@ rsync [options] user@remote_host:/path/to/source /local/destination
 - a：归档模式，保持文件权限、符号链接等
 - v：显示详细信息
 - z：压缩数据（提高网络传输效率）
+
+
+```bash
+curl -s --head www.baidu.com | head -n 1    # 检测网站是否可访问, 200或301表示可以访问
+```
