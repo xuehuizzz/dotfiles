@@ -15,4 +15,10 @@ curl -s --head www.baidu.com | head -n 1    # 检测网站是否可访问, 200�
 
 scp xxx.file user@ip:path  # 推送文件到远程
 scp user@ip:file path  # 获取文件到本地
+
+# 拆分文件 
+split -b 100M large_file.txt part_    # 按文件大小
+split -l 10000 large_file.txt part_   # 按行数
+# 合并
+cat part_* > merged_file.txt
 ```
