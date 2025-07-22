@@ -14,7 +14,7 @@ RUN     apt-get -yqq update && \
         apt-get autoremove -y && \
         apt-get clean -y
 
-FROM base as build
+FROM base AS build
 
 ENV         FFMPEG_VERSION=4.4 \
             AOM_VERSION=v1.0.0 \
