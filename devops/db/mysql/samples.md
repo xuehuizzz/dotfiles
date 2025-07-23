@@ -63,7 +63,7 @@ SELECT version();  -- 查询数据库版本
 SELECT CURTIME();  -- 当前时间
 SELECT CURDATE();  -- 当前日期
 ```
-## 排序
+## 排名
 ```sql
 SELECT name, salary,
 DENSE_RANK() OVER (ORDER BY salary DESC) AS rank
