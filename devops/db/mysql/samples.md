@@ -63,7 +63,12 @@ SELECT version();  -- 查询数据库版本
 SELECT CURTIME();  -- 当前时间
 SELECT CURDATE();  -- 当前日期
 ```
-
+## 排序
+```sql
+SELECT name, salary,
+DENSE_RANK() OVER (ORDER BY salary DESC) AS rank
+FROM employees;
+```
 ## <mark>实用触发器推荐</mark><sub>只能对单表配置</sub>
 ```sql
 -- 修改数据时自动更新时间戳(没有显式修改updated_at时才会触发), 以显式声明的优先
