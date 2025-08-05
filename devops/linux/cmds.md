@@ -21,4 +21,7 @@ split -b 100M large_file.txt part_    # 按文件大小
 split -l 10000 large_file.txt part_   # 按行数
 # 合并
 cat part_* > merged_file.txt
+
+# 清空文件, 同时保留句柄
+cat /dev/null > file
 ```
