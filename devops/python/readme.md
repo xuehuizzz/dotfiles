@@ -9,7 +9,32 @@ https://www.runoob.com/w3cnote/google-python-styleguide.html
 ```
 
 #### <mark>项目结构建议</mark>
-```plaintext    
+```plaintext
+my_project/
+├── .github/             # GitHub actions/workflows
+├── .vscode/             # Editor-specific settings (optional)
+├── docs/                # Documentation files
+├── src/                 # Source code lives here (recommended!)
+│   └── my_project/      # Actual Python package
+│       ├── __init__.py
+│       ├── config.py
+│       ├── main.py      # Entry point (CLI, API, etc.)
+│       ├── core/        # Core domain logic
+│       ├── services/    # Business logic, services
+│       ├── models/      # Pydantic/ORM models
+│       ├── api/         # REST or GraphQL routes
+│       └── utils/       # Helper functions
+├── tests/               # Unit and integration tests
+│   ├── __init__.py
+│   └── test_main.py
+├── .env                 # Environment variables
+├── pyproject.toml       # Build system & dependencies (Poetry is king in 2025)
+├── README.md            # Project overview
+├── .gitignore
+└── requirements.txt     # Optional (for Docker or deployment)
+
+
+  
 project_name/
 ├── .env   # 环境变量文件
 ├── .gitignore   # Git忽略文件
