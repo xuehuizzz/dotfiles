@@ -88,6 +88,7 @@
     "terminal.integrated.inheritEnv": true,
     "terminal.integrated.gpuAcceleration": "on",
     "terminal.integrated.cursorStyleInactive":"line",
+    // "terminal.integrated.scrollback": 1000,
     "accessibility.signals.terminalCommandFailed": {
         "sound": "auto",
         "announcement": "auto"
