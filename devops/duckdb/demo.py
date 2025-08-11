@@ -1,3 +1,4 @@
+# pip install duckdb
 import duckdb
 
 class DuckDBReader:
