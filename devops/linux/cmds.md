@@ -24,4 +24,7 @@ cat part_* > merged_file.txt
 
 # 清空文件, 同时保留句柄
 cat /dev/null > file
+
+# tee 写入文件和屏幕
+ls -l | tee result.txt
 ```
