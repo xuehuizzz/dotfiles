@@ -1,4 +1,10 @@
 {
+    // 保存自动删除末尾空格
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
     "editor.formatOnPaste": false, // 禁用粘贴时自动缩进
     "window.titleBarStyle": "native",
     "window.customTitleBarVisibility": "never", // 隐藏顶部自定义标题栏
@@ -67,9 +73,6 @@
     "javascript.preferences.quoteStyle": "single",
     "typescript.preferences.quoteStyle": "single",
     "files.autoGuessEncoding": true,
-    // 保存自动删除末尾空格
-    "files.trimTrailingWhitespace": true,
-    "files.insertFinalNewline": true,
     // 搜索吸附目录
     "search.searchEditor.singleClickBehaviour": "peekDefinition",
     "editor.stickyScroll.enabled": false, // 禁用粘性滚动功能
