@@ -10,6 +10,10 @@ sudo nano /etc/ssh/sshd_config
 # Set:
 PermitRootLogin no
 ```
+```bash
+usermod -aG sudo username   # Ubuntu/Debian 将username添加到sudo组
+usermod -aG wheel username  # RHEL/CentOS  将username添加到wheel组
+```
 ## 自动禁止暴力破解 IP
 ```bash
 sudo apt install fail2ban         # Ubuntu
