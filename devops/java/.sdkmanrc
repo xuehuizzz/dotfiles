@@ -1,0 +1,4 @@
+# 在项目根目录创建 .sdkmanrc 文件, 并启用自动切换功能 `sdk env init`
+java=21.0.8-jbr
+maven=3.9.9
+gradle=8.10
