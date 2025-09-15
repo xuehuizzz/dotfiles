@@ -31,4 +31,7 @@ javac -version
 mvn -v
 gradle -v
 
+# 在项目根目录创建 .sdkmanrc 文件, 启用 `自动切换功能`,
+# 之后进入该目录时，会自动切换到 .sdkmanrc 指定的版本，非常适合多项目开发
+sdk env init
 ```
