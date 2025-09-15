@@ -14,9 +14,19 @@ sdk default java 21.0.8-jbr  # 设为默认
 sdk install maven
 sdk install gradle
 
+# 查看当前正在使用的版本
+sdk current
+
+# 切换Java版本
+sdk use java x.x.x
+sdk default java x.x.x
+sdk current 
+
 # 验证
 java -version
 javac -version
 mvn -v
 gradle -v
+
+
 ```
