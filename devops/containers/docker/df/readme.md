@@ -1,47 +1,53 @@
 ## <font color=red>Dockerfile</font>
 ```dockerfile
-# 基于一个基础镜像, 优先使用使用官方 Slim 或 Alpine 基础镜像
+# 1) 基础镜像：尽量固定小版本或 digest，减少供应链不确定性
 FROM node:18-alpine
 
-# 创建并切换到一个非root用户 appuser, 以下操作都是以 appuser 的身份运行
-RUN adduser --disabled-password --gecos '' appuser
-USER appuser
+# 2) 元数据一次性写，减少层数
+LABEL maintainer="xuehui <xuehuizzz103@gmail.com>" \
+      version="1.0" \
+      description="A brief description of the image"
 
-# 使用 LABEL 添加镜像的元信息，例如作者、版本和描述
-LABEL maintainer="xuehui <xuehuizzz103@gmail.com>"
-LABEL version="1.0"
-LABEL description="A brief description of the image"
+# 3) 稳定环境变量
+ENV TZ=Asia/Shanghai \
+    NODE_ENV=production
 
-# 环境变量
-ENV TZ=Asia/Shanghai
-
-# 指定工作路径, 如果该路径不存在, WORKDIR会自动递归创建
+# 4) 工作目录
 WORKDIR /home/app
 
-# => Install uv globally by copying the binary from the official container
+# 5) 系统依赖（构建期通常需要 root；Alpine 用 apk）
+#    --no-cache 不写入本地索引；把 curl 装上以便 HEALTHCHECK
+RUN apk add --no-cache curl bash make build-base
+
+# 6) 从官方 uv 镜像复制二进制（可考虑固定 tag 或 digest）
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-# 复制文件/目录, 主机路径 容器路径
-# . 表示复制到容器当前工作路径, 如果未使用WORKDIR指定工作路径的话, 则会复制到容器的根目录下
-COPY test.txt .
+# 7) 先复制稳定、低频变更的文件以利用缓存（举例）
+# COPY package.json package-lock.json ./
+# RUN npm ci --omit=dev
 
-# 在构建镜像时执行命令, 默认用户是root, 因此不用加 sudo
-# 在命令末尾清理apt缓存, 避免缓存文件占用额外空间
-RUN apt-get update && apt-get install -y build-essential \
-    && make install \
-    && apt-get purge -y build-essential \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
+# 8) 再复制其余源代码 / 资源
+COPY test.txt ./
+# COPY . .
 
+# 9) 如需编译/构建，放在这里（举例）
+# RUN npm run build
 
-# 在容器启动时执行的命令, 推荐使用Exec形式执行命令, 而不是Shell形式
-ENTRYPOINT ["executable", "arg1", "arg2"]
-CMD ["executable", "arg1", "arg2"]
+# 10) 创建非 root 用户，并准备文件权限
+#     在构建尾声再降权，能避免权限问题与重复构建
+RUN adduser -D -H -s /sbin/nologin appuser \
+ && chown -R appuser:appuser /home/app
 
-# 健康检查
-# 每30s进行一次健康检查, 如果命令在10s中未完成,则认为超时,连续3次检查失败后, 容器被标记为不健康
+# 11) 切换到非 root 仅用于运行
+USER appuser
+
+# 12) 健康检查（注意 Alpine 有 /bin/sh；且 curl 已安装）
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
-    cmd curl -f http://localhost/ || exit 1
+  CMD curl -fsS http://localhost/ || exit 1
+
+# 13) 启动命令：ENTRYPOINT 固定主进程；CMD 给默认参数
+ENTRYPOINT ["executable"]
+CMD ["arg1", "arg2"]
 ```
 
 ## <font color=red>注意事项</font>
