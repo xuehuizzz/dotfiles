@@ -38,7 +38,7 @@
 7. 显示/切换当前工作目录
    ```bash
    .shell pwd          -- 显示当前目录  
-   .shell cd /path     -- 切换目录（仅对子 shell 有效）  
+   .cd /path     -- 切换目录（仅对子 shell 有效）  
    ```
 8. 其他常用命令
    ```sql
