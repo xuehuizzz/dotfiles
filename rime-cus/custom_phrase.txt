@@ -1,0 +1,30 @@
+# Rime table
+# coding: utf-8
+#
+# 請將該文件以UTF-8編碼保存爲
+#
+# 碼表各字段以製表符（Tab）分隔
+# 順序爲：文字、編碼、權重（決定重碼的次序、可選）
+
+又双叒叕	yyy
+http://rime.im/	rime	1
+Rime	rime	3
+⌘	cmd
+⌃	ctl
+⌥	opt
+⇧	shift
+↑	shang
+↓	xia
+←	zuo
+→	you
+•	dian
+UTF-8	utf8
+U盘	upan
+IPv4	ipv
+IPv6	ipv
+Quantumult	quan
+T恤	txu
+Wi-Fi	wifi
+QQ邮箱	qq
+hello	hello
+
