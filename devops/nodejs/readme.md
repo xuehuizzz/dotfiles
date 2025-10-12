@@ -41,6 +41,18 @@ pnpm add -D xxx   # -D等同于 npm 的 --save-dev
 # 全局安装包
 pnpm add -g xxx
 
+
+前端框架
+    React：pnpm create react-app my-app
+    Vue：pnpm create vue@latest my-app
+    Svelte：pnpm create svelte@latest my-app
+全栈框架
+    Next.js：pnpm create next-app my-app
+    Nuxt.js：pnpm create nuxt@latest my-app
+后端框架
+    Express：pnpm create express-app my-app
+    NestJS：pnpm create @nestjs/cli my-app
+
 # 运行脚本
 在 package.json 里写脚本，比如：
 
