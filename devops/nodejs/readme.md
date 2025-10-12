@@ -40,7 +40,7 @@ yarn cache clean  # 清理缓存
 yarn start  # 启动项目
 ```
 
-# nvm
+# nvm <sub>node版本管理工具</sub>
 ```bash
 # 安装
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
