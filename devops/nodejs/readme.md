@@ -24,6 +24,37 @@ nvm use default
 ```
 > 优先使用npx创建项目, 例如: npx create-next-app@latest report-system --typescript
 
+# <mark>pnpm</mark>
+```bash
+npm install -g pnpm
+pnpm -v
+
+# 初始化项目
+pnpm init   -y 跳过交互, 生成默认package.json
+
+# 删除依赖
+pnpm remove xxx
+# 安装生产依赖
+pnpm add xxx
+# 安装开发依赖
+pnpm add -D xxx   # -D等同于 npm 的 --save-dev
+# 全局安装包
+pnpm add -g xxx
+
+# 运行脚本
+在 package.json 里写脚本，比如：
+
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  }
+}
+然后:
+pnpm dev
+```
+
+
 # yarn
 ```bash
 # Yarn 和 npm 都是包管理工具, 可以共存, 但在同一个项目中最好只使用其中一个
