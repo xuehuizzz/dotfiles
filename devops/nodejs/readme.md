@@ -66,6 +66,14 @@ pnpm add -g xxx
 pnpm dev
 ```
 
+# degit
+```bash
+# 快速下载仓库的当前快照, 不包含git历史, 常用于下载模板项目使用
+pnpm install -g degit
+
+# how to use?
+degit user/repo my-project
+```
 
 # yarn
 ```bash
