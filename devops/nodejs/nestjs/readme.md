@@ -9,4 +9,4 @@ cd my-nest-app
 pnpm run start  # 启动项目, 生产模式启动
 pnpm run start:dev  # 启动项目, 开发模式启动, 会开启热重载
 ```
-> npx @nestjs/cli new my-nest-app   # 不安装cli工具, 临时使用
+> 项目名通常 小写, 连字符拼接
