@@ -1,16 +1,24 @@
 通用-------------------------------------------------------------------------------------------------------------------------
 # 自定义方法, 判断命令存不存在
-_has() {
+alias_list=(
+    "vim:nvim"
+    "vi:nvim"
+    "cat:bat"
+)
+
+# 判断命令是否存在
+_command_exists() {
     command -v "$1" > /dev/null 2>&1
 }
 
-if _has bat; then
-    alias cat="bat"
-fi
-if _has nvim; then
-    alias vim="nvim"
-    alias vi="nvim"
-fi
+for pair in "${alias_list[@]}"; do
+    alias_cmd=${pair%%:*}   # alias 名称
+    real_cmd=${pair##*:} # 目标命令
+    if _command_exists "${real_cmd%% *}"; then  # 如果命令存在（忽略参数部分）
+        alias $alias_cmd="$real_cmd"
+    fi
+done
+
 
 # rsync -avz file.txt user@yourserver.com:/home/user/  # 从本地传输到远程服务器
 # rsync -avz user@yourserver.com:/home/user/file.txt file.txt  # 从远程服务器下载文件到本地
