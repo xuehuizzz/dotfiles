@@ -1,8 +1,3 @@
-# p10k config
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 source ~/.bash_profile
 setopt AUTO_CD
@@ -30,7 +25,6 @@ alias dsm="docker-slim build --http-probe=false --continue-after=exec"  # dsm im
 alias ql="qlmanage -p"  # quick look
 alias vim="nvim"
 
-
 custom_open() {    # for macOS
     if [[ -f "$1" ]]; then
         # 如果是文件，直接用 TextEdit 打开
@@ -44,12 +38,25 @@ custom_open() {    # for macOS
 }
 alias open="custom_open"
 
+
 # 配置zsh插件
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 
 
+# 自定义PROMPT
+parse_git_branch() {
+  git branch --show-current 2>/dev/null
+}
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+set_prompt() {
+  local git_branch="$(parse_git_branch)"
+  local path="%F{cyan}%~%f"
+  if [ -n "$git_branch" ]; then
+    PROMPT="${path} %F{green}(${git_branch})%f ➜ "
+  else
+    PROMPT="${path} ➜ "
+  fi
+}
+
+precmd_functions+=(set_prompt)
