@@ -1,6 +1,14 @@
+# brew setup
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+export HOMEBREW_AUTO_UPDATE_SECS=1296000  # 15天自动更新一次
+export HOMEBREW_NO_ENV_HINTS=1  # 隐藏提示信息
 source ~/.bash_profile
 
+# zsh plugins
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# zsh setup
 HISTSIZE=100000                 # 内存中最大历史记录数
 SAVEHIST=100000                 # 保存到文件的最大记录数
 HISTFILE=~/.zsh_history         # 历史文件路径
@@ -16,6 +24,7 @@ setopt AUTO_PUSHD         # 自动把 `cd` 的目录也推入栈
 setopt PUSHD_SILENT       # 不在每次 pushd/popd 时打印栈
 setopt PUSHD_IGNORE_DUPS  # 不允许重复目录
 
+# alias info
 alias ls="ls -G"
 alias ll="ls -lhSr"  # h 人性化显示, S 文件大小排序, r 倒序
 alias rsync="rsync -avz --progress" # 适合大文件传输, 支持断点续传
@@ -33,7 +42,6 @@ alias tarx="tar -xzvf"  # 解压文件   tarx xxx.tar.gz
 alias ffmpeg="docker run --rm -v \$(pwd):/home/ffmpeg ffmpeg:v1 -y"
 alias dsm="docker-slim build --http-probe=false --continue-after=exec"  # dsm imageName:tag   # 镜像瘦身
 alias ql="qlmanage -p"  # quick look
-
 alias_list=(
     "vim:nvim"
     "vi:nvim"
@@ -53,7 +61,7 @@ for pair in "${alias_list[@]}"; do
     fi
 done
 
-
+# custom functions
 custom_open() {    # for macOS
     if [[ -f "$1" ]]; then
         # 如果是文件，直接用 TextEdit 打开
@@ -68,12 +76,7 @@ custom_open() {    # for macOS
 alias open="custom_open"
 
 
-# 配置zsh插件
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-
-# 自定义PROMPT
+# PROMPT setup
 parse_git_branch() {
   git branch --show-current 2>/dev/null
 }
