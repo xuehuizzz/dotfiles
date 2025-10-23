@@ -1,66 +1,73 @@
 return {
+  -- Highlight, edit, and navigate code
   "nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate",
   dependencies = {
-    "HiPhish/rainbow-delimiters.nvim",
+    "HiPhish/rainbow-delimiters.nvim", -- ✅ 替换掉旧版 p00f/nvim-ts-rainbow
   },
-  main = "nvim-treesitter.configs",
+  build = ":TSUpdate",
+  main = "nvim-treesitter.configs", -- Sets main module to use for opts
   opts = {
     ensure_installed = {
       "lua",
       "python",
       "javascript",
       "typescript",
-      "vim",
       "vimdoc",
-      "bash",
-      "html",
-      "css",
-      "json",
-      "yaml",
-      "markdown",
-      "markdown_inline",
-      "dockerfile",
-      "go",
-      "sql",
+      "vim",
+      "regex",
       "terraform",
+      "sql",
+      "dockerfile",
       "toml",
-      "gitignore",
+      "json",
       "java",
-      "groovy",        -- 如果你确实需要，可保留，否则建议移除
+      "groovy",
+      "go",
+      "gitignore",
       "graphql",
+      "yaml",
       "make",
       "cmake",
+      "markdown",
+      "markdown_inline",
+      "bash",
       "tsx",
+      "css",
+      "html",
     },
+
+    -- 自动安装未安装的语法
     auto_install = true,
+
     highlight = {
       enable = true,
-      additional_vim_regex_highlighting = {},
+      additional_vim_regex_highlighting = { "ruby" },
     },
-    indent = {
-      enable = true,
-      disable = { "ruby" },  -- 你原本指定的内容仍保留
-    },
+
+    indent = { enable = true, disable = { "ruby" } },
   },
+
   config = function(_, opts)
+    -- treesitter 基础配置
     require("nvim-treesitter.configs").setup(opts)
-  
-    -- rainbow-delimiters 配置
+
+    -- ✅ rainbow-delimiters 配置
     local rainbow_delimiters = require("rainbow-delimiters")
+
     vim.g.rainbow_delimiters = {
       strategy = {
         [""] = rainbow_delimiters.strategy["global"],
-        vim = rainbow_delimiters.strategy["local"],
+        commonlisp = rainbow_delimiters.strategy["local"],
       },
       query = {
         [""] = "rainbow-delimiters",
-        lua = "rainbow-blocks",
+        latex = "rainbow-blocks",
       },
       highlight = {
-        "RainbowDelimiterYellow",
-        "RainbowDelimiterViolet",
-        "RainbowDelimiterBlue",
+        -- 自定义你的彩虹括号配色（与原来的保持一致）
+        "RainbowDelimiterYellow", -- "#F9D749"
+        "RainbowDelimiterViolet", -- "#CC78D1"
+        "RainbowDelimiterBlue",   -- "#479FF8"
       },
     }
   end,

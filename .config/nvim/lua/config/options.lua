@@ -67,39 +67,39 @@ vim.cmd("language en_US.UTF-8")
 -- 完全禁用诊断图标和符号
 -- TODO: 过滤 #501, #402 告警
 vim.diagnostic.config({
-  virtual_text = {
-    prefix = "", -- 设置虚拟文本的前缀为空
-    spacing = 4, -- 设置间距
-    source = true,
-    severity = {
-      min = vim.diagnostic.severity.INFO,
-    },
-  },
-  signs = false, -- 禁用行号列的图标
-  update_in_insert = false,
-  underline = true,
-  severity_sort = true,
-  float = {
-    border = "rounded",
-    source = true,
-    header = "",
-    prefix = "",
-  },
+	virtual_text = {
+		prefix = "", -- 设置虚拟文本的前缀为空
+		spacing = 4, -- 设置间距
+		source = true,
+		severity = {
+			min = vim.diagnostic.severity.INFO,
+		},
+	},
+	signs = false, -- 禁用行号列的图标
+	update_in_insert = false,
+	underline = true,
+	severity_sort = true,
+	float = {
+		border = "rounded",
+		source = true,
+		header = "",
+		prefix = "",
+	},
 })
 
 -- 禁用一些不需要的内置插件
 local disabled_built_ins = {
-  "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
-  "gzip",
-  "zip",
-  "zipPlugin",
-  "tar",
-  "tarPlugin",
+	"netrw",
+	"netrwPlugin",
+	"netrwSettings",
+	"netrwFileHandlers",
+	"gzip",
+	"zip",
+	"zipPlugin",
+	"tar",
+	"tarPlugin",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-  vim.g["loaded_" .. plugin] = 1
+	vim.g["loaded_" .. plugin] = 1
 end
