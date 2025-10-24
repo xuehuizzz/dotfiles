@@ -12,18 +12,24 @@ ENV DUCKDB_EXTENSION_DIRECTORY=${DUCKDB_DIR}/extensions
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH="${DUCKDB_DIR}/bin:${PATH}"
 
-# 安装依赖、创建目录、下载 DuckDB CLI 并安装扩展
+# 构建参数，Docker 会自动设置 TARGETARCH
+ARG TARGETARCH
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ca-certificates curl unzip && \
     mkdir -p ${DUCKDB_DIR}/bin ${DUCKDB_DIR}/extensions && \
-    curl -fsSL -o /tmp/duckdb.zip "https://github.com/duckdb/duckdb/releases/latest/download/duckdb_cli-linux-amd64.zip" && \
+    \
+    # 根据架构选择 DuckDB CLI 下载链接
+    DUCKDB_ARCH="amd64" && \
+    if [ "$TARGETARCH" = "arm64" ]; then DUCKDB_ARCH="arm64"; fi && \
+    echo "Downloading DuckDB CLI for $DUCKDB_ARCH..." && \
+    curl -fsSL -o /tmp/duckdb.zip "https://github.com/duckdb/duckdb/releases/latest/download/duckdb_cli-linux-${DUCKDB_ARCH}.zip" && \
     unzip /tmp/duckdb.zip -d /tmp && \
     mv /tmp/duckdb ${DUCKDB_DIR}/bin/duckdb && \
     chmod +x ${DUCKDB_DIR}/bin/duckdb && \
     rm -rf /tmp/duckdb.zip /var/lib/apt/lists/* && \
+    \
     # 安装并加载扩展到默认数据库
     duckdb -c "INSTALL excel; INSTALL json; LOAD excel; LOAD json;"
 
-# 默认入口命令
 ENTRYPOINT ["duckdb"]
-
