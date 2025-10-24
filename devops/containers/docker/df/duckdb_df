@@ -18,7 +18,7 @@ RUN apt-get update && \
     chmod +x ${DUCKDB_DIR}/bin/duckdb && \
     rm -rf /tmp/duckdb.zip /var/lib/apt/lists/* && \
     # 安装并加载扩展到默认数据库
-    duckdb -c "INSTALL excel; INSTALL json; INSTALL parquet; LOAD excel; LOAD json; LOAD parquet;"
+    duckdb -c "INSTALL excel; INSTALL json; LOAD excel; LOAD json;"
 
 # 默认入口命令
 ENTRYPOINT ["duckdb"]
