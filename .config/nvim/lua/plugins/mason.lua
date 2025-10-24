@@ -51,6 +51,7 @@ return {
 				"denols",
 				-- { 'eslint_d', version = '13.1.2' },
 			},
+			run_on_start = false  -- 不自动安装
 		})
 	end,
 }
