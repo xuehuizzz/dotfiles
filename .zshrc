@@ -39,7 +39,6 @@ alias hist="history -i"
 alias jupyter="nohup jupyter notebook --allow-root > jupyter.log 2>&1 &"  #后台启动jupyter notebook
 alias tarc="tar -czvf"  # 压缩文件   tarc xxx.tar.gz file1 file2 folder1  # 可以同时归档文件和目录并压缩
 alias tarx="tar -xzvf"  # 解压文件   tarx xxx.tar.gz
-alias ffmpeg="docker run --rm -v \$(pwd):/home/ffmpeg ffmpeg:v1 -y"
 alias dsm="docker-slim build --http-probe=false --continue-after=exec"  # dsm imageName:tag   # 镜像瘦身
 alias ql="qlmanage -p"  # quick look
 alias_list=(
@@ -75,6 +74,13 @@ custom_open() {    # for macOS
 }
 alias open="custom_open"
 
+duckdb() {
+  docker run --rm -it -v "$(pwd):/data" -w /data duckdb-cli:latest "$@"
+}
+
+ffmpeg() {
+  docker run --rm -v "$(pwd):/home/ffmpeg" ffmpeg:v1 -y "$@"
+}
 
 # PROMPT setup
 parse_git_branch() {
