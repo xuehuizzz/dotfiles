@@ -1,7 +1,7 @@
 ## <font color=red>Dockerfile</font>
 ```dockerfile
-# 1) 基础镜像：尽量固定小版本或 digest，减少供应链不确定性
-FROM node:18-alpine
+# 1) 基础镜像：最推荐 debian:bookworm-slim
+FROM debian:bookworm-slim
 
 # 2) 元数据一次性写，减少层数
 LABEL maintainer="xuehui <xuehuizzz103@gmail.com>" \
