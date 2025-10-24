@@ -1,4 +1,4 @@
-# alias duckdb='docker run --rm -it -v "$PWD:/data" -w /data duckdb-cli:latest'
+# alias duckdb="docker run --rm -it -v \$(pwd):/data -w /data duckdb-cli:latest"
 
 # syntax=docker/dockerfile:1
 FROM debian:bookworm-slim
