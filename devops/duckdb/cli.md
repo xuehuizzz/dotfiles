@@ -7,7 +7,9 @@
    ```bash
    INSTALL excel;  # 安装excel插件
    LOAD excel;  # 加载Excel插件
-
+   INSTALL json;
+   LOAD json;
+   
    # 读取Excel, 不指定sheet的话, 默认读取第一个sheet页
    select * from read_xlsx('data.xlsx', sheet='sheet_name');
    ```
@@ -19,34 +21,39 @@
    -- 手动指定分隔符和表头
    SELECT * FROM read_csv('data.csv', delim=',', header=true);
    ```
-4. 建视图, 反复查询CSV
+4. 查询json文件
+   ```sql
+   -- 只要文件内容是标准JSON格式, 文件扩展名don't care
+   select * from read_json("file");
+   ```
+5. 建视图, 反复查询CSV
    ```sql
    CREATE VIEW mycsv AS SELECT * FROM read_csv_auto('data.csv');
    SELECT COUNT(*) FROM mycsv;
    SELECT col1, col2 FROM mycsv WHERE col3 > 100;
    ```
-5. 导入CSV到duckdb表(持久化)
+6. 导入CSV到duckdb表(持久化)
    ```sql
    CREATE TABLE mytable AS SELECT * FROM read_csv_auto('data.csv');
    SELECT * FROM mytable LIMIT 10;
    ```
-6. 导出查询结果为CSV
+7. 导出查询结果为CSV
    ```sql
    COPY (SELECT * FROM mytable WHERE age > 30) 
    TO 'output.csv' (HEADER, DELIMITER ',');
    ```
-7. 显示/切换当前工作目录
+8. 显示/切换当前工作目录
    ```bash
    .shell pwd          -- 显示当前目录  
    .cd /path     -- 切换目录（仅对子 shell 有效）  
    ```
-8. 其他常用命令
+9. 其他常用命令
    ```sql
    SHOW TABLES;  -- 查看数据库里的表
    DROP TABLE mytable;  -- 删除表
    DESCRIBE mytable;   -- 查看表结构
    ```
-9. 退出CLI
+10. 退出CLI
    ```bash
     .exit  # Ctrl+D
    ```
