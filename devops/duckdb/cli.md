@@ -17,9 +17,9 @@
    ```sql
    -- 自动识别格式
    SELECT * FROM read_csv_auto('data.csv') WHERE xxx=xxx;
-
    -- 手动指定分隔符和表头
    SELECT * FROM read_csv('data.csv', delim=',', header=true);
+   -- read_csv('https://example.com/data.csv')
    ```
 4. 查询json文件
    ```sql
