@@ -37,10 +37,12 @@
    CREATE TABLE mytable AS SELECT * FROM read_csv_auto('data.csv');
    SELECT * FROM mytable LIMIT 10;
    ```
-7. 导出查询结果为CSV
+7. 导出查询结果
    ```sql
+   -- 原数据格式任意
    COPY (SELECT * FROM mytable WHERE age > 30) 
-   TO 'output.csv' (HEADER, DELIMITER ',');
+   TO 'output.csv' (HEADER, DELIMITER ',');  -- 导出为csv
+   TO 'output.json' (FORMAT JSON);  -- 导出为json
    ```
 8. 显示/切换当前工作目录
    ```bash
