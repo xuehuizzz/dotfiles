@@ -1,89 +1,93 @@
 """A log config file, Use lazy % formatting in logging functions.
 from loguru import logger  # Third-party library, used directly
 
-pip install python-json-logger
 """
+__all__ = ["logger"]
+
 import atexit
+import json
 import logging
 import sys
-from logging.handlers import RotatingFileHandler
+from datetime import datetime
 from pathlib import Path
+from logging.handlers import RotatingFileHandler
 
-from pythonjsonlogger.json import JsonFormatter
+
+class SimpleJsonFormatter(logging.Formatter):
+    def format(self, record):
+        log_record = {
+            "level": record.levelname,
+            "ts": datetime.fromtimestamp(record.created)
+            .astimezone()
+            .isoformat(timespec="milliseconds"),
+            "msg": record.getMessage(),
+            "caller": record.filename,
+            "func": record.funcName,
+            "lineno": record.lineno,
+            "name": record.name,
+            # "thread": record.threadName,
+            # "process": record.process,
+        }
+        if hasattr(record, "extra_data"):
+            log_record["extra"] = record.extra_data
+        if record.exc_info:
+            log_record["exc_info"] = self.formatException(record.exc_info)
+        return json.dumps(log_record, ensure_ascii=False)
 
 
-def setup_logger(log_level=logging.DEBUG, console_level=logging.DEBUG, logger_name='project_name'):
-    """Sets up and returns a logger with both file and console handlers."""
-    if not logger_name:
-        logger_name = __name__
-    log_dir = Path(__file__).resolve().parent / "logs"  # Modify according to actual situation
-    log_dir.mkdir(parents=True, exist_ok=True)
-    log_file = log_dir / "task.log"
+_LOGGERS = {}  # 缓存 logger
 
-    _logger = logging.getLogger(logger_name)
-    _logger.propagate = False
-    _logger.setLevel(log_level)
 
-    if _logger.hasHandlers():
-        _logger.handlers.clear()
+def get_logger(
+    name="project", log_dir=None, max_bytes=10 * 1024 * 1024, backup_count=5
+):
+    if name in _LOGGERS:
+        return _LOGGERS[name]
 
-    # 1. 文件自动轮换: 基于文件大小
-    # file_handler = RotatingFileHandler(
-    #     log_file, maxBytes=20 * 1024 * 1024, backupCount=7, encoding='utf-8'
-    # )
-    
-    # 2. 文件自动轮换: 基于时间
-    # file_handler = TimedRotatingFileHandler(
-    #     log_file, when=midnight, backupCount=7, encoding='utf-8'
-    # )
+    if log_dir is None:
+        log_dir = Path(__file__).resolve().parent / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True, mode=0o755)
+    log_file = log_dir / f"{name}.log"
 
-    # 3. 不轮换: 文件格式(普通)
-    file_handler = logging.FileHandler(log_file, encoding='utf-8')
-    file_handler.setLevel(log_level)
+    logger = logging.getLogger(name)
+    logger.setLevel(logging.DEBUG)
 
-    console_handler = logging.StreamHandler(stream=sys.stdout)
-    console_handler.setLevel(console_level)
-
-    formatter = logging.Formatter(
-        '%(asctime)s - %(levelname)-8s | %(filename)s [%(funcName)s: %(lineno)3d] - %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S'
+    # 文件日志（JSON + 轮转）
+    file_handler = RotatingFileHandler(
+        log_file, maxBytes=max_bytes, backupCount=backup_count, encoding="utf-8"
     )
-    # 输出JSON格式
-    json_formatter = JsonFormatter(
-        fmt='%(levelname)s %(asctime)s %(name)s %(message)s %(filename)s %(funcName)s %(lineno)d',
-        datefmt='%Y-%m-%dT%H:%M:%S',
-        rename_fields={
-            'levelname': 'level',
-            'asctime': 'ts',
-            'message': 'msg',
-            'filename': 'caller'
-        },
-        json_ensure_ascii=False
+    file_handler.setFormatter(SimpleJsonFormatter())
+    logger.addHandler(file_handler)
+
+    # 控制台日志（彩色可选）
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_formatter = logging.Formatter(
+        "%(asctime)s - %(levelname)-8s | %(filename)s [%(funcName)s:%(lineno)3d] - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
     )
-    
-    file_handler.setFormatter(json_formatter)  # or formatter
-    console_handler.setFormatter(formatter)
+    console_handler.setFormatter(console_formatter)
+    logger.addHandler(console_handler)
 
-    _logger.addHandler(file_handler)
-    _logger.addHandler(console_handler)
+    # 自动关闭
+    atexit.register(lambda: [h.flush() or h.close() for h in logger.handlers])
 
-    atexit.register(lambda: _logger.handlers.clear())
-    return _logger
-
-
-logger = setup_logger()
+    _LOGGERS[name] = logger
+    return logger
 
 
-if __name__ == '__main__':
+logger = get_logger("my_project")
+
+
+if __name__ == "__main__":
     """
+    logger = get_logger("my_project")
+    logger.debug("调试日志")
+    logger.info("任务开始")
+    logger.warning("警告信息")
+    logger.error("出错啦")
     try:
-        from loguru import logger
-    except ImportError:
-        from custom_func import logger
-    logger.debug('这是一个%s信息', 'debug')
-    logger.info('这是一个%s信息', 'info')
-    logger.warning('这是一个%s信息', 'warning')
-    logger.error('这是一个%s信息', 'error')
-    logger.critical('这是一个%s信息', 'critical')
-    logger.exception("自带堆栈信息")
+        1 / 0
+    except ZeroDivisionError:
+        logger.exception("捕获异常示例")
+    logger.critical("严重错误！")
     """
