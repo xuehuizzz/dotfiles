@@ -41,7 +41,7 @@
    ```sql
    -- 原数据格式任意
    COPY (SELECT * FROM mytable WHERE age > 30) 
-   TO 'output.csv' (HEADER, DELIMITER ',');  -- 导出为csv
+   TO 'output.csv' (HEADER, DELIMITER ',');  -- 导出为csv, 显式指定 (FORMAT csv, DELIMITER ',', HEADER)
    TO 'output.json' (FORMAT JSON);  -- 导出为json
    ```
 8. 显示/切换当前工作目录
