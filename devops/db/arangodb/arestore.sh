@@ -5,7 +5,6 @@
 DB_NAME="cmdb"
 DB_USER="root"
 DB_PASS="admin"
-BASE_DUMP_DIR="./gzip"  # 文件备份路径 / 时间戳文件夹
 SERVER_ENDPOINT="tcp://127.0.0.1:8529"
 
 # 参数
@@ -24,7 +23,7 @@ while [[ $# -gt 0 ]]; do
       ALL_MODE=true
       shift
       ;;
-    -t|--timestamp)
+    -d|--dir)
       TIMESTAMP_DIR="$2"
       shift 2
       ;;
@@ -42,8 +41,7 @@ if [ -z "$TIMESTAMP_DIR" ]; then
   exit 1
 fi
 
-# 拼接最终 dump 目录路径
-DUMP_DIR="$BASE_DUMP_DIR/$TIMESTAMP_DIR"
+DUMP_DIR="$TIMESTAMP_DIR"
 
 # 检查路径是否存在
 if [ ! -d "$DUMP_DIR" ]; then
