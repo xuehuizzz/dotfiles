@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# sh arestore.sh -d <fireDir> --all  恢复所有
+# sh arestore.sh -d <fireDir> -c <collectionName>  恢复单个集合
 # 默认参数
 DB_NAME="cmdb"
 DB_USER="root"
