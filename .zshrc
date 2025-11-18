@@ -1,3 +1,5 @@
+export XDG_CONFIG_HOME="$HOME/.config"  # 配置文件
+
 # brew setup
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 export HOMEBREW_AUTO_UPDATE_SECS=1296000  # 15天自动更新一次
@@ -23,6 +25,7 @@ setopt AUTO_CD
 setopt AUTO_PUSHD         # 自动把 `cd` 的目录也推入栈
 setopt PUSHD_SILENT       # 不在每次 pushd/popd 时打印栈
 setopt PUSHD_IGNORE_DUPS  # 不允许重复目录
+
 
 # alias info
 alias ls="ls -G"
