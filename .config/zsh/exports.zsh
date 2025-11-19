@@ -8,3 +8,6 @@ export HOMEBREW_AUTO_UPDATE_SECS=1296000  # 15天自动更新一次
 
 export EDITOR=nvim
 
+export TERM="xterm-256color"
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
