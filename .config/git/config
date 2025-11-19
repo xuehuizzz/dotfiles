@@ -1,3 +1,12 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+#	name = xuehui
+#	email = xuehui@mbp.(none)
+
+# 以编辑模式 ( -e ) 打开全局 Git 配置文件
+#  git config --global -e
+
 [core]
   excludesfile = $HOME/.gitignore_global
 [user]
@@ -38,3 +47,4 @@
 [blame]
   coloring = highlightRecent
   date = relative
+

@@ -46,3 +46,8 @@ custom_open() {    # for macOS
     fi
 }
 alias open="custom_open"
+
+ffmpeg() {
+  docker run --rm -v "$(pwd):/home/ffmpeg" ffmpeg:v1 -y "$@"
+}
+

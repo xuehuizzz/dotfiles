@@ -200,3 +200,4 @@ augroup file_dictionaries
 augroup END
 
 highlight StatusLine cterm=bold ctermfg=231 ctermbg=NONE guifg=#ffffff guibg=NONE
+
