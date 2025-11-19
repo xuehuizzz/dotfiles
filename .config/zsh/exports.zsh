@@ -6,4 +6,5 @@ export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 export HOMEBREW_AUTO_UPDATE_SECS=1296000  # 15天自动更新一次
 # export HOMEBREW_NO_ENV_HINTS=1  # 隐藏提示信息
 
+export EDITOR=nvim
 
