@@ -1,0 +1,19 @@
+#!/usr/bin/expect -f
+# 使用 openconnect 工具登录公司内网vpn
+set vpn_host "host:port"
+set username "username"
+set password "password"
+set servercert "pin-sha256:8tPMmzAWB2myX169SqY3KpxIOydL3gdEIkllilqZroA="  # 先手动登录并记录保存
+
+spawn sudo /usr/local/bin/openconnect $vpn_host -u $username --servercert $servercert
+
+expect {
+    "Password:" {
+        send "$password\r"
+        exp_continue
+    }
+    eof
+}
+
+interact
+
