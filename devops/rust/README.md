@@ -8,6 +8,9 @@ source $HOME/.cargo/env
 rustc --version
 cargo --version
 rustup --version
+
+# 卸载
+rustup self uninstall
 ```
 # rustup<sub>工具链管理器</sub>
 ```bash
