@@ -2,6 +2,7 @@
     // 保存自动删除末尾空格
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
+    "chat.disableAIFeatures": true, // 关闭 Copilot / AI chat 功能
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit"
     },
