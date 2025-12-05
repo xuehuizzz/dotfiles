@@ -33,6 +33,13 @@ ArangoDB 是一个高效、灵活且易于扩展的多模型数据库，适合�
    - 不推荐的字符: 避免使用特殊字符（如 `$`, `.` 等）和空格，因为可能会导致解析或查询的问题
    - 首字符：字段名称可以以字母或下划线开头，但避免以数字开头，以防产生歧义
 
+## 导入导出
+```bash
+# 导入json文件
+arangoimport --file students.jsonl --type jsonl --server.database cmdb  --collection students
+
+# 
+```
 
 ## 插入数据
 ```aql
