@@ -35,7 +35,7 @@ ArangoDB 是一个高效、灵活且易于扩展的多模型数据库，适合�
 
 ## 导入导出
 ```bash
-# 导入jsonl文件
+# 导入jsonl文件, 相比 json 对程序更友好
 arangoimport --file students.jsonl --type jsonl --server.database cmdb  --collection students
 
 # 导出为jsonl文件
