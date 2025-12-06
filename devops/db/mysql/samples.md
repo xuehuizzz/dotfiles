@@ -1,6 +1,6 @@
 ## MySQL8 创建一张标准的数据表
 ```sql
--- 时间为: UTC 毫秒级
+-- 日期时间类型: DB 存入 UTC 毫秒级, 应用层输出转成 ISO8601
 CREATE TABLE xxx (
     id INT PRIMARY KEY AUTO_INCREMENT COMMENT '主键ID',  -- 自增id
     created_at DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
