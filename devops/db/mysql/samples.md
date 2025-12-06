@@ -6,7 +6,6 @@ CREATE TABLE xxx (
     created_at datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
     updated_at datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间',
     deleted_at datetime(3) DEFAULT NULL COMMENT '删除时间(软删除)',
-    -- expired_at datetime(3) NULL DEFAULT NULL COMMENT '过期时间',
     created_by int NOT NULL COMMENT '创建者ID',
     updated_by int NOT NULL COMMENT '更新者ID',
     status tinyint NOT NULL DEFAULT '1' COMMENT '状态：0-禁用，1-启用',
