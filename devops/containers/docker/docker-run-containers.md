@@ -15,7 +15,7 @@
 - Uptime
     - Uptime 是一个监控和报告网站运行状态的工具。它可以定期检查指定网站的健康状态，并通过电子邮件或其他方式报告任何中断或故障，适用于网站和应用的实时监控。
 
-1. **psql**
+1. **mysql**
   - ```bash
     docker run -d \
     --name mysql \
@@ -29,7 +29,7 @@
     --restart always \
     mysql:8.4
     ```
-2. **mysql**
+2. **postgresql**
   - ```bash
     docker run -d \
     --name psql \
