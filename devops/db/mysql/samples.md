@@ -10,15 +10,14 @@ CREATE TABLE xxx (
     created_by INT NOT NULL COMMENT '创建者ID',
     updated_by INT NOT NULL COMMENT '更新者ID',
     status TINYINT NOT NULL DEFAULT 1 COMMENT '状态：0-禁用，1-启用',
-    is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '是否删除：0-否，1-是',
     version INT NOT NULL DEFAULT 1 COMMENT '版本号',
     remark VARCHAR(255) DEFAULT NULL COMMENT '备注',
-    tuition DECIMAL(5, 2) NOT NULL DEFAULT 0 COMMENT '小数类型'
+    tuition DECIMAL(12, 2) NOT NULL DEFAULT 0 COMMENT '小数类型'
     -- UNIQUE KEY idx_username (username),  -- 唯一索引
     -- KEY idx_email (email),   -- 普通索引
     -- KEY idx_name_email (name, email),  -- 联合索引
     -- FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE  -- 物理外键,级联删除
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT '一张相对规范的表结构';
+) ENGINE = InnoDB row_format = Dynamic DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT '一张相对规范的表结构';
 ```
 > utf8mb4_0900_ai_ci 是 MySQL 8.0 中引入的一种字符集排序规则（collation），它由几个部分组成:
    - utf8mb4 : 字符集，支持完整的 Unicode 字符集，包括 emoji 表情符号和其他特殊字符（最多可存储 4 字节的 UTF-8 字符）
