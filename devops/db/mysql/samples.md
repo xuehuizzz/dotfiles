@@ -8,6 +8,7 @@ CREATE TABLE xxx (
     deleted_at datetime(3) DEFAULT NULL COMMENT '删除时间(软删除)',
     created_by int NOT NULL COMMENT '创建者ID',
     updated_by int NOT NULL COMMENT '更新者ID',
+    deleted_by int DEFAULT NULL COMMENT '删除者ID',
     status tinyint NOT NULL DEFAULT '1' COMMENT '状态：0-禁用，1-启用',
     version int NOT NULL DEFAULT '1' COMMENT '版本号',
     remark varchar(255) DEFAULT NULL COMMENT '备注',
