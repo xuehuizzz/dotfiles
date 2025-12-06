@@ -2,22 +2,23 @@
 ```sql
 -- 日期时间类型: DB 存入 UTC 毫秒级, 应用层输出转成 ISO8601
 CREATE TABLE xxx (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键ID',  -- 自增id
-    created_at DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
-    updated_at DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间',
-    deleted_at DATETIME(3) NULL DEFAULT NULL COMMENT '删除时间(软删除)',
-    -- expired_at DATETIME(3) NULL DEFAULT NULL COMMENT '过期时间',
-    created_by INT NOT NULL COMMENT '创建者ID',
-    updated_by INT NOT NULL COMMENT '更新者ID',
-    status TINYINT NOT NULL DEFAULT 1 COMMENT '状态：0-禁用，1-启用',
-    version INT NOT NULL DEFAULT 1 COMMENT '版本号',
-    remark VARCHAR(255) DEFAULT NULL COMMENT '备注',
-    tuition DECIMAL(12, 2) NOT NULL DEFAULT 0 COMMENT '小数类型'
+    id bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',  -- 自增id
+    created_at datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
+    updated_at datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间',
+    deleted_at datetime(3) DEFAULT NULL COMMENT '删除时间(软删除)',
+    -- expired_at datetime(3) NULL DEFAULT NULL COMMENT '过期时间',
+    created_by int NOT NULL COMMENT '创建者ID',
+    updated_by int NOT NULL COMMENT '更新者ID',
+    status tinyint NOT NULL DEFAULT '1' COMMENT '状态：0-禁用，1-启用',
+    version int NOT NULL DEFAULT '1' COMMENT '版本号',
+    remark varchar(255) DEFAULT NULL COMMENT '备注',
+    tuition decimal(12, 2) NOT NULL DEFAULT '0.00' COMMENT '小数类型',
     -- UNIQUE KEY idx_username (username),  -- 唯一索引
     -- KEY idx_email (email),   -- 普通索引
     -- KEY idx_name_email (name, email),  -- 联合索引
     -- FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE  -- 物理外键,级联删除
-) ENGINE = InnoDB row_format = Dynamic DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT '一张相对规范的表结构';
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='一张相对规范的表结构';
 ```
 > utf8mb4_0900_ai_ci 是 MySQL 8.0 中引入的一种字符集排序规则（collation），它由几个部分组成:
    - utf8mb4 : 字符集，支持完整的 Unicode 字符集，包括 emoji 表情符号和其他特殊字符（最多可存储 4 字节的 UTF-8 字符）
