@@ -12,7 +12,7 @@ build-backend = "flit_core.buildapi"
 
 # 项目元数据
 [project]
-name = "my_package"  # 项目名称
+name = "my_project"  # 项目名称
 version = "0.1.0"  # 项目版本
 description = "A sample Python package"  # 项目描述
 maintainers = [{name = "Your Name", email = "your.email@example.com"}]
@@ -33,20 +33,20 @@ async = ["asgiref>=3.2"]
 dotenv = ["python-dotenv"]
 
 [tool.flit.module]
-name = ""   # 项目主模块
+name = "my_project"   # 项目主模块
 
 [tool.flit.sdist]  # 打包时包含或排除的文件/夹
 include = [
     "docs/",
     "examples/",
-    "requirements/",
     "tests/",
-    "CHANGES.rst",
-    "CONTRIBUTING.rst",
-    "tox.ini",
+    "pyproject.toml",
+    "requirements.txt",
 ]
 exclude = [
     "docs/_build/",
+    ".venv/",
+    "__pycache__/",
 ]
 
 # 代码质量格式检查
