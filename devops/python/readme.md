@@ -11,58 +11,25 @@ https://www.runoob.com/w3cnote/google-python-styleguide.html
 #### <mark>项目结构建议</mark>
 ```plaintext
 my_project/
-├── .github/             # GitHub actions/workflows
-├── .vscode/             # Editor-specific settings (optional)
-├── docs/                # Documentation files
-├── src/                 # Source code lives here (recommended!)
-│   └── my_project/      # Actual Python package
-│       ├── __init__.py
-│       ├── config.py
-│       ├── main.py      # Entry point (CLI, API, etc.)
-│       ├── core/        # Core domain logic
-│       ├── services/    # Business logic, services
-│       ├── models/      # Pydantic/ORM models
-│       ├── api/         # REST or GraphQL routes
-│       └── utils/       # Helper functions
-├── tests/               # Unit and integration tests
-│   ├── __init__.py
-│   └── test_main.py
-├── .env                 # Environment variables
-├── pyproject.toml       # Build system & dependencies (Poetry is king in 2025)
-├── README.md            # Project overview
-├── .gitignore
-└── requirements.txt     # Optional (for Docker or deployment)
-
-
-  
-project_name/
-├── .env   # 环境变量文件
-├── .gitignore   # Git忽略文件
-├── Makefile   # 项目管理脚本
-├── README.md   # 项目说明文档
-├── deploy/      # 项目部署目录, Dockerfile, docker-compose.yaml等
-├── docs   # 项目文档目录(使用 Sphinx 等工具生成文档)
-│   ├── conf.py
-│   └── index.rst
-├── project_name/   # 主要源代码目录
-│   ├── __init__.py
-│   ├── __main__.py   # 程序入口
-│   ├── api   # 接口文件包
-│   │   └── __init__.py
-│   ├── config   # 配置信息
-│   │   ├── __init__.py
-│   │   └── settings.py
-│   ├── core  # 核心代码
-│   │   └── __init__.py
-│   ├── models   # 模型映射
-│   │   └── __init__.py
-│   └── utils  # 工具类通用代码
-│       └── __init__.py
-├── pyproject.toml   # 现代Python项目构建配置
-├── requirements.txt   # 项目依赖
-├── samples/   # 示例代码
-├── scripts/   # 工具脚本
-└── tests/   # 测试用例目录
+├── .github/                 # GitHub Actions workflow 配置
+├── docs/                    # 项目文档
+├── deploy/                  # 部署相关文件，如 Dockerfile、K8s 配置、CI/CD 脚本
+├── src/                     # 源代码目录
+│   └── my_project/          # Python 包根目录
+│       ├── __init__.py      # 包初始化文件
+│       ├── __main__.py      # 入口文件，可用 `python -m my_project` 运行
+│       ├── config/          # 配置相关模块
+│       │   └── settings.py  # 配置文件，如读取 .env 或 YAML 配置
+│       ├── core/            # 核心业务逻辑模块
+│       ├── services/        # 服务层，处理业务逻辑、外部接口调用
+│       ├── models/          # 数据模型，例如 ORM 或 Pydantic 模型
+│       ├── api/             # API 层（如 FastAPI 路由）
+│       └── utils/           # 工具函数/模块
+├── tests/                   # 单元测试、集成测试
+├── .env                     # 环境变量文件
+├── pyproject.toml           # Python 项目配置（依赖、打包、工具链）
+├── README.md                # 项目说明文档
+└── requirements.txt         # 依赖列表（pip）
 ```
 
 #### 1.<mark>模块导入规范</mark><sub> pip install isort</sub>
