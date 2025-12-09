@@ -195,8 +195,9 @@
         "**/__pycache__": true,
         "**/.ruff_cache": true,
         "**/.idea": true,
-        // "**/.vscode": true,
-        "**/node_modules": true
+        "**/.vscode": true,
+        "**/node_modules": true,
+        "**/.venv": true,
     },
     "files.eol": "\n", // 保存文件换行符为 unix 格式
     "files.encoding": "utf8",
