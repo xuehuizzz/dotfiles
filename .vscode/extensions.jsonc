@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    ms-ceintl.vscode-language-pack-zh-hans,
     ms-python.python,
     ms-python.vscode-pylance,
     ms-python.debugpy,
@@ -12,6 +11,7 @@
     mechatroner.rainbow-csv,
     fittentech.fitten-code,
     usernamehw.errorlens,
-    isudox.vscode-jetbrains-keybindings
+    isudox.vscode-jetbrains-keybindings,
+    tamasfe.even-better-toml
   ]
 }
