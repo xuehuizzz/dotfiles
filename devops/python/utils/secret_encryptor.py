@@ -1,7 +1,6 @@
 """AES-GCM 对称加密工具(工程化版本).
 pip install cryptography
 
-
 本模块用于对敏感配置(如数据库密码、API Token 等)进行
 安全、可验证、可扩展的对称加密与解密。
 
@@ -58,20 +57,6 @@ Base64(urlsafe) 编码后的二进制数据，结构如下：
 ----------
 - 用户密码存储（应使用 bcrypt / argon2 等慢哈希）
 - 大文件流式加密（需分块处理）
-
-示例
-----
-    encrypted = aes_encrypt(
-        "SuperSecretPassword!",
-        MASTER_KEY,
-        aad=b"db-password"
-    )
-
-    plaintext = aes_decrypt(
-        encrypted,
-        MASTER_KEY,
-        aad=b"db-password"
-    )
 """
 
 
