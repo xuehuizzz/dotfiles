@@ -1,10 +1,12 @@
 # 常用操作
-1. 启动CLI
+1. 启动/退出CLI
    ```bash
-   duckdb
+   duckdb  # 进入
+   .exit  # Ctrl+D 退出
    ```
 2. 安装插件(以Excel为例)
    ```bash
+   SELECT * FROM duckdb_extensions();  -- 查看可用的扩展(包括已安装和可安装的)
    INSTALL excel;  # 安装excel插件
    LOAD excel;  # 加载Excel插件
    INSTALL json;
@@ -54,8 +56,4 @@
    SHOW TABLES;  -- 查看数据库里的表
    DROP TABLE mytable;  -- 删除表
    DESCRIBE mytable;   -- 查看表结构
-   ```
-10. 退出CLI
-   ```bash
-    .exit  # Ctrl+D
    ```
