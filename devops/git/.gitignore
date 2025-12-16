@@ -7,8 +7,16 @@ wheels/
 *.egg-info
 .venv/
 
-# macOS
+# OS X specific files.
 *.DS_Store
+
+# vim swap files
+.*.sw?
+.sw?
+
+# Editor temporaries
+*.swp
+*~
 
 # sonarqube
 sonar-project.properties
