@@ -26,8 +26,10 @@ my_project/
 │       ├── api/             # API 层（如 FastAPI 路由）
 │       └── utils/           # 工具函数/模块
 ├── tests/                   # 单元测试、集成测试
-├── .env                     # 环境变量文件
+├── .env.example             # 配置模板：只放 key，不放 value
+├── .gitignore               # 忽略真实配置、缓存、虚拟环境
 ├── pyproject.toml           # Python 项目配置（依赖、打包、工具链）
+├── Makefile                 # 工程快捷键：run / test / lint / ci
 ├── README.md                # 项目说明文档
 └── requirements.txt         # 依赖列表（pip）
 ```
