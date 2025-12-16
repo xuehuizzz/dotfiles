@@ -18,7 +18,12 @@ description = "A sample Python package"  # 项目描述
 maintainers = [{name = "Your Name", email = "your.email@example.com"}]
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = [
+dependencies = [   # 项目所需运行第三方依赖(必须)
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "pydantic>=2.6",
+    "pydantic-settings>=2.2",
+    "sqlalchemy>=2.0",
     "requests>=2.25", 
     "numpy>=1.21"
 ]
