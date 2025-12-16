@@ -9,18 +9,19 @@ import json
 import logging
 import sys
 import threading
-from datetime import datetime
+from datetime import datetime, timezone
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
+from typing import Any, Dict
 
 
 class SimpleJsonFormatter(logging.Formatter):
-    def format(self, record):
-        log_record = {
+    def format(self, record: logging.LogRecord) -> str:
+        log_record: Dict[str, Any] = {
             "level": record.levelname,
-            "ts": datetime.fromtimestamp(
-                record.created, tz=datetime.now().astimezone().tzinfo
-            ).isoformat(timespec="milliseconds"),
+            "ts": datetime.fromtimestamp(record.created, tz=timezone.utc).isoformat(
+                timespec="milliseconds"
+            ),
             "msg": record.getMessage(),
             "caller": record.filename,
             "func": record.funcName,
@@ -33,7 +34,7 @@ class SimpleJsonFormatter(logging.Formatter):
 
 
 class LoggerManager:
-    _loggers = {}
+    _loggers: Dict[str, logging.Logger] = {}
     _lock = threading.Lock()
 
     def __init__(self, log_dir=None, max_bytes=10 * 1024 * 1024, backup_count=5):
@@ -52,16 +53,25 @@ class LoggerManager:
                     try:
                         handler.flush()
                         handler.close()
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        print(
+                            f"Failed to close log handler {handler}: {e}",
+                            file=sys.stderr,
+                        )
 
-    def get_logger(self, name="project", console=True, json_file=True):
+    def get_logger(
+        self,
+        name: str = "project",
+        console: bool = True,
+        json_file: bool = True,
+        level: int = logging.DEBUG,
+    ) -> logging.Logger:
         with self._lock:
             if name in self._loggers:
                 return self._loggers[name]
 
             logger = logging.getLogger(name)
-            logger.setLevel(logging.DEBUG)
+            logger.setLevel(level)
             logger.propagate = False
 
             if json_file:
@@ -87,6 +97,7 @@ class LoggerManager:
 
             self._loggers[name] = logger
             return logger
+
 
 if __name__ == "__main__":
     """
