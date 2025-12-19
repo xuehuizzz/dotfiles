@@ -34,3 +34,24 @@ git ls-files | grep '\.log$'
 git rm --cached path/to/specific.log    # 或 git rm --cached -f "*.log"   移除所有被追踪的log文件
 # 接着commit 和 push
 ```
+
+## Git提交规范
+```bash
+feat: 新增xxx
+fix: 修复xxx
+remove: 删除xxx
+refactor: 重构xxx
+perf: 优化xxx
+docs: 更新 xxx 文档使用说明
+chore: 升级 xxx 版本/依赖, 小改动(不算功能)
+style: 统一代码格式
+
+
+# 推荐格式
+<type>(<scope>): <subject>
+```
+> feat(login): 支持手机号登录
+> 
+> fix(api): 修复用户列表分页错误
+> 
+> refactor(auth): 重构鉴权逻辑
