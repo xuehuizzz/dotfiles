@@ -62,6 +62,12 @@ SELECT user();  -- 当前连接用户
 SELECT version();  -- 查询数据库版本
 SELECT CURTIME();  -- 当前时间
 SELECT CURDATE();  -- 当前日期
+
+-- 反连接
+SELECT a.* FROM table_a a
+LEFT JOIN table_b b ON a.id = b.a_id
+WHERE b.a_id IS NULL;
+
 ```
 ## 排名
 ```sql
