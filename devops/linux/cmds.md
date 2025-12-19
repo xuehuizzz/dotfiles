@@ -1,4 +1,4 @@
-# rsync
+# how to use
 ```bash
 # 支持远程增量大文件同步, 基本语法如下:
 rsync [options] source user@remote_host:/path/to/destination
@@ -28,3 +28,18 @@ cat /dev/null > file
 # tee 写入文件和屏幕
 ls -l | tee result.txt
 ```
+
+```bash
+# 提权, 哪些命令不需要输入密码, 不要直接 vim /etc/sudoers (容易把sudo锁住)
+sudo visudo
+
+xuehui ALL=(ALL) NOPASSWD: /usr/local/bin/openconnect    # 给用户提权
+%vpnusers ALL=(ALL) NOPASSWD: /usr/local/bin/openconnect  # 给用户组提权
+```
+> xuehui → 用户名  (%vpnusers → 用户组)
+>
+> ALL=(ALL) → 在所有主机，以所有用户身份运行
+>
+> NOPASSWD: → 执行命令时不需要输入 sudo 密码
+>
+> /usr/local/bin/openconnect → 允许执行的命令
