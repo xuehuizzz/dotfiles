@@ -32,4 +32,7 @@ DuckDB 经常被叫作“嵌入式版的OLAP数据库”，它的定位有点像
 brew install duckdb
 pip install duckdb
 curl https://install.duckdb.org | sh
+
+# 插件手动下载地址
+http://extensions.duckdb.org/v1.4.1/linux_amd64/excel.duckdb_extension.gz
 ```
