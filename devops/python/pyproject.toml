@@ -89,7 +89,7 @@ select = [
 
 # 导包排序
 [tool.isort]
-profile = "ruff"
+profile = "black"
 line_length = 100    # 指定每行代码的最大字符数
 multi_line_output = 3   # 定义多行导入的格式
 include_trailing_comma = true   # 在多行导入的最后一个模块后添加尾随逗号
