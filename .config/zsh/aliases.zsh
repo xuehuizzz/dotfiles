@@ -16,7 +16,7 @@ alias tarx="tar -xzvf"  # 解压文件   tarx xxx.tar.gz
 alias curl="curl --compressed"
 alias wget="wget -c"
 alias nc="nc -zv"  # 现代化测试主机端口连通性工具, nc -zv myserver.com 22
-alias gcge="git config --global -e"
+alias gitconf="git config --global -e"
 # alias jupyter="nohup jupyter notebook --allow-root > jupyter.log 2>&1 &"  #后台启动jupyter notebook
 alias_list=(
     "vim:nvim"
