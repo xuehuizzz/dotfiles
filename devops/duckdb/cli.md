@@ -23,6 +23,7 @@
    SELECT * FROM read_csv('data.csv', delim=',', header=true);
    -- read_csv('https://example.com/data.csv')
    ```
+   > 查询默认返回头尾几行, 在查询前配置`.maxrows num`可显示完整行记录
 4. 查询json文件
    ```sql
    -- 只要文件内容是标准JSON格式, 文件扩展名don't care
