@@ -1,4 +1,4 @@
-**Vault 是由 HashiCorp 开发的一款开源的秘密管理工具（Secret Management Tool），主要用于安全地存储、管理和访问敏感信息，比如 API 密钥、密码、证书、加密密钥等** [官网地址](https://www.vaultproject.io/)
+**[Vault](https://www.vaultproject.io/) 是由 HashiCorp 开发的一款开源的秘密管理工具（Secret Management Tool），主要用于安全地存储、管理和访问敏感信息，比如 API 密钥、密码、证书、加密密钥等**
 
 #### <mark>Vault 的主要功能包括:</mark>
 - 安全存储秘密: 通过加密的方式保存敏感数据, 确保数据在存储和传输过程中都安全
