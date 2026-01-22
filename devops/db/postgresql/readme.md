@@ -45,3 +45,5 @@ host    all             all             xxx.xxx.xxx.xxx/32           md5
 > `xxx.xxx.xxx.xxx/32`: 仅允许指定IP地址的主机访问
 >
 > `md5`: 要求客户端使用**用户名+密码经MD5哈希**方式认证
+
+<mark>注意: </mark> 修改后再 `SELECT pg_reload_conf();` 生效.
