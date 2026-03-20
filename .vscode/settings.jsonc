@@ -57,7 +57,7 @@
     // 自动补齐`HTML`尖括号
     "editor.linkedEditing": true,
     "html.format.wrapAttributes": "preserve",
-    "html.format.wrapLineLength": 70,
+    "html.format.wrapLineLength": 100,
     "html.format.indentHandlebars": true,
     // 格式化自动删分号
     "javascript.format.semicolons": "remove",
