@@ -76,7 +76,7 @@
     "typescript.suggest.autoImports": true,
     "javascript.preferences.quoteStyle": "single",
     "typescript.preferences.quoteStyle": "single",
-    "files.autoGuessEncoding": true,
+    "files.autoGuessEncoding": false,
     // 搜索吸附目录
     "search.searchEditor.singleClickBehaviour": "peekDefinition",
     "editor.stickyScroll.enabled": false, // 禁用粘性滚动功能
@@ -127,8 +127,8 @@
     // 行内样式代码补全
     "editor.quickSuggestions": {
         "other": true,
-        "comments": true,
-        "strings": true
+        "comments": false,
+        "strings": false
     },
     "editor.wordSeparators": "`~!@%^&*()=+[{]}\\|;:'\",.<>/?（），。；：",
     // 配置代码缩略图
@@ -137,7 +137,7 @@
     "editor.minimap.renderCharacters": true, // 是否渲染实际字符
     "editor.minimap.side": "right", // 缩略图位置（right/left）
     "editor.minimap.showSlider": "mouseover", // 滑块显示方式
-    "editor.foldingStrategy": "indentation",
+    "editor.foldingStrategy": "auto",
     "editor.foldingHighlight": false,
     "editor.snippetSuggestions": "top",
     "editor.tabCompletion": "on",
@@ -145,12 +145,8 @@
     // JSX
     "emmet.includeLanguages": {
         "javascript": "javascriptreact",
-        "typescript": "javascriptreact"
+        "typescript": "typescriptreact"
     },
-    "emmet.excludeLanguages": [
-        "javascript",
-        "typescript"
-    ],
     "search.followSymlinks": false,
     "update.mode": "manual",
     "search.exclude": {
@@ -224,6 +220,17 @@
             }
         ]
     },
+    // 禁用 git 文件树装饰（大型仓库明显提升侧边栏响应速度）
+    "git.decorations.enabled": false,
+    // 限制 TS Server 内存上限，防止大型项目内存膨胀（按需调整）
+    "typescript.tsserver.maxTsServerMemory": 4096,
+    // 悬停提示延迟，减少无意触发的计算开销
+    "editor.hover.delay": 500,
+    // 禁用不需要的内置扩展（如果不用的话）
+    "npm.autoDetect": "off",
+    "grunt.autoDetect": "off",
+    "gulp.autoDetect": "off",
+    "jake.autoDetect": "off",
     // 自定义背景颜色
     "workbench.colorCustomizations": {
         "editor.background": "#2B2B2B", // 设置编辑器背景颜色
