@@ -262,4 +262,14 @@
         "sideBarSectionHeader.border": "#00000000", // 隐藏大纲与时间线边界色
         "activityBar.border": "#00000000", // 隐藏活动栏分隔侧边栏边框
     },
+    // code spell白名单
+    "cSpell.words": [
+        "myCustomWord",
+        "foobar",
+        "xuehui",
+        "k8s",
+        "cmdb",
+        "oceanbase",
+        "nopcloudnet"
+    ]
 }
