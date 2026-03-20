@@ -36,3 +36,4 @@ curl https://install.duckdb.org | sh
 # 插件手动下载地址
 http://extensions.duckdb.org/v1.4.1/linux_amd64/excel.duckdb_extension.gz
 ```
+> 在操作大量数据(PB)时, 数据必须是 Parquet
