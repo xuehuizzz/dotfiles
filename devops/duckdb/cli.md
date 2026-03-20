@@ -1,7 +1,8 @@
 # 常用操作
-1. 启动/退出CLI
+1. 基础命令
    ```bash
    duckdb  # 进入
+   .maxrows num  # 定义显示最大行数
    .exit  # Ctrl+D 退出
    ```
 2. 安装插件(以Excel为例)
