@@ -238,7 +238,7 @@
         "sideBar.background": "#2B2B2B", // 侧边栏背景色
         "sideBarSectionHeader.background": "#2B2B2B", // 侧边栏分组标题的背景色
         "sideBar.border": "#00000000", // 侧边栏边框颜色
-        "terminal.background": "#000000", // 终端背景色
+        "terminal.background": "#2B2B2B", // 终端背景色
         "panel.background": "#2B2B2B", // 面板背景色
         "activityBar.background": "#2B2B2B", // 添加这一行来设置活动栏背景色
         "tab.activeBackground": "#2B2B2B", // 活动标签背景
