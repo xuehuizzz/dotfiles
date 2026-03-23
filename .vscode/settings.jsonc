@@ -269,6 +269,20 @@
         "panel.border": "#363636", // 隐藏终端面板与编辑器边框
         "sideBarSectionHeader.border": "#363636", // 隐藏大纲与时间线边界色
         "activityBar.border": "#363636", // 隐藏活动栏分隔侧边栏边框
+
+        "editor.lineHighlightBorder": "#00000000", // 去掉当前行边框
+        "editorLineNumber.foreground": "#555555", // 行号颜色
+        "editorCursor.foreground": "#3E66C5", // 光标颜色
+        "editor.lineHighlightBackground": "#2F2F2F", // 当前行高亮（很实用！）
+        "editorLineNumber.activeForeground": "#CCCCCC", // 当前行行号（高亮）
+        "scrollbarSlider.background": "#44444466", // 滚动条默认
+        "scrollbarSlider.hoverBackground": "#55555588", // 悬停
+        "scrollbarSlider.activeBackground": "#666666AA", // 拖动时
+        "editor.findMatchBackground": "#3E66C566", // 当前搜索匹配
+        "editor.findMatchHighlightBackground": "#3E66C533", // 其他匹配项
+        "editor.selectionBackground": "#3E66C544", // 选中文本
+        "editor.selectionHighlightBackground": "#3E66C522", // 与选中文本相同的其他文本
+        "editor.wordHighlightBackground": "#3E66C533", // 光标所在单词的其他出现位置
     },
     // code spell白名单
     "cSpell.words": [
