@@ -237,7 +237,7 @@
         "editor.foreground": "#FFFFFF", // 设置编辑器前景颜色
         "sideBar.background": "#2B2B2B", // 侧边栏背景色
         "sideBarSectionHeader.background": "#2B2B2B", // 侧边栏分组标题的背景色
-        "sideBar.border": "#00000000", // 侧边栏边框颜色
+        "sideBar.border": "#242424", // 侧边栏边框颜色
         "terminal.background": "#2B2B2B", // 终端背景色
         "panel.background": "#2B2B2B", // 面板背景色
         "activityBar.background": "#2B2B2B", // 添加这一行来设置活动栏背景色
@@ -258,16 +258,16 @@
         // "breadcrumbPicker.background": "#2B2B2B", // 面包屑选择器背景
         // "editorGroupHeader.border": "#00000000", // 编辑器组标题栏边框
         "statusBar.background": "#2B2B2B", // 状态栏背景色
-        "statusBar.border": "#00000000", // 下方状态栏边框
+        "statusBar.border": "#242424", // 下方状态栏边框
         // "statusBar.noFolderBackground": "#2B2B2B", // 未打开文件夹时的状态栏背景
         // "statusBar.debuggingBackground": "#2B2B2B", // 调试时的状态栏背景
         // "statusBarItem.activeBackground": "#2B2B2B", // 状态栏项目激活时的背景
         // "statusBarItem.hoverBackground": "#2B2B2B", // 状态栏项目悬停时的背景
         "editorGutter.background": "#2B2B2B", // 设置行号区域背景色
         "editorGroupHeader.tabsBorder": "#00000000", // 设置头部标签颜色
-        "panel.border": "#000000", // 隐藏终端面板与编辑器边框
-        "sideBarSectionHeader.border": "#00000000", // 隐藏大纲与时间线边界色
-        "activityBar.border": "#00000000", // 隐藏活动栏分隔侧边栏边框
+        "panel.border": "#242424", // 隐藏终端面板与编辑器边框
+        "sideBarSectionHeader.border": "#242424", // 隐藏大纲与时间线边界色
+        "activityBar.border": "#242424", // 隐藏活动栏分隔侧边栏边框
     },
     // code spell白名单
     "cSpell.words": [
