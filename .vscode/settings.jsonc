@@ -106,7 +106,7 @@
     "editor.fontLigatures": "'calt', 'cv01', 'ss01', 'zero'",
     "editor.fontSize": 11,
     "editor.fontWeight": "normal",
-    "workbench.iconTheme": null, // "material-icon-theme",
+    "workbench.iconTheme": "material-icon-theme",
     "workbench.list.fastScrollSensitivity": 10,
     "workbench.colorTheme": "JetBrains Darcula Theme",
     "workbench.editor.tabActionLocation": "left",
