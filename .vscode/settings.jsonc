@@ -252,7 +252,7 @@
         // "list.inactiveSelectionForeground": "#ffffff", // 非焦点时选中项的文字颜色
         // "list.dropBackground": "#2B2B2B", // 拖放时的背景色
         "titleBar.activeBackground": "#2B2B2B", // 标题栏背景色
-        "titleBar.border": "#00000000", // 标题栏边框颜色
+        "titleBar.border": "#363636", // 标题栏边框颜色
         // "titleBar.inactiveBackground": "#2B2B2B", // 非活动标题栏背景色
         "breadcrumb.background": "#2B2B2B", // 面包屑导航背景
         // "breadcrumbPicker.background": "#2B2B2B", // 面包屑选择器背景
