@@ -233,6 +233,7 @@
     "jake.autoDetect": "off",
     // 自定义背景颜色
     "workbench.colorCustomizations": {
+        "editorRuler.foreground": "#363636",  // 标尺线颜色
         "editor.background": "#2B2B2B", // 设置编辑器背景颜色
         "editor.foreground": "#FFFFFF", // 设置编辑器前景颜色
         "sideBar.background": "#2B2B2B", // 侧边栏背景色
