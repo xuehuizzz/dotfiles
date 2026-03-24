@@ -22,6 +22,7 @@ my_project/
 │       ├── __main__.py      # 入口文件，可用 `python -m my_project` 运行
 │       ├── config/          # 配置相关模块
 │       │   └── settings.py  # 配置文件，如读取 .env 或 YAML 配置
+│       ├── constants/       # 常量文件模块
 │       ├── core/            # 核心业务逻辑模块
 │       ├── services/        # 服务层，处理业务逻辑、外部接口调用
 │       ├── schemas/         # 数据结构定义, 如请求/响应的 Pydantic Schema
