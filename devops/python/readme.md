@@ -22,6 +22,7 @@ my_project/
 │       │   └── settings.py  # 配置文件，如读取 .env 或 YAML 配置
 │       ├── core/            # 核心业务逻辑模块
 │       ├── services/        # 服务层，处理业务逻辑、外部接口调用
+│       ├── schemas/         # 数据结构定义, 如请求/响应的 Pydantic Schema
 │       ├── models/          # 数据模型，例如 ORM 或 Pydantic 模型
 │       ├── api/             # API 层（如 FastAPI 路由）
 │       └── utils/           # 工具函数/模块
