@@ -28,6 +28,8 @@ sonar-project.properties
 /build
 
 # Logs
+logs/*           # 忽略 logs 目录下的所有文件
+!logs/.gitkeep   # 但是不忽略 .gitkeep 这个文件
 logs
 *.log
 npm-debug.log*
