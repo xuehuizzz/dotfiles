@@ -40,7 +40,7 @@
     -p 5432:5432 \
     -w /app \
     --restart always \
-    postgres:15
+    postgres:18
     ```
 3. **jenkins**
   - ```bash
