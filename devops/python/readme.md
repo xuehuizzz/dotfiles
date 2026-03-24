@@ -15,6 +15,7 @@ my_project/
 ├── docs/                    # 项目文档
 ├── deploy/                  # 部署相关文件，如 Dockerfile、K8s 配置、CI/CD 脚本
 ├── logs/                    # 日志文件目录
+│   └── .gitkeep             # 占位文件，使 Git 保留空目录
 ├── src/                     # 源代码目录
 │   └── my_project/          # Python 包根目录
 │       ├── __init__.py      # 包初始化文件
