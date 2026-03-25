@@ -6,12 +6,14 @@ parse_git_branch() {
 set_prompt() {
   local git_branch="$(parse_git_branch)"
   local path="%F{cyan}%~%f"
+  local symbol="%(?.%F{green}❯%f.%F{red}❯%f)"
   if [ -n "$git_branch" ]; then
-    PROMPT="${path} %F{green}(${git_branch})%f ➜ "
+    PROMPT="${path} %F{green}(${git_branch})%f"$'\n'"${symbol} "
   else
-    PROMPT="${path} ➜ "
+    PROMPT="${path}"$'\n'"${symbol} "
   fi
 }
+
 
 precmd_functions+=(set_prompt)
 
