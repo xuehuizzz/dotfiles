@@ -11,20 +11,39 @@ return {
 		vim.g.loaded_netrw = 1
 		vim.g.loaded_netrwPlugin = 1
 
+		-- ✅ 定义 nvim-tree 所需的全部 diagnostic signs
+		local nvim_tree_diagnostics = {
+			{ "NvimTreeDiagnosticErrorIcon", " ", "DiagnosticError" },
+			{ "NvimTreeDiagnosticWarnIcon", " ", "DiagnosticWarn" },
+			{ "NvimTreeDiagnosticInfoIcon", " ", "DiagnosticInfo" },
+			{ "NvimTreeDiagnosticHintIcon", "", "DiagnosticHint" },
+			{ "NvimTreeDiagnosticErrorFileHL", " ", "DiagnosticError" },
+			{ "NvimTreeDiagnosticWarnFileHL", " ", "DiagnosticWarn" },
+			{ "NvimTreeDiagnosticInfoFileHL", " ", "DiagnosticInfo" },
+			{ "NvimTreeDiagnosticHintFileHL", "", "DiagnosticHint" },
+			{ "NvimTreeDiagnosticError", " ", "DiagnosticError" },
+			{ "NvimTreeDiagnosticWarn", " ", "DiagnosticWarn" },
+			{ "NvimTreeDiagnosticInfo", " ", "DiagnosticInfo" },
+			{ "NvimTreeDiagnosticHint", "", "DiagnosticHint" },
+		}
+		for _, sign in ipairs(nvim_tree_diagnostics) do
+			vim.fn.sign_define(sign[1], { text = sign[2], texthl = sign[3] })
+		end
+
 		nvimtree.setup({
 			-- ── 侧栏视图 ──────────────────────────────────────
 			view = {
 				width = 32,
-				cursorline = true, -- 高亮当前行
+				cursorline = true,
 				side = "left",
-				signcolumn = "yes", -- 显示 git/diagnostics 标记列
+				signcolumn = "yes",
 			},
 
 			-- ── 渲染器 ────────────────────────────────────────
 			renderer = {
-				group_empty = true, -- 将空文件夹合并为一行显示 (a/b/c)
-				highlight_git = "name", -- 按 git 状态高亮文件名
-				highlight_diagnostics = "icon", -- 按诊断状态高亮图标
+				group_empty = true,
+				highlight_git = "name",
+				highlight_diagnostics = "icon",
 
 				indent_markers = {
 					enable = true,
@@ -38,9 +57,9 @@ return {
 				},
 
 				icons = {
-					git_placement = "signcolumn", -- git 状态放到标记列, 更整洁
+					git_placement = "signcolumn",
 					modified_placement = "signcolumn",
-					diagnostics_placement = "signcolumn",
+					diagnostics_placement = "after",
 
 					glyphs = {
 						default = "󰈚",
@@ -72,7 +91,7 @@ return {
 			-- ── Git 集成 ──────────────────────────────────────
 			git = {
 				enable = true,
-				ignore = false, -- 不隐藏 gitignored 文件
+				ignore = false,
 			},
 
 			-- ── 诊断集成 (LSP) ───────────────────────────────
@@ -98,7 +117,7 @@ return {
 				open_file = {
 					quit_on_open = false,
 					window_picker = {
-						enable = false, -- 与 splits 兼容
+						enable = false,
 					},
 				},
 			},
@@ -122,7 +141,7 @@ return {
 
 			-- ── 更新聚焦文件 ─────────────────────────────────
 			update_focused_file = {
-				enable = true, -- 自动定位到当前打开的文件
+				enable = true,
 				update_root = false,
 			},
 		})
