@@ -1,18 +1,11 @@
 return {
 	"williamboman/mason.nvim",
-	lazy = false,
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		"hrsh7th/cmp-nvim-lsp",
-		"neovim/nvim-lspconfig",
-		-- "saghen/blink.cmp",
 	},
 	config = function()
-		-- import mason and mason_lspconfig
 		local mason = require("mason")
 		local mason_lspconfig = require("mason-lspconfig")
-		local mason_tool_installer = require("mason-tool-installer")
 
 		mason.setup({
 			ui = {
@@ -25,33 +18,22 @@ return {
 		})
 
 		mason_lspconfig.setup({
-			automatic_enable = false,
-			-- servers for mason to install
 			ensure_installed = {
+				-- Lua
 				"lua_ls",
-				-- "ts_ls", currently using a ts plugin
-				"html",
-				"cssls",
-				"tailwindcss",
+				-- Python
+				"pyright",
+				"ruff",
+				-- Go
 				"gopls",
-				"emmet_ls",
+				-- TypeScript / JavaScript
+				"ts_ls",
+				-- Deno (可选，通常系统全局安装 deno 即可)
+				-- "denols",
+				-- Emmet
 				"emmet_language_server",
-				-- "eslint",
-				"marksman",
 			},
-		})
-
-		mason_tool_installer.setup({
-			ensure_installed = {
-				"prettier", -- prettier formatter
-				"stylua", -- lua formatter
-				"isort", -- python formatter
-				"pylint",
-				"clangd",
-				"denols",
-				-- { 'eslint_d', version = '13.1.2' },
-			},
-			run_on_start = false  -- 不自动安装
+			automatic_installation = true,
 		})
 	end,
 }
