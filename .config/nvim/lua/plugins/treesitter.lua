@@ -1,57 +1,70 @@
 return {
-  -- Highlight, edit, and navigate code
   "nvim-treesitter/nvim-treesitter",
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = {
-    "HiPhish/rainbow-delimiters.nvim", -- ✅ 替换掉旧版 p00f/nvim-ts-rainbow
+    "HiPhish/rainbow-delimiters.nvim",
   },
   build = ":TSUpdate",
-  main = "nvim-treesitter.configs", -- Sets main module to use for opts
-  opts = {
-    ensure_installed = {
-      "lua",
-      "python",
-      "javascript",
-      "typescript",
-      "vimdoc",
-      "vim",
-      "regex",
-      "terraform",
-      "sql",
-      "dockerfile",
-      "toml",
-      "json",
-      "java",
-      "groovy",
-      "go",
-      "gitignore",
-      "graphql",
-      "yaml",
-      "make",
-      "cmake",
-      "markdown",
-      "markdown_inline",
-      "bash",
-      "tsx",
-      "css",
-      "html",
-    },
+  config = function()
+    require("nvim-treesitter.configs").setup({
+      ensure_installed = {
+        "lua",
+        "python",
+        "javascript",
+        "typescript",
+        "tsx",
+        "vimdoc",
+        "vim",
+        "regex",
+        "terraform",
+        "sql",
+        "dockerfile",
+        "toml",
+        "json",
+        "java",
+        "groovy",
+        "go",
+        "gitignore",
+        "graphql",
+        "yaml",
+        "make",
+        "cmake",
+        "markdown",
+        "markdown_inline",
+        "bash",
+        "css",
+        "html",
+      },
 
-    -- 自动安装未安装的语法
-    auto_install = true,
+      auto_install = true,
 
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = { "ruby" },
-    },
+      highlight = {
+        enable = true,
+        -- 大文件禁用，避免卡顿
+        disable = function(_, buf)
+          local max_filesize = 100 * 1024 -- 100 KB
+          local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
+          if ok and stats and stats.size > max_filesize then
+            return true
+          end
+        end,
+      },
 
-    indent = { enable = true, disable = { "ruby" } },
-  },
+      indent = { enable = true },
 
-  config = function(_, opts)
-    -- treesitter 基础配置
-    require("nvim-treesitter.configs").setup(opts)
+      -- 增量选择：用 <CR> 逐步扩大选区，<BS> 缩小
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<CR>",
+          node_incremental = "<CR>",
+          scope_incremental = false,
+          node_decremental = "<BS>",
+        },
+      },
+    })
 
-    -- ✅ rainbow-delimiters 配置
+    -- Rainbow Delimiters 配置
     local rainbow_delimiters = require("rainbow-delimiters")
 
     vim.g.rainbow_delimiters = {
@@ -63,13 +76,19 @@ return {
         [""] = "rainbow-delimiters",
         latex = "rainbow-blocks",
       },
+      priority = {
+        [""] = 110,
+        lua = 210,
+      },
       highlight = {
-        -- 自定义你的彩虹括号配色（与原来的保持一致）
-        "RainbowDelimiterYellow", -- "#F9D749"
-        "RainbowDelimiterViolet", -- "#CC78D1"
-        "RainbowDelimiterBlue",   -- "#479FF8"
+        "RainbowDelimiterYellow",
+        "RainbowDelimiterViolet",
+        "RainbowDelimiterBlue",
+        "RainbowDelimiterOrange",
+        "RainbowDelimiterGreen",
+        "RainbowDelimiterCyan",
+        "RainbowDelimiterRed",
       },
     }
   end,
 }
-
