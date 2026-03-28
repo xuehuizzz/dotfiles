@@ -81,7 +81,7 @@ return { -- Autocompletion
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
 
         -- 确认补全
-        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+        ["<CR>"] = cmp.mapping.confirm({ select = false }),
 
         -- 手动触发补全
         ["<C-Space>"] = cmp.mapping.complete(),

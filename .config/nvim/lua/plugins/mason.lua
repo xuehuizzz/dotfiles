@@ -22,8 +22,8 @@ return {
 				-- Lua
 				"lua_ls",
 				-- Python
-				"pyright",
 				"ruff",
+        "pyright",
 				-- Go
 				"gopls",
 				-- TypeScript / JavaScript

@@ -13,9 +13,7 @@ vim.opt.shiftwidth = 4 -- 缩进宽度为4个空格
 vim.opt.autoindent = true -- 自动缩进
 vim.opt.cursorline = true -- 高亮当前行
 vim.opt.mouse = "a" -- 启用鼠标支持
-vim.opt.lazyredraw = true -- 关闭显示重绘
 vim.opt.ttyfast = true -- 提高性能
-vim.opt.syntax = "on" -- 语法高亮
 vim.opt.ruler = true -- 显示状态栏标尺
 vim.opt.cmdheight = 0 -- 命令行高度
 vim.opt.laststatus = 2 -- 显示状态栏
@@ -35,7 +33,7 @@ vim.opt.magic = true -- 设置魔术
 vim.opt.backspace = "indent,eol,start" -- 设置退格键行为
 vim.opt.foldenable = true -- 开启折叠
 vim.opt.foldmethod = "expr" -- 折叠方式
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- 使用 treesitter 提供的折叠
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- 使用 treesitter 提供的折叠
 vim.opt.foldcolumn = "0" -- 折叠区域宽度
 vim.opt.foldlevel = 99 -- 折叠层数
 vim.opt.foldlevelstart = 99 -- 默认展开所有折叠
@@ -54,12 +52,10 @@ vim.opt.linebreak = true -- 在单词之间换行
 vim.opt.breakindent = true -- 保持换行后的缩进
 vim.opt.showbreak = "↪ " -- 显示换行符号
 vim.opt.filetype = "on" -- 启用文件类型检测
-vim.opt.syntax = "enable" -- 启用语法高亮
 vim.opt.encoding = "utf-8" -- 设置编码为 UTF-8
 vim.opt.fileencoding = "utf-8" -- 设置文件编码为 UTF-8
 vim.opt.langremap = false -- 禁用语言映射
 vim.opt.virtualedit = "onemore" -- 允许光标移动到最后一个字符之后
-vim.opt.scroll = 10 -- 设置 Ctrl-U 和 Ctrl-D 滚动的行数
 vim.opt.scrolljump = 1 -- 当光标移出屏幕时滚动的行数
 vim.opt.scrolloff = 8 -- 保持光标上下文可见行数，让滚动更平滑
 vim.cmd("language en_US.UTF-8")
@@ -98,6 +94,16 @@ local disabled_built_ins = {
 	"zipPlugin",
 	"tar",
 	"tarPlugin",
+  "2html_plugin",
+  "tohtml",
+  "getscript",
+  "getscriptPlugin",
+  "logipat",
+  "matchit",
+  "rrhelper",
+  "spellfile_plugin",
+  "vimball",
+  "vimballPlugin",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
