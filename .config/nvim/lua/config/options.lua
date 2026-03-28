@@ -60,6 +60,7 @@ vim.opt.scrolljump = 1 -- 当光标移出屏幕时滚动的行数
 vim.opt.scrolloff = 8 -- 保持光标上下文可见行数，让滚动更平滑
 vim.cmd("language en_US.UTF-8")
 
+
 -- 完全禁用诊断图标和符号
 -- TODO: 过滤 #501, #402 告警
 vim.diagnostic.config({
