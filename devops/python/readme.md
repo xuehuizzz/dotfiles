@@ -25,6 +25,7 @@ my_project/
 │       ├── constants/       # 常量文件模块
 │       ├── core/            # 核心业务逻辑模块
 │       ├── services/        # 服务层，处理业务逻辑、外部接口调用
+│       ├── repositoies/     # 数据访问层，处理数据库或外部存储的操作
 │       ├── schemas/         # 数据结构定义, 如请求/响应的 Pydantic Schema
 │       ├── models/          # 数据模型，例如 ORM 或 Pydantic 模型
 │       ├── api/             # API 层（如 FastAPI 路由）
@@ -35,7 +36,7 @@ my_project/
 ├── pyproject.toml           # Python 项目配置（依赖、打包、工具链）
 ├── Makefile                 # 工程快捷键：run / test / lint / ci
 ├── README.md                # 项目说明文档
-└── requirements.txt         # 依赖列表（pip）
+└── uv.lock                  # 使用uv安装同步依赖
 ```
 
 #### 1.<mark>模块导入规范</mark><sub> pip install isort</sub>
