@@ -1,6 +1,6 @@
 return {
 	"neovim/nvim-lspconfig",
-	event = { "BufReadPost", "BufNewFile" },
+	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
@@ -27,7 +27,7 @@ return {
 				vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
 
 				opts.desc = "Go to declaration"
-				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+				vim.keymap.set("n", "<C-b>", vim.lsp.buf.declaration, opts)
 
 				opts.desc = "Show LSP definitions"
 				vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
