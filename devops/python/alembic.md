@@ -64,6 +64,37 @@ alembic init alembic
 ```ini
 sqlalchemy.url = postgresql+psycopg2://user:password@localhost:5432/dbname
 ```
+或者: 直接改 alembic/env.py
+```python
+import os
+from logging.config import fileConfig
+from pathlib import Path
+
+from sqlalchemy import engine_from_config, pool
+from sqlalchemy.engine.url import make_url
+from dotenv import load_dotenv
+
+from alembic import context
+from src.manus.models import Base
+
+env_file = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(env_file)
+
+
+config = context.config
+database_url = os.getenv("SQLALCHEMY_DATABASE_URI")
+
+if not database_url:
+    raise ModuleNotFoundError("SQLALCHEMY_DATABASE_URI is not set. Did you forget to configure .env?")
+
+sync_url = database_url.replace(
+    "postgresql+asyncpg",
+    "postgresql+psycopg2"
+)
+
+# 不在alembic.ini中硬编码, 通过环境变量读取再替换同步驱动
+config.set_main_option("sqlalchemy.url", sync_url)
+```
 
 ## 五、接入 SQLAlchemy Model
 先准备一个Base类文件:
