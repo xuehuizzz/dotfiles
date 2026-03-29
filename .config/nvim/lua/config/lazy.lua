@@ -14,22 +14,15 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ -- 加载插件
+	require("plugins.snacks"),
 	require("plugins.colortheme"),
 	require("plugins.autocompletion"),
 	require("plugins.window-picker"),
-	require("plugins.neotree"),
-	require("plugins.indent-blankline"),
 	require("plugins.treesitter"),
 	require("plugins.lualine"),
 	require("plugins.comment"),
-	require("plugins.toggleterm"),
 	require("plugins.mason"),
 	require("plugins.lsp"),
-	require("plugins.telescope"),
-	require("plugins.alpha"),
-	require("plugins.nui"),
-	require("plugins.nvim-notify"),
 	require("plugins.noice"),
-	require("plugins.bufremove"),
 	require("plugins.bufferline"),
 })

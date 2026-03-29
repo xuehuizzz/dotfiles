@@ -80,14 +80,13 @@ return {
 			hl("GitSignsChange", { fg = "#6897BB" })
 			hl("GitSignsDelete", { fg = "#CF6171" })
 
-			-- Telescope（如果使用）
-			hl("TelescopeBorder", { fg = border, bg = bg_dark })
-			hl("TelescopeNormal", { bg = bg_dark })
-			hl("TelescopeSelection", { bg = bg_visual })
-			hl("TelescopePromptBorder", { fg = border, bg = bg_dark })
-			hl("TelescopePromptNormal", { bg = bg_dark })
-			hl("TelescopeResultsBorder", { fg = border, bg = bg_dark })
-			hl("TelescopePreviewBorder", { fg = border, bg = bg_dark })
+			-- Snacks Picker
+			hl("SnacksPickerBorder", { fg = border, bg = bg_dark })
+			hl("SnacksPickerNormal", { bg = bg_dark })
+			hl("SnacksPickerSelected", { bg = bg_visual })
+			hl("SnacksPickerInputBorder", { fg = border, bg = bg_dark })
+			hl("SnacksPickerInputNormal", { bg = bg_dark })
+			hl("SnacksPickerPreviewBorder", { fg = border, bg = bg_dark })
 		end,
 	},
 }

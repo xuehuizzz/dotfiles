@@ -3,7 +3,6 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
-		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
 	config = function()
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -24,19 +23,19 @@ return {
 				local opts = { buffer = ev.buf, silent = true }
 
 				opts.desc = "Show LSP references"
-				vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+				vim.keymap.set("n", "gR", function() Snacks.picker.lsp_references() end, opts)
 
 				opts.desc = "Go to declaration"
 				vim.keymap.set("n", "<C-b>", vim.lsp.buf.declaration, opts)
 
 				opts.desc = "Show LSP definitions"
-				vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+				vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, opts)
 
 				opts.desc = "Show LSP implementations"
-				vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+				vim.keymap.set("n", "gi", function() Snacks.picker.lsp_implementations() end, opts)
 
 				opts.desc = "Show LSP type definitions"
-				vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+				vim.keymap.set("n", "gt", function() Snacks.picker.lsp_type_definitions() end, opts)
 
 				opts.desc = "See available code actions"
 				vim.keymap.set({ "n", "v" }, "<leader>vca", vim.lsp.buf.code_action, opts)
@@ -45,7 +44,7 @@ return {
 				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
 				opts.desc = "Show buffer diagnostics"
-				vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+				vim.keymap.set("n", "<leader>D", function() Snacks.picker.diagnostics_buffer() end, opts)
 
 				opts.desc = "Show line diagnostics"
 				vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)

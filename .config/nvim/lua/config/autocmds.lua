@@ -53,6 +53,27 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	end,
 })
 
+-- 关闭最后一个文件时退出 nvim
+vim.api.nvim_create_autocmd("BufDelete", {
+	callback = function()
+		vim.schedule(function()
+			local bufs = vim.tbl_filter(function(b)
+				if not vim.api.nvim_buf_is_valid(b) then return false end
+				if not vim.bo[b].buflisted then return false end
+				if vim.bo[b].buftype ~= "" then return false end
+				-- 有文件名的才算真实 buffer
+				if vim.api.nvim_buf_get_name(b) ~= "" then return true end
+				-- 无文件名但有内容的也算
+				local lines = vim.api.nvim_buf_get_lines(b, 0, -1, false)
+				return #lines > 1 or (#lines == 1 and lines[1] ~= "")
+			end, vim.api.nvim_list_bufs())
+			if #bufs == 0 then
+				vim.cmd("qa!")
+			end
+		end)
+	end,
+})
+
 -- 保存时自动删除空行中的空格字符
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",

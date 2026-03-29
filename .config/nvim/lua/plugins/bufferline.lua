@@ -8,13 +8,11 @@ return {
 
   opts = {
     options = {
-      close_command = function(n) require("mini.bufremove").delete(n, false) end,
-      right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+      close_command = function(n) Snacks.bufdelete(n) end,
+      right_mouse_command = function(n) Snacks.bufdelete(n) end,
       mode = "buffers",
       themable = true,
       numbers = "none",
-      close_command = "bdelete! %d",
-      right_mouse_command = "bdelete! %d",
       left_mouse_command = "buffer %d",
       middle_mouse_command = nil,
 
@@ -32,7 +30,7 @@ return {
       -- 为 neo-tree 留出侧边栏偏移
       offsets = {
         {
-          filetype = "neo-tree",
+          filetype = "snacks_layout_box",
           text = "  File Explorer",
           text_align = "left",
           highlight = "Directory",

@@ -1,12 +1,13 @@
 -- 设置 leader 键，建议在初始化 lazy 之前设置
 vim.g.mapleader = " " -- 设置全局 leader 键为空格键
 vim.g.maplocalleader = " " -- 设置局部 leader 键为空格键
-
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
 vim.opt.guifont = "Maple Mono NF CN:h12"
 vim.opt.number = true -- 显示行号
 -- vim.opt.relativenumber = true        -- 显示相对行号
 -- vim.opt.title = true  -- 显示文件标题
-vim.opt.guicursor = "n-v-c-sm-i-ci-ve-r-cr-o:ver25" -- 设置任何模式下都使用竖线光标
+vim.opt.guicursor = "n-v-c-sm-i-ci-ve-r-cr-o:ver25,t:ver25-blinkon400-blinkoff400-blinkwait300-Cursor" -- 竖线光标，终端模式下闪烁
 vim.opt.expandtab = true -- 将制表符展开为空格
 vim.opt.tabstop = 4 -- 制表符等于4个空格
 vim.opt.shiftwidth = 4 -- 缩进宽度为4个空格
@@ -19,7 +20,7 @@ vim.opt.cmdheight = 0 -- 命令行高度
 vim.opt.laststatus = 2 -- 显示状态栏
 vim.opt.softtabstop = 4 -- 退格键一次删除4个空格
 vim.opt.smartindent = true -- 智能自动缩进
-vim.opt.autochdir = true -- 自动切换工作目录
+-- vim.opt.autochdir = true -- 自动切换工作目录（会导致 explorer 根目录跟随变化）
 vim.opt.backupcopy = "yes" -- 备份时的行为为覆盖
 vim.opt.hidden = true -- 允许在有未保存的修改时切换缓冲区
 vim.opt.ignorecase = true -- 搜索时忽略大小写

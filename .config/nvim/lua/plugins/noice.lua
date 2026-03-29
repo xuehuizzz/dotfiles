@@ -3,7 +3,7 @@ return {
   event = "VeryLazy",
   dependencies = {
     "MunifTanjim/nui.nvim",
-    "rcarriga/nvim-notify",
+    "nvim-treesitter/nvim-treesitter",
   },
 
   opts = {
@@ -211,7 +211,7 @@ return {
       "<C-b>",
       function() if not require("noice.lsp").scroll(-4) then return "<C-b>" end end,
       silent = true, expr = true, desc = "Scroll Backward",
-      mode = { "i", "n", "s" },
+      mode = { "i", "s" },
     },
   },
 }
