@@ -5,8 +5,8 @@ bindings = [
     { key = "N", mods = "Command", action = "SpawnNewInstance" },
     { key = "Left",  mods = "Command", chars = "\u001bOH"  },# jump word start
     { key = "Right", mods = "Command", chars =  "\u001bOF" },# jump word end
-    { key = "Up",  mods = "Command", chars = "\u001bB"   },# Skip word left
-    { key = "Down", mods = "Command", chars = "\u001bF"   },# Skip word right
+    { key = "Up",  mods = "Command", chars = "\u001bb"   },# Skip word left
+    { key = "Down", mods = "Command", chars = "\u001bf"   },# Skip word right
 ]
 
 [env]
@@ -67,3 +67,10 @@ live_config_reload = true
 
 [terminal]
 osc52 = "CopyPaste" # 设定复制黏贴行为 默认只能复制
+
+[mouse]
+hide_when_typing = true  # 打字时自动隐藏鼠标指针，减少视觉干扰
+
+[bell]
+animation = "EaseOutExpo"
+duration = 0   
