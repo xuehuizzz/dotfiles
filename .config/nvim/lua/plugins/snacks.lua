@@ -18,6 +18,7 @@ return {
           { icon = "", key = "w", desc = "  Find Word",       action = ":lua Snacks.picker.grep()" },
           { icon = "", key = "p", desc = "  Package Manager", action = ":Lazy" },
           { icon = "", key = "h", desc = "  Health", action = ":checkhealth" },
+          { icon = "", key = "c", desc = "  Config", action = ":lua Snacks.picker.files({ cwd = vim.fn.stdpath('config') })" },
           { icon = "", key = "q", desc = "  Quit",            action = ":qa" },
         },
         header = [[
