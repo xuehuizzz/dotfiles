@@ -14,6 +14,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ -- 加载插件
+	require("plugins.autopairs"),
 	require("plugins.snacks"),
 	require("plugins.colortheme"),
 	require("plugins.autocompletion"),

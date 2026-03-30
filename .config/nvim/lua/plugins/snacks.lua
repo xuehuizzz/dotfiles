@@ -29,7 +29,7 @@ return {
           #+#   #+#+#   #+#+#+#       #+#     #+#       #+# 
           ###    ####     ###     ########### ###       ### 
 
-               ── Code  ·  Create  ·  Conquer ──]],
+             ── 🌈Code  ·  Create  ·  Conquer🌈 ──]],
       },
       sections = {
         { section = "header" },
