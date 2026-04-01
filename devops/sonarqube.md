@@ -29,7 +29,7 @@ sonar.host.url=http://localhost:9000
 # 指定要分析的代码分支(社区版不支持指定),不指定分支则默认扫描当前分支的代码, 也就是说在扫描代码前, 先git checkout branchName上
 # sonar.branch.name=branchName
 # SonarQube 的认证令牌, 出于安全考虑，建议通过命令行参数传入而不是直接写在配置文件中
-sonar.login=your-token-here
+sonar.token=your-token-here
 # python项目指定检测版本
 sonar.python.version=
 sonar.scm.provider=git
