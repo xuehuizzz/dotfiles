@@ -38,7 +38,7 @@ class Postgres:
                 # 参数改为从环境变量获取
                 self._engine = create_async_engine(
                     url="postgresql+asyncpg://admin:admin@localhost:5432/manus",
-                    echo=self._setting.env == "development",
+                    echo=False,  # 不输出SQL语句
                     pool_size=20,
                     max_overflow=10,
                     pool_timeout=30,
