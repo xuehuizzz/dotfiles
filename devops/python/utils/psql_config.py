@@ -1,5 +1,8 @@
 """pgsql基础配置信息
 pip install sqlalchemy asyncpg
+
+有异步框架 / 高并发 IO → 用 async（asyncpg）
+普通项目 / 脚本 / 后台任务 → 用 sync（psycopg2 / pymysql）更稳
 """
 
 import asyncio
