@@ -1,4 +1,6 @@
-"""pgsql基础配置信息"""
+"""pgsql基础配置信息
+pip install sqlalchemy asyncpg
+"""
 
 import asyncio
 from contextlib import asynccontextmanager
@@ -32,7 +34,7 @@ class Postgres:
                 # 2.创建异步引擎
                 # 参数改为从环境变量获取
                 self._engine = create_async_engine(
-                    "postgresql+asyncpg://admin:admin@localhost:5432/manus",
+                    url="postgresql+asyncpg://admin:admin@localhost:5432/manus",
                     echo=self._setting.env == "development",
                     pool_size=20,
                     max_overflow=10,
