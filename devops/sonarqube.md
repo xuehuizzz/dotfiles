@@ -2,7 +2,7 @@
 ## 安装并运行 SonarQube 服务器
 ```bash
 # 使用 Docker 运行 SonarQube(推荐方式), 社区版, 个人使用
-docker run -d --name sonarqube -p 9000:9000 sonarqube:latest  # lts的稳定版本
+docker run -d --name sonarqube -p 9000:9000 sonarqube:latest
 ```
 ## 安装 SonarScanner cli工具
 ```bash
