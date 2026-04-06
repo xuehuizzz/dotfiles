@@ -3,12 +3,7 @@
 ```bash
 docker run -d --name sonarqube -p 9000:9000 sonarqube:latest
 ```
-## 安装 SonarScanner cli工具
-```bash
-brew install sonar-scanner  # macOS
-sudo apt-get install sonar-scanner  # Ubuntu/Debian
-sudo yum install sonar-scanner  # CentOS/RHEL
-```
+
 ## 在项目根目录创建 sonar-project.properties 配置文件
 ```properties
 # 项目的唯一标识符，在 SonarQube 服务器上用于区分不同项目
@@ -43,4 +38,16 @@ https://localhost:9000  # 默认user/pwd都是: admin
 # 分析完成后，可以在 SonarQube 的 Web 界面上看到结果, 所有的分析结果都会被存储在默认的主干（main）中
 sonar-scanner  #  -X 启用调试模式
 # sonar-scanner -Dsonar.login=your-token-here     
+```
+
+## 安装 SonarScanner cli工具
+```bash
+brew install sonar-scanner  # macOS
+sudo apt-get install sonar-scanner  # Ubuntu/Debian
+sudo yum install sonar-scanner  # CentOS/RHEL
+```
+或者:
+```bash
+# 不污染本地环境
+docker run --rm -v "$(pwd):/usr/src" -e SONAR_HOST_URL="http://host.docker.internal:9000" -e SONAR_LOGIN="你的token" sonarsource/sonar-scanner-cli
 ```
