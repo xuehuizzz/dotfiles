@@ -10,7 +10,7 @@ return {
 		config = function()
 			vim.cmd([[colorscheme darcula-solid]])
 
-			local transparent_bg = false
+			local transparent_bg = false  -- 透明背景开关
 			local bg = transparent_bg and "NONE" or "#2B2B2B"
 			local bg_dark = transparent_bg and "NONE" or "#242424"
 			local bg_light = "#323232"
