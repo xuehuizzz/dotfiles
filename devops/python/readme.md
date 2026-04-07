@@ -352,19 +352,14 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
     *
         ```python
-        # pip install ruff black pylint wemake-python-styleguide, 优先推荐 ruff
+        # pip install ruff
         ruff init  # 生成配置文件
         ruff rules  # 查看支持的规则
         ruff check path/to/your_file.py  # 检查一个文件
         ruff check .  # 检查当前路径下所有py文件
         ruff check path/to/your_directory  # 检查一个目录
-        ruff check path/to/your_file.py --fix  # 自动修复问题 
-
-        # 在终端使用black和pylint来规范你的脚本
-        black your_script.py  
-        pylint your_script.py
-        flake8 your_script.py   # 更为严格
-        # 在pycharm或者vscode安装插件: sonarlint
+        ruff check path/to/your_file.py --fix  # 自动修复问题
+        ruff format .  # 格式化代码
         ```
 
 *   使用dataclasses
@@ -403,43 +398,6 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
             在处理数据库或者需要原子操作的场景中, 确保事务的正确开启和关闭, 以及在必要时进行回滚
         锁和同步:
             在多线程或多进程编程中, 上下文管理器可以用来管理锁, 从而避免死锁并确保资源在并发环境下的正确使用
-        ```
-
-*   写明确的文档注释, 一个函数实现了什么功能, 接收了什么参数, 返回什么结果
-
-    *
-        ```python
-        def add_numbers(a: int, b: int) -> int:
-            """
-            将两个整数相加并返回结果。
-
-            参数:
-            a (int): 第一个加数。
-            b (int): 第二个加数。
-
-            返回:
-            int: 两个加数的和。
-            """
-            return a + b
-        ```
-
-*   使用**PrettyErrors**美化错误信息
-
-    *
-        ```python
-        import pretty_errors
-
-        # 配置 PrettyErrors
-        pretty_errors.configure(
-            separator_character="",  # 去掉顶部的分隔线, 亦可以自定义: "*" 或者 "=" 或者其它
-            line_number_first=True,  # 显示行号在前
-            # filename_display=pretty_errors.FILENAME_EXTENDED,  # 显示完整的文件路径
-            # display_link=True,  # 显示错误所在的文件链接
-            # lines_before=2,  # 错误前显示的代码行数
-            # lines_after=2,  # 错误后显示的代码行数
-            line_color=pretty_errors.RED + '>  ' + pretty_errors.default_config.line_color,  # 行号颜色
-            code_color='  ' + pretty_errors.default_config.code_color,  # 代码颜色
-        )
         ```
 
 #### 5.<mark>使用类型注解</mark>
