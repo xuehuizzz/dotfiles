@@ -154,6 +154,8 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
         func("hello")     # 提供了参数: hello
         ```
 
+*   单向哈希散列用 **Argon2id + HMAC-SHA-256 pepper**, 对称加解密用 **AESGCM**
+  
 * 函数嵌套的层数不建议超过2层, 过多的嵌套会导致可读性和维护性下降.
 
 * 小型项目用相对导入, **中大型项目用绝对导入**, 配置setup.py则不需要再文件里手动管理sys.path
@@ -217,7 +219,6 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
             -- 批量插入
             -- 可以在一次事务中插入多行数据，这减少了事务的开销和网络通信的次数，提高了插入效率
             INSERT INTO table (column1, column2) VALUES (value1, value2), (value3, value4);
-
         ```
 
 *   关闭异常自动关联上下文
@@ -303,8 +304,6 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
         print(current_dir)
         print(parent_dir)
         ```
-
-*   使用 **Argon2id + HMAC-SHA-256 pepper** 提供安全的密码哈希与验证功能
 
 *   <font color="red">**Code review**</font>
 
