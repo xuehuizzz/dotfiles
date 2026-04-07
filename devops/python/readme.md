@@ -127,7 +127,7 @@ load_dotenv(dotenv_path=dotenv_path)
 # -----------------------------------------
 # 使用环境变量
 db_host = os.getenv("DB_HOST")   # 输出为: "127.0.0.1"
-db_port = os.getenv("DB_PORT")   # 输出为: "3306"
+db_port = int(os.getenv("DB_PORT"))   # 输出为: "3306"
 db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 ```
 
@@ -171,19 +171,6 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
         print(decoded_value)
         ```
 
-*   <font color="red">掌握函数式编程</font>
-
-    *
-        ```python
-        """
-        functools：这个库是 Python 函数式编程的核心，提供了一系列帮助函数来处理其他函数。
-        itertools：这个库提供了一系列用于构造和操作迭代对象的工具
-        operator：这个库提供了一系列对应于 Python 的内置操作符的函数，比如加法、乘法、索引操作等
-        toolz：pip install toolz 提供了一系列函数式编程工具，以便于创建纯函数式的数据流。它扩展了内置的函数式编程功能
-        fn.py：另一个第三方库，专注于提供严格的函数式编程方法，包括无状态的函数和不可变数据类型
-        """
-        ```
-
 *   在进行日志记录和抛出异常时, 使用懒惰的 `%` 格式化（也就是延迟格式化）
 
     *
@@ -205,13 +192,9 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
 *   列表推导式 禁止超过 1 个 for 语句或过滤器表达式，否则使用传统 for 循环语句替代
 
-*   使用双下划线 __ 来代表不需要的变量，单下划线 _ 容易与 gettext() 函数的别名冲突
-
 *   如果一个方法“本质是在描述对象的状态或派生属性”，而不是执行动作，就应该用 `@property`
-  
-*   避免`from xxx import *`, 因为可能会造成命名空间的污染. 禁止导入了模块却不使用它
 
-*   程序的main文件应该以 #!/usr/bin/python2或者 #!/usr/bin/python3开始, 大部分.py文件不必以#!作为文件的开始
+*   程序的main文件应该以 #!/usr/bin/env python3 开始, 大部分.py文件不必以#!作为文件的开始
 
 *   尽量减少try/except块中的代码量, 避免使用全局变量, 用类变量来代替
 
@@ -491,11 +474,13 @@ result = apply_function(add, 10, 20)
 
 ```ini
 [mypy]
-; 指定项目的Python版本
+# 指定项目的Python版本
 python_version = 3.8
-; 开启对未注明类型函数定义内部的检查
+# 逐步启用规则
+strict = False
+# 开启对未注明类型函数定义内部的检查
 check_untyped_defs = True   
-; 要求所有函数定义都必须有类型注解
+# 要求所有函数定义都必须有类型注解
 disallow_untyped_defs = True 
 # 忽略对不存在类型注解的第三方库的检查
 ignore_missing_imports = True
@@ -503,11 +488,11 @@ ignore_missing_imports = True
 disallow_incomplete_defs = True
 # 不允许在已注明类型的函数中调用未注明类型的函数
 disallow_untyped_calls = True
-; 严格区分 None 类型和其他类型
+# 严格区分 None 类型和其他类型
 strict_optional = True
 # 警告不必要的类型转换
 warn_redundant_casts = True
-; 警告代码中无用的 # type: ignore 注释
+# 警告代码中无用的 # type: ignore 注释
 warn_unused_ignores = True
 # 当函数可能返回 Any 类型时发出警告
 warn_return_any = True
