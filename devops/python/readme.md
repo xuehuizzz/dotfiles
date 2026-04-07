@@ -20,6 +20,7 @@ my_project/
 │   └── my_project/          # Python 包根目录
 │       ├── __init__.py      # 包初始化文件
 │       ├── __main__.py      # 入口文件，可用 `python -m my_project` 运行
+│       ├── py.typed         # 空文件, 告诉类型检查工具（mypy、Pyright 等）——这个库自带类型提示
 │       ├── config/          # 配置相关模块
 │       │   └── settings.py  # 配置文件，如读取 .env 或 YAML 配置
 │       ├── constants/       # 常量文件模块
