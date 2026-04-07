@@ -23,6 +23,18 @@ git remote rm name  # 删除远程仓库
 
 ```
 
+## 推送冲突
+```bash
+# 本地的 Git 仓库落后于远程仓库，你试图 git push 的时候被拒绝
+git add xxx
+git commit -m 'xxx'
+git pull  # 拉取失败, 本地的 Git 仓库落后于远程仓库，你试图 git push 的时候被拒绝
+git stash   # 把你当前工作区的修改（还没 commit 的改动）暂存起来，恢复工作区到干净状态（就像回到上一次 commit 的样子）
+git pull
+git stash pop  # 把之前 stash 的改动重新应用到工作区，并删除 stash 记录（git stash apply 会保留 stash 记录，不会删）
+git push
+```
+
 ## 停止追踪log文件
 ```bash
 # 如果 .gitignore中已经添加 *.log 配置了, 但是还会追踪log文件,
