@@ -2,11 +2,7 @@
     <h2><img src="https://readme-typing-svg.herokuapp.com?font=Optima&size=35&duration=6000&color=FF5733&center=true&vCenter=true&width=800&lines=代码是写给人看的,+顺便能在机器上运行" alt="Typing SVG"/></h2>
 </div>
 
-###  <mark>Google开源项目风格指南</mark>
-```bash
-https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/contents/#
-https://www.runoob.com/w3cnote/google-python-styleguide.html
-```
+###  [Google开源项目风格指南](https://google.github.io/styleguide/pyguide.html), [国内中文版](https://zh-google-styleguide.readthedocs.io/en/latest/)
 
 #### <mark>项目结构建议</mark>
 ```plaintext
