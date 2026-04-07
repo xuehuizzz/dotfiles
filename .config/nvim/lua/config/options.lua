@@ -13,6 +13,7 @@ vim.opt.tabstop = 4 -- 制表符等于4个空格
 vim.opt.shiftwidth = 4 -- 缩进宽度为4个空格
 vim.opt.autoindent = true -- 自动缩进
 vim.opt.cursorline = true -- 高亮当前行
+vim.o.wrapscan = true -- 全局开启循环搜索
 vim.opt.mouse = "a" -- 启用鼠标支持
 vim.opt.ttyfast = true -- 提高性能
 vim.opt.ruler = true -- 显示状态栏标尺
