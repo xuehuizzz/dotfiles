@@ -304,32 +304,7 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
         print(parent_dir)
         ```
 
-*   使用**passlib**安全存储密码
-
-    *
-        ```python
-        # pip install bcrypt passlib
-        from passlib.hash import bcrypt
-        """
-        bcrypt算法是单向的,即无法从散列值中恢复或“解密”原始密码,只能重置密码
-        """
-        def hash_password(password):
-            """使用 bcrypt 算法生成密码的哈希"""
-            hashed_password = bcrypt.hash(password)
-            return hashed_password
-
-        def verify_password(hashed_password, password):
-            """检查提供的密码与存储的哈希是否匹配"""
-            return bcrypt.verify(password, hashed_password)
-
-        if __name__ == "__main__":
-            pwd = '12345678'
-            hashed = hash_password(pwd)
-            print("Hashed Password:", hashed)
-
-            verification_result = verify_password(hashed, pwd)
-            print("Password Verified:", verification_result)
-        ```
+*   使用 **Argon2id + HMAC-SHA-256 pepper** 提供安全的密码哈希与验证功能
 
 *   <font color="red">**Code review**</font>
 
