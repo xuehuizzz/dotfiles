@@ -39,6 +39,45 @@ my_project/
 └── uv.lock                  # 使用uv安装同步依赖
 ```
 
+### <mark>uv</mark><sub>用 Rust 开发的超快 Python 包与项目管理工具</sub>
+```bash
+# 初始化项目
+uv init myproject --lib  # 创建库项目（带 --lib 选项, 生成 pyproject.toml、src 目录等）
+uv init myproject --python 3.12  # 指定 Python 版本初始化(会新建 .venv)
+cd myproject
+
+# 手动创建虚拟环境
+uv venv -p 3.12
+
+# 添加依赖（自动创建虚拟环境、更新 pyproject.toml 和 uv.lock）
+uv add requests
+uv add "flask>=3.0"
+uv add pandas numpy scipy           # 同时添加多个
+
+# 添加开发依赖
+uv add --dev pytest ruff mypy
+uv add --group lint ruff             # 添加到自定义依赖组
+
+# 移除依赖
+uv remove requests
+
+# 同步环境（根据 uv.lock 安装所有依赖）
+uv sync
+
+# 仅同步生产依赖（排除 dev）
+uv sync --no-dev
+
+# 更新锁文件
+uv lock
+
+# 更新特定包到最新版本
+uv lock --upgrade-package requests
+
+# 查看依赖树
+uv tree
+```
+
+
 #### 1.<mark>模块导入规范</mark><sub> pip install isort</sub>
 
 >标准库导入
