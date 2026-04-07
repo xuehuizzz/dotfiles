@@ -124,7 +124,7 @@ load_dotenv()    # 从项目根目录加载.env文件
 from pathlib import Path
 dotenv_path = Path('path/to/.env')
 load_dotenv(dotenv_path=dotenv_path)  
------------------------------------------
+# -----------------------------------------
 # 使用环境变量
 db_host = os.getenv("DB_HOST")   # 输出为: "127.0.0.1"
 db_port = os.getenv("DB_PORT")   # 输出为: "3306"
