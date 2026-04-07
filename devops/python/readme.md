@@ -207,6 +207,8 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
 
 *   使用双下划线 __ 来代表不需要的变量，单下划线 _ 容易与 gettext() 函数的别名冲突
 
+*   如果一个方法“本质是在描述对象的状态或派生属性”，而不是执行动作，就应该用 @property
+  
 *   避免`from xxx import *`, 因为可能会造成命名空间的污染. 禁止导入了模块却不使用它
 
 *   程序的main文件应该以 #!/usr/bin/python2或者 #!/usr/bin/python3开始, 大部分.py文件不必以#!作为文件的开始
