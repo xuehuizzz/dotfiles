@@ -20,6 +20,7 @@ set number
 set cursorline
 set ruler
 set cmdheight=1
+set noshowmode
 set laststatus=2
 set display+=lastline
 set wildmenu
@@ -60,9 +61,9 @@ set autochdir
 
 " ── 折叠 ────────────────────────────────────────────────────
 set foldenable
-set foldmethod=syntax
+set foldmethod=indent
 set foldcolumn=0
-set foldlevel=1
+set foldlevel=99
 
 " ── 文件 ────────────────────────────────────────────────────
 set nobackup
@@ -139,12 +140,12 @@ function! GetFileFormat()
     return get({'unix': 'LF', 'dos': 'CRLF', 'mac': 'CR'}, &fileformat, &fileformat)
 endfunction
 
-set statusline=%{GetMode()}%M%R%=\ %f%=\ %0(%{GetFileFormat()}\ %{&encoding}\ %c:%l%)
+set statusline=\ %{GetMode()}\ │\ %f\ %M%R%=%{&filetype}\ │\ %{GetFileFormat()}\ %{&encoding}\ │\ %l:%c\ 
 
 " ============================================================
-"  注释切换 (Ctrl + /)
+"  注释切换 (Ctrl+/ 或 <leader>c)
 " ============================================================
-function! ToggleComment()
+function! ToggleComment() range
     let l:ft = &filetype
     if l:ft =~# '^\(python\|sh\|bash\|zsh\|ruby\|perl\|yaml\|conf\|tmux\|make\|dockerfile\)$'
         let l:cs = '#'
@@ -158,16 +159,26 @@ function! ToggleComment()
         let l:cs = '//'
     endif
     let l:e = escape(l:cs, '/"')
-    if getline('.') =~ '^\s*' . l:e . '\s\?'
-        execute 's/^\(\s*\)' . l:e . ' \?/\1/e'
-    else
-        execute 's/^\(\s*\)/\1' . l:e . ' /e'
-    endif
+    for l:lnum in range(a:firstline, a:lastline)
+        let l:line = getline(l:lnum)
+        if l:line =~ '^\s*' . l:e . '\s\?'
+            call setline(l:lnum, substitute(l:line, '^\(\s*\)' . l:e . ' \?', '\1', ''))
+        else
+            call setline(l:lnum, substitute(l:line, '^\(\s*\)', '\1' . l:cs . ' ', ''))
+        endif
+    endfor
 endfunction
 
-nnoremap <silent> <C-_> :call ToggleComment()<CR>
-vnoremap <silent> <C-_> :call ToggleComment()<CR>
-inoremap <silent> <C-_> <Esc>:call ToggleComment()<CR>a
+nnoremap <silent> <C-_>     :call ToggleComment()<CR>
+vnoremap <silent> <C-_>     :call ToggleComment()<CR>
+inoremap <silent> <C-_>     <Esc>:call ToggleComment()<CR>a
+
+nnoremap <silent> <C-/>     :call ToggleComment()<CR>
+vnoremap <silent> <C-/>     :call ToggleComment()<CR>
+inoremap <silent> <C-/>     <Esc>:call ToggleComment()<CR>a
+
+nnoremap <silent> <leader>c :call ToggleComment()<CR>
+vnoremap <silent> <leader>c :call ToggleComment()<CR>
 
 " ============================================================
 "  快捷键
@@ -218,7 +229,7 @@ augroup END
 
 augroup ft_javascript
     autocmd!
-    autocmd FileType javascript setlocal foldmethod=syntax
+    autocmd FileType javascript setlocal foldmethod=indent
 augroup END
 
 let html_use_css = 1
