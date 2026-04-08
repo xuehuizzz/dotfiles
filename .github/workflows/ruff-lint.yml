@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
@@ -27,12 +27,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install ruff
 
-      # 将 Ruff 输出保存到文件
       - name: Run Ruff
         run: |
+          set -o pipefail
           ruff check . | tee ruff.log
 
-      # 如果 Ruff 检查失败，显示 Ruff 的输出日志
       - name: Show Ruff logs
         if: failure()
         run: cat ruff.log
