@@ -2,7 +2,7 @@
 pip install cryptography
 
 本模块用于对敏感配置(如数据库密码、API Token 等)进行
-安全、可验证、可扩展的对称加密与解密。
+安全、可验证、可扩展的对称加密与解密.
 
 核心设计目标
 -----------
@@ -16,7 +16,7 @@ pip install cryptography
    - 不同用途通过不同 context / AAD 实现密钥隔离
 
 3. 支持附加认证数据(AAD)
-   - AAD 不加密，但参与认证
+   - AAD 不加密, 但参与认证
    - 可用于绑定用途、业务类型或数据版本
    - 防止密文被复制到错误场景中仍然可解密
 
@@ -26,7 +26,7 @@ pip install cryptography
 
 密文格式
 --------
-Base64(urlsafe) 编码后的二进制数据，结构如下：
+Base64(urlsafe) 编码后的二进制数据, 结构如下:
 
     +---------+---------+--------------------+
     | Version |  Nonce  |   Ciphertext+Tag   |
@@ -35,17 +35,17 @@ Base64(urlsafe) 编码后的二进制数据，结构如下：
 
 - Version: 当前实现固定为 0x01
 - Nonce: 随机生成,AES-GCM 推荐 12 字节
-- Ciphertext+Tag: AES-GCM 输出（含认证标签）
+- Ciphertext+Tag: AES-GCM 输出(含认证标签)
 
 安全注意事项
 -----------
-- 主密钥(master_key)必须妥善保管, 推荐来源：
+- 主密钥(master_key)必须妥善保管, 推荐来源:
   - 环境变量
   - KMS(AWS KMS / GCP KMS / Azure Key Vault)
   - HashiCorp Vault
 - 严禁将主密钥硬编码到仓库中
 - 不要复用同一 nonce (本实现每次随机生成)
-- AAD 必须在加密和解密时完全一致，否则解密会失败
+- AAD 必须在加密和解密时完全一致, 否则解密会失败
 
 适用场景
 --------
@@ -55,10 +55,9 @@ Base64(urlsafe) 编码后的二进制数据，结构如下：
 
 不适用场景
 ----------
-- 用户密码存储（应使用 bcrypt / argon2 等慢哈希）
-- 大文件流式加密（需分块处理）
+- 用户密码存储(应使用 bcrypt / argon2 等慢哈希)
+- 大文件流式加密(需分块处理)
 """
-
 
 import base64
 import os
@@ -69,7 +68,7 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
 NONCE_LEN: Final = 12
-VERSION: Final = b"\x01"  # 版本号，未来可扩展
+VERSION: Final = b"\x01"  # 版本号, 未来可扩展
 
 
 def derive_key(master_key: bytes, *, context: bytes) -> bytes:
