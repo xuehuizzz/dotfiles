@@ -26,15 +26,15 @@ KEY_SIZE_128 = 16  # 128-bit
 KEY_SIZE_192 = 24  # 192-bit
 KEY_SIZE_256 = 32  # 256-bit (推荐)
 
-NONCE_SIZE = 12  # 96-bit，GCM 推荐长度
+NONCE_SIZE = 12  # 96-bit, GCM 推荐长度
 
 
 @dataclass(frozen=True)
 class AESGCMConfig:
     """AES-GCM 参数配置"""
 
-    key_size: int = KEY_SIZE_256  # 密钥长度（字节）
-    nonce_size: int = NONCE_SIZE  # nonce 长度（字节）
+    key_size: int = KEY_SIZE_256  # 密钥长度(字节)
+    nonce_size: int = NONCE_SIZE  # nonce 长度(字节)
 
     def __post_init__(self):
         if self.key_size not in (KEY_SIZE_128, KEY_SIZE_192, KEY_SIZE_256):
@@ -64,11 +64,11 @@ class CryptoService:
         plaintext = svc.decrypt(ciphertext)
         assert plaintext == "Hello, World!"
 
-        # 带附加认证数据 (AAD)
+        # 带附加认证数据(AAD)
         ciphertext = svc.encrypt("secret", aad=b"user_id=123")
         plaintext = svc.decrypt(ciphertext, aad=b"user_id=123")
 
-        # Base64 编码（适合存数据库或传输）
+        # Base64 编码(适合存数据库或传输)
         token = svc.encrypt_to_base64("secret")
         plaintext = svc.decrypt_from_base64(token)
 
@@ -126,17 +126,14 @@ class CryptoService:
         try:
             key = bytes.fromhex(key_hex)
         except ValueError:
-            raise RuntimeError(f"Environment variable '{env_key}' is not valid hex")
+            raise RuntimeError(f"Environment variable '{env_key}' is not valid hex") from None
         return cls(key=key, config=config)
 
     def _generate_nonce(self) -> bytes:
         """生成随机 nonce"""
         return os.urandom(self._config.nonce_size)
 
-    # ------------------------------------------------------------------
-    # 核心加解密（bytes 级别）
-    # ------------------------------------------------------------------
-
+    # 核心加解密(bytes 级别)
     def encrypt_bytes(
         self,
         plaintext: bytes,
@@ -198,7 +195,7 @@ class CryptoService:
         aad: Optional[bytes] = None,
         encoding: str = "utf-8",
     ) -> bytes:
-        """加密字符串，返回 bytes"""
+        """加密字符串, 返回 bytes"""
         return self.encrypt_bytes(plaintext.encode(encoding), aad)
 
     def decrypt(
@@ -218,7 +215,7 @@ class CryptoService:
         urlsafe: bool = True,
     ) -> str:
         """
-        加密字符串，返回 Base64 编码的密文
+        加密字符串, 返回 Base64 编码的密文
 
         Args:
             plaintext: 待加密字符串
@@ -254,10 +251,7 @@ class CryptoService:
             明文字符串
         """
         try:
-            if urlsafe:
-                raw = base64.urlsafe_b64decode(token)
-            else:
-                raw = base64.b64decode(token)
+            raw = base64.urlsafe_b64decode(token) if urlsafe else base64.b64decode(token)
         except Exception as e:
             raise ValueError(f"Invalid Base64 input: {e}")
         return self.decrypt(raw, aad, encoding)
