@@ -1,11 +1,12 @@
 """pgsql基础配置信息
 pip install sqlalchemy asyncpg
 
-有异步框架 / 高并发 IO → 用 async（asyncpg）
-普通项目 / 脚本 / 后台任务 → 用 sync（psycopg2 / pymysql）更稳
+有异步框架 / 高并发 IO → 用 async(asyncpg)
+普通项目 / 脚本 / 后台任务 → 用 sync(psycopg2 / pymysql)更稳
 """
 
 import asyncio
+import logging
 from contextlib import asynccontextmanager
 
 from sqlalchemy import text
@@ -16,8 +17,7 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from .log_config import get_logger
-logger = get_logger()
+logger = logging.getLogger()
 
 
 class Postgres:
@@ -43,7 +43,7 @@ class Postgres:
                     max_overflow=10,
                     pool_timeout=30,
                     pool_recycle=1800,  # 避免数据库端主动断开长时间空闲连接
-                    pool_pre_ping=True,  # 从池中取连接前先 ping 一下，防止拿到已断开的连接
+                    pool_pre_ping=True,  # 从池中取连接前先 ping 一下, 防止拿到已断开的连接
                 )
                 logger.info("正在初始化Postgres连接...")
 
@@ -94,9 +94,9 @@ class Postgres:
 
 if __name__ == "__main__":
     """用法示例"""
-    from sqlalchemy import text
-    from sqlalchemy import select
     from manus.models import User  # 假设你有这个 ORM 模型
+    from sqlalchemy import select, text
+
     postgres = Postgres()
 
     # 用法1: 原生sql
@@ -111,6 +111,7 @@ if __name__ == "__main__":
             # 查询
             result = await session.execute(select(User).where(User.id == 1))
             user = result.scalar_one_or_none()
+            print(user)
 
             # 新增
             new_user = User(name="xuehui")
