@@ -1,4 +1,5 @@
 """通用配置信息, 环境变量(安全增强版 v4)"""
+
 import re
 from enum import StrEnum
 from functools import lru_cache
@@ -25,6 +26,7 @@ WEAK_PASSWORDS = frozenset(
 )
 SSLMODE = Literal["disable", "require", "verify-ca", "verify-full"]
 
+
 def is_strong_password(pwd: str) -> bool:
     """生产环境密码强度校验"""
     return (
@@ -34,7 +36,6 @@ def is_strong_password(pwd: str) -> bool:
         and re.search(r"[0-9]", pwd) is not None
         and re.search(r"[^a-zA-Z0-9]", pwd) is not None
     )
-
 
 
 # 环境定义
@@ -188,7 +189,6 @@ class Settings(BaseSettings):
                 )
 
         return v
-
 
     # 安全输出
     def safe_dump(self) -> dict:
