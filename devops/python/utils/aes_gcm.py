@@ -3,39 +3,38 @@
 """
 AES-GCM 对称加密工具模块
 
-AES-256-GCM 提供认证加密（Authenticated Encryption），同时保证:
-  - 机密性（Confidentiality）: 数据被加密，无法被窃听
-  - 完整性（Integrity）: 数据被篡改后解密会失败
-  - 真实性（Authenticity）: 可验证数据确实来自持有密钥的一方
+AES-256-GCM 提供认证加密 (Authenticated Encryption), 同时保证:
+  - 机密性 (Confidentiality): 数据被加密, 无法被窃听
+  - 完整性 (Integrity): 数据被篡改后解密会失败
+  - 真实性 (Authenticity): 可验证数据确实来自持有密钥的一方
 """
 
-import os
 import base64
 import logging
-from typing import Optional, Tuple, Union
+import os
 from dataclasses import dataclass
+from typing import Optional
 
-from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.exceptions import InvalidTag
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 logger = logging.getLogger(__name__)
 
 
-# ---------------------------------------------------------------------------
 # 常量
-# ---------------------------------------------------------------------------
-KEY_SIZE_128 = 16   # 128-bit
-KEY_SIZE_192 = 24   # 192-bit
-KEY_SIZE_256 = 32   # 256-bit (推荐)
+KEY_SIZE_128 = 16  # 128-bit
+KEY_SIZE_192 = 24  # 192-bit
+KEY_SIZE_256 = 32  # 256-bit (推荐)
 
-NONCE_SIZE = 12     # 96-bit，GCM 推荐长度
+NONCE_SIZE = 12  # 96-bit，GCM 推荐长度
 
 
 @dataclass(frozen=True)
 class AESGCMConfig:
     """AES-GCM 参数配置"""
-    key_size: int = KEY_SIZE_256    # 密钥长度（字节）
-    nonce_size: int = NONCE_SIZE    # nonce 长度（字节）
+
+    key_size: int = KEY_SIZE_256  # 密钥长度（字节）
+    nonce_size: int = NONCE_SIZE  # nonce 长度（字节）
 
     def __post_init__(self):
         if self.key_size not in (KEY_SIZE_128, KEY_SIZE_192, KEY_SIZE_256):
@@ -65,7 +64,7 @@ class CryptoService:
         plaintext = svc.decrypt(ciphertext)
         assert plaintext == "Hello, World!"
 
-        # 带附加认证数据（AAD）
+        # 带附加认证数据 (AAD)
         ciphertext = svc.encrypt("secret", aad=b"user_id=123")
         plaintext = svc.decrypt(ciphertext, aad=b"user_id=123")
 
@@ -80,7 +79,7 @@ class CryptoService:
     def __init__(self, key: bytes, config: Optional[AESGCMConfig] = None):
         """
         Args:
-            key: AES 密钥，长度必须与 config.key_size 匹配
+            key: AES 密钥, 长度必须与 config.key_size 匹配
             config: 可选的配置
         """
         self._config = config or AESGCMConfig()
@@ -99,7 +98,7 @@ class CryptoService:
         生成密码学安全的随机密钥
 
         Args:
-            key_size: 密钥长度（字节），默认 32（256-bit）
+            key_size: 密钥长度 (字节), 默认 32(256-bit)
 
         Returns:
             随机密钥 bytes
@@ -113,7 +112,7 @@ class CryptoService:
         config: Optional[AESGCMConfig] = None,
     ) -> "CryptoService":
         """
-        从环境变量创建实例，密钥以 hex 编码存储
+        从环境变量创建实例, 密钥以 hex 编码存储
 
         Raises:
             RuntimeError: 环境变量未设置
@@ -122,7 +121,7 @@ class CryptoService:
         if not key_hex:
             raise RuntimeError(
                 f"Environment variable '{env_key}' is not set. "
-                f"Generate one with: python -c \"from cryptography.hazmat.primitives.ciphers.aead import AESGCM; print(AESGCM.generate_key(256).hex())\""
+                f'Generate one with: python -c "from cryptography.hazmat.primitives.ciphers.aead import AESGCM; print(AESGCM.generate_key(256).hex())"'
             )
         try:
             key = bytes.fromhex(key_hex)
@@ -147,11 +146,11 @@ class CryptoService:
         加密原始字节
 
         返回格式: nonce (12B) || ciphertext || tag (16B)
-        nonce 前置拼接，解密时自动拆分
+        nonce 前置拼接, 解密时自动拆分
 
         Args:
             plaintext: 待加密数据
-            aad: 附加认证数据，不会被加密但会被认证（篡改后解密失败）
+            aad: 附加认证数据, 不会被加密但会被认证(篡改后解密失败)
 
         Returns:
             nonce + 密文 + tag 的拼接
@@ -173,8 +172,8 @@ class CryptoService:
         解密原始字节
 
         Args:
-            data: encrypt_bytes 的输出（nonce + ciphertext + tag）
-            aad: 加密时使用的附加认证数据，必须与加密时一致
+            data: encrypt_bytes 的输出(nonce + ciphertext + tag)
+            aad: 加密时使用的附加认证数据, 必须与加密时一致
 
         Returns:
             明文 bytes
@@ -189,13 +188,9 @@ class CryptoService:
                 f"Minimum length: {self._config.nonce_size + 16} bytes"
             )
 
-        nonce = data[:self._config.nonce_size]
-        ciphertext = data[self._config.nonce_size:]
+        nonce = data[: self._config.nonce_size]
+        ciphertext = data[self._config.nonce_size :]
         return self._aesgcm.decrypt(nonce, ciphertext, aad)
-
-    # ------------------------------------------------------------------
-    # 字符串便捷方法
-    # ------------------------------------------------------------------
 
     def encrypt(
         self,
@@ -215,10 +210,6 @@ class CryptoService:
         """解密为字符串"""
         return self.decrypt_bytes(data, aad).decode(encoding)
 
-    # ------------------------------------------------------------------
-    # Base64 便捷方法（适合存数据库、放 JSON、URL 传输）
-    # ------------------------------------------------------------------
-
     def encrypt_to_base64(
         self,
         plaintext: str,
@@ -233,7 +224,7 @@ class CryptoService:
             plaintext: 待加密字符串
             aad: 附加认证数据
             encoding: 字符串编码
-            urlsafe: 是否使用 URL 安全的 Base64（默认 True）
+            urlsafe: 是否使用 URL 安全的 Base64(默认 True)
 
         Returns:
             Base64 编码的密文字符串
@@ -251,13 +242,13 @@ class CryptoService:
         urlsafe: bool = True,
     ) -> str:
         """
-        解密 Base64 编码的密文，返回明文字符串
+        解密 Base64 编码的密文, 返回明文字符串
 
         Args:
             token: Base64 编码的密文
             aad: 加密时使用的附加认证数据
             encoding: 字符串编码
-            urlsafe: 是否使用 URL 安全的 Base64（默认 True）
+            urlsafe: 是否使用 URL 安全的 Base64(默认 True)
 
         Returns:
             明文字符串
@@ -272,9 +263,7 @@ class CryptoService:
         return self.decrypt(raw, aad, encoding)
 
 
-# ---------------------------------------------------------------------------
 # 全局单例
-# ---------------------------------------------------------------------------
 _default_service: Optional[CryptoService] = None
 
 
@@ -292,9 +281,6 @@ def init_crypto_service(key: bytes, config: Optional[AESGCMConfig] = None) -> No
     _default_service = CryptoService(key=key, config=config)
 
 
-# ---------------------------------------------------------------------------
-# 测试
-# ---------------------------------------------------------------------------
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
