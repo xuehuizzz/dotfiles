@@ -171,7 +171,7 @@ class Settings(BaseSettings):
     def validate_db_in_prod(
         cls, v: PostgresSettings, info: ValidationInfo
     ) -> PostgresSettings:
-        """生产环境：禁止弱密码 + 强制密码强度"""
+        """生产环境: 禁止弱密码 + 强制密码强度"""
         env = info.data.get("env")
 
         if env == Env.production:
