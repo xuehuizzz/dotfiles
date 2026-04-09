@@ -10,7 +10,6 @@ from urllib.parse import quote_plus
 from pydantic import BaseModel, SecretStr, ValidationInfo, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
 # 弱密码
 WEAK_PASSWORDS = frozenset(
     {
@@ -71,10 +70,10 @@ class PostgresSettings(BaseModel):
     @property
     def connect_args(self) -> dict:
         """
-        SQLAlchemy create_engine 的 connect_args。
+        SQLAlchemy create_engine 的 connect_args.
         asyncpg 期望 ssl=True / ssl.SSLContext,
-        不能直接传字符串 "require"。
-        如需更精细的证书校验，可升级为 ssl.create_default_context()。
+        不能直接传字符串 "require".
+        如需更精细的证书校验, 可升级为 ssl.create_default_context().
         """
         if self.ssl_mode == "disable":
             return {}
@@ -94,7 +93,7 @@ class RedisSettings(BaseModel):
     @property
     def url(self) -> str:
         """
-        安全拼接 Redis URL。
+        安全拼接 Redis URL.
         支持 Redis 6+ ACL: redis://user:password@host
         """
         scheme = "rediss" if self.ssl else "redis"
@@ -180,12 +179,12 @@ class Settings(BaseSettings):
 
             if pwd in WEAK_PASSWORDS:
                 raise ValueError(
-                    "生产环境禁止使用弱数据库密码，请通过环境变量 PGSQL__PASSWORD 配置强密码"
+                    "生产环境禁止使用弱数据库密码, 请通过环境变量 PGSQL__PASSWORD 配置强密码"
                 )
 
             if not is_strong_password(pwd):
                 raise ValueError(
-                    "生产环境数据库密码强度不足，要求: ≥8位, 包含大小写字母、数字和特殊字符"
+                    "生产环境数据库密码强度不足, 要求: ≥8位, 包含大小写字母、数字和特殊字符"
                 )
 
         return v
@@ -193,8 +192,8 @@ class Settings(BaseSettings):
     # 安全输出
     def safe_dump(self) -> dict:
         """
-        脱敏输出配置（用于日志）。
-        SecretStr 字段由 Pydantic v2 自动输出为 '**********'。
+        脱敏输出配置(用于日志).
+        SecretStr 字段由 Pydantic v2 自动输出为 '**********'.
         """
         return self.model_dump()
 
@@ -206,5 +205,5 @@ def get_settings() -> Settings:
 
 
 def reset_settings() -> None:
-    """清除配置缓存（测试用）"""
+    """清除配置缓存(测试用)"""
     get_settings.cache_clear()
