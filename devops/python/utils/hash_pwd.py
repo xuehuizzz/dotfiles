@@ -4,16 +4,17 @@
 pip install argon2-cffi
 """
 
-import os
-import hmac
 import hashlib
+import hmac
 import logging
+import os
 from dataclasses import dataclass
+
 from argon2 import PasswordHasher, Type
 from argon2.exceptions import (
-    VerifyMismatchError,
-    VerificationError,
     InvalidHashError,
+    VerificationError,
+    VerifyMismatchError,
 )
 
 logger = logging.getLogger(__name__)
@@ -22,11 +23,12 @@ logger = logging.getLogger(__name__)
 @dataclass(frozen=True)
 class Argon2Config:
     """Argon2 参数配置"""
-    time_cost: int = 3          # 迭代次数
-    memory_cost: int = 65536    # 内存开销 KB (64MB)
-    parallelism: int = 4        # 并行线程数
-    hash_len: int = 32          # 输出哈希长度（字节）
-    type: Type = Type.ID        # Argon2id，兼顾抗侧信道和抗 GPU
+
+    time_cost: int = 3  # 迭代次数
+    memory_cost: int = 65536  # 内存开销 KB (64MB)
+    parallelism: int = 4  # 并行线程数
+    hash_len: int = 32  # 输出哈希长度（字节）
+    type: Type = Type.ID  # Argon2id，兼顾抗侧信道和抗 GPU
 
 
 class PasswordService:
@@ -83,12 +85,12 @@ class PasswordService:
         if not pepper:
             raise RuntimeError(
                 f"Environment variable '{env_key}' is not set. "
-                f"Generate one with: python -c \"import os; print(os.urandom(32).hex())\""
-            )
+                f'Generate one with: python -c "import os; print(os.urandom(32).hex())"'
+            ) from None
         return cls(pepper=pepper.encode("utf-8"), config=config)
 
     def _normalize(self, password: str) -> str:
-        """HMAC-SHA-256 预处理，引入 pepper 提供额外安全层"""
+        """HMAC-SHA-256 预处理, 引入 pepper 提供额外安全层"""
         return hmac.new(
             self._pepper,
             password.encode("utf-8"),
@@ -109,7 +111,7 @@ class PasswordService:
             password: 明文密码
 
         Returns:
-            Argon2 哈希字符串，格式: $argon2id$v=19$m=65536,t=3,p=4$salt$hash
+            Argon2 哈希字符串, 格式: $argon2id$v=19$m=65536,t=3,p=4$salt$hash
 
         Raises:
             ValueError: 密码为空
@@ -141,23 +143,20 @@ class PasswordService:
 
     def needs_rehash(self, hashed_password: str) -> bool:
         """
-        检查哈希是否需要重新生成（参数升级后旧哈希需要更新）
+        检查哈希是否需要重新生成(参数升级后旧哈希需要更新)
 
-        用法: 登录成功后调用，若返回 True 则用新参数重新 hash 并更新数据库
+        用法: 登录成功后调用, 若返回 True 则用新参数重新 hash 并更新数据库
         """
         return self._hasher.check_needs_rehash(hashed_password)
 
 
-# ---------------------------------------------------------------------------
 # 便捷的模块级单例，适合大多数项目直接使用
-# ---------------------------------------------------------------------------
 _default_service: PasswordService | None = None
 
 
 def get_password_service() -> PasswordService:
     """
     获取全局单例，首次调用时从环境变量初始化
-
     在应用启动时确保 PASSWORD_PEPPER 环境变量已设置
     """
     global _default_service
@@ -174,13 +173,10 @@ def init_password_service(pepper: bytes, config: Argon2Config | None = None) -> 
     _default_service = PasswordService(pepper=pepper, config=config)
 
 
-# ---------------------------------------------------------------------------
-# 测试
-# ---------------------------------------------------------------------------
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
-    # 直接实例化（开发/测试用）
+    # 直接实例化(开发/测试用)
     svc = PasswordService(pepper=b"test-pepper-do-not-use-in-production")
 
     pwd = "12345678"
