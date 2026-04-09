@@ -43,8 +43,8 @@ class AQLConfig:
 
     def run(self):
         try:
-            update_aql = f"""xxx"""
-            res = self.db.AQLQuery(update_attr_aql, rawResults=True)    # 返回的是可迭代对象
+            update_aql = """xxx"""
+            self.db.AQLQuery(update_aql, rawResults=True)
 
         except Exception as e:
             logger.error("修改数据时发生错误: %r", str(e))
