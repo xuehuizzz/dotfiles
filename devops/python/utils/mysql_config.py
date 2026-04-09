@@ -1,8 +1,9 @@
 """This file is used to connect to MySQL and perform basic operations.
 pip install pymysql pymysql-pool python-dotenv
 """
+
 import os
-from typing import Optional, List, Tuple, Any
+from typing import Any
 
 import pymysql
 from dotenv import load_dotenv
@@ -12,27 +13,39 @@ load_dotenv()
 
 
 class MySQLContext:
-    _connection_pool: Optional[ConnectionPool] = None
+    _connection_pool: ConnectionPool | None = None
 
-    def __init__(self, host: Optional[str] = None,  user: Optional[str] = None,
-                 password: Optional[str] = None, database: Optional[str] = None, port: Optional[int] = None,
-                 connection_pool_size: int = 10, max_overflow: int = 10, **kwargs) -> None:
-        self.conn: Optional[pymysql.connections.Connection] = None
-        self.cursor: Optional[pymysql.cursors.Cursor] = None
+    def __init__(
+        self,
+        host: str | None = None,
+        user: str | None = None,
+        password: str | None = None,
+        database: str | None = None,
+        port: int | None = None,
+        connection_pool_size: int = 10,
+        max_overflow: int = 10,
+        **kwargs,
+    ) -> None:
+        self.conn: pymysql.connections.Connection | None = None
+        self.cursor: pymysql.cursors.Cursor | None = None
         self.host = host or os.getenv("MY_HOST")
         self.user = user or os.getenv("MY_USER")
         self.password = password or os.getenv("MY_PWD")
         self.database = database or os.getenv("MY_DB")
         self.port = port or int(os.getenv("MY_PORT")) if os.getenv("MY_PORT") else 3306
         if not MySQLContext._connection_pool:
-            MySQLContext.initialize_pool(self.host, self.user, self.password, self.database, self.port)
+            MySQLContext.initialize_pool(
+                self.host, self.user, self.password, self.database, self.port
+            )
 
-    def __enter__(self) -> 'MySQLContext':
+    def __enter__(self) -> "MySQLContext":
         self.conn = self._connection_pool.get_connection()
         self.cursor = self.conn.cursor()
         return self
 
-    def __exit__(self, exc_type: Optional[type], exc_value: Optional[Exception], traceback: Optional[Any]) -> None:
+    def __exit__(
+        self, exc_type: type | None, exc_value: Exception | None, traceback: Any | None
+    ) -> None:
         if self.cursor:
             self.cursor.close()
             self.cursor = None
@@ -55,16 +68,18 @@ class MySQLContext:
                 "user": user,
                 "password": password,
                 "database": database,
-                "port": port
+                "port": port,
             }
             if not all(config.values()):
                 missing_vars = [key for key, value in config.items() if not value]
-                raise ValueError("Missing required environment variables for "
-                                 f"database connection: {', '.join(missing_vars)}")
+                raise ValueError(
+                    "Missing required environment variables for "
+                    f"database connection: {', '.join(missing_vars)}"
+                )
 
             cls._connection_pool = ConnectionPool(**config)
 
-    def execute_query(self, query: str, params: Optional[Tuple[Any, ...]] = None) -> int:
+    def execute_query(self, query: str, params: tuple[Any, ...] | None = None) -> int:
         try:
             self.conn.ping(reconnect=True)  # Reconnect if connection is lost
             self.cursor.execute(query, params)
@@ -74,7 +89,9 @@ class MySQLContext:
             self.conn.rollback()
             raise RuntimeError(f"Failed to execute query: {query_err!r}") from query_err
 
-    def execute_many_queries(self, query: str, params_list: Optional[List[Tuple[Any, ...]]] = None) -> int:
+    def execute_many_queries(
+        self, query: str, params_list: list[tuple[Any, ...]] | None = None
+    ) -> int:
         try:
             # TODO: 优化该方法, 因为executemany不是一条语句多个values
             self.conn.ping(reconnect=True)  # Reconnect if connection is lost
@@ -85,12 +102,14 @@ class MySQLContext:
             self.conn.rollback()
             raise RuntimeError(f"Failed to execute queries: {query_err!r}") from query_err
 
-    def fetch_all(self, query: str, params: Optional[Tuple[Any, ...]] = None) -> List[Tuple[Any, ...]]:
+    def fetch_all(self, query: str, params: tuple[Any, ...] | None = None) -> list[tuple[Any, ...]]:
         try:
             self.cursor.execute(query, params)
             return self.cursor.fetchall()
         except Exception as fetch_err:
-            raise RuntimeError(f"Failed to fetch data: {fetch_err!r}, sql: {query, params}") from fetch_err
+            raise RuntimeError(
+                f"Failed to fetch data: {fetch_err!r}, sql: {query, params}"
+            ) from fetch_err
 
 
 if __name__ == "__main__":
@@ -124,4 +143,3 @@ if __name__ == "__main__":
     finally:
         # Disconnect the pool at the end of the program
         MySQLContext.close_pool()
-        
