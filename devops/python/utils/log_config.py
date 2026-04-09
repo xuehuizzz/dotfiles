@@ -22,16 +22,35 @@ from manus.config.settings import get_settings
 # 不需要序列化到 JSON 的 LogRecord 内置属性
 _BUILTIN_ATTRS = frozenset(
     {
-        "args", "asctime", "created", "exc_info", "exc_text", "filename",
-        "funcName", "levelname", "levelno", "lineno", "message", "module",
-        "msecs", "msg", "name", "pathname", "process", "processName",
-        "relativeCreated", "stack_info", "taskName", "thread", "threadName",
+        "args",
+        "asctime",
+        "created",
+        "exc_info",
+        "exc_text",
+        "filename",
+        "funcName",
+        "levelname",
+        "levelno",
+        "lineno",
+        "message",
+        "module",
+        "msecs",
+        "msg",
+        "name",
+        "pathname",
+        "process",
+        "processName",
+        "relativeCreated",
+        "stack_info",
+        "taskName",
+        "thread",
+        "threadName",
     }
 )
 
 
 class SimpleJsonFormatter(logging.Formatter):
-    """输出单行 JSON 格式的日志，支持 extra 字段。"""
+    """输出单行 JSON 格式的日志, 支持 extra 字段。"""
 
     def format(self, record: logging.LogRecord) -> str:
         log_record: dict[str, Any] = {
@@ -78,7 +97,7 @@ class LoggerManager:
     """
     线程安全的日志管理器(单例).
 
-    所有配置优先从显式参数读取，其次从 settings (.env)，最后使用默认值.
+    所有配置优先从显式参数读取, 其次从 settings (.env), 最后使用默认值.
 
     用法:
         from xxx import get_logger
@@ -86,7 +105,7 @@ class LoggerManager:
         log = get_logger("my_module")
         log.info("hello %s", "world")
 
-    如需自定义初始化参数，可在应用入口处显式实例化一次:
+    如需自定义初始化参数, 可在应用入口处显式实例化一次:
         LoggerManager(log_dir="/var/log/myapp", console_level=logging.DEBUG)
         log = get_logger("my_module")  # 后续照常使用便捷函数
     """
@@ -95,7 +114,7 @@ class LoggerManager:
     _init_lock: ClassVar[threading.Lock] = threading.Lock()
     _initialized: bool = False
 
-    # 用于标记自己添加的 handler，避免误清第三方 handler
+    # 用于标记自己添加的 handler, 避免误清第三方 handler
     _HANDLER_TAG = "_logmgr_managed"
 
     def __new__(cls, *args: Any, **kwargs: Any) -> "LoggerManager":
@@ -114,14 +133,14 @@ class LoggerManager:
     ) -> None:
         with self._init_lock:
             if self._initialized:
-                # 单例已初始化，若调用方传入了不同参数则发出警告
+                # 单例已初始化, 若调用方传入了不同参数则发出警告
                 self._warn_if_different(log_dir, max_bytes, backup_count, console_level, file_level)
                 return
             self._initialized = True
 
         settings = get_settings()
 
-        # ---- 日志路径：显式参数 > settings > 项目根/logs ----
+        # ---- 日志路径: 显式参数 > settings > 项目根/logs ----
         if log_dir is not None:
             self.log_dir = Path(log_dir)
         elif settings.log_path:
@@ -130,18 +149,16 @@ class LoggerManager:
             self.log_dir = _find_project_root() / "logs"
         self.log_dir.mkdir(parents=True, exist_ok=True)
 
-        # ---- 日志级别：显式参数 > settings > 默认值 ----
+        # ---- 日志级别: 显式参数 > settings > 默认值 ----
         self.console_level = (
             console_level
             if console_level is not None
-            else getattr(settings, "log_console_level", None)
-            or logging.INFO
+            else getattr(settings, "log_console_level", None) or logging.INFO
         )
         self.file_level = (
             file_level
             if file_level is not None
-            else getattr(settings, "log_file_level", None)
-            or logging.DEBUG
+            else getattr(settings, "log_file_level", None) or logging.DEBUG
         )
 
         self.max_bytes = max_bytes
@@ -152,10 +169,7 @@ class LoggerManager:
 
         atexit.register(self._close_all)
 
-    # ------------------------------------------------------------------ #
     #  内部工具方法
-    # ------------------------------------------------------------------ #
-
     def _warn_if_different(
         self,
         log_dir: Path | str | None,
@@ -164,7 +178,7 @@ class LoggerManager:
         console_level: int | None,
         file_level: int | None,
     ) -> None:
-        """单例已存在时，若新参数与已有配置不一致则发出警告。"""
+        """单例已存在时, 若新参数与已有配置不一致则发出警告。"""
         diffs: list[str] = []
         if log_dir is not None and Path(log_dir) != self.log_dir:
             diffs.append(f"log_dir: {self.log_dir} vs {log_dir}")
@@ -186,7 +200,7 @@ class LoggerManager:
 
     @staticmethod
     def _tag_handler(handler: logging.Handler) -> logging.Handler:
-        """给 handler 打上标记，以便后续只清理自己创建的。"""
+        """给 handler 打上标记, 以便后续只清理自己创建的。"""
         setattr(handler, LoggerManager._HANDLER_TAG, True)
         return handler
 
@@ -194,10 +208,7 @@ class LoggerManager:
     def _is_managed(handler: logging.Handler) -> bool:
         return getattr(handler, LoggerManager._HANDLER_TAG, False)
 
-    # ------------------------------------------------------------------ #
     #  生命周期
-    # ------------------------------------------------------------------ #
-
     def _close_all(self) -> None:
         with self._lock:
             for lg in self._loggers.values():
@@ -215,10 +226,7 @@ class LoggerManager:
                     lg.removeHandler(handler)
             self._loggers.clear()
 
-    # ------------------------------------------------------------------ #
     #  公共接口
-    # ------------------------------------------------------------------ #
-
     def get_logger(
         self,
         name: str = "manus",
@@ -235,7 +243,7 @@ class LoggerManager:
             logger.setLevel(level)
             logger.propagate = False
 
-            # 只清理由本管理器创建的 handler，保留外部添加的
+            # 只清理由本管理器创建的 handler, 保留外部添加的
             for h in logger.handlers[:]:
                 if self._is_managed(h):
                     logger.removeHandler(h)
@@ -270,7 +278,7 @@ class LoggerManager:
 
 
 def get_logger(name: str = "manus", **kwargs: Any) -> logging.Logger:
-    """便捷入口，省去每次手动实例化 LoggerManager。"""
+    """便捷入口, 省去每次手动实例化 LoggerManager。"""
     return LoggerManager().get_logger(name, **kwargs)
 
 
