@@ -1,7 +1,5 @@
 # pip install hvac
 
-from typing import Optional
-
 import hvac
 
 
@@ -21,14 +19,14 @@ class VaultClient:
     def get_kv_v2_secret(
         self,
         path: str,
-        field: Optional[str] = None,
+        field: str | None = None,
         raise_on_deleted_version: bool = True,
-    ) -> Optional[str | dict]:
+    ) -> str | dict | None:
         """
         读取 KV v2 类型的 secret。
 
-        :param path: 密文路径, 如 'mysql/admin'
-        :param field: 可选, 指定要返回的字段, 如 'username', 否则返回整个 data dict
+        :param path: 密文路径，如 'mysql/admin'
+        :param field: 可选，指定要返回的字段, 如 'username'，否则返回整个 data dict
         :param raise_on_deleted_version: 是否在已删除的版本上抛出异常(默认 True)
         :return: 字段值 或 所有字段 dict, 找不到则返回 None
         """
@@ -43,7 +41,7 @@ class VaultClient:
         except hvac.exceptions.InvalidPath:
             return None
         except Exception as e:
-            raise RuntimeError(f"Failed to read secret: {e}")
+            raise RuntimeError("Failed to read secret") from e
 
 
 if __name__ == "__main__":
