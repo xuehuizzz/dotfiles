@@ -1,11 +1,18 @@
+import logging
+
 from pyArango.connection import Connection
+
+logger = logging.getLogger()
+ARANGO_URL = ""
+ARANGO_UAERNAME = ""
+ARANGO_PASSWORD = ""
 
 
 class AQLConfig:
     def __init__(self, collection=None):
         self.database = "cmdb"
         self.collection = collection or "IPAddress"
-        arangodb_dic = {"arangoURL": arango_url, "username": arango_username, "password": arango_password}
+        arangodb_dic = {"arangoURL": ARANGO_URL, "username": ARANGO_UAERNAME, "password": ARANGO_PASSWORD}
 
         try:
             self.ar_conn = Connection(**arangodb_dic)
