@@ -13,7 +13,6 @@ import base64
 import logging
 import os
 from dataclasses import dataclass
-from typing import Optional
 
 from cryptography.exceptions import InvalidTag
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
@@ -76,7 +75,7 @@ class CryptoService:
         svc = CryptoService.from_env()
     """
 
-    def __init__(self, key: bytes, config: Optional[AESGCMConfig] = None):
+    def __init__(self, key: bytes, config: AESGCMConfig | None = None):
         """
         Args:
             key: AES 密钥, 长度必须与 config.key_size 匹配
@@ -85,9 +84,7 @@ class CryptoService:
         self._config = config or AESGCMConfig()
 
         if len(key) != self._config.key_size:
-            raise ValueError(
-                f"Key must be {self._config.key_size} bytes, got {len(key)}"
-            )
+            raise ValueError(f"Key must be {self._config.key_size} bytes, got {len(key)}")
 
         self._key = key
         self._aesgcm = AESGCM(self._key)
@@ -109,7 +106,7 @@ class CryptoService:
     def from_env(
         cls,
         env_key: str = "AES_GCM_KEY",
-        config: Optional[AESGCMConfig] = None,
+        config: AESGCMConfig | None = None,
     ) -> "CryptoService":
         """
         从环境变量创建实例, 密钥以 hex 编码存储
@@ -137,7 +134,7 @@ class CryptoService:
     def encrypt_bytes(
         self,
         plaintext: bytes,
-        aad: Optional[bytes] = None,
+        aad: bytes | None = None,
     ) -> bytes:
         """
         加密原始字节
@@ -163,7 +160,7 @@ class CryptoService:
     def decrypt_bytes(
         self,
         data: bytes,
-        aad: Optional[bytes] = None,
+        aad: bytes | None = None,
     ) -> bytes:
         """
         解密原始字节
@@ -181,8 +178,7 @@ class CryptoService:
         """
         if data is None or len(data) < self._config.nonce_size + 16:
             raise ValueError(
-                f"Encrypted data too short. "
-                f"Minimum length: {self._config.nonce_size + 16} bytes"
+                f"Encrypted data too short. Minimum length: {self._config.nonce_size + 16} bytes"
             )
 
         nonce = data[: self._config.nonce_size]
@@ -192,7 +188,7 @@ class CryptoService:
     def encrypt(
         self,
         plaintext: str,
-        aad: Optional[bytes] = None,
+        aad: bytes | None = None,
         encoding: str = "utf-8",
     ) -> bytes:
         """加密字符串, 返回 bytes"""
@@ -201,7 +197,7 @@ class CryptoService:
     def decrypt(
         self,
         data: bytes,
-        aad: Optional[bytes] = None,
+        aad: bytes | None = None,
         encoding: str = "utf-8",
     ) -> str:
         """解密为字符串"""
@@ -210,7 +206,7 @@ class CryptoService:
     def encrypt_to_base64(
         self,
         plaintext: str,
-        aad: Optional[bytes] = None,
+        aad: bytes | None = None,
         encoding: str = "utf-8",
         urlsafe: bool = True,
     ) -> str:
@@ -234,7 +230,7 @@ class CryptoService:
     def decrypt_from_base64(
         self,
         token: str,
-        aad: Optional[bytes] = None,
+        aad: bytes | None = None,
         encoding: str = "utf-8",
         urlsafe: bool = True,
     ) -> str:
@@ -253,23 +249,23 @@ class CryptoService:
         try:
             raw = base64.urlsafe_b64decode(token) if urlsafe else base64.b64decode(token)
         except Exception as e:
-            raise ValueError(f"Invalid Base64 input: {e}")
+            raise ValueError("Invalid Base64 input") from e
         return self.decrypt(raw, aad, encoding)
 
 
 # 全局单例
-_default_service: Optional[CryptoService] = None
+_default_service: CryptoService | None = None
 
 
 def get_crypto_service() -> CryptoService:
-    """获取全局单例，首次调用时从环境变量初始化"""
+    """获取全局单例, 首次调用时从环境变量初始化"""
     global _default_service
     if _default_service is None:
         _default_service = CryptoService.from_env()
     return _default_service
 
 
-def init_crypto_service(key: bytes, config: Optional[AESGCMConfig] = None) -> None:
+def init_crypto_service(key: bytes, config: AESGCMConfig | None = None) -> None:
     """手动初始化全局单例"""
     global _default_service
     _default_service = CryptoService(key=key, config=config)
