@@ -27,8 +27,8 @@ class Argon2Config:
     time_cost: int = 3  # 迭代次数
     memory_cost: int = 65536  # 内存开销 KB (64MB)
     parallelism: int = 4  # 并行线程数
-    hash_len: int = 32  # 输出哈希长度（字节）
-    type: Type = Type.ID  # Argon2id，兼顾抗侧信道和抗 GPU
+    hash_len: int = 32  # 输出哈希长度(字节)
+    type: Type = Type.ID  # Argon2id, 兼顾抗侧信道和抗 GPU
 
 
 class PasswordService:
@@ -150,13 +150,13 @@ class PasswordService:
         return self._hasher.check_needs_rehash(hashed_password)
 
 
-# 便捷的模块级单例，适合大多数项目直接使用
+# 便捷的模块级单例, 适合大多数项目直接使用
 _default_service: PasswordService | None = None
 
 
 def get_password_service() -> PasswordService:
     """
-    获取全局单例，首次调用时从环境变量初始化
+    获取全局单例, 首次调用时从环境变量初始化
     在应用启动时确保 PASSWORD_PEPPER 环境变量已设置
     """
     global _default_service
@@ -167,7 +167,7 @@ def get_password_service() -> PasswordService:
 
 def init_password_service(pepper: bytes, config: Argon2Config | None = None) -> None:
     """
-    手动初始化全局单例（用于测试或不使用环境变量的场景）
+    手动初始化全局单例(用于测试或不使用环境变量的场景)
     """
     global _default_service
     _default_service = PasswordService(pepper=pepper, config=config)
