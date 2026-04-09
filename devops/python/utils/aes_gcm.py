@@ -334,7 +334,7 @@ if __name__ == "__main__":
         print("Wrong key detected: InvalidTag ✓")
     print()
 
-    # --- 每次加密结果不同（nonce 随机）---
+    # --- 每次加密结果不同(nonce 随机)---
     enc1 = svc.encrypt("same message")
     enc2 = svc.encrypt("same message")
     print("Same plaintext, different ciphertext:", enc1 != enc2, "✓")
