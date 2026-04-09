@@ -1,7 +1,8 @@
 # pip install hvac
 
-import hvac
 from typing import Optional
+
+import hvac
 
 
 class VaultClient:
