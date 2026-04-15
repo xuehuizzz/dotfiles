@@ -1,7 +1,8 @@
 # 常用操作
 1. 基础命令
    ```bash
-   duckdb  # 进入
+   duckdb  # 默认进入memory数据库, 退出则数据清零
+   duckdb xxx.db  # 进入指定数据库, 不存在的话则直接创建
    .maxrows num  # 定义显示最大行数
    .exit  # Ctrl+D 退出
    ```
