@@ -8,19 +8,16 @@
 2. 安装插件(以Excel为例)
    ```bash
    SELECT * FROM duckdb_extensions();  -- 查看可用的扩展(包括已安装和可安装的)
-   INSTALL excel;  # 安装excel插件
-   LOAD excel;  # 加载Excel插件
-   INSTALL json;
-   LOAD json;
+   # 自动安装插件, 1.5+版本后会自动 INSTALL和LOAD
+   SELECT * FROM read_xlsx('data.xlsx', sheet='sheet_name');
    
-   # 读取Excel, 不指定sheet的话, 默认读取第一个sheet页
-   select * from read_xlsx('data.xlsx', sheet='sheet_name');
+   # 手动安装(一般在内网环境下)
+   INSTALL excel;  # 安装excel插件
+   -- LOAD excel;  # 加载Excel插件
    ```
 3. 查询csv文件
    ```sql
    -- 自动识别格式
-   SELECT * FROM read_csv_auto('data.csv') WHERE xxx=xxx;
-   -- 手动指定分隔符和表头
    SELECT * FROM read_csv('data.csv', delim=',', header=true);
    -- read_csv('https://example.com/data.csv')
    ```
