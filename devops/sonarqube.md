@@ -6,6 +6,12 @@ docker run -d --name sonarqube -p 9000:9000 sonarqube:latest
 
 ## 在项目根目录创建 sonar-project.properties 配置文件
 ```properties
+# SonarQube 的认证令牌, 出于安全考虑，建议通过命令行参数传入而不是直接写在配置文件中
+sonar.token=your-token-here
+# SonarQube 服务器的地址
+sonar.host.url=http://localhost:9000
+# 指定要分析的代码分支(社区版不支持指定),不指定分支则默认扫描当前分支的代码, 也就是说在扫描代码前, 先git checkout branchName上
+# sonar.branch.name=branchName
 # 项目的唯一标识符，在 SonarQube 服务器上用于区分不同项目
 sonar.projectKey=projectName
 # 项目在 SonarQube UI 界面上显示的名称, 可以使用更友好的可读名称
@@ -18,15 +24,23 @@ sonar.sources=.
 sonar.sourceEncoding=UTF-8
 # Java 编译后的字节码文件位置, SonarQube 需要这些文件来进行更准确的分析
 sonar.java.binaries=target/classes
-# SonarQube 服务器的地址
-sonar.host.url=http://localhost:9000
-# 指定要分析的代码分支(社区版不支持指定),不指定分支则默认扫描当前分支的代码, 也就是说在扫描代码前, 先git checkout branchName上
-# sonar.branch.name=branchName
-# SonarQube 的认证令牌, 出于安全考虑，建议通过命令行参数传入而不是直接写在配置文件中
-sonar.token=your-token-here
 # python项目指定检测版本
 sonar.python.version=
 sonar.scm.provider=git
+# 排除不需要分析的文件/目录（支持通配符）
+sonar.exclusions=**/test/**,**/node_modules/**,**/vendor/**,**/generated/**,**/*.min.js,**/*.min.css
+# 测试代码目录
+sonar.tests=src/test
+# 测试文件匹配模式
+sonar.test.inclusions=**/*Test.java,**/*_test.py,**/*.spec.js
+# 排除不计入覆盖率的文件
+sonar.coverage.exclusions=**/config/**,**/entity/**,**/dto/**,**/*Application.java
+# 排除不检测重复代码的文件
+sonar.cpd.exclusions=**/dto/**,**/entity/**
+# CI/CD 中等待质量门禁结果，未通过则构建失败
+sonar.qualitygate.wait=true
+# 质量门禁检查超时时间（秒）
+sonar.qualitygate.timeout=300
 ```
 ## 获取token
 ```bash
