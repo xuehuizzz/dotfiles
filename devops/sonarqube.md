@@ -1,7 +1,7 @@
 # <mark>SonarQube: 开源的代码质量管理平台, 主要用于持续代码质量检测</mark>
 ## 安装并运行 SonarQube 服务器
 ```bash
-docker run -d --name sonarqube -p 9000:9000 sonarqube:latest
+docker run -d --name sonarqube -p 9000:9000 --restart always sonarqube:latest
 ```
 
 ## 在项目根目录创建 sonar-project.properties 配置文件
