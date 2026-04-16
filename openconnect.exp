@@ -1,19 +1,25 @@
-#!/usr/bin/expect -f
-# 使用 openconnect 工具登录公司内网vpn
-set vpn_host "host:port"
-set username "username"
-set password "password"
-set servercert "pin-sha256:8tPMmzAWB2myX169SqY3KpxIOydL3gdEIkllilqZroA="  # 先手动登录并记录保存
+CONF="$HOME/.vpn.conf"
 
-spawn sudo /usr/local/bin/openconnect $vpn_host -u $username --servercert $servercert
+if [[ ! -f "$CONF" ]]; then
+    echo "配置文件不存在: $CONF"
+    echo "请创建配置文件，格式如下:"
+    echo "  VPN_HOST=host:port"
+    echo "  VPN_USER=username"
+    echo "  VPN_PASS=password"
+    echo "  VPN_CERT=pin-sha256:xxxx"
+    exit 1
+fi
 
-expect {
-    "Password:" {
-        send "$password\r"
-        exp_continue
-    }
-    eof
-}
+source "$CONF"
 
-interact
+for var in VPN_HOST VPN_USER VPN_PASS VPN_CERT; do
+    if [[ -z "${!var}" ]]; then
+        echo "错误: $CONF 中缺少 $var"
+        exit 1
+    fi
+done
 
+echo "$VPN_PASS" | sudo openconnect "$VPN_HOST" \
+    -u "$VPN_USER" \
+    --servercert "$VPN_CERT" \
+    --passwd-on-stdin
