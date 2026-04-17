@@ -5,7 +5,7 @@
 CREATE TABLE xxx (
     id bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键ID',
     created_at datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间(UTC)',
-    updated_at datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '更新时间(UTC,ON UPDATE 由应用层显式设置)',
+    updated_at datetime(3) DEFAULT NULL COMMENT '更新时间(UTC,由应用层显式设置)',
     deleted_at datetime(3) DEFAULT NULL COMMENT '删除时间(软删除,UTC)',
     created_by bigint UNSIGNED NOT NULL COMMENT '创建者ID',
     updated_by bigint UNSIGNED DEFAULT NULL COMMENT '更新者ID(创建时为NULL)',
