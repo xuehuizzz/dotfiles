@@ -22,6 +22,10 @@
 [pull]
   rebase = true
 
+[rebase]
+  # pull --rebase 时自动 stash 未提交的修改，rebase 完自动 pop
+  autoStash = true
+
 [fetch]
   # git fetch 时自动清理远程已删除的分支引用
   prune = true
@@ -57,6 +61,9 @@
   co = checkout
   ci = commit
   br = branch
+
+  # 一键同步并推送：拉取最新代码 → 推送（autoStash 自动处理暂存）
+  sync = !git pull && git push
 
   # 撤销操作
   unadd = restore --staged
