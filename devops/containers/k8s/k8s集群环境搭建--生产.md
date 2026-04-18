@@ -8,7 +8,7 @@
     sudo curl -fsSL https://get.docker.com | sudo sh  # 官方安装脚本
     sudo systemctl start docker   # 开启docker服务
     sudo systemctl enable docker  # 设置开机自启
-    sudo usermod -aG $USER  # 将当前用户添加到docker组
+    sudo usermod -aG docker $USER  # 将当前用户添加到docker组
     newgrp docker  # 修改当前会话的组为docker
     
     # 更新系统并安装基本依赖
@@ -35,7 +35,16 @@
     sudo apt update && sudo apt install -y kubelet=1.31.4-* kubeadm=1.31.4-* kubectl=1.31.4-*
     
     # centos
-    
+    # 添加 Kubernetes yum 仓库
+    cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+    [kubernetes]
+    name=Kubernetes
+    baseurl=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/
+    enabled=1
+    gpgcheck=1
+    gpgkey=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/repodata/repomd.xml.key
+    EOF
+    sudo yum install -y kubelet-1.31.4 kubeadm-1.31.4 kubectl-1.31.4 --disableexcludes=kubernetes
     
     # 使用snap安装
     sudo apt update && sudo apt install -y snapd  # 确保系统安装了snapd
@@ -77,15 +86,16 @@
         # 验证是否配置成功
         docker info | grep "Cgroup Driver"
         ```
-5. **安装containerd**
+5. **配置containerd**
     ```bash
     # 在使用 kubeadm 搭建 Kubernetes 集群时, 需要安装容器运行时(Container Runtime), 而 containerd是当前推荐的容器运行时之一
+    # containerd 已在步骤1中随依赖安装, 这里只做配置
     
-    sudo apt-get update && apt-get install -y containerd
-    mkdir -p /etc/containerd
-    containerd config default > /etc/containerd/config.toml
-    sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
-    systemctl restart containerd
+    sudo mkdir -p /etc/containerd
+    containerd config default | sudo tee /etc/containerd/config.toml
+    sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
+    sudo systemctl restart containerd
+    sudo systemctl enable containerd
     ```
 6. **初始化k8s集群**
     ```bash
@@ -131,16 +141,19 @@
     ```
     - 删除仓库配置
     ```bash
+    # 先卸载 k8s 组件 (此时仓库配置还在, apt 能找到已安装包的元数据)
+    sudo apt remove -y --purge kubelet kubeadm kubectl
+    sudo apt autoremove -y
     # 删除仓库秘钥
-    sudo rm /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    sudo rm -f /etc/apt/keyrings/kubernetes-apt-keyring.gpg
     # 删除仓库配置文件
-    sudo rm /etc/apt/sources.list.d/kubernetes.list
-    # 更新包索引并卸载
-    sudo apt update && sudo apt remove kubelet kubeadm kubectl
+    sudo rm -f /etc/apt/sources.list.d/kubernetes.list
+    # 更新包索引
+    sudo apt update
     ```
 8. <font color=red>**加入工作节点到集群**</font>
     命令格式如下: 
-    <mark>kubeadm join <ip>:<port> --token <token> --discovery-token-ca-cert-hash sha256:<证书哈希值></mark>
+    `kubeadm join <ip>:<port> --token <token> --discovery-token-ca-cert-hash sha256:<证书哈希值>`
     ```bash
     kubeadm token list  # 在主节点（控制平面）上查看现有的 token
     ```
