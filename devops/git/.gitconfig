@@ -1,44 +1,88 @@
 # 以编辑模式 ( -e ) 打开全局 Git 配置文件
-#  git config --global -e
+#   git config --global -e
 
-[core]
-  excludesfile = $HOME/.gitignore_global
-  quotepath = false
+# ── 用户信息 ─────────────────────────────────────────
 [user]
   name = xuehui
   email = xuehuizzz103@gmail.com
+
+# ── 初始化 ───────────────────────────────────────────
+[init]
+  defaultBranch = main
+
+# ── 核心设置 ─────────────────────────────────────────
+[core]
+  excludesfile = ~/.gitignore_global
+  quotepath = false
+
 [commit]
-  template = $HOME/.stCommitMsg
+  template = ~/.stCommitMsg
+
+# ── 拉取 & 同步 ─────────────────────────────────────
 [pull]
-    rebase = true
+  rebase = true
+
+[fetch]
+  # git fetch 时自动清理远程已删除的分支引用
+  prune = true
+
+# ── 差异 & 追溯 ─────────────────────────────────────
+[diff]
+  # 比默认 myers 算法产生更可读的 diff
+  algorithm = histogram
+
+[blame]
+  coloring = highlightRecent
+  date = relative
+
+# ── 冲突解决 ─────────────────────────────────────────
+[rerere]
+  # 记住冲突解决方式，rebase 工作流下非常有用
+  enabled = true
+
+# ── 网络 ─────────────────────────────────────────────
 [http]
   sslVerify = true
+
+# ── 别名 ─────────────────────────────────────────────
 [alias]
-  unadd = restore --staged
-  # 撤销最近一次提交,保留修改内容在工作区
-  uncommit = reset HEAD~1
-  # 把你当前所在分支的提交，推送到远程仓库的同名分支，并设置跟踪关系, 初次git done, 之后直接git push 即可
-  done = !git push -u origin HEAD
+  # 常用简写
+  s = status
   co = checkout
   ci = commit
-  s = status
   br = branch
+
+  # 撤销操作
+  unadd = restore --staged
+  # 撤销最近一次提交，保留修改内容在工作区
+  uncommit = reset HEAD~1
+
+  # 把当前分支推送到远程同名分支并设置跟踪关系
+  # 初次 git done，之后直接 git push 即可
+  done = !git push -u origin HEAD
+
+  # 日志查看
   hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  # 同 hist 但不分页
+  lg = !git --no-pager log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  # 同 lg 但显示所有分支
+  lga = !git --no-pager log --all --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  # 查看最近一周指定用户的提交，用法: git lgu xuehui
+  lgu = "!f() { git log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago' --author=\"$1\"; }; f"
+
+  # 底层调试
   type = cat-file -t
   dump = cat-file -p
-  # 终极日志格式：一行输出 git log，带图形、时间、提交人、备注
-  lg = !git --no-pager log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-  # 查看最近一周自己的提交, git lg- xuehui
-  lgu = "!f() { git log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago' --author=\"$1\"; }; f"
-[safe]
-  directory = /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core
-  directory = /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask
-  directory = /usr/local/Homebrew
+
+# ── Git LFS ──────────────────────────────────────────
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
-[blame]
-  coloring = highlightRecent
-  date = relative
+
+# ── 安全目录 (Homebrew) ─────────────────────────────
+[safe]
+  directory = /usr/local/Homebrew
+  directory = /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core
+  directory = /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask
