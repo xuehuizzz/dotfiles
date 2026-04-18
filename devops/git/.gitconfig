@@ -51,32 +51,6 @@
   # 例: git stauts → 自动执行 git status
   autocorrect = 5
 
-# ── 别名 ─────────────────────────────────────────────
-#
-# Conventional Commits 规范:
-#   格式: <type>(<scope>): <subject>
-#
-#   type        说明
-#   ──────────  ──────────────────────────────
-#   feat        新功能
-#   fix         修复 Bug
-#   docs        仅文档变更
-#   style       代码格式调整（不影响逻辑）
-#   refactor    重构（非新功能、非修 Bug）
-#   perf        性能优化
-#   test        添加或修改测试
-#   build       构建系统或外部依赖变更
-#   ci          CI/CD 配置变更
-#   chore       其他杂项
-#   revert      回退之前的提交
-#
-#   示例:
-#     feat(auth): 添加微信扫码登录
-#     fix(cart): 修复数量为 0 时仍可下单的问题
-#     docs: 更新 README 部署说明
-#     refactor(api): 将请求层从 axios 迁移到 fetch
-#     chore: 删除废弃的配置文件
-#
 [alias]
   # 常用简写
   s = status
@@ -107,7 +81,7 @@
   dump = cat-file -p
 
   # 查看 commit type 速查表，用法: git types
-  types = !printf '\\n  \\033[1mConventional Commits 速查表\\033[0m\\n  格式: <type>(<scope>): <subject>\\n\\n  \\033[33mfeat\\033[0m        新功能\\n  \\033[33mfix\\033[0m         修复 Bug\\n  \\033[33mdocs\\033[0m        仅文档变更\\n  \\033[33mstyle\\033[0m       代码格式调整（不影响逻辑）\\n  \\033[33mrefactor\\033[0m    重构（非新功能、非修 Bug）\\n  \\033[33mperf\\033[0m        性能优化\\n  \\033[33mtest\\033[0m        添加或修改测试\\n  \\033[33mbuild\\033[0m       构建系统或外部依赖变更\\n  \\033[33mci\\033[0m          CI/CD 配置变更\\n  \\033[33mchore\\033[0m       其他杂项\\n  \\033[33mrevert\\033[0m      回退之前的提交\\n\\n  \\033[1m示例:\\033[0m\\n  feat(auth): 添加微信扫码登录\\n  fix(cart): 修复数量为 0 时仍可下单的问题\\n  docs: 更新 README 部署说明\\n  refactor(api): 请求层从 axios 迁移到 fetch\\n  chore: 删除废弃的配置文件\\n'
+  types = !cat ~/.git-commit-types.md
 
 # ── Git LFS ──────────────────────────────────────────
 [filter "lfs"]
