@@ -81,7 +81,7 @@
   dump = cat-file -p
 
   # 查看 commit type 速查表，用法: git types
-  types = !cat ~/.git-commit-types.md
+  types = !cat ~/.git-commit-types
 
 # ── Git LFS ──────────────────────────────────────────
 [filter "lfs"]
