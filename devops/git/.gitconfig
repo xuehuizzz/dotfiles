@@ -30,6 +30,7 @@
 [diff]
   # 比默认 myers 算法产生更可读的 diff
   algorithm = histogram
+  colorMoved = default
 
 [blame]
   coloring = highlightRecent
@@ -43,6 +44,12 @@
 # ── 网络 ─────────────────────────────────────────────
 [http]
   sslVerify = true
+
+# ── 容错 ─────────────────────────────────────────────
+[help]
+  # 拼错 git 命令时自动纠正并执行（延迟 0.5s）
+  # 例: git stauts → 自动执行 git status
+  autocorrect = 5
 
 # ── 别名 ─────────────────────────────────────────────
 #
