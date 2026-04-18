@@ -3,6 +3,7 @@
 
 [core]
   excludesfile = $HOME/.gitignore_global
+  quotepath = false
 [user]
   name = xuehui
   email = xuehuizzz103@gmail.com
