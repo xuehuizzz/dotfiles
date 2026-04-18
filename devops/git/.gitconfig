@@ -15,7 +15,7 @@
   excludesfile = ~/.gitignore_global
   quotepath = false
   # 防止系统随机选 vim/nano，按需改为 nvim 或 code --wait
-  editor = vim
+  editor = nvim
   # 大仓库性能优化：文件系统监控 + 未跟踪文件缓存
   fsmonitor = true
   untrackedCache = true
