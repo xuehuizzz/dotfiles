@@ -1,29 +1,26 @@
--- 安装 lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
--- 使用 vim.fn.glob 和 vim.fn.empty 检查文件是否存在
-if vim.fn.empty(vim.fn.glob(lazypath)) > 0 then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	})
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "--branch=stable",
+    lazyrepo,
+    lazypath,
+  })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ -- 加载插件
-	require("plugins.autopairs"),
-	require("plugins.snacks"),
-	require("plugins.colortheme"),
-	require("plugins.autocompletion"),
-	require("plugins.window-picker"),
-	require("plugins.treesitter"),
-	require("plugins.lualine"),
-	require("plugins.comment"),
-	require("plugins.mason"),
-	require("plugins.lsp"),
-	require("plugins.noice"),
-	require("plugins.bufferline"),
+require("lazy").setup({
+  { import = "plugins" },
 })
