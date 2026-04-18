@@ -1,0 +1,16 @@
+# DB 服务器 - node_exporter
+- targets:
+    - '10.0.2.1:9100'
+    - '10.0.2.2:9100'
+  labels:
+    role: db
+    env: production
+
+# DB 服务器 - mysqld_exporter
+- targets:
+    - '10.0.2.1:9104'
+    - '10.0.2.2:9104'
+  labels:
+    role: db
+    env: production
+    exporter: mysqld

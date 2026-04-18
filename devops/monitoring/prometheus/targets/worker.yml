@@ -1,0 +1,9 @@
+# Worker 服务器 - node_exporter
+# 修改 targets 中的 IP 为实际服务器地址
+- targets:
+    - '10.0.3.1:9100'
+    - '10.0.3.2:9100'
+    - '10.0.3.3:9100'
+  labels:
+    role: worker
+    env: production

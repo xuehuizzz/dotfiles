@@ -1,0 +1,25 @@
+# 中间件服务器 - node_exporter
+- targets:
+    - '10.0.4.1:9100'
+    - '10.0.4.2:9100'
+  labels:
+    role: middleware
+    env: production
+
+# 中间件服务器 - redis_exporter
+- targets:
+    - '10.0.4.1:9121'
+    - '10.0.4.2:9121'
+  labels:
+    role: middleware
+    env: production
+    exporter: redis
+
+# 中间件服务器 - kafka_exporter
+- targets:
+    - '10.0.4.1:9308'
+    - '10.0.4.2:9308'
+  labels:
+    role: middleware
+    env: production
+    exporter: kafka

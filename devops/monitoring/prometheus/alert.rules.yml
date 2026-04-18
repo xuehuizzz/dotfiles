@@ -1,12 +1,65 @@
 groups:
-  - name: node_exporter_alerts
+  # ===========================================================
+  # 通用告警 - 所有服务器
+  # ===========================================================
+  - name: node_alerts
     rules:
-      - alert: HighCPUUsage
-        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 80
-        for: 2m
+      # 服务器宕机
+      - alert: NodeDown
+        expr: up{job="node"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.instance }} 已宕机"
+          description: "{{ $labels.role }} 服务器 {{ $labels.instance }} 已无法连接超过 1 分钟"
+
+      # CPU 使用率 > 80%
+      - alert: HighCPU
+        expr: 100 - (avg by(instance, role) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
         labels:
           severity: warning
         annotations:
-          summary: "High CPU usage on {{ $labels.instance }}"
-          description: "CPU usage is above 80% for more than 2 minutes."
-      
+          summary: "{{ $labels.instance }} CPU 使用率过高"
+          description: "{{ $labels.role }} 服务器 CPU 使用率 {{ $value | printf \"%.1f\" }}%，持续超过 5 分钟"
+
+      # CPU 使用率 > 95%
+      - alert: CriticalCPU
+        expr: 100 - (avg by(instance, role) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 95
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.instance }} CPU 使用率极高"
+          description: "{{ $labels.role }} 服务器 CPU 使用率 {{ $value | printf \"%.1f\" }}%，持续超过 2 分钟"
+
+      # 内存使用率 > 80%
+      - alert: HighMemory
+        expr: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{ $labels.instance }} 内存使用率过高"
+          description: "{{ $labels.role }} 服务器内存使用率 {{ $value | printf \"%.1f\" }}%"
+
+      # 磁盘使用率 > 85%
+      - alert: HighDisk
+        expr: (1 - node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{ $labels.instance }} 磁盘空间不足"
+          description: "{{ $labels.role }} 服务器 {{ $labels.mountpoint }} 磁盘使用率 {{ $value | printf \"%.1f\" }}%"
+
+      # 磁盘使用率 > 95%
+      - alert: CriticalDisk
+        expr: (1 - node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes) * 100 > 95
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.instance }} 磁盘即将写满"
+          description: "{{ $labels.role }} 服务器 {{ $labels.mountpoint }} 磁盘使用率 {{ $value | printf \"%.1f\" }}%，请立即处理"

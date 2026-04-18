@@ -4,8 +4,10 @@ services:
     container_name: prometheus
     volumes:
       - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=30d'
     ports:
       - '9090:9090'
     restart: always
@@ -20,32 +22,20 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning
-    restart: always
-
-  # mysqld-exporter:
-  #   image: prom/mysqld-exporter
-  #   container_name: mysqld-exporter
-  #   ports:
-  #     - '9104:9104'
-  #   environment:
-  #     - DATA_SOURCE_NAME=exporter:pwd_exporter@(192.168.215.1:3306)/
-
-  # 服务器监控
-  node-exporter:
-    image: prom/node-exporter
-    container_name: node-exporter
-    ports:
-      - '9100:9100'
+      - grafana_data:/var/lib/grafana
     restart: always
 
   alertmanager:
     image: prom/alertmanager
     container_name: alertmanager
     ports:
-      - "9093:9093"
+      - '9093:9093'
     volumes:
       - ./alertmanager/config.yml:/etc/alertmanager/config.yml
     command:
       - '--config.file=/etc/alertmanager/config.yml'
     restart: always
-    
+
+volumes:
+  prometheus_data:
+  grafana_data:

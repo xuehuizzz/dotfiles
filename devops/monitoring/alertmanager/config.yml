@@ -1,11 +1,38 @@
 global:
   resolve_timeout: 5m
 
+# ================================================================
+# 路由规则 - 按 severity 分流
+# ================================================================
 route:
   receiver: 'default'
+  group_by: ['alertname', 'role', 'instance']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  routes:
+    # critical 告警 → 邮件 + Webhook 双通道
+    - match:
+        severity: critical
+      receiver: 'critical'
+      repeat_interval: 1h
 
+    # warning 告警 → 仅 Webhook
+    - match:
+        severity: warning
+      receiver: 'warning'
+      repeat_interval: 4h
+
+# ================================================================
+# 告警接收器
+# ================================================================
 receivers:
   - name: 'default'
+    webhook_configs:
+      - url: 'http://YOUR_WEBHOOK_URL'
+        send_resolved: true
+
+  - name: 'critical'
     email_configs:
       - to: 'your@email.com'
         from: 'alertmanager@example.com'
@@ -13,3 +40,22 @@ receivers:
         auth_username: 'your@email.com'
         auth_identity: 'your@email.com'
         auth_password: 'yourpassword'
+        send_resolved: true
+    webhook_configs:
+      - url: 'http://YOUR_WEBHOOK_URL'
+        send_resolved: true
+
+  - name: 'warning'
+    webhook_configs:
+      - url: 'http://YOUR_WEBHOOK_URL'
+        send_resolved: true
+
+# ================================================================
+# 抑制规则 - critical 触发时抑制同实例的 warning
+# ================================================================
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'instance']

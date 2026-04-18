@@ -1,0 +1,90 @@
+groups:
+  # ===========================================================
+  # Redis 告警
+  # ===========================================================
+  - name: redis_alerts
+    rules:
+      # Redis 宕机
+      - alert: RedisDown
+        expr: up{job="redis"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.instance }} Redis 已宕机"
+          description: "中间件服务器 {{ $labels.instance }} 的 Redis 无法连接超过 1 分钟"
+
+      # Redis 内存使用率过高
+      - alert: RedisHighMemory
+        expr: redis_memory_used_bytes / redis_memory_max_bytes * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{ $labels.instance }} Redis 内存使用率过高"
+          description: "Redis 内存使用率 {{ $value | printf \"%.1f\" }}%"
+
+      # Redis 连接数过高
+      - alert: RedisHighConnections
+        expr: redis_connected_clients > 1000
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{ $labels.instance }} Redis 连接数过高"
+          description: "当前 Redis 连接数 {{ $value }}"
+
+      # Redis 拒绝连接
+      - alert: RedisRejectedConnections
+        expr: increase(redis_rejected_connections_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.instance }} Redis 正在拒绝连接"
+          description: "过去 5 分钟内有连接被拒绝，请检查 maxclients 配置"
+
+  # ===========================================================
+  # Kafka 告警
+  # ===========================================================
+  - name: kafka_alerts
+    rules:
+      # Kafka 宕机
+      - alert: KafkaDown
+        expr: up{job="kafka"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.instance }} Kafka 已宕机"
+          description: "中间件服务器 {{ $labels.instance }} 的 Kafka 无法连接超过 1 分钟"
+
+      # Consumer Group Lag 过大
+      - alert: KafkaConsumerLag
+        expr: kafka_consumergroup_lag_sum > 10000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{ $labels.consumergroup }} 消费延迟过大"
+          description: "Consumer Group {{ $labels.consumergroup }} 积压消息数 {{ $value }}"
+
+      # Under-replicated Partitions
+      - alert: KafkaUnderReplicatedPartitions
+        expr: kafka_topic_partition_under_replicated_partition > 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Kafka 存在未完全复制的分区"
+          description: "Topic {{ $labels.topic }} 有 {{ $value }} 个未完全复制的分区"
+
+      # Broker 活跃数量异常
+      - alert: KafkaBrokersDown
+        expr: count(up{job="kafka"} == 1) < 2
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Kafka Broker 数量不足"
+          description: "当前活跃 Broker 数量 {{ $value }}，低于预期"

@@ -1,0 +1,55 @@
+groups:
+  # ===========================================================
+  # MySQL 告警
+  # ===========================================================
+  - name: mysql_alerts
+    rules:
+      # MySQL 宕机
+      - alert: MySQLDown
+        expr: up{job="mysqld"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.instance }} MySQL 已宕机"
+          description: "DB 服务器 {{ $labels.instance }} 的 MySQL 无法连接超过 1 分钟"
+
+      # 连接数过高 (超过最大连接数的 80%)
+      - alert: MySQLHighConnections
+        expr: mysql_global_status_threads_connected / mysql_global_variables_max_connections * 100 > 80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{ $labels.instance }} MySQL 连接数过高"
+          description: "当前连接数占最大连接数的 {{ $value | printf \"%.1f\" }}%"
+
+      # 慢查询激增 (每分钟超过 10 条)
+      - alert: MySQLSlowQueries
+        expr: rate(mysql_global_status_slow_queries[5m]) * 60 > 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{ $labels.instance }} MySQL 慢查询过多"
+          description: "当前慢查询速率 {{ $value | printf \"%.1f\" }} 条/分钟"
+
+      # 主从复制延迟
+      - alert: MySQLReplicationLag
+        expr: mysql_slave_status_seconds_behind_master > 30
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{ $labels.instance }} MySQL 主从复制延迟"
+          description: "复制延迟 {{ $value }} 秒"
+
+      # 主从复制中断
+      - alert: MySQLReplicationStopped
+        expr: mysql_slave_status_slave_io_running == 0 or mysql_slave_status_slave_sql_running == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.instance }} MySQL 主从复制中断"
+          description: "请立即检查复制状态"

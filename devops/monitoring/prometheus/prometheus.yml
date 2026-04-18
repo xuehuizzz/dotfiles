@@ -1,5 +1,6 @@
 global:
   scrape_interval: 15s
+  evaluation_interval: 15s
 
 alerting:
   alertmanagers:
@@ -9,13 +10,62 @@ alerting:
 
 rule_files:
   - "alert.rules.yml"
-  
+  - "alert.rules.db.yml"
+  - "alert.rules.middleware.yml"
+
 scrape_configs:
-  # - job_name: 'mysqld-exporter'
-  #   static_configs:
-  #     - targets: ['mysqld-exporter:9104']
-  
-  - job_name: 'node-exporter'
-    static_configs:
-      - targets: ['node-exporter:9100']
-  
+  # ============================================================
+  # 主机监控 - 所有服务器的 node_exporter
+  # ============================================================
+  - job_name: 'node'
+    file_sd_configs:
+      - files:
+          - '/etc/prometheus/targets/web.yml'
+          - '/etc/prometheus/targets/db.yml'
+          - '/etc/prometheus/targets/worker.yml'
+          - '/etc/prometheus/targets/middleware.yml'
+        refresh_interval: 30s
+    # 只抓取 node_exporter (端口 9100)
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*:9100'
+        action: keep
+
+  # ============================================================
+  # MySQL 监控 - DB 服务器的 mysqld_exporter
+  # ============================================================
+  - job_name: 'mysqld'
+    file_sd_configs:
+      - files:
+          - '/etc/prometheus/targets/db.yml'
+        refresh_interval: 30s
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*:9104'
+        action: keep
+
+  # ============================================================
+  # Redis 监控 - 中间件服务器的 redis_exporter
+  # ============================================================
+  - job_name: 'redis'
+    file_sd_configs:
+      - files:
+          - '/etc/prometheus/targets/middleware.yml'
+        refresh_interval: 30s
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*:9121'
+        action: keep
+
+  # ============================================================
+  # Kafka 监控 - 中间件服务器的 kafka_exporter
+  # ============================================================
+  - job_name: 'kafka'
+    file_sd_configs:
+      - files:
+          - '/etc/prometheus/targets/middleware.yml'
+        refresh_interval: 30s
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*:9308'
+        action: keep
