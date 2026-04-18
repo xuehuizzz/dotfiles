@@ -114,7 +114,7 @@
   lga = !git --no-pager log --all --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
   lgu = "!f() { git log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago' --author=\"$1\"; }; f"
   # 一键全分支树状图
-  tree = log --graph --decorate --all --oneline
+  tree = log --graph --decorate --all --pretty=format:'%C(auto)%h %ad | %s %d [%an]' --date=short
   # 最近 10 次提交涉及的文件
   recent = !git log -10 --stat
 
