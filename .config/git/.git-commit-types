@@ -1,0 +1,27 @@
+Conventional Commits 速查表
+格式: <type>(<scope>): <subject>
+
+  feat        新功能
+  fix         修复 Bug
+  docs        仅文档变更
+  style       代码格式调整（不影响逻辑）
+  refactor    重构（非新功能、非修 Bug）
+  perf        性能优化
+  test        添加或修改测试
+  build       构建系统或外部依赖变更
+  ci          CI/CD 配置变更
+  chore       其他杂项
+  revert      回退之前的提交
+
+示例:
+  feat(cart): 添加购物车批量删除功能
+  fix(login): 修复验证码过期后无法重新发送的问题
+  chore: 删除废弃的配置文件
+  docs: 更新 README 部署说明
+  style: 统一缩进为 2 空格
+  refactor(api): 将请求层从 axios 迁移到 fetch
+  perf(list): 虚拟滚动优化长列表渲染
+  test(user): 补充用户注册单元测试
+  build: 升级 vite 到 5.x
+  ci: 添加 GitHub Actions 自动部署流程
+  revert: 回退 "feat(cart): 添加购物车批量删除功能"
