@@ -3,21 +3,21 @@ bindings = [
     { key = "V", mods = "Command", action = "Paste" },
     { key = "C", mods = "Command", action = "Copy" },
     { key = "N", mods = "Command", action = "SpawnNewInstance" },
-    { key = "Left",  mods = "Command", chars = "\u001bOH"  },# jump to line start (Home)
-    { key = "Right", mods = "Command", chars = "\u001bOF"  },# jump to line end (End)
-    { key = "Up",    mods = "Command", chars = "\u001bb"   },# skip word left
-    { key = "Down",  mods = "Command", chars = "\u001bf"   },# skip word right
-    { key = "Left",  mods = "Alt", chars = "\u001bb"       },# Option+Left 跳词（macOS 习惯）
-    { key = "Right", mods = "Alt", chars = "\u001bf"       },# Option+Right 跳词
-    { key = "Back",  mods = "Command", chars = "\u0015"    },# Cmd+Backspace 删除整行
-    { key = "Back",  mods = "Alt", chars = "\u001b\u007f"  },# Option+Backspace 删除一个词
-    { key = "Key0",  mods = "Command", action = "ResetFontSize" },# Cmd+0 重置字号
-    { key = "Equals", mods = "Command", action = "IncreaseFontSize" },# Cmd+= 放大
-    { key = "Minus",  mods = "Command", action = "DecreaseFontSize" },# Cmd+- 缩小
-    { key = "F",  mods = "Command", action = "SearchForward" },# Cmd+F 搜索
-    { key = "K",  mods = "Command", action = "ClearHistory" },# Cmd+K 清屏
-    { key = "Q",  mods = "Command", action = "Quit" },# Cmd+Q 退出
-    { key = "W",  mods = "Command", action = "Quit" },# Cmd+W 关闭窗口
+    { key = "Left",  mods = "Command", chars = "\u001bOH"  },
+    { key = "Right", mods = "Command", chars = "\u001bOF"  },
+    { key = "Up",    mods = "Command", chars = "\u001bb"   },
+    { key = "Down",  mods = "Command", chars = "\u001bf"   },
+    { key = "Left",  mods = "Alt", chars = "\u001bb"       },
+    { key = "Right", mods = "Alt", chars = "\u001bf"       },
+    { key = "Back",  mods = "Command", chars = "\u0015"    },
+    { key = "Back",  mods = "Alt", chars = "\u001b\u007f"  },
+    { key = "Key0",  mods = "Command", action = "ResetFontSize" },
+    { key = "Equals", mods = "Command", action = "IncreaseFontSize" },
+    { key = "Minus",  mods = "Command", action = "DecreaseFontSize" },
+    { key = "F",  mods = "Command", action = "SearchForward" },
+    { key = "K",  mods = "Command", action = "ClearHistory" },
+    { key = "Q",  mods = "Command", action = "Quit" },
+    { key = "W",  mods = "Command", action = "Quit" },
 ]
 
 [env]
@@ -52,7 +52,6 @@ magenta = "#c397d8"
 cyan = "#70c0b1"
 white = "#eaeaea"
 
-# 搜索高亮颜色
 [colors.search.matches]
 foreground = "#1d1f21"
 background = "#f0c674"
@@ -61,25 +60,22 @@ background = "#f0c674"
 foreground = "#1d1f21"
 background = "#b5bd68"
 
-# 选中文本颜色
 [colors.selection]
 text = "#1d1f21"
 background = "#81a2be"
 
-# 光标颜色
 [colors.cursor]
 text = "#1d1f21"
 cursor = "#c5c8c6"
 
-# Vi 模式光标颜色
 [colors.vi_mode_cursor]
 text = "#1d1f21"
 cursor = "#f0c674"
 
 [cursor]
 style = { shape = "Beam", blinking = "Always" }
-blink_interval = 500          # 闪烁间隔（毫秒）
-blink_timeout = 0             # 0 表示永不停止闪烁
+blink_interval = 500
+blink_timeout = 0
 unfocused_hollow = false
 
 [selection]
@@ -90,26 +86,29 @@ size = 12.0
 normal = { family = "Maple Mono NF CN", style = "Regular" }
 bold = { family = "Maple Mono NF CN", style = "Bold" }
 italic = { family = "Maple Mono NF CN", style = "Italic" }
-builtin_box_drawing = true    # 使用内置的 box drawing 字符，更整齐
+builtin_box_drawing = true
 
 [font.offset]
 x = 0
-y = 2                         # 适当增加行间距，阅读更舒适
+y = 2
 
 [window]
 dimensions = { columns = 120, lines = 50 }
 padding = { x = 8, y = 8 }
 dynamic_padding = true
-opacity = 0.85
-blur = true                   # macOS 毛玻璃模糊效果（需要系统支持）
+opacity = 0.9                              # 从 0.85 提高到 0.9，减少合成开销
+blur = false                               # 关闭毛玻璃，这是最大的性能杀手
 title = "terminal"
-option_as_alt = "Both"        # 让左右 Option 键都作为 Alt 使用，对快捷键很重要
-decorations = "Buttonless"    # 无按钮的标题栏，更简洁（也可用 "Transparent"）
+option_as_alt = "Both"
+decorations = "Buttonless"
 startup_mode = "Windowed"
 
 [scrolling]
-history = 10000               # 回滚行数，默认偏少
-multiplier = 3                # 滚动速度倍率
+history = 10000
+multiplier = 5                             # 提高滚动倍率，滚动更快更跟手
+
+[mouse]
+hide_when_typing = true                    # 打字时自动隐藏鼠标，减少视觉干扰
 
 [general]
 live_config_reload = true
