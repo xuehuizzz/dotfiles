@@ -3,10 +3,10 @@ bindings = [
     { key = "V", mods = "Command", action = "Paste" },
     { key = "C", mods = "Command", action = "Copy" },
     { key = "N", mods = "Command", action = "SpawnNewInstance" },
-    { key = "Left",  mods = "Command", chars = "\u001bOH"  },# jump word start
-    { key = "Right", mods = "Command", chars =  "\u001bOF" },# jump word end
-    { key = "Up",  mods = "Command", chars = "\u001bb"   },# Skip word left
-    { key = "Down", mods = "Command", chars = "\u001bf"   },# Skip word right
+    { key = "Left",  mods = "Command", chars = "\u001bOH"  },# jump to line start (Home)
+    { key = "Right", mods = "Command", chars = "\u001bOF"  },# jump to line end (End)
+    { key = "Up",    mods = "Command", chars = "\u001bb"   },# skip word left
+    { key = "Down",  mods = "Command", chars = "\u001bf"   },# skip word right
 ]
 
 [env]
@@ -17,7 +17,6 @@ LC_ALL = "en_US.UTF-8"
 [colors]
 draw_bold_text_with_bright_colors = true
 
-# 以下是一个使用真彩色的配色方案示例
 [colors.primary]
 background = "#1d1f21"
 foreground = "#c5c8c6"
@@ -43,34 +42,27 @@ cyan = "#70c0b1"
 white = "#eaeaea"
 
 [cursor]
-style = { shape = "Beam", blinking = "Always" } # 设置光标为竖线且总是闪烁
-unfocused_hollow = false      # 窗口失焦时光标更柔和，不会像“洞”一样空心
+style = { shape = "Beam", blinking = "Always" }
+unfocused_hollow = false
 
 [selection]
-save_to_clipboard = true # 选中文本自动复制
+save_to_clipboard = true
 
 [font]
 size = 12.0
 normal = { family = "Maple Mono NF CN", style = "Regular" }
-bold = { family = "Maple Mono NF CN", style = "Bold" }      # 粗体
-italic = { family = "Maple Mono NF CN", style = "Italic" }  # 斜体
+bold = { family = "Maple Mono NF CN", style = "Bold" }
+italic = { family = "Maple Mono NF CN", style = "Italic" }
 
 [window]
-dimensions = { columns = 120, lines = 50 } # 窗口尺寸
-padding = { x = 8, y = 8 }                 # 窗口内边距
+dimensions = { columns = 120, lines = 50 }
+padding = { x = 8, y = 8 }
 dynamic_padding = true
-opacity = 0.85                             # 设置透明度
-title = "terminal"                         # 设置窗口标题
+opacity = 0.85
+title = "terminal"
 
 [general]
 live_config_reload = true
 
 [terminal]
-osc52 = "CopyPaste" # 设定复制黏贴行为 默认只能复制
-
-[mouse]
-hide_when_typing = true  # 打字时自动隐藏鼠标指针，减少视觉干扰
-
-[bell]
-animation = "EaseOutExpo"
-duration = 0   
+osc52 = "CopyPaste"
