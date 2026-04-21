@@ -78,6 +78,15 @@ FOR u IN users
 
 ## 查询数据
 ```aql
+// 查询多个集合数据
+ids = [
+    "collection_a/111",
+    "collection_b/112",
+    "collection_c/113",
+]
+RETURN DOCUMENT(ids)
+
+
 RETURN DATE_ISO8601(DATE_NOW())     // 获取当前时间, utc
 RETURN DATE_ISO8601(DATE_ADD(DATE_NOW(), INTERVAL 8 HOUR))   // cst时间
 RETURN DATE_ISO8601(CONVERT_TZ(DATE_NOW(), 'UTC', 'Asia/Shanghai'))    // 指定时区
