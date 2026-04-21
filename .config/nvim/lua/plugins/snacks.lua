@@ -51,6 +51,16 @@ return {
         explorer = {
           hidden = true,
           follow_file = true,
+          exclude = {
+            ".git",
+            "node_modules",
+            "__pycache__",
+            ".venv",
+            ".ruff_cache",
+            "tmp",
+            ".mypy_cache",
+            ".pytest_cache",
+          },
           layout = {
             preset = "sidebar",
             preview = false,
