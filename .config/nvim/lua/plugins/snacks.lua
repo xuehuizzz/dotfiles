@@ -5,6 +5,9 @@ return {
 
   ---@type snacks.Config
   opts = {
+    -- ══════════════════════════════════════════
+    --  Dashboard
+    -- ══════════════════════════════════════════
     dashboard = {
       enabled = not (vim.fn.argc(-1) == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1),
       width = 40,
@@ -13,13 +16,13 @@ return {
       pane_gap = 4,
       preset = {
         keys = {
-          { icon = "", key = "f", desc = "  Find File",       action = ":lua Snacks.picker.files()" },
-          { icon = "", key = "r", desc = "  Recent Files",    action = ":lua Snacks.picker.recent()" },
-          { icon = "", key = "w", desc = "  Find Word",       action = ":lua Snacks.picker.grep()" },
-          { icon = "", key = "p", desc = "  Package Manager", action = ":Lazy" },
-          { icon = "", key = "h", desc = "  Health", action = ":checkhealth" },
-          { icon = "", key = "c", desc = "  Config", action = ":lua Snacks.picker.files({ cwd = vim.fn.stdpath('config') })" },
-          { icon = "", key = "q", desc = "  Quit",            action = ":qa" },
+          { icon = " ", key = "f", desc = "Find File",       action = ":lua Snacks.picker.files()" },
+          { icon = " ", key = "r", desc = "Recent Files",    action = ":lua Snacks.picker.recent()" },
+          { icon = " ", key = "w", desc = "Find Word",       action = ":lua Snacks.picker.grep()" },
+          { icon = " ", key = "p", desc = "Package Manager", action = ":Lazy" },
+          { icon = " ", key = "h", desc = "Health",          action = ":checkhealth" },
+          { icon = " ", key = "c", desc = "Config",          action = ":lua Snacks.picker.files({ cwd = vim.fn.stdpath('config') })" },
+          { icon = " ", key = "q", desc = "Quit",            action = ":qa" },
         },
         header = [[
           ::::    ::: :::     ::: ::::::::::: ::::    ::::  
@@ -47,6 +50,15 @@ return {
       sources = {
         files = {
           hidden = true,
+          exclude = {
+            ".git",
+            "node_modules",
+            "__pycache__",
+            ".venv",
+            ".ruff_cache",
+            ".mypy_cache",
+            ".pytest_cache",
+          },
         },
         explorer = {
           hidden = true,
@@ -57,7 +69,6 @@ return {
             "__pycache__",
             ".venv",
             ".ruff_cache",
-            "tmp",
             ".mypy_cache",
             ".pytest_cache",
           },
@@ -147,9 +158,13 @@ return {
         height = 0.80,
         wo = { winblend = 8 },
         on_win = function(self)
-          local win = self.win
-          local buf = self.buf
+          local win = self.win or vim.api.nvim_get_current_win()
+          local buf = self.buf or vim.api.nvim_get_current_buf()
           if not win or not vim.api.nvim_win_is_valid(win) then return end
+
+          -- ✅ 防止重复注册 keymap
+          if vim.b[buf] and vim.b[buf]._snacks_term_mapped then return end
+          vim.b[buf]._snacks_term_mapped = true
 
           local api = vim.api
           local drag = {}
@@ -267,13 +282,13 @@ return {
     -- ══════════════════════════════════════════
     --  额外实用模块
     -- ══════════════════════════════════════════
-    bigfile    = { enabled = true },
-    quickfile  = { enabled = true },
-    words      = { enabled = true },
-    scroll     = { enabled = true },
-    input      = { enabled = true },
-    scope      = { enabled = true },
-    rename     = { enabled = true },
+    bigfile      = { enabled = true },
+    quickfile    = { enabled = true },
+    words        = { enabled = true },
+    scroll       = { enabled = true },
+    input        = { enabled = true },
+    scope        = { enabled = true },
+    rename       = { enabled = true },
     statuscolumn = { enabled = true },
   },
 
@@ -291,11 +306,13 @@ return {
     { "<leader>fp", function() Snacks.picker.projects() end,    desc = "Projects" },
 
     -- ── Explorer (文件树) ──
-    { "<leader>e",  function() Snacks.explorer.toggle() end,    desc = "Toggle file explorer" },
-    { "<leader>fe", function() Snacks.explorer.reveal() end,    desc = "Reveal current file" },
+    { "<leader>e",  function() Snacks.explorer.toggle() end,                       desc = "Toggle file explorer" },
+    -- ✅ 修复: reveal() 不存在，改用 open({ follow_file = true })
+    { "<leader>fe", function() Snacks.explorer.open({ follow_file = true }) end,   desc = "Reveal current file" },
 
     -- ── Terminal ──
-    { "<C-j>", function() Snacks.terminal.toggle() end, mode = { "n", "t" }, desc = "Toggle floating terminal" },
+    -- ✅ 修复: <C-j> 与 picker list_down 语义冲突，改用 <C-\>
+    { "<C-\\>", function() Snacks.terminal.toggle() end, mode = { "n", "t" }, desc = "Toggle floating terminal" },
 
     -- ── Buffer delete ──
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete current buffer" },
@@ -304,8 +321,8 @@ return {
     { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss all notifications" },
 
     -- ── Words (LSP 引用导航) ──
-    { "]]", function() Snacks.words.jump(vim.v.count1) end,  desc = "Next reference",     mode = { "n", "t" } },
-    { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Previous reference",  mode = { "n", "t" } },
+    { "]]", function() Snacks.words.jump(vim.v.count1) end,  desc = "Next reference",    mode = { "n", "t" } },
+    { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Previous reference", mode = { "n", "t" } },
   },
 
   init = function()
@@ -313,7 +330,6 @@ return {
     local dash_group = vim.api.nvim_create_augroup("snacks_dash_lock", { clear = true })
     local saved_mousescroll = nil
 
-    -- 进入 dashboard 时禁用鼠标滚轮
     vim.api.nvim_create_autocmd("BufEnter", {
       group = dash_group,
       callback = function()
@@ -327,7 +343,6 @@ return {
       end,
     })
 
-    -- 备用: 万一还有滚动，立刻复位
     vim.api.nvim_create_autocmd("WinScrolled", {
       group = dash_group,
       callback = function()
