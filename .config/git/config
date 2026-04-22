@@ -66,6 +66,12 @@
 # [delta]
 #   navigate = true
 #   side-by-side = true
+#   line-numbers = true
+#   syntax-theme = Dracula
+#   plus-style = "syntax #003800"
+#   minus-style = "syntax #3f0001"
+#   file-style = bold yellow
+#   hunk-header-style = cyan bold
 
 [blame]
   coloring = highlightRecent
