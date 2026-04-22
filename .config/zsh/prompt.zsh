@@ -31,5 +31,4 @@ precmd_functions+=( _cmd_timer_precmd )
 
 # 主 PROMPT
 PROMPT='%F{blue}╭─%f %F{cyan}%~%f${vcs_info_msg_0_}${_cmd_duration}
-%F{blue}╰─%f %(?.%F{green}❯%f.%F{red}❯ %?%f) '
-RPROMPT='%F{240}%T%f'
+%F{blue}╰─%f %(?.%F{green}❯%f.%F{red}❯%f) '
