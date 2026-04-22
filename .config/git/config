@@ -20,6 +20,10 @@
   fsmonitor = true
   untrackedCache = true
 
+[status]
+  short = true
+  branch = true
+
 [commit]
   template = ~/.stCommitMsg
   # 提交时自动在编辑器中显示 diff，方便检查
