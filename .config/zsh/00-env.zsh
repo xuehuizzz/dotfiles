@@ -2,7 +2,7 @@ export XDG_CONFIG_HOME="$HOME/.config"  # 配置文件
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-# # 优先使用 ~/.local/bin 中的用户级工具（如 pip install --user 安装的命令）
+# 优先使用 ~/.local/bin 中的用户级工具（如 pip install --user 安装的命令）
 export PATH="$HOME/.local/bin:$PATH"
 
 # homebrew conf
