@@ -3,7 +3,7 @@
 # git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/plugins/zsh-autosuggestions
 # git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.config/zsh/plugins/zsh-syntax-highlighting
 
-_plugin_dir="$HOME/.config/zsh/plugins"
+_plugin_dir="$HOME/.config/zsh/.plugins"
 
 # autosuggestions
 [[ -f "$_plugin_dir/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && \
