@@ -1,18 +1,26 @@
-# Load environment variables
-[[ -f "$HOME/.config/zsh/env.zsh" ]] && source "$HOME/.config/zsh/env.zsh"
+# ============================================================
+# Zsh Config Loader (Ordered & Minimal)
+# ============================================================
 
-# Load Zsh options
-[[ -f "$HOME/.config/zsh/options.zsh" ]] && source "$HOME/.config/zsh/options.zsh"
+: "${ZSH_CONFIG_DIR:=${XDG_CONFIG_HOME:-$HOME/.config}/zsh}"
 
-# Load aliases
-[[ -f "$HOME/.config/zsh/aliases.zsh" ]] && source "$HOME/.config/zsh/aliases.zsh"
+() {
+  local config file
+  local -a configs=(
+    env.zsh
+    options.zsh
+    aliases.zsh
+    plugins.zsh
+    prompt.zsh
+    sdkman.zsh
+  )
 
-# Load plugins
-[[ -f "$HOME/.config/zsh/plugins.zsh" ]] && source "$HOME/.config/zsh/plugins.zsh"
-
-# Load prompt config
-[[ -f "$HOME/.config/zsh/prompt.zsh" ]] && source "$HOME/.config/zsh/prompt.zsh"
-
-# Load sdkman
-[[ -f "$HOME/.config/zsh/sdkman.zsh" ]] && source "$HOME/.config/zsh/sdkman.zsh"
-
+  for config in "${configs[@]}"; do
+    file="$ZSH_CONFIG_DIR/$config"
+    if [[ -r "$file" ]]; then
+      source "$file"
+    elif [[ -n "$ZSH_DEBUG" ]]; then
+      print -u2 "zsh: missing config: $file"
+    fi
+  done
+}
