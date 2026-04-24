@@ -1,8 +1,18 @@
-# 按照一定顺序加载配置
-typeset -g ZSH_CONFIG_DIR="$HOME/.config/zsh"
+# Load environment variables
+[[ -f "$HOME/.config/zsh/env.zsh" ]] && source "$HOME/.config/zsh/env.zsh"
 
-for _f in "$ZSH_CONFIG_DIR"/[0-9][0-9]-*.zsh(N); do
-  source "$_f"
-done
+# Load Zsh options
+[[ -f "$HOME/.config/zsh/options.zsh" ]] && source "$HOME/.config/zsh/options.zsh"
 
-unset _f
+# Load aliases
+[[ -f "$HOME/.config/zsh/aliases.zsh" ]] && source "$HOME/.config/zsh/aliases.zsh"
+
+# Load plugins
+[[ -f "$HOME/.config/zsh/plugins.zsh" ]] && source "$HOME/.config/zsh/plugins.zsh"
+
+# Load prompt config
+[[ -f "$HOME/.config/zsh/prompt.zsh" ]] && source "$HOME/.config/zsh/prompt.zsh"
+
+# Load sdkman
+[[ -f "$HOME/.config/zsh/sdkman.zsh" ]] && source "$HOME/.config/zsh/sdkman.zsh"
+
