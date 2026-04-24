@@ -12,7 +12,7 @@
 
 # ── 核心设置 ─────────────────────────────────────────
 [core]
-  excludesfile = ~/.gitignore_global
+  excludesfile = ~/.config/git/.gitignore_global
   quotepath = false
   # 防止系统随机选 vim/nano，按需改为 nvim 或 code --wait
   editor = nvim
@@ -25,7 +25,7 @@
   branch = true
 
 [commit]
-  template = ~/.stCommitMsg
+  template = ~/.config/git/.stCommitMsg
   # 提交时自动在编辑器中显示 diff，方便检查
   verbose = true
 
