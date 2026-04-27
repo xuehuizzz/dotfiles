@@ -29,8 +29,9 @@ cat /dev/null > file
 ls -l | tee result.txt
 ```
 
+### 命令提权
 ```bash
-# 提权, 哪些命令不需要输入密码, 不要直接 vim /etc/sudoers (容易把sudo锁住)
+# 哪些命令不需要输入密码, 不要直接 vim /etc/sudoers (容易把sudo锁住)
 sudo visudo
 
 xuehui ALL=(ALL) NOPASSWD: /usr/local/bin/openconnect    # 给用户提权
