@@ -8,32 +8,30 @@ return {
   config = function()
     require("nvim-treesitter.configs").setup({
       ensure_installed = {
+        -- 核心开发语言（高频）
         "lua",
         "python",
         "javascript",
         "typescript",
         "tsx",
-        "vimdoc",
-        "vim",
-        "regex",
-        "terraform",
+        "go",
+        "bash",
         "sql",
+        "json",
+        "yaml",
+        "html",
+        "css",
+
+        -- 编辑器/工具链
+        "vim",
+        "vimdoc",
+        "regex",
+
+        -- 基础工程
         "dockerfile",
         "toml",
-        "json",
-        "java",
-        "groovy",
-        "go",
-        "gitignore",
-        "graphql",
-        "yaml",
-        "make",
-        "cmake",
         "markdown",
         "markdown_inline",
-        "bash",
-        "css",
-        "html",
       },
 
       auto_install = true,
@@ -42,7 +40,7 @@ return {
         enable = true,
         -- 大文件禁用，避免卡顿
         disable = function(_, buf)
-          local max_filesize = 100 * 1024 -- 100 KB
+          local max_filesize = 200 * 1024 -- 200 KB
           local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
           if ok and stats and stats.size > max_filesize then
             return true
