@@ -23,8 +23,6 @@ sudo systemctl start fail2ban
 ```
 
 
-
-
 ## <mark>生成SSH秘钥对</mark>
 ```bash
 ssh-keygen -t ed25519 -C "user email"    # ED25519（推荐，更安全）
@@ -128,5 +126,4 @@ sudo snap disable xxx  # 禁用xxx服务开机自启
 
 
 ## commands
-- 在命令前使用空格, 以将其排除在 ~/.bash_history 之外
 - `grep "error" file.txt`  # 简单的搜索不用再 cat file.txt | grep "error"
