@@ -21,7 +21,9 @@
    -- 自动识别格式
    SELECT * FROM read_csv('data.csv', delim=',', header=true);
    
+   -- 无表头文件, 自动把列命名为: column0, column1, column2, ...
    -- 无表头文件, 自动把列命名为: column00, column01, column02, ...
+   -- 视情况而定
    SELECT COUNT(column00) FROM read_csv('data.csv', header=False) where column00 LIKE '%xxx%';  
    -- read_csv('https://example.com/data.csv')
    ```
