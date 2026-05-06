@@ -26,7 +26,7 @@ alias wget="wget -c"
 alias ncz="nc -zv"                                         # 端口连通性测试: ncz myserver.com 22
 
 # 压缩 (.tar.gz 带 -z;  .tar.bz2 用 -j)
-alias tarc="tar -czvf"                                     # tarc xxx.tar.gz file1 folder1
+alias tarc="COPYFILE_DISABLE=1 tar -czvf"                  # tarc xxx.tar.gz file1 folder1
 alias tarx="tar -xzvf"                                     # tarx xxx.tar.gz
 
 # jupyter
