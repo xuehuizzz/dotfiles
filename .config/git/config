@@ -114,6 +114,7 @@
   br = branch
   sw = switch
   rs = restore
+  cc = !cat ~/.config/git/.git-commit-types
 
   unadd = restore --staged
   uncommit = reset --mixed HEAD~1
