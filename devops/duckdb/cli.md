@@ -24,7 +24,8 @@
    -- 无表头文件, 自动把列命名为: column0, column1, column2, ...
    -- 无表头文件, 自动把列命名为: column00, column01, column02, ...
    -- 视情况而定
-   SELECT COUNT(column00) FROM read_csv('data.csv', header=False) where column00 LIKE '%xxx%';  
+   -- 防止被 shell 或编辑器吞掉, 显式指定  delim=E'xxx'
+   SELECT COUNT(column00) FROM read_csv('data.csv', header=False, delim=E'\x0f') where column00 LIKE '%xxx%';  
    -- read_csv('https://example.com/data.csv')
    ```
    > 查询默认返回头尾几行, 在查询前配置`.maxrows num`可显示完整行记录
