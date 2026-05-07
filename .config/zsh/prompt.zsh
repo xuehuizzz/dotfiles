@@ -1,44 +1,85 @@
 setopt PROMPT_SUBST
+
 autoload -U colors && colors
 autoload -Uz add-zsh-hook
 
-# ---- git 异步（修正版）----
+# async git
+
 typeset -g _git_branch=""
 typeset -g _git_async_fd=""
+typeset -g _git_last_pwd=""
 
 _git_async_start() {
+  # 目录没变化直接跳过
+  [[ "$PWD" == "$_git_last_pwd" ]] && return
+  _git_last_pwd="$PWD"
+
   _git_branch=""
-  [[ -n $_git_async_fd ]] && {
+
+  # 清理旧 fd
+  if [[ -n "$_git_async_fd" ]]; then
     zle -F $_git_async_fd 2>/dev/null
     exec {_git_async_fd}<&- 2>/dev/null
-  }
+  fi
+
+  # 非 git 目录直接返回
+  git rev-parse --is-inside-work-tree &>/dev/null || return
+
+  # 异步获取 branch
   exec {_git_async_fd}< <(
     git symbolic-ref --short HEAD 2>/dev/null \
       || git rev-parse --short HEAD 2>/dev/null
   )
+
   zle -F $_git_async_fd _git_async_done
 }
 
 _git_async_done() {
   local fd=$1
-  _git_branch="$(<&$fd)"
+
+  IFS= read -r _git_branch <&$fd
+
   zle -F $fd
   exec {fd}<&-
+
   _git_async_fd=""
+
   zle reset-prompt
 }
 
 add-zsh-hook precmd _git_async_start
 
-# ---- 颜色 ----
-SEG_A_BG=238; SEG_B_BG=240
-SEG_A_FG=cyan; SEG_B_FG=205
+# colors (Tokyo Night style)
+typeset -g PATH_BG=236
+typeset -g PATH_FG=110
 
-# ---- prompt ----
-_git_seg() {
-  [[ -z $_git_branch ]] && return
-  print -rn -- "%K{$SEG_B_BG}%F{$SEG_A_BG}%f%F{$SEG_B_FG}  $_git_branch%f "
+typeset -g GIT_BG=238
+typeset -g GIT_FG=183
+
+typeset -g SEP_FG=238
+
+# segments
+_path_seg() {
+  print -rn -- "%K{$PATH_BG}%F{$PATH_FG} %(4~|.../%3~|%~) "
 }
 
-PROMPT='%K{$SEG_A_BG} %F{$SEG_A_FG}%(4~|.../%3~|%~)%f $(_git_seg)%k
-%F{green}›%f '
+_git_seg() {
+  [[ -z "$_git_branch" ]] && return
+
+  print -rn -- \
+    "%F{$GIT_BG}%K{$PATH_BG}"\
+    "%K{$GIT_BG}%F{$GIT_FG} ${_git_branch} "
+}
+
+_end_seg() {
+  [[ -n "$_git_branch" ]] && {
+    print -rn -- "%F{default}%K{$GIT_BG}"
+    return
+  }
+
+  print -rn -- "%f%K{$PATH_BG}"
+}
+
+
+PROMPT='$(_path_seg)$(_git_seg)$(_end_seg)%k
+%F{110}›%f '
