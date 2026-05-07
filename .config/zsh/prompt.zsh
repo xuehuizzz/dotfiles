@@ -4,7 +4,6 @@ autoload -U colors && colors
 autoload -Uz add-zsh-hook
 
 # async git
-
 typeset -g _git_branch=""
 typeset -g _git_async_fd=""
 typeset -g _git_last_pwd=""
@@ -76,7 +75,6 @@ _end_seg() {
     print -rn -- "%F{default}%K{$GIT_BG}"
     return
   }
-
   print -rn -- "%f%K{$PATH_BG}"
 }
 
