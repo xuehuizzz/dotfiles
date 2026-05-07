@@ -41,4 +41,4 @@ _git_seg() {
 }
 
 PROMPT='%K{$SEG_A_BG} %F{$SEG_A_FG}%(4~|.../%3~|%~)%f $(_git_seg)%k
-%F{green}❯%f '
+%F{green}›%f '
