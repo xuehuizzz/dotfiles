@@ -1,83 +1,171 @@
-setopt PROMPT_SUBST
+# ============================================================
+#   zsh prompt — async git + transient (Tokyo Night)
+# ============================================================
 
+setopt PROMPT_SUBST
 autoload -U colors && colors
 autoload -Uz add-zsh-hook
 
-# async git
-typeset -g _git_branch=""
-typeset -g _git_async_fd=""
-typeset -g _git_last_pwd=""
+# ─── colors ─────────────────────────────────────────────
+typeset -g PATH_BG=236
+typeset -g PATH_FG=110
+typeset -g GIT_BG=238
+typeset -g GIT_FG=183
+typeset -g DIRTY_FG=215
+typeset -g OK_FG=110
+typeset -g ERR_FG=174
 
-_git_async_start() {
-  # 目录没变化直接跳过
-  [[ "$PWD" == "$_git_last_pwd" ]] && return
-  _git_last_pwd="$PWD"
+# ─── last status (immune to precmd pollution) ───────────
+typeset -gi _last_status=0
+typeset -g  _arrow_str="%F{$OK_FG}›%f"
 
-  _git_branch=""
+_save_status() { _last_status=$? }
+add-zsh-hook precmd _save_status   # MUST be first precmd
 
-  # 清理旧 fd
-  if [[ -n "$_git_async_fd" ]]; then
-    zle -F $_git_async_fd 2>/dev/null
-    exec {_git_async_fd}<&- 2>/dev/null
+_update_arrow() {
+  if (( _last_status == 0 )); then
+    _arrow_str="%F{$OK_FG}›%f"
+  else
+    _arrow_str="%F{$ERR_FG}›%f"
+  fi
+  return 0
+}
+add-zsh-hook precmd _update_arrow
+
+# ─── git state ──────────────────────────────────────────
+typeset -g  _git_branch=""
+typeset -g  _git_dirty=""
+typeset -gi _git_async_fd=0
+typeset -gA _gitdir_cache
+typeset -gi _GITDIR_CACHE_MAX=200
+
+_git_find_dir() {
+  if (( ${+_gitdir_cache[$PWD]} )); then
+    local cached="${_gitdir_cache[$PWD]}"
+    if [[ -z "$cached" ]]; then
+      [[ ! -e "$PWD/.git" ]] && return 1
+      unset "_gitdir_cache[$PWD]"
+    elif [[ -e "$cached" ]]; then
+      print -r -- "$cached"
+      return 0
+    else
+      unset "_gitdir_cache[$PWD]"
+    fi
   fi
 
-  # 非 git 目录直接返回
-  git rev-parse --is-inside-work-tree &>/dev/null || return
+  (( ${#_gitdir_cache} > _GITDIR_CACHE_MAX )) && _gitdir_cache=()
 
-  # 异步获取 branch
+  local dir="$PWD" gitdir c
+  while [[ -n "$dir" && "$dir" != "/" ]]; do
+    if [[ -e "$dir/.git" ]]; then
+      if [[ -d "$dir/.git" ]]; then
+        gitdir="$dir/.git"
+      else
+        c=$(<"$dir/.git")
+        gitdir="${c#gitdir: }"
+      fi
+      _gitdir_cache[$PWD]="$gitdir"
+      print -r -- "$gitdir"
+      return 0
+    fi
+    dir="${dir:h}"
+  done
+
+  _gitdir_cache[$PWD]=""
+  return 1
+}
+
+_git_read_head() {
+  local gitdir=$1 head
+  [[ -r "$gitdir/HEAD" ]] || return 1
+  head=$(<"$gitdir/HEAD")
+  if [[ "$head" == ref:* ]]; then
+    print -r -- "${head#ref: refs/heads/}"
+  else
+    print -r -- "${head[1,7]}"
+  fi
+}
+
+_git_async_cleanup() {
+  if (( _git_async_fd )); then
+    [[ -o zle ]] && zle -F $_git_async_fd 2>/dev/null
+    exec {_git_async_fd}<&- 2>/dev/null
+    _git_async_fd=0
+  fi
+  return 0
+}
+
+_git_update() {
+  _git_async_cleanup
+
+  local gitdir
+  if ! gitdir=$(_git_find_dir); then
+    _git_branch=""
+    _git_dirty=""
+    return 0
+  fi
+
+  _git_branch=$(_git_read_head "$gitdir")
+  _git_dirty=""
+
+  [[ -o zle ]] || return 0
+
   exec {_git_async_fd}< <(
-    git symbolic-ref --short HEAD 2>/dev/null \
-      || git rev-parse --short HEAD 2>/dev/null
+    [[ -n "$(git status --porcelain=v1 -uno 2>/dev/null | head -n1)" ]] && print -n '*'
   )
-
   zle -F $_git_async_fd _git_async_done
+  return 0
 }
 
 _git_async_done() {
   local fd=$1
-
-  IFS= read -r _git_branch <&$fd
-
+  IFS= read -r _git_dirty <&$fd
   zle -F $fd
   exec {fd}<&-
-
-  _git_async_fd=""
-
+  _git_async_fd=0
   zle reset-prompt
 }
 
-add-zsh-hook precmd _git_async_start
+add-zsh-hook precmd _git_update
 
-# colors (Tokyo Night style)
-typeset -g PATH_BG=236
-typeset -g PATH_FG=110
-
-typeset -g GIT_BG=238
-typeset -g GIT_FG=183
-
-typeset -g SEP_FG=238
-
-# segments
+# ─── segments ───────────────────────────────────────────
 _path_seg() {
   print -rn -- "%K{$PATH_BG}%F{$PATH_FG} %(4~|.../%3~|%~) "
 }
 
 _git_seg() {
   [[ -z "$_git_branch" ]] && return
-
-  print -rn -- \
-    "%F{$GIT_BG}%K{$PATH_BG}"\
-    "%K{$GIT_BG}%F{$GIT_FG} ${_git_branch} "
+  local mark=""
+  [[ -n "$_git_dirty" ]] && mark=" %F{$DIRTY_FG}${_git_dirty}%F{$GIT_FG}"
+  print -rn -- "%F{$GIT_BG}%K{$PATH_BG}%K{$GIT_BG}%F{$GIT_FG} ${_git_branch}${mark} "
 }
 
 _end_seg() {
-  [[ -n "$_git_branch" ]] && {
-    print -rn -- "%F{default}%K{$GIT_BG}"
-    return
-  }
-  print -rn -- "%f%K{$PATH_BG}"
+  if [[ -n "$_git_branch" ]]; then
+    print -rn -- "%k%F{$GIT_BG}%f"
+  else
+    print -rn -- "%k%F{$PATH_BG}%f"
+  fi
 }
 
+# ─── prompt strings ─────────────────────────────────────
+_PROMPT_FULL='$(_path_seg)$(_git_seg)$(_end_seg)
+${_arrow_str} '
 
-PROMPT='$(_path_seg)$(_git_seg)$(_end_seg)%k
-%F{110}›%f '
+_PROMPT_MINI='${_arrow_str} '
+
+PROMPT=$_PROMPT_FULL
+
+# ─── transient ──────────────────────────────────────────
+_transient_line_finish() {
+  PROMPT=$_PROMPT_MINI
+  zle reset-prompt
+}
+_transient_line_init() {
+  PROMPT=$_PROMPT_FULL
+}
+zle -N zle-line-finish _transient_line_finish
+zle -N zle-line-init   _transient_line_init
+
+_transient_restore() { PROMPT=$_PROMPT_FULL; return 0 }
+add-zsh-hook precmd _transient_restore
