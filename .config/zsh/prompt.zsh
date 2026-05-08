@@ -17,9 +17,19 @@ typeset -g ERR_FG=174
 
 # ─── last status (immune to precmd pollution) ───────────
 typeset -gi _last_status=0
+typeset -gi _prompt_initialized=0
 typeset -g  _arrow_str="%F{$OK_FG}›%f"
 
-_save_status() { _last_status=$? }
+_save_status() {
+  local st=$?
+
+  if (( !_prompt_initialized )); then
+    _last_status=0
+    _prompt_initialized=1
+  else
+    _last_status=$st
+  fi
+}
 add-zsh-hook precmd _save_status   # MUST be first precmd
 
 _update_arrow() {
@@ -42,6 +52,7 @@ typeset -gi _GITDIR_CACHE_MAX=200
 _git_find_dir() {
   if (( ${+_gitdir_cache[$PWD]} )); then
     local cached="${_gitdir_cache[$PWD]}"
+
     if [[ -z "$cached" ]]; then
       [[ ! -e "$PWD/.git" ]] && return 1
       unset "_gitdir_cache[$PWD]"
@@ -55,7 +66,10 @@ _git_find_dir() {
 
   (( ${#_gitdir_cache} > _GITDIR_CACHE_MAX )) && _gitdir_cache=()
 
-  local dir="$PWD" gitdir c
+  local dir="$PWD"
+  local gitdir
+  local c
+
   while [[ -n "$dir" && "$dir" != "/" ]]; do
     if [[ -e "$dir/.git" ]]; then
       if [[ -d "$dir/.git" ]]; then
@@ -64,10 +78,12 @@ _git_find_dir() {
         c=$(<"$dir/.git")
         gitdir="${c#gitdir: }"
       fi
+
       _gitdir_cache[$PWD]="$gitdir"
       print -r -- "$gitdir"
       return 0
     fi
+
     dir="${dir:h}"
   done
 
@@ -76,9 +92,13 @@ _git_find_dir() {
 }
 
 _git_read_head() {
-  local gitdir=$1 head
+  local gitdir=$1
+  local head
+
   [[ -r "$gitdir/HEAD" ]] || return 1
+
   head=$(<"$gitdir/HEAD")
+
   if [[ "$head" == ref:* ]]; then
     print -r -- "${head#ref: refs/heads/}"
   else
@@ -92,6 +112,7 @@ _git_async_cleanup() {
     exec {_git_async_fd}<&- 2>/dev/null
     _git_async_fd=0
   fi
+
   return 0
 }
 
@@ -99,6 +120,7 @@ _git_update() {
   _git_async_cleanup
 
   local gitdir
+
   if ! gitdir=$(_git_find_dir); then
     _git_branch=""
     _git_dirty=""
@@ -113,16 +135,21 @@ _git_update() {
   exec {_git_async_fd}< <(
     [[ -n "$(git status --porcelain=v1 -uno 2>/dev/null | head -n1)" ]] && print -n '*'
   )
+
   zle -F $_git_async_fd _git_async_done
   return 0
 }
 
 _git_async_done() {
   local fd=$1
+
   IFS= read -r _git_dirty <&$fd
+
   zle -F $fd
   exec {fd}<&-
+
   _git_async_fd=0
+
   zle reset-prompt
 }
 
@@ -135,8 +162,11 @@ _path_seg() {
 
 _git_seg() {
   [[ -z "$_git_branch" ]] && return
+
   local mark=""
+
   [[ -n "$_git_dirty" ]] && mark=" %F{$DIRTY_FG}${_git_dirty}%F{$GIT_FG}"
+
   print -rn -- "%F{$GIT_BG}%K{$PATH_BG}%K{$GIT_BG}%F{$GIT_FG} ${_git_branch}${mark} "
 }
 
@@ -161,11 +191,17 @@ _transient_line_finish() {
   PROMPT=$_PROMPT_MINI
   zle reset-prompt
 }
+
 _transient_line_init() {
   PROMPT=$_PROMPT_FULL
 }
+
 zle -N zle-line-finish _transient_line_finish
 zle -N zle-line-init   _transient_line_init
 
-_transient_restore() { PROMPT=$_PROMPT_FULL; return 0 }
+_transient_restore() {
+  PROMPT=$_PROMPT_FULL
+  return 0
+}
+
 add-zsh-hook precmd _transient_restore
