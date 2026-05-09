@@ -186,6 +186,25 @@
         "**/bower_components/**": true,
         "**/.ruff_cache/**": true
     },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/.hg/store/**": true,
+        "**/node_modules/**": true,
+        "**/.pnpm/**": true,
+        "**/dist/**": true,
+        "**/.next/**": true,
+        "**/.nuxt/**": true,
+        "**/.output/**": true,
+        "**/coverage/**": true,
+        "**/.turbo/**": true,
+        "**/.cache/**": true,
+        "**/__pycache__/**": true,
+        "**/.mypy_cache/**": true,
+        "**/.pytest_cache/**": true,
+        "**/.ruff_cache/**": true,
+        "**/.venv/**": true
+    },
     "editor.accessibilitySupport": "off", // 关闭无障碍支持（减少额外 DOM 计算）
     "editor.codeLens": false, // 关闭 CodeLens（引用数等行内提示）
     "editor.colorDecorators": false, // 关闭颜色装饰器（CSS 色块预览）
