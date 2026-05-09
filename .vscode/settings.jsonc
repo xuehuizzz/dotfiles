@@ -172,18 +172,6 @@
     "files.watcherExclude": {
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
-        "**/node_modules/**": true,
-        "**/dist/**": true,
-        "**/.venv/**": true,
-        "**/__pycache__/**": true,
-        "**/.nuxt/**": true,
-        "**/.output/**": true,
-        "**/bower_components/**": true,
-        "**/.ruff_cache/**": true
-    },
-    "files.watcherExclude": {
-        "**/.git/objects/**": true,
-        "**/.git/subtree-cache/**": true,
         "**/.hg/store/**": true,
         "**/node_modules/**": true,
         "**/.pnpm/**": true,
