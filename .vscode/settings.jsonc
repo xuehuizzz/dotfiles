@@ -61,7 +61,6 @@
     "html.format.indentHandlebars": true,
     // 格式化自动删分号
     "js/ts.format.semicolons": "remove",
-    "typescript.format.semicolons": "remove",
     // 类型提示
     "javascript.inlayHints.enumMemberValues.enabled": true,
     "javascript.inlayHints.functionLikeReturnTypes.enabled": false,
