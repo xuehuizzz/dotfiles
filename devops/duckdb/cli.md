@@ -1,4 +1,4 @@
-# 常用操作
+# [社区扩展列表](https://duckdb.org.cn/community_extensions/list_of_extensions)
 1. 基础命令
    ```bash
    duckdb  # 默认进入memory数据库, 退出则数据清零
