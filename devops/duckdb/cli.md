@@ -27,6 +27,18 @@
    -- 防止被 shell 或编辑器吞掉, 显式指定  delim=E'xxx'
    SELECT COUNT(column00) FROM read_csv('data.csv', header=False, delim=E'\x0f') where column00 LIKE '%xxx%';  
    -- read_csv('https://example.com/data.csv')
+
+
+   -- 读取es
+   SELECT * FROM elastic_scan(
+       'http://localhost:9200',
+       'my-index',
+       query='{
+         "query": {
+           "match_all": {}
+         }
+       }'
+   );
    ```
    > 查询默认返回头尾几行, 在查询前配置`.maxrows num`可显示完整行记录
 4. 查询json文件
