@@ -29,16 +29,21 @@
    -- read_csv('https://example.com/data.csv')
 
 
-   -- 读取es
-   SELECT * FROM elastic_scan(
-       'http://localhost:9200',
-       'my-index',
-       query='{
-         "query": {
-           "match_all": {}
-         }
-       }'
+   -- 读取es, 安装并加载扩展(只需安装一次)
+   INSTALL elasticsearch FROM community;
+   LOAD elasticsearch;
+   
+   -- 创建 ES 连接(SECRET)
+   CREATE SECRET es_secret (
+       TYPE elasticsearch,
+       HOST 'localhost',
+       PORT 9200,
+       USER 'elastic',
+       PASSWORD 'your_password'
    );
+   
+   -- 查询 ES 索引
+   SELECT * FROM elastic_search('my_index');
    ```
    > 查询默认返回头尾几行, 在查询前配置`.maxrows num`可显示完整行记录
 4. 查询json文件
