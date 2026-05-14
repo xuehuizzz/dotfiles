@@ -43,7 +43,7 @@ return {
         keys = {
           { key = "f", desc = "Find File",    action = ":lua Snacks.picker.files()" },
           { key = "r", desc = "Recent Files", action = ":lua Snacks.picker.recent()" },
-          { key = "g", desc = "Live Grep",    action = ":lua Snacks.picker.grep()" },
+          { key = "g", desc = "Grep Text",    action = ":lua Snacks.picker.grep()" },  -- 默认搜索当前pwd
           { key = "p", desc = "Projects",     action = ":lua Snacks.picker.projects()" },
           { key = "c", desc = "Config",       action = ":lua Snacks.picker.files({ cwd = vim.fn.stdpath('config') })" },
           { key = "l", desc = "Lazy",         action = ":Lazy" },
