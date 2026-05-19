@@ -1,74 +1,277 @@
-# 安装homebrew
-# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-# 配置环境变量(可选)
-# echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-# eval "$(/opt/homebrew/bin/brew shellenv)"
+#!/usr/bin/env bash
 
-# source ~/.osx 使其生效
-# 更多设置信息见: https://macos-defaults.com
+# ============================================================================
+#  macOS 系统偏好配置脚本
+#  使用方法: bash ~/.macos
+#  参考: https://macos-defaults.com
+# ============================================================================
 
-# 关闭自动开机, 仅限Apple Silicon芯片, 需要运行 macOS Sequoia 或更高版本
-sudo nvram BootPreference=%00   # 在打开盖子或连接电源时均不启动电脑
-sudo nvram BootPreference=%01   # 仅希望在打开盖子时不启动电脑
-sudo nvram BootPreference=%02   # 仅希望在连接电源时不启动电脑
-sudo nvram -d BootPreference    # 恢复打开盖子时的自动启动功能
+# 关闭所有正在运行的提示
+osascript -e 'tell application "System Preferences" to quit'
 
-# 禁止重启系统后打开未关闭的软件
+# 提前请求 sudo 权限，并在脚本运行期间保持
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# ============================================================================
+#  一、系统通用 (NSGlobalDomain)
+# ============================================================================
+
+# 显示所有文件扩展名
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# 默认存储到本地磁盘，而不是 iCloud
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# 关闭智能引号 (代码党救命)
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# 关闭智能破折号
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+# 关闭自动拼写纠正
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# 关闭自动首字母大写
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+
+# 关闭双击空格变句号 (按需，写文档保留可能更好)
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+
+# 启用按住按键重复 (默认是弹出特殊字符菜单)
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# 极速按键重复 (适合 Vim 党)
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+
+# Tab 键聚焦所有控件 (对话框中可用 Tab 切换按钮)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+# 滚动条始终显示
+# 可选值: WhenScrolling, Automatic, Always
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+
+# ============================================================================
+#  二、登录 & 启动
+# ============================================================================
+
+# 重启系统后不打开未关闭的软件
 defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
 
-defaults write com.apple.dock autohide-time-modifier -float 0 && killall Dock  # 使Dock的自动隐藏和显示立即发生
-defaults write com.apple.dock autohide-delay -int 0 && killall Dock   # 设置启动坞响应时间最短
-defaults delete com.apple.dock autohide-time-modifier && killall Dock    # 恢复启动坞默认动画时间
-defaults delete com.apple.Dock autohide-delay && killall Dock    # 恢复默认启动坞响应时间
+# 关闭崩溃报错弹窗
+defaults write com.apple.CrashReporter DialogType none
 
-defaults write com.apple.dock springboard-columns -int 9     # 设置列数
-defaults write com.apple.dock springboard-rows -int 6    # 设置行数
-killall Dock   # 重启 Dock 生效
+# Apple Silicon: 打开盖子或连接电源时均不自动开机 (按需取消注释)
+# sudo nvram BootPreference=%00
 
-# 恢复默认的列数和行数
-defaults write com.apple.dock springboard-rows Default
-defaults write com.apple.dock springboard-columns Default
-killall Dock    # 重启 Dock 生效
+# ============================================================================
+#  三、Dock
+# ============================================================================
 
-# pwpolicy -clearaccountpolicies   # 取消 4 位数密码限制
-# open -n /Applications/WeChat.app/Contents/MacOS/WeChat    # 微信双开
-# sudo spctl --master-disable    #禁用安装守护,允许安装未知来源
+# 自动隐藏 Dock
+defaults write com.apple.dock autohide -bool true
 
-defaults write com.apple.CrashReporter DialogType none    # 关闭崩溃报错
-defaults write com.apple.CrashReporter DialogType crashreport  # 恢复崩溃报错
+# 自动隐藏/显示动画时间设为 0 (立即响应)
+defaults write com.apple.dock autohide-time-modifier -float 0
 
-defaults write com.apple.dock minimize-to-application -bool true  # 将最小化的窗口归到应用程序图标中，而不是单独显示在Dock中
-defaults write com.apple.dock mineffect -string "scale"   # 设置最小化窗口时的效果为“缩放”
-defaults write com.apple.finder "_FXSortFoldersFirst" -bool "true" && killall Finder   # 访达, 将文件夹放在最上面
-
-defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true  # 禁止Image Capture（图像捕捉）应用程序在检测到新连接的设备（如相机或手机）时自动弹出
-
-# Focus Follows Mouse 焦点跟随鼠标
-defaults write com.apple.Terminal FocusFollowsMouse -string true # 开启
-defaults write com.apple.Terminal FocusFollowsMouse -string false # 关闭
-
-# 永久隐藏Dock栏, 仅是在桌面隐藏
-defaults write com.apple.dock autohide -bool true   # autohide：设置为 true 会自动隐藏 Dock。
-defaults write com.apple.dock autohide-delay -float 1000    # autohide-delay：将其设置为一个非常大的值（如 1000），使 Dock 几乎不可能在正常操作中显示
-defaults write com.apple.dock autohide-time-modifier -float 0    # autohide-time-modifier：设置为 0 确保 Dock 消失得非常快
-killall Dock
-
-# 启动时显示桌面而不是打开的应用
-defaults write com.apple.finder NewWindowTarget -string "PfDe"
-defaults write com.apple.finder NewWindowTargetPath -string "file://localhost/Users/$(whoami)/Desktop"
-killall Finder
-
-# 恢复Dock栏的显示, 自动隐藏与显示
+# 鼠标移到边缘后立即弹出 Dock (无延迟)
 defaults write com.apple.dock autohide-delay -float 0
-killall Dock
 
-# 修复 brew services异常, 重新安装
-# brew untap homebrew/services
-# brew tap homebrew/services
+# 最小化窗口时归入应用图标 (而非单独占位)
+defaults write com.apple.dock minimize-to-application -bool true
 
-# 添加环境变量, 使用 brew install 安装的包，添加环境变量时，最好使用如下这样的路径,自动指向最新版本
-#    /opt/homebrew/opt/xxx(Apple Silicon), 
-#    /usr/local/opt/xxx(inter) 
+# 最小化效果: scale (缩放) / genie (神灯)
+defaults write com.apple.dock mineffect -string "scale"
 
+# 不显示"最近使用的应用"
+defaults write com.apple.dock show-recents -bool false
 
+# Dock 图标大小
+defaults write com.apple.dock tilesize -int 42
+
+# 隐藏的 App 在 Dock 中半透明显示
+defaults write com.apple.dock showhidden -bool true
+
+# 关闭 Dock 鼠标悬停放大 (按需)
+# defaults write com.apple.dock magnification -bool false
+
+# ============================================================================
+#  四、Finder (访达)
+# ============================================================================
+
+# 文件夹始终排在最前
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
+# 默认搜索当前文件夹 (而非整个 Mac)
+# 可选: SCev (本机), SCcf (当前文件夹), SCsp (上次范围)
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+# 修改文件扩展名时不弹警告
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# 显示路径栏
+defaults write com.apple.finder ShowPathbar -bool true
+
+# 显示状态栏
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# 在标题栏显示完整 POSIX 路径
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# 默认视图样式 (列表视图: Nlsv / 图标: icnv / 分栏: clmv / 画廊: glyv)
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
+# 新建窗口默认打开桌面
+defaults write com.apple.finder NewWindowTarget -string "PfDe"
+defaults write com.apple.finder NewWindowTargetPath -string "file://localhost${HOME}/Desktop"
+
+# 显示外置磁盘 / 移动硬盘 / 光盘 / 服务器在桌面
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+
+# 不在网络共享和 U 盘上创建 .DS_Store
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# 30 天后自动清空废纸篓
+defaults write com.apple.finder FXRemoveOldTrashItems -bool true
+
+# ============================================================================
+#  五、截图
+# ============================================================================
+
+# 截图保存到 ~/Pictures/Screenshots
+mkdir -p "${HOME}/Pictures/Screenshots"
+defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screenshots"
+
+# 截图格式 (png / jpg / pdf / tiff)
+defaults write com.apple.screencapture type -string "jpg"
+
+# 关闭窗口截图阴影
+defaults write com.apple.screencapture disable-shadow -bool true
+
+# 文件名不带日期
+defaults write com.apple.screencapture include-date -bool false
+
+# 截图后右下角不显示缩略图
+defaults write com.apple.screencapture show-thumbnail -bool false
+
+# ============================================================================
+#  六、Safari
+# ============================================================================
+
+# 显示完整 URL
+defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+
+# 启用开发菜单
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+
+# 默认搜索引擎处不向 Apple 发送搜索建议查询
+defaults write com.apple.Safari UniversalSearchEnabled -bool false
+defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+
+# ============================================================================
+#  七、TextEdit
+# ============================================================================
+
+# 默认使用纯文本模式
+defaults write com.apple.TextEdit RichText -int 0
+
+# 默认 UTF-8 编码
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+
+# ============================================================================
+#  八、Terminal
+# ============================================================================
+
+# 焦点跟随鼠标
+defaults write com.apple.Terminal FocusFollowsMouse -bool true
+
+# 仅使用 UTF-8
+defaults write com.apple.terminal StringEncodings -array 4
+
+# ============================================================================
+#  九、Time Machine
+# ============================================================================
+
+# 不询问新硬盘是否用作备份盘
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# ============================================================================
+#  十、Activity Monitor (活动监视器)
+# ============================================================================
+
+# Dock 图标显示 CPU 使用率
+# 0=Application, 2=Network, 3=Disk, 5=CPU Usage, 6=CPU History
+defaults write com.apple.ActivityMonitor IconType -int 5
+
+# 默认显示所有进程
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+
+# 按 CPU 使用率排序
+defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
+defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+# ============================================================================
+#  十一、Mission Control & 热区
+# ============================================================================
+
+# Mission Control 不自动重排空间
+defaults write com.apple.dock mru-spaces -bool false
+
+# 按应用分组窗口
+defaults write com.apple.dock expose-group-apps -bool true
+
+# ============================================================================
+#  十二、图像捕捉
+# ============================================================================
+
+# 连接相机 / iPhone 时不自动打开图像捕捉
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+# ============================================================================
+#  十三、安全 & 隐私
+# ============================================================================
+
+# 关闭从互联网下载文件的"打开警告" (轻度风险，按需)
+# defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# 立即在锁屏后要求密码
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# ============================================================================
+#  十四、Mac App Store
+# ============================================================================
+
+# 启用自动更新检查
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+
+# 每天检查更新 (而非每周)
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+# 自动下载后台更新
+defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+
+# ============================================================================
+#  最后: 重启相关服务使设置生效
+# ============================================================================
+
+for app in "Activity Monitor" \
+    "cfprefsd" \
+    "Dock" \
+    "Finder" \
+    "Safari" \
+    "SystemUIServer" \
+    "Terminal"; do
+    killall "${app}" &> /dev/null
+done
+
+echo "✅ 配置完成！部分设置可能需要重启或重新登录后才能生效。"
