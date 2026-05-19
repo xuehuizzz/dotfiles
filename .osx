@@ -1,3 +1,9 @@
+# 安装homebrew
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# 配置环境变量(可选)
+# echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+# eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # source ~/.osx 使其生效
 # 更多设置信息见: https://macos-defaults.com
 
