@@ -20,7 +20,9 @@ brew "wget"
 
 # GUI app
 cask "apipost"
+cask "brave-browser"
 cask "claude-code"
+cask "google-chrome"
 cask "iina"
 cask "orbstack"
 cask "prettyclean"
