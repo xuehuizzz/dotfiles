@@ -32,7 +32,6 @@ cask "visual-studio-code"
 
 # mas
 mas "WeChat", id: 836500024
-mas "Telegram", id: 747648890   
 
 # vscode plugins
 vscode "anan.jetbrains-darcula-theme"
