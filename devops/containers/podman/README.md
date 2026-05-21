@@ -12,7 +12,7 @@ podman machine list   # 验证虚拟机状态, 确保虚拟机显示为 "Running
 
 以下是两者的主要区别：
 1. **架构设计**
-   - Docker'
+   - Docker
      - Docker 使用了客户端-服务端（Client-Server）架构。
      - Docker Daemon 是核心组件，负责管理容器的创建、运行等操作。客户端通过 Docker CLI 与 Daemon 交互。
      - 需要一个常驻后台运行的 Docker Daemon。
