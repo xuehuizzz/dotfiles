@@ -141,7 +141,28 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 defaults write com.apple.finder FXRemoveOldTrashItems -bool true
 
 # ============================================================================
-#  五、截图
+#  五、磁盘镜像 (DMG / Disk Images)
+# ============================================================================
+
+# 挂载 DMG 后的自动操作
+# 可选值:
+#   eject       - 卸载完成后直接推出镜像 (DMG 文件保留在原位)
+#   trash       - 将 DMG 文件移到废纸篓
+#   ask         - 弹窗询问用户
+#   do-nothing  - 不做任何操作 (系统默认)
+defaults write com.apple.frameworks.diskimages auto-action -string "eject"
+
+# 跳过 DMG 校验 (加快挂载速度，可信来源时建议开启)
+defaults write com.apple.frameworks.diskimages skip-verify -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+
+# 挂载 DMG 后不自动打开 Finder 窗口 (按需，部分用户喜欢自动打开)
+# defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool false
+# defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool false
+
+# ============================================================================
+#  六、截图
 # ============================================================================
 
 # 截图保存到 ~/Pictures/Screenshots
@@ -161,7 +182,7 @@ defaults write com.apple.screencapture include-date -bool false
 defaults write com.apple.screencapture show-thumbnail -bool false
 
 # ============================================================================
-#  六、Safari
+#  七、Safari
 # ============================================================================
 
 # 显示完整 URL
@@ -177,7 +198,7 @@ defaults write com.apple.Safari UniversalSearchEnabled -bool false
 defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 
 # ============================================================================
-#  七、TextEdit
+#  八、TextEdit
 # ============================================================================
 
 # 默认使用纯文本模式
@@ -188,7 +209,7 @@ defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
 # ============================================================================
-#  八、Terminal
+#  九、Terminal
 # ============================================================================
 
 # 焦点跟随鼠标
@@ -198,14 +219,14 @@ defaults write com.apple.Terminal FocusFollowsMouse -bool true
 defaults write com.apple.terminal StringEncodings -array 4
 
 # ============================================================================
-#  九、Time Machine
+#  十、Time Machine
 # ============================================================================
 
 # 不询问新硬盘是否用作备份盘
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # ============================================================================
-#  十、Activity Monitor (活动监视器)
+#  十一、Activity Monitor (活动监视器)
 # ============================================================================
 
 # Dock 图标显示 CPU 使用率
@@ -220,7 +241,7 @@ defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 # ============================================================================
-#  十一、Mission Control & 热区
+#  十二、Mission Control & 热区
 # ============================================================================
 
 # Mission Control 不自动重排空间
@@ -230,14 +251,14 @@ defaults write com.apple.dock mru-spaces -bool false
 defaults write com.apple.dock expose-group-apps -bool true
 
 # ============================================================================
-#  十二、图像捕捉
+#  十三、图像捕捉
 # ============================================================================
 
 # 连接相机 / iPhone 时不自动打开图像捕捉
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 # ============================================================================
-#  十三、安全 & 隐私
+#  十四、安全 & 隐私
 # ============================================================================
 
 # 关闭从互联网下载文件的"打开警告" (轻度风险，按需)
@@ -248,7 +269,7 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # ============================================================================
-#  十四、Mac App Store
+#  十五、Mac App Store
 # ============================================================================
 
 # 启用自动更新检查
