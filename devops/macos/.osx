@@ -50,7 +50,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # 滚动条始终显示
 # 可选值: WhenScrolling, Automatic, Always
-defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 
 # ============================================================================
 #  二、登录 & 启动
