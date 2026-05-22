@@ -7,7 +7,6 @@
 ### 常用命令
 ```bash
 # 查看
-brew ls  # 列出已安装服务
 brew --version   # 查看 brew 版本
 brew config   # 查看 brew 配置和环境
 brew --prefix  # 查看安装路径, brew --prefix xxx
