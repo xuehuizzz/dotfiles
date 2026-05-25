@@ -22,10 +22,9 @@
    SELECT * FROM read_csv('data.csv', delim=',', header=true);
    
    -- 无表头文件, 自动把列命名为: column0, column1, column2, ...
-   -- 无表头文件, 自动把列命名为: column00, column01, column02, ...
-   -- 视情况而定
+   -- 
    -- 防止被 shell 或编辑器吞掉, 显式指定  delim=E'xxx'
-   SELECT COUNT(column00) FROM read_csv('data.csv', header=False, delim=E'\x0f') where column00 LIKE '%xxx%';  
+   SELECT COUNT(column0) FROM read_csv('data.csv', header=False, delim=E'\x0f') where column00 LIKE '%xxx%';  
    -- read_csv('https://example.com/data.csv')
 
 
@@ -45,7 +44,12 @@
    -- 查询 ES 索引
    SELECT * FROM elastic_search('my_index');
    ```
-   > 查询默认返回头尾几行, 在查询前配置`.maxrows num`可显示完整行记录
+   > DuckDB 在生成默认列名时，会根据总列数决定补零的位数，让所有列名宽度一致（这样字典序排序时也能保持自然顺序）：
+     - 列数 ≤ 9：column0, column1, ..., column8
+     - 列数 10~99：column00, column01, ..., column98, column99
+     - 列数 100~999：column000, column001, ...
+
+
 4. 查询json文件
    ```sql
    -- 只要文件内容是标准JSON格式, 文件扩展名don't care
