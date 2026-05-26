@@ -123,9 +123,15 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 # 默认视图样式 (列表视图: Nlsv / 图标: icnv / 分栏: clmv / 画廊: glyv)
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
-# 新建窗口默认打开桌面
-defaults write com.apple.finder NewWindowTarget -string "PfDe"
-defaults write com.apple.finder NewWindowTargetPath -string "file://localhost${HOME}/Desktop"
+# 新建窗口默认打开 Downloads 目录
+#   PfDe = Desktop (桌面)
+#   PfHm = Home    (家目录)
+#   PfDo = Documents (文稿)
+#   PfCm = Computer (电脑)
+#   PfAF = All My Files (所有我的文件)
+#   PfLo = Other    (自定义路径，配合 NewWindowTargetPath 使用)
+defaults write com.apple.finder NewWindowTarget -string "PfLo"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Downloads/"
 
 # 显示外置磁盘 / 移动硬盘 / 光盘 / 服务器在桌面
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
