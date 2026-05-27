@@ -72,6 +72,11 @@ return {
         if buf_ft == "qf" or buf_ft == "fugitive" or buf_ft == "help" then
           return false
         end
+        -- 过滤掉无名空 buffer（例如启动时的 [No Name]，模拟 VSCode 打开文件夹时无 tab 的行为）
+        local buf_name = vim.api.nvim_buf_get_name(buf_number)
+        if buf_name == "" then
+          return false
+        end
         return true
       end,
 
