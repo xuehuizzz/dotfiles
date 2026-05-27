@@ -43,7 +43,7 @@ return {
         keys = {
           { key = "f", desc = "Find File",    action = ":lua Snacks.picker.files()" },
           { key = "r", desc = "Recent Files", action = ":lua Snacks.picker.recent()" },
-          { key = "g", desc = "Grep Text",    action = ":lua Snacks.picker.grep()" },  -- 默认搜索当前pwd
+          { key = "g", desc = "Grep Text",    action = ":lua Snacks.picker.grep()" },
           { key = "p", desc = "Projects",     action = ":lua Snacks.picker.projects()" },
           { key = "c", desc = "Config",       action = ":lua Snacks.picker.files({ cwd = vim.fn.stdpath('config') })" },
           { key = "l", desc = "Lazy",         action = ":Lazy" },
@@ -317,15 +317,22 @@ return {
       callback = set_indent_hl,
     })
 
-    -- 若需要对 ERROR 级别通知使用更长的显示时间,
-    -- 改用全局覆盖 vim.notify(而不是在 snacks 配置里传 function)
-    local orig_notify = vim.notify
-    vim.notify = function(msg, level, opts)
-      opts = opts or {}
-      if level == vim.log.levels.ERROR and not opts.timeout then
-        opts.timeout = 8000
-      end
-      return orig_notify(msg, level, opts)
-    end
+    -- 对 ERROR 级别通知使用更长的显示时间。
+    -- 必须等 snacks.notifier 完成 setup 并替换 vim.notify 之后再包装,
+    -- 否则 orig_notify 会捕获到 nvim 原生 notify, 包装会被 snacks 覆盖失效。
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "VeryLazy",
+      once = true,
+      callback = function()
+        local orig_notify = vim.notify
+        vim.notify = function(msg, level, opts)
+          opts = opts or {}
+          if level == vim.log.levels.ERROR and not opts.timeout then
+            opts.timeout = 8000
+          end
+          return orig_notify(msg, level, opts)
+        end
+      end,
+    })
   end,
 }

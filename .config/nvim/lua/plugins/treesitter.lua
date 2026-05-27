@@ -48,7 +48,8 @@ return {
         end,
       },
 
-      indent = { enable = true },
+      -- Python 的 treesitter indent 已知不稳定（多行 def/return 缩进会跳），禁用
+      indent = { enable = true, disable = { "python" } },
 
       -- 增量选择：用 <CR> 逐步扩大选区，<BS> 缩小
       incremental_selection = {
