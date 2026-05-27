@@ -116,6 +116,23 @@ return {
               width = 0.22,
             },
           },
+
+          -- 目录树里解绑 <C-j>/<C-k> (从全局 picker 继承), 改用方向键上下;
+          -- 这样 <C-j> 会冒泡到全局 keymap, 触发 toggle terminal。
+          win = {
+            input = {
+              keys = {
+                ["<C-j>"] = false,
+                ["<C-k>"] = false,
+              },
+            },
+            list = {
+              keys = {
+                ["<C-j>"] = false,
+                ["<C-k>"] = false,
+              },
+            },
+          },
         },
       },
 
@@ -216,6 +233,16 @@ return {
         wo = {
           winblend = 10,
         },
+
+        -- terminal 窗口内的关闭键, 与外部 <C-j> 打开键统一, 避开 leader 的 timeoutlen 歧义
+        keys = {
+          term_hide = {
+            "<C-j>",
+            function(self) self:hide() end,
+            mode = { "t", "n" },
+            desc = "Hide Terminal",
+          },
+        },
       },
     },
 
@@ -261,8 +288,21 @@ return {
     { "<leader>e",  function() Snacks.explorer.toggle() end,                       desc = "Explorer" },
     { "<leader>fe", function() Snacks.explorer.open({ follow_file = true }) end,   desc = "Reveal File" },
 
-    -- Terminal
-    { "<leader>t",  function() Snacks.terminal.toggle() end, mode = { "n", "t" },  desc = "Terminal" },
+    -- Terminal: 打开/关闭都用 <C-j>, 覆盖 n/i/v/t 四个模式,
+    -- 全面接管 <C-j> (insert 模式下原本插入换行/normal 模式下等同于 j 等行为一并失效)
+    {
+      "<C-j>",
+      function()
+        -- 从 insert/visual 退到 normal, 再 toggle, 避免遗留模式状态
+        local mode = vim.fn.mode()
+        if mode ~= "n" and mode ~= "t" then
+          vim.cmd("stopinsert")
+        end
+        Snacks.terminal.toggle()
+      end,
+      mode = { "n", "i", "v", "t" },
+      desc = "Toggle Terminal",
+    },
 
     -- Buffer
     { "<leader>bd", function() Snacks.bufdelete() end,       desc = "Delete Buffer" },
