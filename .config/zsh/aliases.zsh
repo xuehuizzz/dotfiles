@@ -13,15 +13,15 @@ alias reload="exec ${SHELL} -l"
 alias hist="history -i"
 alias gitconf="git config --global -e"
 
-# 文件操作
-alias cp="cp -rv"                                          # 递归 + 详细
+# 文件操作 (不覆盖 cp 原义, 避免脚本误把目录递归复制)
+alias cpr="cp -rv"                                         # 递归 + 详细
 alias mv="mv -v"
 alias mkdir="mkdir -pv"
 
 # 网络
 alias rsync="rsync -avz --progress"                        # 适合大文件, 支持断点续传
 alias curl="curl --compressed"
-alias wget="wget -c"
+alias wgetc="wget -c"                                      # 续传; 不覆盖 wget 默认
 # 注意: 覆盖 nc 可能破坏 -l 监听等用法, 若需原始 nc 使用 \nc 或 command nc
 alias ncz="nc -zv"                                         # 端口连通性测试: ncz myserver.com 22
 
@@ -29,8 +29,12 @@ alias ncz="nc -zv"                                         # 端口连通性测�
 alias tarc="COPYFILE_DISABLE=1 tar -czvf"                  # tarc xxx.tar.gz file1 folder1
 alias tarx="tar -xzvf"                                     # tarx xxx.tar.gz
 
-# jupyter
-alias jupyter="nohup jupyter notebook --allow-root > jupyter.log 2>&1 &"
+# jupyter (后台运行, 日志写入缓存目录而非 cwd)
+jupyter() {
+    local log_dir="${XDG_CACHE_HOME:-$HOME/.cache}/jupyter"
+    mkdir -p "$log_dir"
+    nohup command jupyter notebook "$@" > "$log_dir/jupyter.log" 2>&1 &
+}
 
 # ls 根据平台差异处理
 case "$OSTYPE" in
@@ -75,13 +79,20 @@ if [[ "$OSTYPE" == darwin* ]]; then
     alias ql="qlmanage -p"                                 # quick look
 
     custom_open() {
-        if [[ -f "$1" ]]; then
-            command open -a TextEdit "$1"
-        elif [[ -d "$1" ]]; then
-            command open "$1"
-        else
-            command open "$@"
+        local arg
+        if (( $# == 0 )); then
+            command open .
+            return
         fi
+        for arg in "$@"; do
+            if [[ -f "$arg" ]]; then
+                command open -a TextEdit "$arg"
+            else
+                command open "$arg"
+            fi
+        done
     }
     alias open="custom_open"
 fi
+
+unset -f _command_exists

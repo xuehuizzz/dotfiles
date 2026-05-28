@@ -22,10 +22,10 @@ setopt PUSHD_IGNORE_DUPS  # 不允许重复目录
 setopt INTERACTIVE_COMMENTS  # 交互式下允许 # 注释
 setopt NO_BEEP               # 禁用响铃
 
-# 补全初始化 (缓存 24h 内跳过 compaudit 加速启动)
+# 补全初始化 (dump 新鲜 < 24h 跳过 compaudit; 缺失或过期则做完整审计)
 autoload -Uz compinit
 _zcompdump="$HOME/.config/zsh/.zcompdump"
-if [[ -n "$_zcompdump"(#qN.mh+24) ]]; then
+if [[ ! -f "$_zcompdump" || -n "$_zcompdump"(#qN.mh+24) ]]; then
     compinit -d "$_zcompdump"
 else
     compinit -C -d "$_zcompdump"

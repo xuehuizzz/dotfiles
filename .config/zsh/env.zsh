@@ -16,8 +16,8 @@ export VISUAL=nvim
 
 # language conf
 # 不强制设置 TERM, 由终端模拟器决定 (避免 tmux/alacritty/kitty 的 true color 失效)
+# 只设 LANG; LC_ALL 是临时覆盖用, 常设会无视所有 LC_* 分项配置
 export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
 
 # less conf
 export LESS="-R -F -X"  # -R 处理颜色 -F 短输出时直接打印 -X 不清屏
