@@ -9,10 +9,6 @@
 # 关闭所有正在运行的提示
 osascript -e 'tell application "System Preferences" to quit'
 
-# 提前请求 sudo 权限，并在脚本运行期间保持
-sudo -v
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
 # ============================================================================
 #  一、系统通用 (NSGlobalDomain)
 # ============================================================================
@@ -48,7 +44,7 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 # Tab 键聚焦所有控件 (对话框中可用 Tab 切换按钮)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
-# 滚动条始终显示
+# 滚动条仅在滚动时显示
 # 可选值: WhenScrolling, Automatic, Always
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 
@@ -222,7 +218,7 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 defaults write com.apple.Terminal FocusFollowsMouse -bool true
 
 # 仅使用 UTF-8
-defaults write com.apple.terminal StringEncodings -array 4
+defaults write com.apple.Terminal StringEncodings -array 4
 
 # ============================================================================
 #  十、Time Machine
@@ -295,7 +291,6 @@ for app in "Activity Monitor" \
     "cfprefsd" \
     "Dock" \
     "Finder" \
-    "Safari" \
     "SystemUIServer" \
     "Terminal"; do
     killall "${app}" &> /dev/null
