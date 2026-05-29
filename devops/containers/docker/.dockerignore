@@ -1,11 +1,74 @@
-/.git
-/.data
-/.cover
-/dist
-!/dist/dive_linux_amd64
-/ui
-/utils
-/image
-/cmd
-/build
+# ===== 通用 .dockerignore =====
+# 目的: 缩小构建上下文, 避免把无关/敏感文件打进镜像.
+# 按项目需要增删即可.
+
+# 版本控制
+.git
+.gitignore
+.gitattributes
+**/.git
+
+# 环境变量与密钥 (避免泄露进镜像)
+.env
+.env.*
+*.pem
+*.key
+
+# 依赖目录 (镜像内重新安装)
+node_modules
+**/node_modules
+bower_components
+vendor
+
+# Python
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.venv
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 构建产物
+dist/
+build/
+target/
+out/
+*.o
+*.a
+*.so
+
+# 测试与覆盖率
+coverage/
 coverage.txt
+*.cover
+.nyc_output/
+
+# 日志与临时文件
+*.log
+logs/
+tmp/
+.cache/
+
+# 编辑器 / IDE
+.idea/
+.vscode/
+*.swp
+*~
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# 文档 (一般无需进镜像)
+*.md
+LICENSE
+
+# Docker 相关文件本身
+Dockerfile*
+.dockerignore
+docker-compose*.yml
+*_dc.yml
