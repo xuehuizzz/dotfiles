@@ -77,22 +77,30 @@ fi
 if [[ "$OSTYPE" == darwin* ]]; then
     _command_exists docker-slim && alias dsm="docker-slim build --http-probe=false --continue-after=exec"
     alias ql="qlmanage -p"                                 # quick look
-
     custom_open() {
         local arg
-        if (( $# == 0 )); then
+
+        (( $# == 0 )) && {
             command open .
             return
-        fi
+        }
+
         for arg in "$@"; do
             if [[ -f "$arg" ]]; then
-                command open -a TextEdit "$arg"
+                case "$arg" in
+                    *.txt|*.md|*.json|*.yaml|*.yml|*.log|*.conf|*.zsh|*.sh|*.py)
+                        command open -a TextEdit "$arg"
+                        ;;
+                    *)
+                        command open "$arg"
+                        ;;
+                esac
             else
                 command open "$arg"
             fi
         done
     }
-    alias open="custom_open"
+    alias op="custom_open"
 fi
 
 unset -f _command_exists
