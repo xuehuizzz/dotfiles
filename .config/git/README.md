@@ -4,7 +4,7 @@ git config --global -e    # 打开全局gitconfig配置文件
 
 git config --global pull.rebase true   # 全局配置, 这样，当你运行 git pull 时，Git 会自动使用 --rebase
 git pull --rebase  # 获取远程分支的最新更新。 将你的本地提交从远程分支的最新状态“重放”到当前分支之上，而不是直接合并
-git pull 等同于 (git fetch git marge)
+git pull 等同于 (git fetch && git merge)
 git push -u origin HEAD  # 把本地分支提交的内容推送到远程同名分支上, 初次这么操作, 之后直接 git push 即可
 git push origin <banchName>  # 指定推送到远程分支上
 git config --list   # 查看已有的配置信息

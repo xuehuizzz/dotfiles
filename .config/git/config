@@ -11,7 +11,7 @@
 
 # ── 核心 ─────────────────────────────────────────────
 [core]
-  excludesfile = ~/.config/git/.gitignore_global
+  # 全局 ignore 由 Git 按 XDG 规范自动读取 ~/.config/git/ignore，无需显式指定
   quotepath = false
   editor = nvim
   fsmonitor = true
@@ -23,7 +23,6 @@
   submoduleSummary = true
 
 [commit]
-  template = ~/.config/git/.stCommitMsg
   verbose = true
 
 # ── 推送/拉取 ────────────────────────────────────────
