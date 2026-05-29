@@ -9,19 +9,21 @@
 
 _plugin_dir="$HOME/.config/zsh/.plugins"
 
-# ---- autosuggestions 配置 ----
+# ---- autosuggestions ----
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
-# ---- autosuggestions 加载 ----
-_autosuggest="$_plugin_dir/zsh-autosuggestions/zsh-autosuggestions.zsh"
-if [[ -r "$_autosuggest" ]]; then
-    source "$_autosuggest"
-    bindkey '^F' autosuggest-accept   # Ctrl+F 接受建议 (→ 键默认也可用)
+if [[ -r "$_plugin_dir/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+    source "$_plugin_dir/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+    if (( $+widgets[autosuggest-accept] )); then
+        bindkey '^F' autosuggest-accept
+    fi
 fi
 
-# ---- syntax-highlighting 加载 (必须最后) ----
-_syntax_hl="$_plugin_dir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-[[ -r "$_syntax_hl" ]] && source "$_syntax_hl"
+# ---- syntax highlighting (must be last) ----
+if [[ -r "$_plugin_dir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+    source "$_plugin_dir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
 
-unset _plugin_dir _autosuggest _syntax_hl
+unset _plugin_dir
