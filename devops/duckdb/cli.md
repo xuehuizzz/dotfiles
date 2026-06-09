@@ -14,7 +14,7 @@
    
    # 手动安装(一般在内网环境下)
    INSTALL excel;  # 安装excel插件
-   -- LOAD excel;  # 加载Excel插件
+   LOAD excel;  # 加载Excel插件
    ```
 3. 查询csv文件
    ```sql
