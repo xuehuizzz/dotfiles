@@ -74,7 +74,7 @@ pt-query-digest /var/log/mysql/mysql-slow.log
 # 指定输出报告
 pt-query-digest --output=slowlog /var/log/mysql/mysql-slow.log > report.txt
 
-# 分析最近的前 10 条 SQL
+# 输出报告中显示前 10 个查询类别(按耗时排名),    百分比写法(--limit 95%:20)
 pt-query-digest --limit 10 /var/log/mysql/mysql-slow.log
 
 # 只分析某个时间段
@@ -195,7 +195,7 @@ WHERE master_cnt != this_cnt OR master_crc != this_crc;
 # 检查主从一致性（不会修改任何数据）
 pt-table-sync --execute --sync-to-master h=从库IP,u=用户名,p=密码  # --sync-to-master 表示以主库为准，对从库进行同步
 
-# 同步两台服务器之间的某个表（源 → 目标）
+# 修改第二个 DSN(目标)使其与第一个 DSN(源)一致, 生产环境建议先 --print 确认
 pt-table-sync --execute \
   h=源IP,u=用户名,p=密码,D=数据库名,t=表名 \
   h=源IP,u=用户名,p=密码
