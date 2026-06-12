@@ -64,6 +64,7 @@ SELECT user();  -- 当前连接用户
 SELECT version();  -- 查询数据库版本
 SELECT CURTIME();  -- 当前时间
 SELECT CURDATE();  -- 当前日期
+SHOW VARIABLES;  -- 查看变量配置 show variables like 'xxx'
 
 -- 反连接
 SELECT a.* FROM table_a a
