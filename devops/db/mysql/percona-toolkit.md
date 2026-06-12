@@ -28,11 +28,13 @@ pt-online-schema-change \
   --port=3306 \
   --alter "ADD COLUMN age INT" \
   D=mydb,t=users \
+  --alter-foreign-keys-method=auto \
   --charset=utf8mb4 \
   --execute
 ```
 
 ### 常用参数说明
+- `--alter-foreign-keys-method`: 解决外键引用问题(auto / rebuild_constraints / drop_swap)
 - `--dry-run`：预演变更，不真正执行
 - `--execute`：执行变更，和 --dry-run 互斥，选其一即可
 - `--no-check-replication-filters`：忽略复制过滤器检查（主从场景有用）
@@ -50,6 +52,7 @@ pt-online-schema-change \
 - **会有额外磁盘 I/O**：因为复制了整张表的一份
 - **备份数据前用 --dry-run**：安全起见先模拟一次
 - **默认单线程复制**：大表可用 --chunk-size 调优
+- 如果原表上已经有触发器，pt-osc 在旧版本会直接报错（因为 MySQL 5.7 前一张表不能有多个同类型触发器）
 
 ---
 
@@ -143,7 +146,7 @@ pt-kill --busy-time 30 --kill --ignore-user repl_user
 ---
 
 ## pt-table-checksum 主从复制数据一致性校验
-
+<mark>pt-table-checksum 与 pt-table-sync通常配合使用, 先检查差异, 在做同步</mark>
 会在主库执行校验 SQL（通常是对表的 CRC32 校验），并通过复制将这些 SQL 同步到从库，从而检测出主从数据是否一致。
 
 基础命令格式：`pt-table-checksum --host=主库IP --user=用户名 --password=密码`，会校验所有数据库中的所有表
