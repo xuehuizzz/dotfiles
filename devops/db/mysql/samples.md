@@ -58,6 +58,18 @@ ON SCHEDULE EVERY 1 DAY STARTS '2025-05-01 07:30:00'
   CALL whatever_procedure_that_is();
 ```
 
+## 导入文件数据
+```sql
+-- LOAD DATA LOCAL INFILE 是 MySQL 中导入大量数据最快的方法之一，可以直接把本地 CSV、TXT 文件导入表中
+LOAD DATA LOCAL INFILE '/path/data.csv'
+-- LOAD DATA INFILE '/var/lib/mysql-files/data.csv'   -- 文件只能放在MySQL服务器的 /var/lib/mysql-files/ 路径下
+INTO TABLE users
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+```
+
 ## 常用查询
 ```sql
 SELECT user();  -- 当前连接用户
