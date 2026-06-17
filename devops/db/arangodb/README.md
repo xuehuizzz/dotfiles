@@ -67,7 +67,7 @@ LET data = [
 ]
 
 FOR item IN data
-  UPDATE item._id WITH {
+  UPDATE DOCUMENT(item._id) WITH {
     name: item.name,
     code: item.code
   } IN PARSE_IDENTIFIER(item._id).collection
