@@ -67,7 +67,7 @@ SET GLOBAL local_infile = 1;
 
 LOAD DATA LOCAL INFILE '/path/data.csv'
 -- LOAD DATA INFILE '/var/lib/mysql-files/data.csv'   -- 文件只能放在MySQL服务器的 /var/lib/mysql-files/ 路径下
-INTO TABLE users
+INTO TABLE tableName
 CHARACTER SET utf8mb4   
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
