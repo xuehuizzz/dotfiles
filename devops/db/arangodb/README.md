@@ -59,8 +59,18 @@ INSERT doc INTO users
 
 ## 修改数据
 ```aql
-// 单条数据修改
-UPDATE { _key: "12345", age: 31 } IN users
+// 批量修改数据, 多个集合表
+LET data = [
+  { _id: "col1/123", name: "name1", code: "code1" },
+  { _id: "col2/456", name: "name2", code: "code2" },
+  { _id: "col3/789", name: "name3", code: "code3" }
+]
+
+FOR item IN data
+  UPDATE item._id WITH {
+    name: item.name,
+    code: item.code
+  } IN PARSE_IDENTIFIER(item._id).collection
 
 // 使用单个AQL修改多个文档
 FOR doc IN [
