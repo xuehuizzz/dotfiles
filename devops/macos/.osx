@@ -10,7 +10,7 @@
 osascript -e 'tell application "System Preferences" to quit'
 
 # ============================================================================
-#  一、系统通用 (NSGlobalDomain)
+# 系统通用 (NSGlobalDomain)
 # ============================================================================
 
 # 不显示所有文件扩展名
@@ -49,7 +49,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 
 # ============================================================================
-#  二、登录 & 启动
+# 登录 & 启动
 # ============================================================================
 
 # 重启系统后不打开未关闭的软件
@@ -63,7 +63,7 @@ defaults write com.apple.CrashReporter DialogType none
 # sudo nvram BootPreference=%00
 
 # ============================================================================
-#  三、Dock
+# Dock
 # ============================================================================
 
 # 自动隐藏 Dock
@@ -94,7 +94,7 @@ defaults write com.apple.dock showhidden -bool true
 # defaults write com.apple.dock magnification -bool false
 
 # ============================================================================
-#  四、Finder (访达)
+# Finder (访达)
 # ============================================================================
 
 # 文件夹始终排在最前
@@ -143,7 +143,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 defaults write com.apple.finder FXRemoveOldTrashItems -bool true
 
 # ============================================================================
-#  五、磁盘镜像 (DMG / Disk Images)
+# 磁盘镜像 (DMG / Disk Images)
 # ============================================================================
 
 # 挂载 DMG 后的自动操作
@@ -164,7 +164,7 @@ defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 # defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool false
 
 # ============================================================================
-#  六、截图
+# 六、截图
 # ============================================================================
 
 # 截图保存到 ~/Pictures/Screenshots
@@ -184,23 +184,7 @@ defaults write com.apple.screencapture include-date -bool false
 defaults write com.apple.screencapture show-thumbnail -bool false
 
 # ============================================================================
-#  七、Safari
-# ============================================================================
-
-# 显示完整 URL
-defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
-
-# 启用开发菜单
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
-
-# 默认搜索引擎处不向 Apple 发送搜索建议查询
-defaults write com.apple.Safari UniversalSearchEnabled -bool false
-defaults write com.apple.Safari SuppressSearchSuggestions -bool true
-
-# ============================================================================
-#  八、TextEdit
+# TextEdit
 # ============================================================================
 
 # 默认使用纯文本模式
@@ -211,7 +195,7 @@ defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
 # ============================================================================
-#  九、Terminal
+# Terminal
 # ============================================================================
 
 # 焦点跟随鼠标
@@ -221,14 +205,14 @@ defaults write com.apple.Terminal FocusFollowsMouse -bool true
 defaults write com.apple.Terminal StringEncodings -array 4
 
 # ============================================================================
-#  十、Time Machine
+# Time Machine
 # ============================================================================
 
 # 不询问新硬盘是否用作备份盘
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # ============================================================================
-#  十一、Activity Monitor (活动监视器)
+# Activity Monitor (活动监视器)
 # ============================================================================
 
 # Dock 图标显示 CPU 使用率
@@ -243,7 +227,7 @@ defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 # ============================================================================
-#  十二、Mission Control & 热区
+# Mission Control & 热区
 # ============================================================================
 
 # Mission Control 不自动重排空间
@@ -253,14 +237,14 @@ defaults write com.apple.dock mru-spaces -bool false
 defaults write com.apple.dock expose-group-apps -bool true
 
 # ============================================================================
-#  十三、图像捕捉
+# 图像捕捉
 # ============================================================================
 
 # 连接相机 / iPhone 时不自动打开图像捕捉
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 # ============================================================================
-#  十四、安全 & 隐私
+# 安全 & 隐私
 # ============================================================================
 
 # 关闭从互联网下载文件的"打开警告" (轻度风险，按需)
@@ -271,7 +255,7 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # ============================================================================
-#  十五、Mac App Store
+# Mac App Store
 # ============================================================================
 
 # 启用自动更新检查
@@ -283,10 +267,7 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 # 自动下载后台更新
 defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 
-# ============================================================================
 #  最后: 重启相关服务使设置生效
-# ============================================================================
-
 for app in "Activity Monitor" \
     "cfprefsd" \
     "Dock" \
@@ -295,5 +276,4 @@ for app in "Activity Monitor" \
     "Terminal"; do
     killall "${app}" &> /dev/null
 done
-
 echo "✅ 配置完成！部分设置可能需要重启或重新登录后才能生效。"
