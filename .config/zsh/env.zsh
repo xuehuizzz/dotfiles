@@ -2,6 +2,7 @@ export XDG_CONFIG_HOME="$HOME/.config"  # 配置文件
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
 # 优先使用 ~/.local/bin 中的用户级工具（如 pip install --user 安装的命令）
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -20,5 +21,4 @@ export VISUAL=nvim
 export LANG="en_US.UTF-8"
 
 # less conf
-export LESS="-R -F -X"  # -R 处理颜色 -F 短输出时直接打印 -X 不清屏
-
+export LESS="-R -F"  # -R 处理颜色 -F 短输出时直接打印
