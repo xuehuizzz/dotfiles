@@ -13,8 +13,8 @@ osascript -e 'tell application "System Preferences" to quit'
 #  一、系统通用 (NSGlobalDomain)
 # ============================================================================
 
-# 显示所有文件扩展名
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+# 不显示所有文件扩展名
+defaults write NSGlobalDomain AppleShowAllExtensions -bool false
 
 # 默认存储到本地磁盘，而不是 iCloud
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
