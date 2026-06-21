@@ -11,7 +11,7 @@ CREATE TABLE xxx (
     updated_by bigint UNSIGNED DEFAULT NULL COMMENT '更新者ID(创建时为NULL)',
     deleted_by bigint UNSIGNED DEFAULT NULL COMMENT '删除者ID',
     status tinyint UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态：0-禁用，1-启用',
-    version int UNSIGNED NOT NULL DEFAULT 1 COMMENT '乐观锁版本号',
+    version int UNSIGNED NOT NULL DEFAULT 0 COMMENT '乐观锁版本号',
     remark varchar(255) DEFAULT NULL COMMENT '备注',
     tuition decimal(12, 2) NOT NULL DEFAULT 0.00 COMMENT '小数类型',
     -- UNIQUE KEY idx_username (username),                                    -- 唯一索引
