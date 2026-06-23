@@ -21,5 +21,5 @@ use mydb  # 切换数据库, 没有的话会自动创建
 db  # 查看当前数据库
 
 show collections  # 查看集合
-db.dropDatabase()
+db.dropDatabase()  # 删除当前数据库
 ```
