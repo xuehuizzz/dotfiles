@@ -9,6 +9,6 @@ docker run -d \
   -v /Users/xuehuizzz/db/mongodb/data:/data/db \
   -e MONGO_INITDB_ROOT_USERNAME=admin \
   -e MONGO_INITDB_ROOT_PASSWORD=123456 \
-  --restart unless-stopped \
+  --restart always \
   mongo:8
 ```
