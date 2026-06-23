@@ -12,3 +12,14 @@ docker run -d \
   --restart always \
   mongo:8
 ```
+
+### cli常用命令
+```bash
+mongosh -u admin -p 123456   # 进入 MongoDB shell, 无认证的话可直接mongosh
+show dbs  # 查看所有数据库
+use mydb  # 切换数据库, 没有的话会自动创建
+db  # 查看当前数据库
+
+show collections  # 查看集合
+db.dropDatabase()
+```
