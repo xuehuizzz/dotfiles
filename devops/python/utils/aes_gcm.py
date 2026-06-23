@@ -1,7 +1,8 @@
-# pip install cryptography
+# 现代对称加密首推 AEAD,具体首推 AES-256-GCM(有硬件加速时)或 ChaCha20-Poly1305(环境不确定时);若追求最不易用错,直接用 libsodium/PyNaCl 这类高层库.
 
 """
 AES-GCM 对称加密工具模块
+pip install cryptography
 
 AES-256-GCM 提供认证加密 (Authenticated Encryption), 同时保证:
   - 机密性 (Confidentiality): 数据被加密, 无法被窃听
