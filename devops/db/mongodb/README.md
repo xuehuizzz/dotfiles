@@ -77,3 +77,77 @@ db.users.countDocuments({ age: { $gt: 25 } })
 // 去重
 db.users.distinct("age")
 ```
+
+### 修改数据
+```javascript
+// 更新单条（$set 修改字段）
+db.users.updateOne(
+  { name: "Tom" },
+  { $set: { age: 26 } }
+)
+
+// 更新多条
+db.users.updateMany(
+  { age: { $lt: 30 } },
+  { $set: { status: "young" } }
+)
+
+// 替换整个文档
+db.users.replaceOne(
+  { name: "Tom" },
+  { name: "Tom", age: 27, city: "NY" }
+)
+
+// 自增字段
+db.users.updateOne({ name: "Tom" }, { $inc: { age: 1 } })
+
+// upsert（不存在则插入）
+db.users.updateOne(
+  { name: "Lucy" },
+  { $set: { age: 20 } },
+  { upsert: true }
+)
+```
+
+### 删除数据
+```javascript
+// 删除单条
+db.users.deleteOne({ name: "Tom" })
+
+// 删除多条
+db.users.deleteMany({ age: { $gt: 30 } })
+
+// 删除所有文档
+db.users.deleteMany({})
+```
+
+### 索引
+```javascript
+// 创建索引（1 升序，-1 降序）
+db.users.createIndex({ name: 1 })
+
+// 创建唯一索引
+db.users.createIndex({ email: 1 }, { unique: true })
+
+// 查看索引
+db.users.getIndexes()
+
+// 删除索引
+db.users.dropIndex({ name: 1 })
+```
+
+### 用户与权限
+```javascript
+// 创建用户
+db.createUser({
+  user: "admin",
+  pwd: "password",
+  roles: [{ role: "readWrite", db: "mydb" }]
+})
+
+// 查看用户
+show users
+
+// 删除用户
+db.dropUser("admin")
+```
