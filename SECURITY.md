@@ -1,4 +1,4 @@
-# Security Policy
+<h1 align="center">Security Policy</h1>
 
 ## Scope
 
