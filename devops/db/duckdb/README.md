@@ -1,4 +1,4 @@
-## duckdb
+<h1 align="center">duckdb</h1>
 DuckDB 经常被叫作“嵌入式版的OLAP数据库”，它的定位有点像 SQLite 的“分析型表哥”：SQLite 专攻 OLTP（事务处理、小型应用），DuckDB 专攻 OLAP（分析型查询、大数据聚合）。
 
 核心特点可以用一句话概括：**本地文件、单个进程、无服务器、超快的分析查询**
