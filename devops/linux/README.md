@@ -56,8 +56,9 @@ openssl x509 -req -days 36500 -in server.csr -signkey server.key -out server.crt
 
 ## <mark>mount目录</mark>
 ```bash
-mount path_b path_a   # 把目录b挂载到a上
+mount -t nfs xxx.xxx.xxx.xxx:path_b path_a   # 把目录b挂载到a上
 umount path_a         # 取消挂载
+showmount -e xxx.xxx.xxx.xxx  # 查看服务器的路径支持哪些客户端挂载
 
 设置开机自动挂载, 使用uuid, 比直接写设备路径更稳   /etc/fstab
 blkid path_b   # 获取uuid, 输出结果: path_b: UUID="1234-abcd-5678-efgh" TYPE="ext4"
