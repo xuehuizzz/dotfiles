@@ -15,12 +15,15 @@ ENV TZ=Asia/Shanghai \
 # 4) 工作目录
 WORKDIR /home/app
 
-# 5) 系统依赖（构建期通常需要 root；Alpine 用 apk）
-#    --no-cache 不写入本地索引；把 curl 装上以便 HEALTHCHECK
-RUN apk add --no-cache curl bash make build-base
+# 5) 系统依赖（构建期通常需要 root；Debian 用 apt-get）
+#    装完清理 apt 缓存以减小体积；curl 用于 HEALTHCHECK
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      curl bash make build-essential ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
 
-# 6) 从官方 uv 镜像复制二进制（可考虑固定 tag 或 digest）
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+# 6) 从官方 uv 镜像复制二进制（建议固定 tag 或 digest，避免 latest）
+COPY --from=ghcr.io/astral-sh/uv:0.5.11 /uv /uvx /bin/
 
 # 7) 先复制稳定、低频变更的文件以利用缓存（举例）
 # COPY package.json package-lock.json ./
@@ -34,18 +37,21 @@ COPY test.txt ./
 # RUN npm run build
 
 # 10) 创建非 root 用户，并准备文件权限
-#     在构建尾声再降权，能避免权限问题与重复构建
-RUN adduser -D -H -s /sbin/nologin appuser \
+#     在构建尾声再降权，能避免权限问题与重复构建（Debian 用 useradd）
+RUN useradd --system --no-create-home --shell /usr/sbin/nologin appuser \
  && chown -R appuser:appuser /home/app
 
 # 11) 切换到非 root 仅用于运行
 USER appuser
 
-# 12) 健康检查（注意 Alpine 有 /bin/sh；且 curl 已安装）
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
-  CMD curl -fsS http://localhost/ || exit 1
+# 12) 声明端口
+EXPOSE 3000
 
-# 13) 启动命令：ENTRYPOINT 固定主进程；CMD 给默认参数
+# 13) 健康检查（Debian 有 /bin/sh；curl 已安装；加 start-period 缓冲启动）
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 --start-period=5s \
+  CMD curl -fsS http://localhost:3000/ || exit 1
+
+# 14) 启动命令：ENTRYPOINT 固定主进程；CMD 给默认参数
 ENTRYPOINT ["executable"]
 CMD ["arg1", "arg2"]
 ```
