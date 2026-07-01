@@ -25,8 +25,13 @@ COMMENT ON COLUMN xxx.tuition IS '小数类型';
 
 ## 常用
 ```sql
+SHOW config_file;        -- 查看主配置文件路径
+SHOW hba_file;           -- 查看认证配置文件路径
+SHOW data_directory;     -- 查看数据目录
+
+
 -- 排序分组可以使用序号
-select * from your_table order by 1,2  # 以查询的第一个,第二个字段排序
+select * from your_table order by 1,2  # 以查询的第一个, 第二个字段排序
 
 -- 查询用户及授权
 select * from pg_roles;  # 列出所有用户
