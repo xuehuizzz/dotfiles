@@ -123,8 +123,12 @@ alembic revision --autogenerate -m "create table demo"
 
 **注意:** 创建迁移之后最好review一下 迁移文件中的内容是否符合当下的操作
 
-## 七、执行迁移
+## 七、常用命令
 ```bash
+alembic heads          # 查看所有头节点
+alembic show <rev>     # 查看某个版本详情
+alembic stamp head     # 只标记版本不执行(用于已存在的库)
+
 alembic upgrade head  # 升级到最新版本
 alembic downgrade -1  # 回退到上一个版本
 alembic downgrade 8e5e7fb1f43d   # 回退到指定版本
