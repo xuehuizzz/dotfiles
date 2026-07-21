@@ -54,6 +54,20 @@ openssl x509 -req -days 36500 -in server.csr -signkey server.key -out server.crt
 > 
 > 4. 生成证书时的CN（Common Name）要匹配你的域名，上面例子中使用的是localhost, 如果你需要修改证书的信息（比如域名），可以在生成CSR时修改-subj参数中的值。
 
+## <mark>创建逻辑卷并格式化文件系统</mark>
+```bash
+# 创建逻辑卷  卷组名称-逻辑卷名称   vg_data-lv_backup
+lvcreate -L 20G -n lv_backup vg_data
+# 查看
+lvs
+# 格式文件系统 xfs
+mkfs.xfs /dev/vg_data/lv_backup
+```
+>创建逻辑卷会生成两种访问路径, 但指向的是同一块设备
+  - /dev/mapper/卷组名称-逻辑卷名称
+  - /dev/卷组名称/逻辑卷名称
+
+
 ## <mark>mount目录</mark>
 ```bash
 mount -t nfs xxx.xxx.xxx.xxx:path_b path_a   # 把目录b挂载到a上
