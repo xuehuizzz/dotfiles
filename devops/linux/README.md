@@ -56,6 +56,8 @@ openssl x509 -req -days 36500 -in server.csr -signkey server.key -out server.crt
 
 ## <mark>创建逻辑卷并格式化文件系统</mark>
 ```bash
+# 如何查看 VG（Volume Group）还有多少空闲空间可以用来创建或扩容 LV
+vgs
 # 创建逻辑卷  卷组名称-逻辑卷名称   vg_data-lv_backup
 lvcreate -L 20G -n lv_backup vg_data
 # 查看
