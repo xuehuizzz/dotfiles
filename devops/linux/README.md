@@ -63,11 +63,18 @@ lvcreate -L 20G -n lv_backup vg_data
 # 查看
 lvs
 # 格式文件系统 xfs
-mkfs.xfs /dev/vg_data/lv_backup
+mkfs.xfs /dev/vg_data/lv_backup   # mkfs -t xfs /xxx/xxx 一样
 ```
 >创建逻辑卷会生成两种访问路径, 但指向的是同一块设备
   - /dev/mapper/卷组名称-逻辑卷名称
   - /dev/卷组名称/逻辑卷名称
+>常用文件系统:
+  - xfs:  大文件性能好，支持在线扩容
+  - ext4: 几乎所有 Linux 都支持, 稳定、兼容性最好
+  - btrfs: 新一代文件系统, 快照、压缩、校验
+  - vfat/FAT32: Windows、U盘兼容
+  - exfat: 支持大文件，跨平台, 大容量 U 盘
+
 
 
 ## <mark>mount目录</mark>
