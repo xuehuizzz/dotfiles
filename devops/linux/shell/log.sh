@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -Eeuo pipefail
 
 # 颜色变量（用 tput），非终端环境下自动降级
 if [[ -t 1 ]] && tput colors &>/dev/null; then
