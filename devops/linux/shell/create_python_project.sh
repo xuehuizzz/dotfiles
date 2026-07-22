@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # 获取项目名称作为参数, e.g.  ./create_project.sh project_name
 if [ $# -eq 0 ]; then
