@@ -1,5 +1,6 @@
-#!/bin/bash
-set -euo pipefail
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
 
 # 配置日志
 RESET=$(tput sgr0)
