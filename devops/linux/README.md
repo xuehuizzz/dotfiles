@@ -38,14 +38,14 @@ dig @8.8.8.8 example.com  # 使用指定 DNS
 dig +trace example.com  # 查看解析链
 ```
 > 常见DNS记录类型:
-  - A	IPv4地址, Address Record（IPv4, 32 位 = 4 字节）
-  - AAAA	IPv6地址, IPv6地址是128位 = 16 字节, 正好是IPv4的4倍, 所以命名为AAAA
-  - CNAME	别名, CNAME 不能和其他记录共存
-  - MX	邮件服务器, 存在优先级, 数字越小, 优先级越高
-  - NS	域名服务器
-  - TXT	文本记录（SPF、DKIM 等）
-  - SOA	域名授权信息
-  - PTR	反向解析, 倒序IP.in-addr.arpa    通过ip查域名, 跟A记录相反
+  - A: IPv4地址, Address Record（IPv4, 32 位 = 4 字节）
+  - AAAA:	IPv6地址, IPv6地址是128位 = 16 字节, 正好是IPv4的4倍, 所以命名为AAAA
+  - CNAME: 别名, CNAME 不能和其他记录共存
+  - MX:	邮件服务器, 存在优先级, 数字越小, 优先级越高
+  - NS:	域名服务器
+  - TXT: 文本记录（SPF、DKIM 等）
+  - SOA: 域名授权信息
+  - PTR: 反向解析, 倒序IP.in-addr.arpa    通过ip查域名, 跟A记录相反
 
 ## <mark>tcpdump抓包</mark>
 ```bash
