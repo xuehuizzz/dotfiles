@@ -1,167 +1,229 @@
 #!/usr/bin/env bash
-set -eEuo pipefail
 
-# =========== 脚本说明 ===========
-# 请修改工作目录 WORK_DIR 和日志文件 LOG_FILE
-# 使用方式: ./template.sh 
-# 参数: 
-#  -v: 开启 debug 日志
+set -Eeuo pipefail
+
+#==============================
+# Script Template
 #
+# Usage:
+#   ./script.sh [-v] [-h]
+#
+# Options:
+#   -v    Enable DEBUG log
+#   -h    Show help
+#==============================
 
-# =========== 配置区域 ===========
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
-readonly WORK_DIR="$SCRIPT_DIR"       # 工作目录
-readonly LOG_FILE="$WORK_DIR/script.log"  # 日志文件
+#######################################
+# readonly variables
+#######################################
 
+readonly SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+readonly WORK_DIR="$SCRIPT_DIR"
+readonly LOG_FILE="$WORK_DIR/script.log"
 
-# =========== 主函数 ===========
-function main() {
-  # 切换到工作目录  
-  cd "$WORK_DIR" || die "无法进入目录: $WORK_DIR"
-  
-  # 业务逻辑  
-  log "业务逻辑开始"
-  ls
-  log -s "业务逻辑结束"
-}
+#######################################
+# global variables
+#######################################
 
-# =========== 清理函数 ===========
-function cleanup() {
-  # 清理临时文件、释放资源等  
-  # rm -f "$TEMP_FILE" 2>/dev/null || true  
-  if [[ ! -v ARGS_MAP["help"] ]]; then
-    log "执行清理操作\n"
-  fi
-}
+declare -gA ARGS_MAP=()
+declare -gA COLOR_MAP=()
+declare -gA LEVEL_MAP=(
+    [e]="ERROR"
+    [w]="WARN"
+    [i]="INFO"
+    [d]="DEBUG"
+    [s]="SUCCESS"
+)
 
-# =========== 工具函数 ===========
-function die() {
-  log -e "$1"  
-  exit "${2:-1}"
-}
+#######################################
+# logging
+#######################################
+log() {
 
-# =========== 解析参数 ===========
-function parse_args(){
-  # 参数列表MAP, 形如 [d] = "/path/dir"  
-  declare -gA ARGS_MAP  
-  while getopts ":vh" opt; do
-    case "$opt" in 
-      h) ARGS_MAP["help"]="true" ;; 
-      v) ARGS_MAP["debug"]="true" ;;  
-      \?) die "无效选项：$OPTARG" ;;  
-      :) die "选项 $OPTARG 缺少参数" ;; 
+    (($# == 0)) && return
+
+    local level="i"
+
+    case "${1:-}" in
+        -e|-w|-i|-d|-s)
+            level="${1#-}"
+            shift
+            ;;
     esac
-  done
+
+    if [[ $level == d && -z ${ARGS_MAP[debug]:-} ]]; then
+        return
+    fi
+
+    local now
+    now="$(date '+%F %T.%3N')"
+
+    local msg="[$now] [${LEVEL_MAP[$level]}] $*"
+
+    if [[ -t 2 && -n ${COLOR_MAP[$level]:-} ]]; then
+        printf "%b%s%b\n" \
+            "${COLOR_MAP[$level]}" \
+            "$msg" \
+            "${COLOR_MAP[n]}" >&2
+    else
+        printf "%s\n" "$msg" >&2
+    fi
+
+    printf "%s\n" "$msg" >>"$LOG_FILE"
 }
 
-# =========== 打印帮助 ===========
-function print_help_info(){  
-  echo "Usage: $0 [OPTIONS] [ARGS]"  
-  echo "Options:"  
-  echo " -h  显示帮助信息"  
-  echo " -v  显示脚本执行过程详细信息"  
-  echo " ...   其他待补充帮助信息"
+#######################################
+# exit with error
+#######################################
+die() {
+    log -e "$1"
+    exit "${2:-1}"
 }
 
-# =========== 日志函数 ===========
-# 使用方式：log -d "xxx"
-function log() {
-  if [[ "$#" -eq 0 ]]; then
-    return 0  
-  fi
-  
-  local level="${1#-}"  
-  # 检测 LEVEL_MAP 是否存在键 level  
-  if [[ -v "LEVEL_MAP[$level]" ]]; then 
-    shift  
-  else 
-    level='i'   # 默认 INFO 级别 
-  fi
-  
-  # DEBUG 级别未开启  
-  if [[ "$level" == 'd' && ! -v "ARGS_MAP["debug"]" ]] ; then 
-    return 0  
-  fi  
-  # 构建日志行  
-  local log_line="[$(date '+%F %T.%3N')] [${LEVEL_MAP[$level]}] $*"
-  
-  # 只有 SUCCESS 作为输出，其他写入 stderr  
-  if [[ "$level" == 's' ]]; then   
-    echo -e "${COLOR_MAP[$level]}$log_line${COLOR_MAP['n']}"  
-  elif [[ -t 2 ]]; then    
-    echo -e "${COLOR_MAP[$level]}$log_line${COLOR_MAP['n']}" >&2  
-  else    
-    echo -e "$log_line" >&2  
-  fi
-  
-  # 写入日志文件  
-  echo -e "$log_line" >> "$LOG_FILE"
+#######################################
+# cleanup
+#######################################
+cleanup() {
+
+    # 删除临时文件
+    # rm -f "$TMPFILE"
+
+    [[ -n ${ARGS_MAP[help]:-} ]] && return
+
+    log -d "cleanup finished"
 }
 
-# ========= 初始化设置 =========
-function init() {  
-  # 颜色数组  
-  declare -gA COLOR_MAP  
-  if [[ -t 1 ]]; then 
-    COLOR_MAP=(
-      [e]='\033[0;31m'   # Red    
-      [w]='\033[1;33m'   # Yellow    
-      [i]='\033[0m'    # No color   
-      [d]='\033[34m'   # Blue     
-      [s]='\033[0;32m'   # Green   
-      [n]='\033[0m'    # No color   
-    ) 
-  fi
-  
-  # 日志级别 
-  declare -gA LEVEL_MAP=( 
-    [e]='ERROR'   
-    [w]='WARN'   
-    [i]='INFO'   
-    [d]='DEBUG'  
-    [s]='SUCCESS'  
-  )
-  
-  # 解析参数  
-  parse_args "$@"
-  
-  # 打印帮助信息  
-  if [[ -v ARGS_MAP["help"] ]]; then  
-    print_help_info   
-    exit 0  
-  fi
-  
-  log -d "检查工作目录"  
-  if [[ ! -d "$WORK_DIR" ]]; then  
-    die "工作目录不存在: $WORK_DIR" 
-  fi
-  
-  log -d "检查日志文件"
-  if [[ ! -e "$LOG_FILE" ]]; then  
-    log -w "新建日志文件$LOG_FILE"   
-    touch "$LOG_FILE"  
-  fi
+#######################################
+# help
+#######################################
+print_help() {
+
+cat <<EOF
+Usage:
+
+    $0 [OPTIONS]
+
+Options:
+
+    -h      Show help
+    -v      Enable debug log
+
+EOF
+
 }
 
-# =========== 信号处理 ===========
-function handle_signal() {  
-  errorcode="$?"
-  
-  if [[ $errorcode -ne 0 ]]; then  
-    log -e "脚本非正常退出: 错误码: $errorcode, 行号: $LINENO, 命令: $BASH_COMMAND"  
-  elif [[ ! -v ARGS_MAP["help"] ]]; then  
-    log "脚本执行结束"
-  fi
-  
-  # 执行清理 
-  cleanup
+#######################################
+# parse arguments
+#######################################
+parse_args() {
+
+    while getopts ":hv" opt
+    do
+        case "$opt" in
+            h)
+                ARGS_MAP[help]=1
+                ;;
+            v)
+                ARGS_MAP[debug]=1
+                ;;
+            :)
+                die "Option -$OPTARG requires an argument."
+                ;;
+            \?)
+                die "Unknown option: -$OPTARG"
+                ;;
+        esac
+    done
 }
 
-# =========== 信号捕获 ===========
-trap 'handle_signal $? $LINENO $BASH_COMMAND' EXIT
+#######################################
+# initialization
+#######################################
+init() {
 
-# =========== 初始化  ===========
-init "$@"
-log -d "脚本初始化完成"
-# ========= 执行主函数 ==========
-main "$@"
+    if [[ -t 2 ]]; then
+        COLOR_MAP=(
+            [e]=$'\033[31m'
+            [w]=$'\033[33m'
+            [i]=$'\033[0m'
+            [d]=$'\033[34m'
+            [s]=$'\033[32m'
+            [n]=$'\033[0m'
+        )
+    fi
+
+    parse_args "$@"
+
+    if [[ -n ${ARGS_MAP[help]:-} ]]; then
+        print_help
+        exit 0
+    fi
+
+    [[ -d "$WORK_DIR" ]] || die "Working directory does not exist: $WORK_DIR"
+
+    if [[ ! -e "$LOG_FILE" ]]; then
+        touch "$LOG_FILE" || die "Cannot create log file: $LOG_FILE"
+    fi
+
+    log -d "Initialization completed"
+}
+
+#######################################
+# error trap
+#######################################
+on_error() {
+
+    local exit_code="$1"
+    local line="$2"
+    local cmd="$3"
+
+    log -e "Command failed"
+
+    log -e "Exit Code : $exit_code"
+    log -e "Line      : $line"
+    log -e "Command   : $cmd"
+}
+
+#######################################
+# exit trap
+#######################################
+on_exit() {
+
+    local exit_code="$1"
+
+    if (( exit_code == 0 )); then
+        [[ -z ${ARGS_MAP[help]:-} ]] && log -s "Script completed successfully"
+    fi
+
+    cleanup
+}
+
+#######################################
+# main
+#######################################
+main() {
+
+    cd "$WORK_DIR" || die "Cannot enter $WORK_DIR"
+
+    log "Business started"
+
+    ls
+
+    log -s "Business finished"
+
+}
+
+#######################################
+# trap
+#######################################
+
+trap 'on_error $? $LINENO "$BASH_COMMAND"' ERR
+trap 'on_exit $?' EXIT
+
+#######################################
+# start
+#######################################
+
+init "$@"
+
+main
