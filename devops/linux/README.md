@@ -21,6 +21,29 @@ sudo dnf install fail2ban         # Red Hat
 sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
 ```
+## <mark>dig域名解析</mark>
+```bash
+dig example.com  # 解析域名信息
+dig +short example.com   # 仅查询IP
+dig example.com A  # 查询A记录, ipv4
+dig example.com AAAA  # 查询AAAA记录, ipv6
+dig example.com MX  # 查询 MX
+dig example.com NS  # 查询 NS
+dig example.com TXT  # 查询 TXT
+dig example.com CNAME  # 查询 CNAME
+dig example.com  # 查看完整解析
+dig @8.8.8.8 example.com  # 使用指定 DNS
+dig +trace example.com  # 查看解析链
+```
+> 常见DNS记录类型:
+  - A	IPv4地址, Address Record（IPv4, 32 位 = 4 字节）
+  - AAAA	IPv6地址, IPv6地址是128位 = 16 字节, 正好是IPv4的4倍, 所以命名为AAAA
+  - CNAME	别名
+  - MX	邮件服务器
+  - NS	域名服务器
+  - TXT	文本记录（SPF、DKIM 等）
+  - SOA	域名授权信息
+  - PTR	反向解析
 
 ## <mark>tcpdump抓包</mark>
 ```bash
