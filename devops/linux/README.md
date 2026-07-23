@@ -45,7 +45,7 @@ dig +trace example.com  # 查看解析链
   - NS	域名服务器
   - TXT	文本记录（SPF、DKIM 等）
   - SOA	域名授权信息
-  - PTR	反向解析, 通过ip查域名, 跟A记录相反
+  - PTR	反向解析, 倒序IP.in-addr.arpa    通过ip查域名, 跟A记录相反
 
 ## <mark>tcpdump抓包</mark>
 ```bash
