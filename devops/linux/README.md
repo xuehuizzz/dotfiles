@@ -22,6 +22,37 @@ sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
 ```
 
+## <mark>tcpdump抓包</mark>
+```bash
+tcpdump -i interface_name -nn -w test.pcap  # 把抓包结果保存成pcap文件
+tcpdump -C 100 -W 10 -w test.pcap   # 自动滚动文件, 每个100M, 最多10个
+tcpdump -D   # 查看网卡, 或 tcpdump --list-interfaces
+tcpdump -A   # 查看 ASCII（HTTP 很有用）
+tcpdump -vv  # 查看详细信息, -vvv 更详细
+tcpdump -c 100  # 限制抓包数量, 只抓100个包
+timeout 30 tcpdump -i interface_name -w test.pcap  # 用仅抓30s包
+tcpdump -i interface_name  # 抓指定网卡
+tcpdump -i interface_name  -X  # 显示包内容, HEX ASCII
+tcpdump -i interface_name  -xx  # 显示包内容, 只显示HEX
+tcpdump -i any  # 抓所有网卡
+tcpdump -i interface_name -nn  # 不解析域名,默认 tcpdump 会解析 DNS, 两个n分别作用于ip和端口
+tcpdump -i eth0 -nn -s 0  # 查看完整数据包, 默认会截断
+tcpdump -i interface_name host xxx.xxx.xxx.xxx  # 抓指定主机, 双向, A->B, B->A都会抓
+tcpdump src host xxx.xxx.xxx.xxx  # 只抓源ip, 由这个IP发出去的流量包
+tcpdump dst host xxx.xxx.xxx.xxx  # 只抓目的ip, 由这个IP发进来的流量包
+tcpdump -nn port 80  # 抓指定端口的流量, 443, 22, 53, 3306, 6379, ...
+tcpdump protocol_name  # 抓指定协议, tcp, udp, icmp, arp, ...
+tcpdump -nn host 10.0.0.8 and port 3306  # 同时指定IP和端口
+tcpdump port 80 or port 443  # 多条件, tcpdump host 10.0.0.1 or host 10.0.0.2
+tcpdump -nn not port 22  # 抓取除了指定的端口之外的端口流量, 双向
+tcpdump not host 192.168.1.1  # 排除某个IP的流量, 双向
+tcpdump 'tcp[tcpflags] & tcp-syn != 0'  # 查看 SYN 包（排查三次握手）   或  tcpdump 'tcp[13] == 2'
+tcpdump 'tcp[13] == 18'  # 查看 SYN ACK
+tcpdump 'tcp[tcpflags] & tcp-rst != 0'   # BPF（Berkeley Packet Filter）过滤表达式, 只抓RST（Reset）数据包, 常用于分析Connection refused
+tcpdump 'tcp[tcpflags] & tcp-fin != 0'   # 查看FIN, 排查连接关闭
+tcpdump 'tcp[tcpflags] & tcp-push != 0'  # 查看PSH, 查看真正的数据发送
+tcpdump -nn "tcp[tcpflags] & (tcp-syn|tcp-ack) != 0"  # 查前三次握手, 分析为什么连不上
+```
 
 ## <mark>生成SSH秘钥对</mark>
 ```bash
