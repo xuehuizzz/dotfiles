@@ -22,6 +22,7 @@ sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
 ```
 ## <mark>dig域名解析</mark>
+DNS 是树形结构，按域名从右向左解析
 ```bash
 dig example.com  # 解析域名信息
 dig +short example.com   # 仅输出IP
