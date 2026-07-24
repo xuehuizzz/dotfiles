@@ -24,7 +24,7 @@ sudo systemctl start fail2ban
 ## <mark>dig域名解析</mark>
 DNS 是树形结构，按域名从右向左解析
 ```bash
-dig example.com  # 解析域名信息
+dig example.com  # 解析域名信息, 等价于查询A记录, 所以仅会返回A记录相关信息
 dig +short example.com   # 仅输出IP
 dig +short -x xxx.xxx.xxx.xxx  # 仅输出域名
 dig example.com A  # 查询A记录, ipv4
