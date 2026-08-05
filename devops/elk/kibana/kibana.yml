@@ -1,0 +1,12 @@
+server.name: kibana
+server.host: "0.0.0.0"
+
+elasticsearch.hosts: http://elasticsearch:9200
+elasticsearch.username: kibana_system
+elasticsearch.password: your_password
+
+# 中文界面
+i18n.locale: "zh-CN"
+
+# 日志级别
+logging.root.level: info
