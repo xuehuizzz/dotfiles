@@ -4,7 +4,8 @@ services:
     container_name: elasticsearch
     environment:
       - discovery.type=single-node
-      - xpack.security.enabled=false
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=YourStrongPassword123!
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
     ulimits:
       memlock:
