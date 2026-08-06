@@ -1,4 +1,4 @@
-# alias ffmpeg="docker run --rm -v \$(pwd):/home/ffmpeg ffmpeg:v1 -y"
+# alias ffmpeg="docker run --rm --user $(id -u):$(id -g) -v $(pwd):/home/ffmpeg ffmpeg:v1 -y"
 
 # 第一阶段
 FROM ubuntu:22.04 AS builder
