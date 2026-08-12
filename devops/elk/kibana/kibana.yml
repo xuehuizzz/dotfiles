@@ -1,0 +1,17 @@
+server.host: "0.0.0.0"
+server.port: 5601
+server.publicBaseUrl: "http://localhost:5601"
+i18n.locale: "zh-CN"
+
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+# 因为 ES 开了 security，Kibana 不能用 elastic 超级用户连（8.x 会拒绝），要用 kibana_system
+elasticsearch.username: "kibana_system"
+# 容器起来后, 执行如下命令配置 kibana_system 密码
+# docker exec -it elasticsearch bin/elasticsearch-reset-password -u kibana_system -i --url http://localhost:9200
+elasticsearch.password: "123456"  # 这里的密码仅做验证使用, 后续手动配置的时候密码也得是这个
+
+monitoring.ui.container.elasticsearch.enabled: true
+# 32 位以上随机串，用于加密保存对象；不写每次重启会告警
+xpack.encryptedSavedObjects.encryptionKey: "a7f3c1e9b25d468af0c3e5d7b9128f46"
+xpack.reporting.encryptionKey: "d4b8e2f6a1c93705e8d2b4f6a0c17e39"
+xpack.security.encryptionKey: "c1e7a9d3b5f28460c2e4a6d8b0f13579"
