@@ -1,5 +1,6 @@
 ## <center>ES|QL：像 SQL 一样从左到右写数据处理流水线</center>
 #### Query DSL 是“告诉 ES 怎么执行查询”，而 ES|QL 是“像写 SQL 一样描述我要什么数据，以及怎么一步步处理它”。
+ES|QL 本身从 Elasticsearch 8.11 开始可用，8.14 开始 GA（正式可用）。但具体语法/函数/能力又有各自的最低版本。
 ### 基本语法结构
 ```bash
 FROM index
