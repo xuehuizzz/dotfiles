@@ -1,4 +1,5 @@
 ## <center>ES|QL：像 SQL 一样从左到右写数据处理流水线</center>
+#### Query DSL 是“告诉 ES 怎么执行查询”，而 ES|QL 是“像写 SQL 一样描述我要什么数据，以及怎么一步步处理它”。
 ### 基本语法结构
 ```bash
 FROM index
