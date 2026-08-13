@@ -1,7 +1,6 @@
 ```bash
 # ==========================================================
 # Elasticsearch 常用操作 · Kibana Dev Tools 版
-# 用法：整段粘贴进 Dev Tools，光标放到某条请求上 Ctrl/Cmd + Enter 执行
 # ==========================================================
 
 
@@ -12,7 +11,6 @@ GET /
 
 # 集群健康（green/yellow/red）
 GET _cluster/health
-
 GET _cat/health?v
 
 # 按索引查看健康
@@ -32,7 +30,6 @@ GET _cluster/settings?include_defaults=false&flat_settings=true
 
 # 节点详细统计（线程池、JVM、fs 等）
 GET _nodes/stats
-
 GET _cat/thread_pool?v
 
 # 所有 _cat 接口列表
@@ -43,14 +40,11 @@ GET _cat
 
 # 查看所有索引（按大小排序）
 GET _cat/indices?v&s=store.size:desc
-
 GET _cat/indices/my-index-*?v&h=index,health,docs.count,store.size
 
 # 查看索引结构（settings + mappings）
 GET my-index
-
 GET my-index/_mapping
-
 GET my-index/_settings
 
 # 创建索引
@@ -92,24 +86,19 @@ PUT my-index/_settings
 
 # 关闭 / 打开索引
 POST my-index/_close
-
 POST my-index/_open
 
 # 刷新 / 段合并（force merge 很重，低峰期做）
 POST my-index/_refresh
-
 POST my-index/_flush
-
 POST my-index/_forcemerge?max_num_segments=1
 
 # 统计
 GET my-index/_count
-
 GET my-index/_stats
 
 # 分片分布 / 未分配原因
 GET _cat/shards/my-index?v&h=index,shard,prirep,state,docs,store,node,unassigned.reason
-
 GET _cluster/allocation/explain
 
 
@@ -137,7 +126,6 @@ PUT my-index/_create/1
 
 # 查询单条 / 只看 _source
 GET my-index/_doc/1
-
 GET my-index/_source/1
 
 # 判断存在（返回 200 / 404）
@@ -399,12 +387,10 @@ POST _snapshot/my_repo/snap1/_restore
 
 # 正在执行的任务
 GET _cat/tasks?v&detailed=true
-
 GET _tasks?actions=*search&detailed=true
 
 # 查 reindex / update_by_query 进度
 GET _tasks/<task_id>
-
 POST _tasks/<task_id>/_cancel
 
 # 热点线程（返回纯文本）
@@ -431,7 +417,6 @@ POST _security/user/elastic/_password
 
 # 用户 / 角色
 GET _security/user
-
 GET _security/role
 
 POST _security/user/app_ro
@@ -443,7 +428,6 @@ POST _security/user/app_ro
 
 # 查看当前认证身份 / 许可证
 GET _security/_authenticate
-
 GET _license
 
 
