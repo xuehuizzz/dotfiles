@@ -79,8 +79,9 @@ docker exec -it elasticsearch bin/elasticsearch-reset-password -u kibana_system 
 验证：
 
 ```bash
-# 9200未开放, 此方法也无法验证
-curl -u kibana_system:123456 "http://localhost:9200/_security/_authenticate?pretty"
+docker exec -it elasticsearch \
+  curl -u kibana_system:123456 \
+  "http://localhost:9200/_security/_authenticate?pretty"
 ```
 
 然后重启 Kibana：
