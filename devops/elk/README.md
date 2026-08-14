@@ -1,6 +1,6 @@
 # ELK Stack 本地开发环境
 
-基于 Docker Compose 的 Elasticsearch + Logstash + Kibana 一键部署方案，版本 **8.13.0**。
+基于 Docker Compose 的 Elasticsearch + Logstash + Kibana 一键部署方案，版本 **9.4.4**。
 
 ## 目录结构
 
@@ -164,7 +164,7 @@ tar -czf es-backup-$(date +%F).tar.gz elasticsearch/data
 ```bash
 # 版本号必须与 ES 完全一致
 docker exec -it elasticsearch bin/elasticsearch-plugin install \
-  https://github.com/infinilabs/analysis-ik/releases/download/v8.13.0/elasticsearch-analysis-ik-8.13.0.zip
+  https://github.com/infinilabs/analysis-ik/releases/download/v9.4.4/elasticsearch-analysis-ik-9.4.4.zip
 
 docker compose restart elasticsearch
 
