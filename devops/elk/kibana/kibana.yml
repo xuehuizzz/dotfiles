@@ -1,0 +1,15 @@
+server.host: "0.0.0.0"
+server.port: 5601
+server.publicBaseUrl: "http://localhost:5601"
+i18n.locale: "zh-CN"
+
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+# 因为 ES 开了 security，Kibana 不能用 elastic 超级用户连（8.x 会拒绝），要用 kibana_system
+elasticsearch.username: "kibana_system"
+elasticsearch.password: ${KIBANA_PASSWORD}  # 这里的密码仅做验证使用, 后续手动配置的时候密码也得是这个
+
+monitoring.ui.container.elasticsearch.enabled: true
+# 32 位以上随机串，用于加密保存对象；不写每次重启会告警
+xpack.encryptedSavedObjects.encryptionKey: ${XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY}
+xpack.reporting.encryptionKey: ${XPACK_REPORTING_ENCRYPTIONKEY}
+xpack.security.encryptionKey: ${XPACK_SECURITY_ENCRYPTIONKEY}
