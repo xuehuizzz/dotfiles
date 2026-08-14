@@ -68,7 +68,7 @@ docker compose logs -f elasticsearch
 compose 里的 `ELASTIC_PASSWORD` **只对 `elastic` 用户生效**，`kibana_system` 密码默认未设置，不设 Kibana 会一直 401 重启。
 
 ```bash
-# 方式 A：API（推荐，非交互）
+# 方式 A：API（推荐，非交互）(现在docker-compose没有把9200对公网开放, 因此用方式 B)
 curl -u elastic:123456 -X POST "http://localhost:9200/_security/user/kibana_system/_password" \
   -H 'Content-Type: application/json' -d '{"password":"123456"}'
 
