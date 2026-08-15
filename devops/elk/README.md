@@ -26,8 +26,8 @@ elk/
 |---|---|
 | Docker | 20.10+ |
 | Docker Compose | v2（使用 `docker compose` 而非 `docker-compose`） |
-| 可用内存 | ≥ 4GB（三个容器各限制 1g） |
-| 端口占用 | 9200、9300、5601、5044 需空闲 |
+| 可用内存 | ≥ 10GB（`mem_limit`：ES 6g、Logstash 2g、Kibana 1g；ES/LS 堆各占一半） |
+| 端口占用 | 9200（仅绑定 `127.0.0.1`）、5601、5044 需空闲；9300 不对宿主机映射 |
 
 ## 快速开始
 
@@ -68,7 +68,7 @@ docker compose logs -f elasticsearch
 compose 里的 `ELASTIC_PASSWORD` **只对 `elastic` 用户生效**，`kibana_system` 密码默认未设置，不设 Kibana 会一直 401 重启。
 
 ```bash
-# 方式 A：API（推荐，非交互）(现在docker-compose没有把9200对公网开放, 因此用方式 B)
+# 方式 A：API（推荐，非交互）。9200 已绑定到 127.0.0.1，可直接从宿主机调用
 curl -u elastic:123456 -X POST "http://localhost:9200/_security/user/kibana_system/_password" \
   -H 'Content-Type: application/json' -d '{"password":"123456"}'
 
@@ -91,16 +91,19 @@ docker compose restart kibana
 docker compose logs -f kibana   # 出现 "Kibana is now available" 即成功
 ```
 
-### 创建logstash用户<sub>用elastic也可以但不推荐</sub>
+### 创建 logstash 用户<sub>用 elastic 也可以但不推荐</sub>
+
+分两步：先建**角色**（授权），再建**用户**并绑定角色。用户名/密码须与 `.env` 里的 `LOGSTASH_ES_USERNAME` / `LOGSTASH_ES_PASSWORD` 一致，否则 Logstash 启动会 401。
 
 ```bash
+# 1. 创建角色。cluster 的 monitor 必需：ES output 插件启动时要做许可证/健康检查，缺了会 403
 docker exec -it elasticsearch \
   curl -u elastic:123456 \
   -X PUT \
   "http://localhost:9200/_security/role/logstash_writer_role" \
   -H "Content-Type: application/json" \
   -d '{
-    "cluster": [],
+    "cluster": ["monitor", "manage_index_templates"],
     "indices": [
       {
         "names": ["logstash-*"],
@@ -114,7 +117,29 @@ docker exec -it elasticsearch \
       }
     ]
   }'
+
+# 2. 创建用户 logstash_writer 并绑定上面的角色（密码须与 .env 的 LOGSTASH_ES_PASSWORD 一致）
+docker exec -it elasticsearch \
+  curl -u elastic:123456 \
+  -X PUT \
+  "http://localhost:9200/_security/user/logstash_writer" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "password": "123456",
+    "roles": ["logstash_writer_role"],
+    "full_name": "Logstash Writer"
+  }'
+
+# 3. 重启 Logstash 使认证生效
 docker compose restart logstash
+```
+
+验证用户可登录：
+
+```bash
+docker exec -it elasticsearch \
+  curl -u logstash_writer:123456 \
+  "http://localhost:9200/_security/_authenticate?pretty"
 ```
 
 ## 访问方式
@@ -166,7 +191,7 @@ curl -u elastic:123456 "http://localhost:9200/_cat/indices?v"
 curl -u elastic:123456 "http://localhost:9200/_cat/nodes?v&h=name,heap.percent,ram.percent,cpu"
 
 # 删除索引
-curl -u elastic:123456 -X DELETE "http://localhost:9200/app-log-2024.01.01"
+curl -u elastic:123456 -X DELETE "http://localhost:9200/logstash-2024.01.01"
 
 # 进入容器
 docker exec -it elasticsearch bash
@@ -206,7 +231,7 @@ curl -u elastic:123456 -X POST "http://localhost:9200/_analyze?pretty" \
 
 ## Logstash 使用
 
-参考 pipeline 配置：
+仓库内 `logstash/logstash.conf` 已配置为用 `logstash_writer` 写入 `logstash-*` 索引（须先执行上文「创建 logstash 用户」步骤，否则会认证失败）：
 
 ```conf
 input {
@@ -220,13 +245,15 @@ filter {
 output {
   elasticsearch {
     hosts    => ["http://elasticsearch:9200"]
-    user     => "elastic"
-    password => "123456"
-    index    => "app-log-%{+YYYY.MM.dd}"
+    user     => "${LOGSTASH_ES_USERNAME}"   # 取自 .env
+    password => "${LOGSTASH_ES_PASSWORD}"
+    index    => "logstash-%{+YYYY.MM.dd}"
   }
   stdout { codec => rubydebug }   # 调试用，生产移除
 }
 ```
+
+> 若想改用其他索引前缀（如 `app-log-*`），需同步修改「创建 logstash 用户」步骤里 `logstash_writer_role` 的 `indices.names`，否则新前缀无写入权限。
 
 修改 `logstash.conf` 后重启生效：
 
@@ -234,7 +261,7 @@ output {
 docker compose restart logstash
 ```
 
-在 Kibana 中查看数据：**Management → Stack Management → Data Views → Create data view**，索引模式填 `app-log-*`，时间字段选 `@timestamp`，然后到 **Discover** 查询。
+在 Kibana 中查看数据：**Management → Stack Management → Data Views → Create data view**，索引模式填 `logstash-*`，时间字段选 `@timestamp`，然后到 **Discover** 查询。
 
 ## 故障排查
 
@@ -256,8 +283,8 @@ docker compose restart logstash
 - 密码 `123456` 过于简单，改用 `.env` 文件管理：`ELASTIC_PASSWORD=${ES_PASSWORD}`
 - `xpack.security.http.ssl.enabled: false` 为明文传输，生产应启用 TLS
 - `http.cors.allow-origin: "*"` 允许任意跨域，生产应收窄
-- 9200/9300 端口不应直接暴露公网
-- JVM heap 512m 仅够测试，生产建议 ≥ 4g 且不超过物理内存 50%、不超过 31g
+- 9200 当前仅绑定 `127.0.0.1`（不暴露公网）；生产若需对外，务必置于反向代理 + TLS 之后
+- 当前 ES heap 3g（占 `mem_limit` 6g 的 50%），生产建议按数据量调整，且不超过物理内存 50%、不超过 31g
 - 单节点无副本，需配置多节点集群 + 快照仓库（`path.repo`）
 - `kibana.yml` 中三个 `encryptionKey` 请替换为自己生成的随机串，且**部署后不要再改**（改了会导致已存的加密对象无法解密）
 

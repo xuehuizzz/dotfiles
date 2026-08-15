@@ -12,9 +12,10 @@ services:
         soft: 65536
         hard: 65536
     mem_limit: 6g
-    # ports:
-    #   - "9200:9200"
-    #   - "9300:9300"
+    # 仅绑定到宿主机回环地址：本机可 curl / 连 head，但不暴露到公网。
+    # 9300 是节点间 transport 端口，单节点无需对宿主机映射。
+    ports:
+      - "127.0.0.1:9200:9200"
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./elasticsearch/data:/usr/share/elasticsearch/data
