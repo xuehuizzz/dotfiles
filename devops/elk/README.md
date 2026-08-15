@@ -12,7 +12,6 @@ elk/
 │   ├── config/
 │   │   └── elasticsearch.yml     # ES 主配置
 │   ├── data/                     # 数据持久化（勿手动改动）
-│   ├── logs/                     # ES 运行日志
 │   └── plugins/                  # 自定义插件，如 IK 分词器
 ├── kibana/
 │   └── kibana.yml                # Kibana 配置
@@ -48,7 +47,7 @@ echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf   # 永久生效
 ES 容器内以 `uid=1000` 运行，宿主机目录属主不对会启动失败报 `AccessDeniedException`：
 
 ```bash
-mkdir -p elasticsearch/{config,data,logs,plugins}
+mkdir -p elasticsearch/{config,data,plugins}
 sudo chown -R 1000:1000 elasticsearch
 chmod -R 775 elasticsearch
 ```
