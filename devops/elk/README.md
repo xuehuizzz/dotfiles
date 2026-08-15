@@ -102,7 +102,7 @@ docker exec -it elasticsearch \
   "http://localhost:9200/_security/role/logstash_writer_role" \
   -H "Content-Type: application/json" \
   -d '{
-    "cluster": ["monitor", "manage_index_templates"],
+    "cluster": ["monitor", "manage_index_templates", "manage_ilm"],
     "indices": [
       {
         "names": ["logstash-*"],
@@ -111,7 +111,11 @@ docker exec -it elasticsearch \
           "create",
           "create_doc",
           "index",
-          "write"
+          "write",
+          "delete",
+          "create_index",
+          "manage",
+          "manage_ilm"
         ]
       }
     ]
