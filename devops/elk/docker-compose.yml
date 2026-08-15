@@ -19,7 +19,6 @@ services:
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./elasticsearch/data:/usr/share/elasticsearch/data
-      - ./elasticsearch/logs:/usr/share/elasticsearch/logs
       - ./elasticsearch/plugins:/usr/share/elasticsearch/plugins
     networks:
       - elk
@@ -41,7 +40,7 @@ services:
     volumes:
       - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
     ports:
-      - "5044:5044"
+      - "127.0.0.1:5044:5044"    # 有远程 Filebeat 才改成 "5044:5044" + 防火墙 + TLS
     mem_limit: 2g
     depends_on:
       elasticsearch:
@@ -56,7 +55,7 @@ services:
     env_file:
       - .env
     ports:
-      - "5601:5601"
+      - "127.0.0.1:5601:5601"
     volumes:
       - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
     mem_limit: 1g
