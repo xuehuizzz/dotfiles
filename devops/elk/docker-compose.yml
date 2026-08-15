@@ -2,8 +2,9 @@ services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.4.4
     container_name: elasticsearch
-    env_file:
-      - .env
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      ES_JAVA_OPTS: ${ES_JAVA_OPTS}
+      TZ: ${TZ}
     ulimits:
       memlock:
         soft: -1
@@ -35,8 +36,11 @@ services:
   logstash:
     image: docker.elastic.co/logstash/logstash:9.4.4
     container_name: logstash
-    env_file:
-      - .env
+    environment:
+      LOGSTASH_ES_USERNAME: ${LOGSTASH_ES_USERNAME}
+      LOGSTASH_ES_PASSWORD: ${LOGSTASH_ES_PASSWORD}
+      LS_JAVA_OPTS: ${LS_JAVA_OPTS}
+      TZ: ${TZ}
     volumes:
       - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
     ports:
@@ -52,8 +56,12 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana:9.4.4
     container_name: kibana
-    env_file:
-      - .env
+    environment:
+      KIBANA_PASSWORD: ${KIBANA_PASSWORD}       # kibana.yml 里用 ${KIBANA_PASSWORD} 引用
+      XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY: ${XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY}
+      XPACK_REPORTING_ENCRYPTIONKEY: ${XPACK_REPORTING_ENCRYPTIONKEY}
+      XPACK_SECURITY_ENCRYPTIONKEY: ${XPACK_SECURITY_ENCRYPTIONKEY}
+      TZ: ${TZ}
     ports:
       - "127.0.0.1:5601:5601"
     volumes:
