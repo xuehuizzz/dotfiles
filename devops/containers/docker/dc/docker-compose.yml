@@ -1,7 +1,5 @@
-## docker-compose.yml
-```yml
 # 如果有敏感信息存于 .env 文件当中, 使用如下命令运行容器
-# docker-compose --env-file envFilePath -f custom.yml up -d
+# docker compose --env-file envFilePath -f custom.yml up -d
 #    --env-file 指定了 .env 文件的路径, 不指定这个参数的话, 会默认加载当前目录下的 .env 文件
 #    -f 指定了自定义的 yml 文件, 不指定的话, 默认使用 docker-compose.yml 文件
 # 同理, 如果使用了自定义文件启动, 那么在 down 的时候也应指定该文件, 否则默认 docker-compose.yml
@@ -104,4 +102,3 @@ volumes:                             # 定义数据卷, 用于持久化数据
 networks:                            # 定义自定义网络
   front-end:                         # 前端网络, 供 web 服务对外使用
   back-end:                          # 后端网络, 供 web 与 db 之间通信
-```
