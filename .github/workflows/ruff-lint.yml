@@ -1,37 +1,72 @@
-name: Ruff Lint
+name: Ruff
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   lint:
     name: Lint Python Code with Ruff
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      RUFF_VERSION: "0.16.2"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install Ruff
         run: |
-          python -m pip install --upgrade pip
-          pip install ruff
+          set -euo pipefail
+          python -m pip install "ruff==${RUFF_VERSION}"
+          ruff --version
 
-      - name: Run Ruff
+      - name: Run Ruff check
+        run: ruff check --no-cache --output-format=github .
+
+      - name: Run Ruff format check
+        if: ${{ !cancelled() }}
+        run: ruff format --no-cache --diff .
+
+      - name: Publish Ruff findings to job summary
+        if: ${{ failure() }}
         run: |
-          set -o pipefail
-          ruff check . | tee ruff.log
-
-      - name: Show Ruff logs
-        if: failure()
-        run: cat ruff.log
+          set -uo pipefail
+          {
+            echo "## Ruff findings (ruff ${RUFF_VERSION})"
+            echo
+            echo '```text'
+            ruff check --no-cache --output-format=full . || true
+            echo '```'
+            echo
+            echo '<details><summary>Statistics</summary>'
+            echo
+            echo '```text'
+            ruff check --no-cache --statistics . || true
+            echo '```'
+            echo
+            echo '</details>'
+          } >> "$GITHUB_STEP_SUMMARY"
