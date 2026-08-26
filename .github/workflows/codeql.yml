@@ -8,12 +8,11 @@ on:
     branches:
       - main
   schedule:
-    # 每周一 UTC 时间 06:00 定时扫描
     - cron: '0 6 * * 1'
 
 jobs:
   analyze:
-    name: Analyze Code
+    name: Analyze Python
     runs-on: ubuntu-latest
 
     permissions:
@@ -35,11 +34,7 @@ jobs:
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
-          # 可选：使用额外的查询套件，security-and-quality 比默认的 security-extended 更严格
           queries: +security-and-quality
-
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
