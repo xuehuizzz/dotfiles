@@ -66,7 +66,7 @@ found = any(thing == other_thing for thing in things)  # all()同理
 
 
 class Kls:
-    name = 'xuehui'
+    name = "xuehui"
     __age = 25
 
     def public(self):
