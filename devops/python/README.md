@@ -156,16 +156,16 @@ DB_PORT=3306
 # pip install python-dotenv
 import os
 from dotenv import load_dotenv
-load_dotenv()    # 从项目根目录加载.env文件
-# 或者从指定路径加载 .env 文件
+load_dotenv()  # 从项目根目录加载.env文件, 或者从指定路径加载 .env 文件
+
 from pathlib import Path
-dotenv_path = Path('path/to/.env')
-load_dotenv(dotenv_path=dotenv_path)  
+dotenv_path = Path("path/to/.env")
+load_dotenv(dotenv_path=dotenv_path)
 # -----------------------------------------
 # 使用环境变量
-db_host = os.getenv("DB_HOST")   # 输出为: "127.0.0.1"
-db_port = int(os.getenv("DB_PORT"))   # 输出为: "3306"
-db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
+db_host = os.getenv("DB_HOST")  # 输出为: "127.0.0.1"
+db_port = int(os.getenv("DB_PORT"))  # 输出为: "3306"
+db_pwd = os.getenv("DB_PWD")  # 输出为: None, 不存在返回None
 ```
 
 #### 4.<mark>编码建议</mark>
@@ -176,6 +176,7 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
         ```python
         _sentinel = object()  # 创建唯一的哨兵对象
 
+
         def func(x=_sentinel):
             if x is _sentinel:
                 print("参数未提供")
@@ -184,11 +185,11 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
                 print("参数显式设为 None")
             else:
                 print("提供了参数:", x)
-        
-        
-        func()            # 参数未提供
-        func(None)        # 参数显式设为 None
-        func("hello")     # 提供了参数: hello
+
+
+        func()  # 参数未提供
+        func(None)  # 参数显式设为 None
+        func("hello")  # 提供了参数: hello
         ```
 
 *   单向哈希散列用 **Argon2id + HMAC-SHA-256 pepper**, 对称加解密用 **AESGCM**
@@ -202,6 +203,7 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
     *
         ```python
         import base64
+        
         s = "SGVsbG8gV29ybGQh"  # "Hello World!" 的 Base64 编码
         try:
             decoded_value = base64.b64decode(s).decode("utf-8")
@@ -216,6 +218,7 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
         ```python
         # 在日志记录和抛出异常的时候建议使用 `%r` 来进行字符串占位, 而不是 `%s`
         import logging
+        
         logging.debug("Some debug info: %r", value)
         ```
 
@@ -305,17 +308,18 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
     *
         ```python
         import sys
+        
         my_list = [i for i in range(10000)]
-        print(sum(my_list)) # 49995000
+        print(sum(my_list))  # 49995000
 
         my_gen = (i for i in range(10000))
-        print(sum(my_gen)) # 49995000
+        print(sum(my_gen))  # 49995000
 
         my_list = [i for i in range(10000)]
-        print(sys.getsizeof(my_list), 'bytes') # 85176 bytes
+        print(sys.getsizeof(my_list), 'bytes')  # 85176 bytes
 
         my_gen = (i for i in range(10000))
-        print(sys.getsizeof(my_gen), 'bytes') # 112 bytes
+        print(sys.getsizeof(my_gen), 'bytes')  # 112 bytes
         ```
 
 *   使用**pathlib**操作文件系统
@@ -324,18 +328,18 @@ db_pwd = os.getenv("DB_PWD")     # 输出为: None, 不存在返回None
         ```python
         from pathlib import Path
 
-        current_dir = Path(__file__).resolve()   # 当前文件绝对路径,而不是工作目录中文件路径
+        current_dir = Path(__file__).resolve()  # 当前文件绝对路径,而不是工作目录中文件路径
         parent_dir = current_dir.parent  # 当前文件的父级目录
-        project_path = current_dir.parent.parent   # 假设为项目根路径, current_dir.parents[3] 也可以
+        project_path = current_dir.parent.parent  # 假设为项目根路径, current_dir.parents[3] 也可以
 
         new_dir = parent_dir / "test"
-        new_dir.mkdir(parents=True, exist_ok=True)   # 创建文件夹, 若不存在的话
+        new_dir.mkdir(parents=True, exist_ok=True)  # 创建文件夹, 若不存在的话
 
         file_path = Path("a.txt")
         with open(file_path, 'w') as file:
             file.write("Hello, this is some text.")
 
-        for i in new_dir.glob("*.txt"):   # 获取指定路径下以 .txt 结尾的文件
+        for i in new_dir.glob("*.txt"):  # 获取指定路径下以 .txt 结尾的文件
             print(i.stem, i.name, i.parent)
 
         print(current_dir)
