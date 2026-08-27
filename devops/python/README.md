@@ -156,9 +156,11 @@ DB_PORT=3306
 # pip install python-dotenv
 import os
 from dotenv import load_dotenv
+
 load_dotenv()  # 从项目根目录加载.env文件, 或者从指定路径加载 .env 文件
 
 from pathlib import Path
+
 dotenv_path = Path("path/to/.env")
 load_dotenv(dotenv_path=dotenv_path)
 # -----------------------------------------
@@ -316,10 +318,10 @@ db_pwd = os.getenv("DB_PWD")  # 输出为: None, 不存在返回None
         print(sum(my_gen))  # 49995000
 
         my_list = [i for i in range(10000)]
-        print(sys.getsizeof(my_list), 'bytes')  # 85176 bytes
+        print(sys.getsizeof(my_list), "bytes")  # 85176 bytes
 
         my_gen = (i for i in range(10000))
-        print(sys.getsizeof(my_gen), 'bytes')  # 112 bytes
+        print(sys.getsizeof(my_gen), "bytes")  # 112 bytes
         ```
 
 *   使用**pathlib**操作文件系统
@@ -336,7 +338,7 @@ db_pwd = os.getenv("DB_PWD")  # 输出为: None, 不存在返回None
         new_dir.mkdir(parents=True, exist_ok=True)  # 创建文件夹, 若不存在的话
 
         file_path = Path("a.txt")
-        with open(file_path, 'w') as file:
+        with open(file_path, "w") as file:
             file.write("Hello, this is some text.")
 
         for i in new_dir.glob("*.txt"):  # 获取指定路径下以 .txt 结尾的文件
