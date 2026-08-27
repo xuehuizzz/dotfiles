@@ -46,7 +46,7 @@ services:
       - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
     ports:
       - "127.0.0.1:5044:5044"    # 有远程 Filebeat 才改成 "5044:5044" + 防火墙 + TLS
-    mem_limit: 2g
+    mem_limit: ${LS_MEM_LIMIT}
     depends_on:
       elasticsearch:
         condition: service_healthy
