@@ -369,14 +369,17 @@ db_pwd = os.getenv("DB_PWD")  # 输出为: None, 不存在返回None
         这个模块自 Python 3.7 起引入，提供了一种声明式的方法来定义数据封装类。
         使用 @dataclass 装饰器定义类。这个装饰器自动为你的类添加特殊方法，比如 __init__() 和 __repr__()。
         """
+        
         from dataclasses import dataclass
+
 
         @dataclass
         class Person:
             name: str
             age: int
             gender: str
-            
+
+
         p = Person("xuehui", 18, "男")
         print(p.name)
 
@@ -451,6 +454,7 @@ class Person:
     def __init__(self, name: str):
         self.name = name
 
+
 def greet(person: Person) -> str:
     return f"Hello, {person.name}"
 ```
@@ -470,11 +474,15 @@ def process_json(data: JSON) -> None:
 ```python
 # 如果你需要将函数作为参数传递，可以指定其调用签名：
 from typing import Callable
+
+
 def apply_function(func: Callable[[int, int], int], a: int, b: int) -> int:
     return func(a, b)
 
+
 def add(x: int, y: int) -> int:
     return x + y
+
 
 result = apply_function(add, 10, 20)
 ```
