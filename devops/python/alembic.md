@@ -188,7 +188,7 @@ class Demo(Base):
 """create table demos
 
 Revision ID: 8e5e7fb1f43d
-Revises: 
+Revises:
 Create Date: 2026-03-27 14:14:30.414701
 
 """
