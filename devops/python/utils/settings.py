@@ -168,9 +168,7 @@ class Settings(BaseSettings):
     # =====================
     @field_validator("db", mode="after")
     @classmethod
-    def validate_db_in_prod(
-        cls, v: PostgresSettings, info: ValidationInfo
-    ) -> PostgresSettings:
+    def validate_db_in_prod(cls, v: PostgresSettings, info: ValidationInfo) -> PostgresSettings:
         """生产环境: 禁止弱密码 + 强制密码强度"""
         env = info.data.get("env")
 
