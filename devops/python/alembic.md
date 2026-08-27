@@ -20,8 +20,8 @@ Alembic 是一个 数据库迁移工具，通常和 SQLAlchemy 一起用。
 
 每个 migration 都有唯一 ID：
 ```python
-revision = '1975ea83b712'
-down_revision = 'ae1027a6acf'
+revision = "1975ea83b712"
+down_revision = "ae1027a6acf"
 ```
 👉 形成一条链：
 ```bash
@@ -85,12 +85,11 @@ config = context.config
 database_url = os.getenv("SQLALCHEMY_DATABASE_URI")
 
 if not database_url:
-    raise ModuleNotFoundError("SQLALCHEMY_DATABASE_URI is not set. Did you forget to configure .env?")
+    raise ModuleNotFoundError(
+        "SQLALCHEMY_DATABASE_URI is not set. Did you forget to configure .env?"
+    )
 
-sync_url = database_url.replace(
-    "postgresql+asyncpg",
-    "postgresql+psycopg2"
-)
+sync_url = database_url.replace("postgresql+asyncpg", "postgresql+psycopg2")
 
 # 不在alembic.ini中硬编码, 通过环境变量读取再替换同步驱动
 config.set_main_option("sqlalchemy.url", sync_url)
@@ -180,7 +179,9 @@ class Demo(Base):
         String(255), nullable=False, server_default=text("''::character varying")
     )
     descriprion: Mapped[str] = mapped_column(Text, nullable=False, server_default=text("''::text"))
-    email: Mapped[str] = mapped_column(String(255), nullable=False, server_default=text("''::character varying"))
+    email: Mapped[str] = mapped_column(
+        String(255), nullable=False, server_default=text("''::character varying")
+    )
 
 ```
 > 8e5e7fb1f43d_create_table_demos.py
