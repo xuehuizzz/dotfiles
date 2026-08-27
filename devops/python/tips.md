@@ -46,13 +46,13 @@ mypy .  # 检查整个项目, 在项目根目录下执行
 ## 格式化输出数据
 
 ```python
-json.dumps(data, indent=4, ensure_ascii=False)   # 接收非 ASCII 编码的字符，这样才能使用中文
+json.dumps(data, indent=4, ensure_ascii=False)  # 接收非 ASCII 编码的字符, 这样才能使用中文
 ```
 
 ## 使用any代替for循环
 
 ```python
-found = any(thing == other_thing for thing in things)    # all()同理
+found = any(thing == other_thing for thing in things)  # all()同理
 ```
 
 ## 调用类的私有方法/变量
@@ -63,14 +63,17 @@ found = any(thing == other_thing for thing in things)    # all()同理
 而是通过名称重整（name mangling）来改变方法名，使得外部无法直接访问。
 名称重整的机制是将类内部的 __private 改为 _ClassName__private，从而达到一定程度的“隐藏”。
 """
-class Kls():
+
+
+class Kls:
     name = 'xuehui'
     __age = 25
+
     def public(self):
-        print('Hello public world!')
+        print("Hello public world!")
 
     def __private(self):
-        print('Hello private world!')
+        print("Hello private world!")
 
     def call_private(self):
         self.__private()
@@ -87,17 +90,20 @@ print(res)
 ```python
 import asyncio
 
+
 # 定义一个异步方法
 async def fetch_data():
     print("开始获取数据")
     await asyncio.sleep(2)  # 模拟一个耗时的操作，比如网络请求
     print("数据获取完成")
-    return {'data': 123}
+    return {"data": 123}
+
 
 # 定义一个主异步方法来运行其他异步任务
 async def main():
     data = await fetch_data()  # 调用异步方法并等待其完成
     print(data)
+
 
 # 运行主异步方法
 asyncio.run(main())
@@ -110,25 +116,27 @@ asyncio.run(main())
 class MetaExample(type):
     def __new__(cls, name, bases, dct):
         # 在创建类之前动态添加类属性
-        dct['auto_attribute'] = "This is an auto-generated attribute"
+        dct["auto_attribute"] = "This is an auto-generated attribute"
         
         # 定义一个自动生成的类方法
         def auto_method(cls):
             return f"{cls.__name__} says hello!"
         
-        dct['auto_method'] = classmethod(auto_method)
+        dct["auto_method"] = classmethod(auto_method)
         
         # 使用 type 创建类
         return super().__new__(cls, name, bases, dct)
-    
+
     def __init__(cls, name, bases, dct):
         print(f"Class {name} has been created with MetaExample metaclass.")
         super().__init__(name, bases, dct)
+
 
 # 使用元类创建类
 class ExampleClass(metaclass=MetaExample):
     def normal_method(self):
         return "This is a normal method."
+
 
 # 实例化和使用 ExampleClass
 example = ExampleClass()
