@@ -12,7 +12,11 @@ class AQLConfig:
     def __init__(self, collection=None):
         self.database = "cmdb"
         self.collection = collection or "IPAddress"
-        arangodb_dic = {"arangoURL": ARANGO_URL, "username": ARANGO_UAERNAME, "password": ARANGO_PASSWORD}
+        arangodb_dic = {
+            "arangoURL": ARANGO_URL,
+            "username": ARANGO_UAERNAME,
+            "password": ARANGO_PASSWORD,
+        }
 
         try:
             self.ar_conn = Connection(**arangodb_dic)
@@ -29,10 +33,10 @@ class AQLConfig:
         logger.info("插入数据开始")
         try:
             # 已存在的文档不会插入
-            collection = self.db.collections['xxx']
+            collection = self.db.collections["xxx"]
             batch_size = 10000
             for i in range(0, len(data), batch_size):
-                batch = data[i:i + batch_size]
+                batch = data[i : i + batch_size]
                 docs = [collection.createDocument(item) for item in batch]
                 collection.bulkSave(docs)
                 logger.info("已插入: %r 条数据", i + len(batch))
@@ -49,6 +53,7 @@ class AQLConfig:
         except Exception as e:
             logger.error("修改数据时发生错误: %r", str(e))
             raise
+
 
 if __name__ == "__main__":
     AQLConfig().run()
