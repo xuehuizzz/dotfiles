@@ -105,9 +105,7 @@ class DuckDBReader:
         if not kwargs:
             return ""
 
-        return ", " + ", ".join(
-            f"{key}=${key}" for key in kwargs
-        )
+        return ", " + ", ".join(f"{key}=${key}" for key in kwargs)
 
 
 if __name__ == "__main__":
