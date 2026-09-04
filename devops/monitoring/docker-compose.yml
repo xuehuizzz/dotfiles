@@ -3,13 +3,14 @@ services:
     image: prom/prometheus
     container_name: prometheus
     volumes:
-      - ./prometheus:/etc/prometheus
+      - ./prometheus:/etc/prometheus:ro
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.retention.time=30d'
+      - '--storage.tsdb.retention.size=50GB'
     ports:
-      - '9090:9090'
+      - '127.0.0.1:9090:9090'
     restart: always
 
   grafana:
@@ -18,10 +19,10 @@ services:
     ports:
       - '3000:3000'
     environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
     volumes:
-      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
       - grafana_data:/var/lib/grafana
     restart: always
 
@@ -29,9 +30,9 @@ services:
     image: prom/alertmanager
     container_name: alertmanager
     ports:
-      - '9093:9093'
+      - '127.0.0.1:9093:9093'
     volumes:
-      - ./alertmanager/config.yml:/etc/alertmanager/config.yml
+      - ./alertmanager/config.yml:/etc/alertmanager/config.yml:ro
     command:
       - '--config.file=/etc/alertmanager/config.yml'
     restart: always
