@@ -12,12 +12,14 @@ services:
     ports:
       - '127.0.0.1:9090:9090'
     restart: always
+    networks:
+      - monitoring
 
   grafana:
     image: grafana/grafana
     container_name: grafana
     ports:
-      - '3000:3000'
+      - '127.0.0.1:3000:3000'
     environment:
       GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
@@ -25,6 +27,8 @@ services:
       - ./grafana/provisioning:/etc/grafana/provisioning:ro
       - grafana_data:/var/lib/grafana
     restart: always
+    networks:
+      - monitoring
 
   alertmanager:
     image: prom/alertmanager
@@ -33,10 +37,17 @@ services:
       - '127.0.0.1:9093:9093'
     volumes:
       - ./alertmanager/config.yml:/etc/alertmanager/config.yml:ro
+      - alertmanager_data:/alertmanager
     command:
       - '--config.file=/etc/alertmanager/config.yml'
     restart: always
-
+    networks:
+      - monitoring
+      
 volumes:
   prometheus_data:
   grafana_data:
+  alertmanager_data:
+
+networks:
+  monitoring:
