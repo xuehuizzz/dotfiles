@@ -9,9 +9,9 @@ alerting:
             - 'alertmanager:9093'
 
 rule_files:
-  - "alert.rules.yml"
-  - "alert.rules.db.yml"
-  - "alert.rules.middleware.yml"
+  - "/etc/prometheus/alert.rules.yml"
+  - "/etc/prometheus/alert.rules.db.yml"
+  - "/etc/prometheus/alert.rules.middleware.yml"
 
 scrape_configs:
   # ============================================================
