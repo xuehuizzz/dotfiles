@@ -115,6 +115,8 @@ defaults write com.apple.finder ShowStatusBar -bool true
 
 # 在标题栏显示完整 POSIX 路径
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# 设置 Finder 的默认“分组方式”为“不分组”
 defaults write com.apple.finder FXPreferredGroupBy -string "None"
 
 # 默认视图样式 (列表视图: Nlsv / 图标: icnv / 分栏: clmv / 画廊: glyv)
