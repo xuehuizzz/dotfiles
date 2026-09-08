@@ -6,8 +6,6 @@
 #  参考: https://macos-defaults.com
 # ============================================================================
 
-# 关闭所有正在运行的提示
-osascript -e 'tell application "System Preferences" to quit'
 
 # ============================================================================
 # 系统通用 (NSGlobalDomain)
@@ -122,6 +120,9 @@ defaults write com.apple.finder FXPreferredGroupBy -string "None"
 # 默认视图样式 (列表视图: Nlsv / 图标: icnv / 分栏: clmv / 画廊: glyv)
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
+# Column View 自动调整列宽
+defaults write com.apple.finder _FXEnableColumnAutoSizing -bool true
+
 # 新建窗口默认打开 Downloads 目录
 #   PfDe = Desktop (桌面)
 #   PfHm = Home    (家目录)
@@ -145,6 +146,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # 30 天后自动清空废纸篓
 defaults write com.apple.finder FXRemoveOldTrashItems -bool true
+
 
 # ============================================================================
 # 磁盘镜像 (DMG / Disk Images)
