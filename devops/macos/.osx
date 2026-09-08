@@ -13,7 +13,7 @@ osascript -e 'tell application "System Preferences" to quit'
 # 系统通用 (NSGlobalDomain)
 # ============================================================================
 
-# 不显示所有文件扩展名
+# 不强制显示所有扩展名
 defaults write NSGlobalDomain AppleShowAllExtensions -bool false
 
 # 默认存储到本地磁盘，而不是 iCloud
@@ -42,7 +42,7 @@ defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Tab 键聚焦所有控件 (对话框中可用 Tab 切换按钮)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
 
 # 滚动条仅在滚动时显示
 # 可选值: WhenScrolling, Automatic, Always
@@ -51,10 +51,6 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 # ============================================================================
 # 登录 & 启动
 # ============================================================================
-
-# 重启系统后不打开未关闭的软件
-defaults write com.apple.loginwindow TALLogoutSavesState -bool false
-defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
 
 # 关闭崩溃报错弹窗
 defaults write com.apple.CrashReporter DialogType none
@@ -65,6 +61,9 @@ defaults write com.apple.CrashReporter DialogType none
 # ============================================================================
 # Dock
 # ============================================================================
+
+# 让正在运行的 App 显示小指示点
+defaults write com.apple.dock show-process-indicators -bool true
 
 # 自动隐藏 Dock
 defaults write com.apple.dock autohide -bool true
@@ -99,6 +98,7 @@ defaults write com.apple.dock showhidden -bool true
 
 # 文件夹始终排在最前
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
+defaults write com.apple.finder _FXSortFoldersFirstOnDesktop -bool true
 
 # 默认搜索当前文件夹 (而非整个 Mac)
 # 可选: SCev (本机), SCcf (当前文件夹), SCsp (上次范围)
@@ -115,6 +115,7 @@ defaults write com.apple.finder ShowStatusBar -bool true
 
 # 在标题栏显示完整 POSIX 路径
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+defaults write com.apple.finder FXPreferredGroupBy -string "None"
 
 # 默认视图样式 (列表视图: Nlsv / 图标: icnv / 分栏: clmv / 画廊: glyv)
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
@@ -128,6 +129,7 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 #   PfLo = Other    (自定义路径，配合 NewWindowTargetPath 使用)
 defaults write com.apple.finder NewWindowTarget -string "PfLo"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Downloads/"
+defaults write com.apple.finder FinderSpawnTab -bool true
 
 # 显示外置磁盘 / 移动硬盘 / 光盘 / 服务器在桌面
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
@@ -154,11 +156,6 @@ defaults write com.apple.finder FXRemoveOldTrashItems -bool true
 #   do-nothing  - 不做任何操作 (系统默认)
 defaults write com.apple.frameworks.diskimages auto-action -string "eject"
 
-# 跳过 DMG 校验 (加快挂载速度，可信来源时建议开启)
-defaults write com.apple.frameworks.diskimages skip-verify -bool true
-defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-
 # 挂载 DMG 后不自动打开 Finder 窗口 (按需，部分用户喜欢自动打开)
 # defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool false
 # defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool false
@@ -172,7 +169,7 @@ mkdir -p "${HOME}/Pictures/Screenshots"
 defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screenshots"
 
 # 截图格式 (png / jpg / pdf / tiff)
-defaults write com.apple.screencapture type -string "jpg"
+defaults write com.apple.screencapture type -string "png"
 
 # 关闭窗口截图阴影
 defaults write com.apple.screencapture disable-shadow -bool true
@@ -219,6 +216,8 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # 0=Application, 2=Network, 3=Disk, 5=CPU Usage, 6=CPU History
 defaults write com.apple.ActivityMonitor IconType -int 5
 
+# Activity Monitor 默认刷新周期
+defaults write com.apple.ActivityMonitor UpdatePeriod -int 1
 # 默认显示所有进程
 defaults write com.apple.ActivityMonitor ShowCategory -int 0
 
@@ -268,12 +267,8 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 
 #  最后: 重启相关服务使设置生效
-for app in "Activity Monitor" \
-    "cfprefsd" \
-    "Dock" \
-    "Finder" \
-    "SystemUIServer" \
-    "Terminal"; do
-    killall "${app}" &> /dev/null
-done
+killall Dock 2>/dev/null || true
+killall Finder 2>/dev/null || true
+killall SystemUIServer 2>/dev/null || true
+killall "Activity Monitor" 2>/dev/null || true
 echo "✅ 配置完成！部分设置可能需要重启或重新登录后才能生效。"
