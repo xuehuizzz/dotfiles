@@ -93,6 +93,7 @@ For doc IN users
   // RETURN DISTINCT doc.name
   COLLECT res = doc.name
   RETURN res
+  // RETURN DISTINCT doc.name  // 也可
 
 // 查询用户表中city="New York"的记录并按照age顺序查询
 FOR doc IN users
@@ -114,11 +115,12 @@ FOR doc IN users
    COLLECT city = doc.city WITH COUNT INTO count
    RETURN { city, count }
 
-// 连表查询
-FOR user IN Users
-    FOR order IN Orders
-        FILTER user._key == order.userKey
-        RETURN { user, order }
+// 在UI端查询并导出为csv
+FOR doc IN users
+  RETURN {
+    name: doc.name,
+    age: IFNULL(doc.age, 18)   // 只要查询结果中没有null值就会导出csv
+  }
 ```
 
 ## 删除数据
