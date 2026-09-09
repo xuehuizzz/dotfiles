@@ -44,3 +44,23 @@ xuehui ALL=(ALL) NOPASSWD: /usr/local/bin/openconnect    # 给用户提权
 > NOPASSWD: → 执行命令时不需要输入 sudo 密码
 >
 > /usr/local/bin/openconnect → 允许执行的命令
+
+### zstd
+```bash
+# 压缩文件
+zstd test.txt
+
+# 解压
+zstd -d test.txt.zst
+
+# 指定压缩等级，1 最快，19 压缩率更高
+zstd -5 test.txt
+
+# 压缩目录
+tar -cf data.tar data/
+zstd data.tar
+
+# 解压 tar.zst
+zstd -d data.tar.zst
+tar -xf data.tar
+```
