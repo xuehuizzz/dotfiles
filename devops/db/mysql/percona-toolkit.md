@@ -1,4 +1,4 @@
-# Percona Toolkit 使用笔记
+<h1 align="center">Percona Toolkit 使用笔记</h1>
 
 > 安装：`brew/apt/yum install percona-toolkit`
 
