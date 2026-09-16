@@ -6,14 +6,14 @@ CREATE TABLE xxx (
     id bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键ID',    -- BINARY(16) NOT NULL PRIMARY KEY COMMENT '分布式系统主键: uuid v7',      -- UUID v7
     created_at datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间(UTC)',
     updated_at datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间(UTC)',
-    deleted_at datetime(3) DEFAULT NULL COMMENT '删除时间(软删除,UTC)',
+    deleted_at datetime(3) DEFAULT NULL COMMENT '删除时间(软删除,UTC), IS NUll(未删除), IS NOT NULL(已删除)',
     created_by bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建者ID，0=SYSTEM',
     updated_by bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '更新者ID，0=SYSTEM',
     deleted_by bigint UNSIGNED DEFAULT NULL COMMENT '删除者ID，NULL=未删除，0=SYSTEM，其他=用户ID',
-    status tinyint UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态：0-禁用，1-启用',
+    state tinyint UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态：0-禁用，1-启用',
     version int UNSIGNED NOT NULL DEFAULT 0 COMMENT '乐观锁版本号',
     remark varchar(255) DEFAULT NULL COMMENT '备注',
-    tuition decimal(12, 2) NOT NULL DEFAULT 0.00 COMMENT '小数类型',
+    money decimal(12, 2) NOT NULL DEFAULT 0.00 COMMENT '小数类型',
     -- UNIQUE KEY idx_username (username),                                    -- 唯一索引
     -- KEY idx_email (email),                                                 -- 普通索引
     -- KEY idx_name_email (name, email),                                      -- 联合索引
