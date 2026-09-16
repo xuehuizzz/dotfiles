@@ -30,7 +30,7 @@ CREATE TABLE xxx (
 ## 用户管理
 ```sql
 -- 创建用户
-CREATE USER 'admin'@'%' IDENTIFIED BY 'admin_pwd';
+CREATE USER 'admin'@'%' IDENTIFIED BY 'admin_passwd';
 
 -- 修改用户密码
 ALTER USER 'username'@'hostname' IDENTIFIED BY 'new_password';  -- MySQL5.7及以上版本(最推荐使用)
