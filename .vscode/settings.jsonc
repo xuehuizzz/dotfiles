@@ -82,7 +82,7 @@
     "code-runner.clearPreviousOutput": true,
     "code-runner.runInTerminal": true,
     "python.terminal.activateEnvironment": true,
-    "terminal.integrated.fontFamily": "Maple Mono NF CN, Menlo, Consolas, Maple UI, PingFang, 'Microsoft YaHei', monospace",
+    "terminal.integrated.fontFamily": "Maple Mono NF CN, Menlo, Consolas, PingFang, 'Microsoft YaHei', monospace",
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.persistentSessionReviveProcess": "never",
     "terminal.integrated.shellIntegration.enabled": true,
@@ -98,7 +98,7 @@
         "announcement": "auto"
     },
     "workbench.fontAliasing": "antialiased",
-    "editor.fontFamily": "Maple Mono NF CN, Menlo, Consolas, Maple UI, PingFang, 'Microsoft YaHei', monospace",
+    "editor.fontFamily": "Maple Mono NF CN, Menlo, Consolas, PingFang, 'Microsoft YaHei', monospace",
     "editor.fontLigatures": "'calt', 'cv01', 'ss01', 'zero'",
     "editor.fontSize": 11,
     "editor.fontWeight": "normal",
