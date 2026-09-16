@@ -119,7 +119,7 @@ FOR doc IN users
 FOR doc IN users
   RETURN {
     name: doc.name,
-    age: IFNULL(doc.age, 18)   // 只要查询结果中没有null值就会导出csv
+    age: NOT_NULL(doc.age, 18)   // 只要查询结果中没有null值就会导出csv
   }
 ```
 
