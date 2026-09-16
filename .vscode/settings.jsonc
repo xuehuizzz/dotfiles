@@ -81,6 +81,7 @@
     // 终端配置
     "code-runner.clearPreviousOutput": true,
     "code-runner.runInTerminal": true,
+    "python.terminal.activateEnvironment": true,
     "terminal.integrated.fontFamily": "Maple Mono NF CN, Menlo, Consolas, Maple UI, PingFang, 'Microsoft YaHei', monospace",
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.persistentSessionReviveProcess": "never",
