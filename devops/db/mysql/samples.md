@@ -1,7 +1,5 @@
 ## MySQL8 创建一张标准的数据表
 ```sql
--- 日期时间类型: DB 存入 UTC 毫秒级, 应用层输出转成 ISO8601
--- 连接层需设置 SET time_zone = '+00:00', 只影响 timestamp 和 NOW()/CURRENT_TIMESTAMP 这类函数的返回值, 主要保证的是 CURRENT_TIMESTAMP(3) 默认值是 UTC
 CREATE TABLE xxx (
     id bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键ID',    -- BINARY(16) NOT NULL PRIMARY KEY COMMENT '分布式系统主键: uuid v7',      -- UUID v7
     created_at datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间(UTC)',
@@ -10,10 +8,10 @@ CREATE TABLE xxx (
     created_by bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建者ID，0=SYSTEM',
     updated_by bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '更新者ID，0=SYSTEM',
     deleted_by bigint UNSIGNED DEFAULT NULL COMMENT '删除者ID，NULL=未删除，0=SYSTEM，其他=用户ID',
-    state tinyint UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态：0-禁用，1-启用',
+    status tinyint UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态：0-禁用，1-启用',
     version int UNSIGNED NOT NULL DEFAULT 0 COMMENT '乐观锁版本号',
     remark varchar(255) DEFAULT NULL COMMENT '备注',
-    money decimal(12, 2) NOT NULL DEFAULT 0.00 COMMENT '小数类型',
+    money decimal(12, 2) NOT NULL DEFAULT 0.00 COMMENT '金额存储',
     -- UNIQUE KEY idx_username (username),                                    -- 唯一索引
     -- KEY idx_email (email),                                                 -- 普通索引
     -- KEY idx_name_email (name, email),                                      -- 联合索引
@@ -21,6 +19,17 @@ CREATE TABLE xxx (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='一张相对规范的表结构(mysql8.x)';
 ```
+> 1. 数据库时间统一使用 UTC
+> 2. DATETIME(3) 按 UTC 约定解释
+> 3. 所有连接池 SESSION time_zone 必须为 +00:00
+> 4. API 时间统一输出 ISO 8601，并携带 timezone / Z
+> 5. updated_at / updated_by 由同一更新操作维护
+> 6. version 用于 optimistic locking
+> 7. deleted_at IS NULL 表示有效数据
+> 8. status 表示业务状态，不承担删除语义
+> 9. 所有业务查询必须考虑 deleted_at
+> 10. UUIDv7 与 AUTO_INCREMENT 二选一，由系统架构决定
+
 > utf8mb4_0900_ai_ci 是 MySQL 8.0 中引入的一种字符集排序规则（collation），它由几个部分组成:
    - utf8mb4 : 字符集，支持完整的 Unicode 字符集，包括 emoji 表情符号和其他特殊字符（最多可存储 4 字节的 UTF-8 字符）
    - 0900 : 表示基于 Unicode 9.0.0 标准, 比旧版本的排序规则更加完善
