@@ -8,7 +8,6 @@ follow_symlinks = true
 
 # Prompt 左侧 / 右侧布局
 format = """
-$os\
 $username\
 $hostname\
 $directory\
