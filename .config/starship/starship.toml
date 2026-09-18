@@ -1,0 +1,125 @@
+# Starship 全局配置
+"$schema" = "https://starship.rs/config-schema.json"
+add_newline = false
+scan_timeout = 30
+command_timeout = 500
+follow_symlinks = true
+
+
+# Prompt 左侧 / 右侧布局
+format = """
+$os\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$character
+"""
+right_format = ""
+
+
+# 最后那个输入符号
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+
+
+# 当前目录
+[directory]
+style = "bold cyan"
+format = "[$path]($style)[$read_only]($read_only_style) "
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = "~"
+read_only = " "
+read_only_style = "red"
+
+
+# Git Branch
+[git_branch]
+symbol = " "
+style = "bold purple"
+format = "[$symbol$branch]($style) "
+
+
+# Git Status
+[git_status]
+disabled = true
+
+
+# Git Commit
+[git_commit]
+commit_hash_length = 7
+tag_symbol = "🔖 "
+
+
+# Username
+[username]
+show_always = false
+style_user = "bold yellow"
+style_root = "bold red"
+format = "[$user]($style) "
+
+
+# Hostname
+[hostname]
+ssh_only = true
+format = "[$hostname]($style) "
+style = "bold green"
+
+
+# OS 默认关闭
+[os]
+disabled = true
+format = "[$symbol]($style) "
+
+
+# 命令执行时间
+[cmd_duration]
+disabled = false
+
+
+# Battery
+[battery]
+disabled = false
+
+
+
+# Memory Usage
+[memory_usage]
+disabled = false
+# threshold = 75
+
+
+# Jobs
+[jobs]
+symbol = "✦ "
+style = "bold blue"
+
+
+# 上一个命令是否执行成功
+[status]
+disabled = false
+format = "[$symbol$status]($style) "
+symbol = "✘ "
+
+
+# 当前使用 zsh / bash / fish 等
+[shell]
+disabled = true
+
+
+# 当前项目 package 版本
+[package]
+disabled = false
+
+
+# 自定义颜色系统
+[palettes.my_theme]
+red = "#ff5555"
+green = "#50fa7b"
+yellow = "#f1fa8c"
+blue = "#8be9fd"
+purple = "#bd93f9"
+pink = "#ff79c6"
