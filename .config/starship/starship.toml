@@ -20,9 +20,9 @@ right_format = ""
 
 # 最后那个输入符号
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
-vimcmd_symbol = "[❮](bold green)"
+success_symbol = "[›](bold green)"
+error_symbol = "[›](bold red)"
+vimcmd_symbol = "[‹](bold green)"
 
 
 # 当前目录
