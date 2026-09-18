@@ -22,3 +22,6 @@ export LANG="en_US.UTF-8"
 
 # less conf
 export LESS="-R -F"  # -R 处理颜色 -F 短输出时直接打印
+
+# starship conf
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
