@@ -27,8 +27,8 @@ map("n", "<Tab>", ">>_", "Indent current line")
 map("n", "<S-Tab>", "<<_", "Outdent current line")
 
 -- Select all  NOTE: overrides default <C-a> (increment number)
-map("n", "<C-a>", "ggVG", "Select all")
-map({ "i", "v" }, "<C-a>", "<Esc>ggVG", "Select all")
+map("n", "<C-a>", "gg0vG$", "Select all")
+map({ "i", "v" }, "<C-a>", "<Esc>gg0vG$", "Select all")
 
 -- Disable Command+A
 map({ "n", "i", "v" }, "<D-a>", "<Nop>", "Disable Cmd+A")
