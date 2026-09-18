@@ -12,7 +12,7 @@
     aliases.zsh
     plugins.zsh
     sdkman.zsh
-    starship.zsh
+    prompt.zsh
   )
 
   for config in "${configs[@]}"; do
