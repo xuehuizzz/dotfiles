@@ -29,12 +29,5 @@ export LESS="-R -F"  # -R 处理颜色 -F 短输出时直接打印
 # starship conf
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
-# ---------- Pager ----------
-if command -v bat >/dev/null 2>&1; then
-  export MANPAGER="bat -l man -p"
-elif command -v batcat >/dev/null 2>&1; then
-  export MANPAGER="batcat -l man -p"
-fi
-
 # ---------- GPG ----------
 export GPG_TTY=$(tty)
