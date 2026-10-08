@@ -1,6 +1,9 @@
-export XDG_CONFIG_HOME="$HOME/.config"  # 配置文件
-export XDG_DATA_HOME="$HOME/.local/share"
+# ---------- XDG base directories ----------
+# Centralizes config/cache/data locations
+export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 # 优先使用 ~/.local/bin 中的用户级工具（如 pip install --user 安装的命令）
