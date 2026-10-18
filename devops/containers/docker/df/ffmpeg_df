@@ -1,73 +1,125 @@
-# alias ffmpeg="docker run --rm --user $(id -u):$(id -g) -v $(pwd):/home/ffmpeg ffmpeg:v1 -y"
+# alias ffmpeg="docker run --rm --user $(id -u):$(id -g) -v $(pwd):/home/ffmpeg ffmpeg:v9 -y"
 
-# 第一阶段
-FROM ubuntu:22.04 AS builder
+# ==================== 第一阶段：构建 ====================
+FROM debian:bookworm-slim AS builder
 
-# 换源 + apt 配置
+# 1. 先用官方源安装 ca-certificates
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        xz-utils \
+        && rm -rf /var/lib/apt/lists/*
+
+# 2. 换清华源 + 开启 non-free / contrib
+RUN sed -i 's|Components: main|Components: main contrib non-free non-free-firmware|g' /etc/apt/sources.list.d/debian.sources && \
+    sed -i 's|http://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g' /etc/apt/sources.list.d/debian.sources && \
+    sed -i 's|http://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources
+
+# 3. 安装构建依赖
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        autoconf automake build-essential cmake git pkg-config \
+        nasm yasm texinfo wget zlib1g-dev \
+        libass-dev libfreetype6-dev libsdl2-dev libtool \
+        libva-dev libvdpau-dev libvorbis-dev \
+        libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev \
+        libx264-dev libx265-dev libnuma-dev libvpx-dev \
+        libfdk-aac-dev libmp3lame-dev libopus-dev libxvidcore-dev \
+        libssl-dev libaom-dev libdav1d-dev libbluray-dev \
+        libtheora-dev libopenjp2-7-dev libsoxr-dev \
+        frei0r-plugins-dev libvidstab-dev \
+        && rm -rf /var/lib/apt/lists/*
+
+# 4. 下载并编译 FFmpeg 9.0.2
+WORKDIR /tmp/ffmpeg_sources
+RUN curl -fsSL -o ffmpeg-9.0.2.tar.xz https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz && \
+    tar -xJf ffmpeg-9.0.2.tar.xz && \
+    cd ffmpeg-9.0.2 && \
+    ./configure \
+        --prefix=/usr/local \
+        --enable-gpl \
+        --enable-version3 \
+        --enable-nonfree \
+        --enable-libass \
+        --enable-libfreetype \
+        --enable-libmp3lame \
+        --enable-libopus \
+        --enable-libvorbis \
+        --enable-libvpx \
+        --enable-libx264 \
+        --enable-libx265 \
+        --enable-libfdk-aac \
+        --enable-libxvid \
+        --enable-libtheora \
+        --enable-libopenjpeg \
+        --enable-libbluray \
+        --enable-libaom \
+        --enable-libdav1d \
+        --enable-libsoxr \
+        --enable-frei0r \
+        --enable-libvidstab \
+        --enable-openssl \
+        --disable-debug \
+        --disable-doc \
+        --disable-ffplay \
+        && make -j"$(nproc)" \
+        && make install \
+        && make distclean
+
+# ==================== 第二阶段：运行时 ====================
+FROM debian:bookworm-slim
+
+# 同样先装证书
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates && \
-    update-ca-certificates && apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    sed -i 's|http://archive.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list && \
-    sed -i 's|http://security.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list && \
-    echo 'Acquire::Queue-Mode "access";' > /etc/apt/apt.conf.d/99parallel && \
-    echo 'Acquire::http::Pipeline-Depth "200";' >> /etc/apt/apt.conf.d/99parallel && \
-    echo 'Acquire::https::Pipeline-Depth "200";' >> /etc/apt/apt.conf.d/99parallel
+    rm -rf /var/lib/apt/lists/*
 
-# 安装构建依赖
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        autoconf automake build-essential cmake git libass-dev libvidstab-dev \
-        libfreetype6-dev libsdl2-dev libtool libva-dev libvdpau-dev libvorbis-dev \
-        libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo wget \
-        zlib1g-dev nasm yasm libx264-dev libx265-dev libnuma-dev libvpx-dev \
-        libfdk-aac-dev libmp3lame-dev libopus-dev libxvidcore-dev libssl-dev \
-        libaom-dev libdav1d-dev libbluray-dev libtheora-dev libopenjp2-7-dev \
-        libsoxr-dev frei0r-plugins-dev
+# 换源 + 开启 non-free（运行时也需要 libfdk-aac）
+RUN sed -i 's|Components: main|Components: main contrib non-free non-free-firmware|g' /etc/apt/sources.list.d/debian.sources && \
+    sed -i 's|http://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g' /etc/apt/sources.list.d/debian.sources && \
+    sed -i 's|http://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources
 
-# 拉取源码
-WORKDIR /tmp/ffmpeg_sources
-RUN git clone --depth 1 https://git.ffmpeg.org/ffmpeg.git
-
-# 编译
-WORKDIR /tmp/ffmpeg_sources/ffmpeg
-RUN ./configure --prefix=/usr/local --enable-gpl --enable-libass --enable-libfreetype \
-        --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx \
-        --enable-libx264 --enable-libx265 --enable-libfdk-aac --enable-libxvid \
-        --enable-libtheora --enable-libopenjpeg --enable-libbluray --enable-libaom \
-        --enable-libdav1d --enable-libsoxr --enable-frei0r --enable-libvidstab \
-        --enable-openssl --enable-version3 --enable-nonfree && \
-    make -j"$(nproc)" && \
-    make install && \
-    make distclean
-
-# 清理
-RUN apt-get remove -y autoconf automake build-essential cmake git \
-        libass-dev libfreetype6-dev libsdl2-dev libtool libva-dev \
-        libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev \
-        libxcb-xfixes0-dev pkg-config texinfo wget zlib1g-dev nasm yasm && \
-    apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# 第二阶段
-FROM ubuntu:22.04
-
-# 复制
 COPY --from=builder /usr/local /usr/local
 
-# 运行期依赖
+# 安装运行时依赖
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        libass9 libfreetype6 libsdl2-2.0-0 libva2 libvdpau1 libvorbis0a libx264-163 \
-        libx265-199 libnuma1 libvpx7 libfdk-aac2 libmp3lame0 libopus0 libxvidcore4 \
-        libssl3 libaom3 libdav1d5 libbluray2 libtheora0 libopenjp2-7 libsoxr0 \
-        frei0r-plugins libvidstab1.1 ca-certificates libxcb1 libxcb-shape0 \
-        libxcb-shm0 libxcb-xfixes0 libsndio7.0 libxv1 libva-drm2 && \
-    rm -rf /var/lib/apt/lists/* && ldconfig
+        libass9 \
+        libfreetype6 \
+        libsdl2-2.0-0 \
+        libva2 \
+        libvdpau1 \
+        libvorbis0a \
+        libx264-164 \
+        libx265-199 \
+        libnuma1 \
+        libvpx7 \
+        libfdk-aac2 \
+        libmp3lame0 \
+        libopus0 \
+        libxvidcore4 \
+        libssl3 \
+        libaom3 \
+        libdav1d6 \
+        libbluray2 \
+        libtheora0 \
+        libopenjp2-7 \
+        libsoxr0 \
+        frei0r-plugins \
+        libvidstab1.1 \
+        libxcb1 \
+        libxcb-shape0 \
+        libxcb-shm0 \
+        libxcb-xfixes0 \
+        libsndio7.0 \
+        libxv1 \
+        libva-drm2 \
+        && rm -rf /var/lib/apt/lists/* \
+        && ldconfig
 
-# 工作目录
 WORKDIR /home/ffmpeg
 
-# 测试
 RUN ffmpeg -version
 
-# 入口
 ENTRYPOINT ["ffmpeg"]
