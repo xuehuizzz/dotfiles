@@ -67,9 +67,9 @@ done
 unset _alias_list pair alias_cmd real_cmd
 
 # ffmpeg docker 包装 (仅在本地镜像存在时生效, 避免污染真实 ffmpeg)
-if _command_exists docker && docker image inspect ffmpeg:v1 >/dev/null 2>&1; then
+if _command_exists docker && docker image inspect ffmpeg:v9 >/dev/null 2>&1; then
     ffmpeg() {
-        docker run --rm -v "$(pwd):/home/ffmpeg" ffmpeg:v1 -y "$@"
+        docker run --rm -v "$(pwd):/home/ffmpeg" ffmpeg:v9 -y "$@"
     }
 fi
 
