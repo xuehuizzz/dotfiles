@@ -12,7 +12,7 @@
 ```cmd
 # 在 Linux 系统中，Logrotate 通常默认安装
 sudo apt-get install logrotate   # Debian/Ubuntu
-sudo yarn install logrotate    # Red Hat/CentOS
+sudo yum install logrotate     # 或 sudo dnf install logrotate
 
 logrotate --version  # 验证是否安装成功
 ```
