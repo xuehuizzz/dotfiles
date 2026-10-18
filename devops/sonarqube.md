@@ -46,7 +46,7 @@ sonar.qualitygate.timeout=300
 ```bash
 https://localhost:9000  # 默认user/pwd都是: admin
 # 点击头像 --> My Account --> Security --> Generate Token
-``
+```
 ## 执行代码分析
 ```bash
 # 分析完成后，可以在 SonarQube 的 Web 界面上看到结果, 所有的分析结果都会被存储在默认的主干（main）中
