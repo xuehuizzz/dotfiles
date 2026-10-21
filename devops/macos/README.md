@@ -1,4 +1,5 @@
 # <mark>homebrew</mark>
+Homebrew 是 macOS 上流行的开源包管理器，可以通过命令行快速安装、更新和卸载软件、开发工具及系统依赖。
 ### [安装](https://brew.sh/)
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
