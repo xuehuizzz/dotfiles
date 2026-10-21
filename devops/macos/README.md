@@ -65,7 +65,7 @@ brew services stop --all       # 停止所有托管服务
 brew services cleanup          # 清理无用的服务配置
 
 # 软件源与仓库扩展
-brew tap                      # 查看已添加的第三方仓库
+brew tap                       # 查看已添加的第三方仓库
 brew tap user/repo             # 添加第三方仓库
 brew untap user/repo           # 移除第三方仓库
 brew tap-info user/repo        # 查看仓库信息
