@@ -189,11 +189,11 @@ return {
 
       -- 不同 level 的 icon(可选)
       icons = {
-        error = " ",
-        warn  = " ",
-        info  = " ",
-        debug = " ",
-        trace = " ",
+        error = "",
+        warn  = "",
+        info  = "",
+        debug = "",
+        trace = "",
       },
     },
 
