@@ -114,8 +114,8 @@
   cc = !cat ~/.config/git/.git-commit-types
 
   unadd = restore --staged
-  uncommit = reset --mixed HEAD~1
-  undo = reset --soft HEAD~1
+  uncommit = reset --soft HEAD~1
+  undo = reset --mixed HEAD~1
   repush = push --force-with-lease
   back = checkout -
   done = !git push -u origin HEAD
