@@ -1,7 +1,6 @@
 # 以编辑模式 ( -e ) 打开全局 Git 配置文件
 #   git config --global -e
 
-# ── 用户信息 ─────────────────────────────────────────
 [user]
   name = xuehui
   email = xuehuizzz103@gmail.com
@@ -9,7 +8,6 @@
 [init]
   defaultBranch = main
 
-# ── 核心 ─────────────────────────────────────────────
 [core]
   # 全局 ignore 由 Git 按 XDG 规范自动读取 ~/.config/git/ignore，无需显式指定
   quotepath = false
@@ -23,7 +21,6 @@
 [commit]
   verbose = true
 
-# ── 推送/拉取 ────────────────────────────────────────
 [push]
   default = simple
   autoSetupRemote = true
@@ -45,7 +42,6 @@
 [stash]
   showPatch = true
 
-# ── 差异 / 合并 ──────────────────────────────────────
 [diff]
   algorithm = histogram
   colorMoved = default
@@ -67,7 +63,6 @@
 [tag]
   sort = version:refname
 
-# ── delta ────────────────────────────────────────────
 [pager]
   diff = delta
   log = delta
@@ -103,7 +98,6 @@
   # 0 = 关闭 | prompt = 确认后执行 | 5 = 0.5s 后自动执行
   autocorrect = prompt
 
-# ── 别名：只保留「真·简写」，复杂逻辑全部移出 ──────
 [alias]
   s = status --short
   co = checkout
@@ -132,13 +126,12 @@
   dump = cat-file -p
   aliases = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
 
-# ── LFS ──────────────────────────────────────────────
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
 
-# ── 多身份（按需启用）────────────────────────────────
+# 多身份（按需启用）
 # [includeIf "gitdir:~/work/"]
 #   path = ~/.config/git/config-work
