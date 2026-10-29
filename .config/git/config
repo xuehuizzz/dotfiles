@@ -105,7 +105,7 @@
 
 # ── 别名：只保留「真·简写」，复杂逻辑全部移出 ──────
 [alias]
-  s = status -sb
+  s = status --short
   co = checkout
   ci = commit
   br = branch
