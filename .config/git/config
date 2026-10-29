@@ -113,9 +113,9 @@
   rs = restore
   cc = !cat ~/.config/git/.git-commit-types
 
-  unadd = restore --staged
-  uncommit = reset --soft HEAD~1
-  undo = reset --mixed HEAD~1
+  unadd = restore --staged  # 取消暂存（unstage），文件内容保留在工作区
+  uncommit = reset --soft HEAD~1   # 撤销最近一次 commit，改动保留在暂存区
+  undo = reset --mixed HEAD~1   # 撤销最近一次 commit，改动保留在工作区（不暂存）
   repush = push --force-with-lease
   back = checkout -
   done = !git push -u origin HEAD
