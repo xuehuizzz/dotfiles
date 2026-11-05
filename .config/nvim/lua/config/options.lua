@@ -1,113 +1,205 @@
--- 设置 leader 键，建议在初始化 lazy 之前设置
-vim.g.mapleader = " " -- 设置全局 leader 键为空格键
-vim.g.maplocalleader = " " -- 设置局部 leader 键为空格键
+-- 1. Leader Keys
+-- Must be set before loading plugins
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- 2. Disable Unnecessary Providers
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
+
+-- 3. Basic Settings
+vim.opt.number = true
+vim.opt.relativenumber = false
+vim.opt.title = true
+
+vim.opt.wrap = false
+vim.opt.scrolloff = 10
+vim.opt.sidescrolloff = 8
+
+vim.opt.mouse = "a"
+vim.opt.termguicolors = true
+vim.opt.background = "dark"
+
+vim.opt.encoding = "utf-8"
+vim.opt.fileencoding = "utf-8"
+
+-- GUI font
 vim.opt.guifont = "Maple Mono NF CN:h12"
-vim.opt.number = true -- 显示行号
--- vim.opt.relativenumber = true        -- 显示相对行号
--- vim.opt.title = true  -- 显示文件标题
-vim.opt.guicursor = "n-v-c-sm-i-ci-ve-r-cr-o:ver25,t:ver25-blinkon400-blinkoff400-blinkwait300-Cursor" -- 竖线光标，终端模式下闪烁
-vim.opt.expandtab = true -- 将制表符展开为空格
-vim.opt.tabstop = 4 -- 制表符等于4个空格
-vim.opt.shiftwidth = 4 -- 缩进宽度为4个空格
-vim.opt.autoindent = true -- 自动缩进
-vim.opt.cursorline = true -- 高亮当前行
-vim.opt.mouse = "a" -- 启用鼠标支持
-vim.opt.ttyfast = true -- 提高性能
-vim.opt.ruler = true -- 显示状态栏标尺
-vim.opt.cmdheight = 0 -- 命令行高度
-vim.opt.laststatus = 2 -- 显示状态栏
-vim.opt.softtabstop = 4 -- 退格键一次删除4个空格
-vim.opt.smartindent = true -- 智能自动缩进
--- vim.opt.autochdir = true -- 自动切换工作目录（会导致 explorer 根目录跟随变化）
-vim.opt.backupcopy = "yes" -- 备份时的行为为覆盖
-vim.opt.hidden = true -- 允许在有未保存的修改时切换缓冲区
-vim.opt.ignorecase = true -- 搜索时忽略大小写
-vim.opt.smartcase = true -- 有大写字母时保持对大小写敏感
-vim.opt.wrapscan = true -- 开启循环搜索
-vim.opt.incsearch = true -- 即时搜索
-vim.opt.hlsearch = true -- 搜索高亮
-vim.opt.errorbells = false -- 关闭错误提示音
-vim.opt.visualbell = false -- 关闭可视响铃
-vim.opt.magic = true -- 设置魔术
-vim.opt.backspace = "indent,eol,start" -- 设置退格键行为
-vim.opt.foldenable = true -- 开启折叠
-vim.opt.foldmethod = "expr" -- 折叠方式
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- 使用 treesitter 提供的折叠
-vim.opt.foldcolumn = "0" -- 折叠区域宽度
-vim.opt.foldlevel = 99 -- 折叠层数
-vim.opt.foldlevelstart = 99 -- 默认展开所有折叠
-vim.opt.termguicolors = true -- 启用终端真彩色支持
-vim.opt.background = "dark" -- 设置深色背景主题
-vim.opt.signcolumn = "yes" -- 始终显示标记列, (用于显示 git 状态、错误提示等), 防止文本左右移动
-vim.opt.clipboard:append("unnamedplus") -- 将系统剪贴板设置为默认寄存器
-vim.opt.splitright = true -- 垂直分割窗口时，新窗口在右边打开
-vim.opt.splitbelow = true -- 水平分割窗口时，新窗口在下方打开
-vim.opt.backup = false -- 不创建备份文件
-vim.opt.swapfile = false -- 禁用交换文件（swap file）的创建，这些文件通常用于在编辑时进行备份
-vim.opt.writebackup = false -- 不允许其他程序同时编辑同一文件
-vim.opt.conceallevel = 0 -- 不隐藏任何语法标记(如 Markdown 中的 `` )
-vim.opt.wrap = true -- 启用自动换行
-vim.opt.linebreak = true -- 在单词之间换行
-vim.opt.breakindent = true -- 保持换行后的缩进
-vim.opt.showbreak = "↪ " -- 显示换行符号
-vim.opt.filetype = "on" -- 启用文件类型检测
-vim.opt.encoding = "utf-8" -- 设置编码为 UTF-8
-vim.opt.fileencoding = "utf-8" -- 设置文件编码为 UTF-8
-vim.opt.langremap = false -- 禁用语言映射
-vim.opt.virtualedit = "onemore" -- 允许光标移动到最后一个字符之后
-vim.opt.scrolljump = 1 -- 当光标移出屏幕时滚动的行数
-vim.opt.scrolloff = 8 -- 保持光标上下文可见行数，让滚动更平滑
-vim.cmd("language en_US.UTF-8")
 
+-- 4. Indentation
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
 
--- 完全禁用诊断图标和符号
--- TODO: 过滤 #501, #402 告警
-vim.diagnostic.config({
-	virtual_text = {
-		prefix = "", -- 设置虚拟文本的前缀为空
-		spacing = 4, -- 设置间距
-		source = true,
-		severity = {
-			min = vim.diagnostic.severity.INFO,
-		},
-	},
-	signs = false, -- 禁用行号列的图标
-	update_in_insert = false,
-	underline = true,
-	severity_sort = true,
-	float = {
-		border = "rounded",
-		source = true,
-		header = "",
-		prefix = "",
-	},
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+
+-- 5. Search Settings
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+vim.opt.incsearch = true
+vim.opt.hlsearch = true
+vim.opt.wrapscan = true
+
+-- 6. Visual Settings
+-- Cursor line is controlled by autocmds
+vim.opt.cursorline = false
+
+vim.opt.signcolumn = "yes"
+vim.opt.showmatch = true
+vim.opt.matchtime = 2
+
+vim.opt.cmdheight = 0
+vim.opt.laststatus = 3
+
+vim.opt.ruler = true
+vim.opt.conceallevel = 0
+
+vim.opt.showbreak = "↪ "
+vim.opt.linebreak = false
+vim.opt.breakindent = false
+
+-- Completion popup
+vim.opt.completeopt = "menuone,noinsert,noselect"
+vim.opt.pumheight = 10
+vim.opt.pumblend = 10
+
+-- Floating window border (Neovim 0.11+)
+vim.opt.winborder = "rounded"
+
+-- Diff view
+vim.opt.fillchars:append("diff:╱")
+
+-- 7. File Handling
+vim.opt.backup = false
+vim.opt.writebackup = false
+vim.opt.swapfile = false
+
+-- Persistent undo
+local undodir = vim.fn.expand("~/.cache/nvim/undodir")
+
+vim.fn.mkdir(undodir, "p")
+
+vim.opt.undofile = true
+vim.opt.undodir = undodir
+
+-- 8. Performance and Timing
+vim.opt.updatetime = 300
+
+vim.opt.timeoutlen = 500
+vim.opt.ttimeoutlen = 0
+
+-- 9. Completion and File Search
+vim.opt.iskeyword:append("-")
+vim.opt.path:append("**")
+
+vim.opt.wildmode = "longest:full,full"
+
+vim.opt.wildignore:append({
+    "*/node_modules/*",
+    "*.o",
+    "*.obj",
+    "*.pyc",
+    "*.class",
+    "*.jar",
 })
 
--- 禁用一些不需要的内置插件
+-- 10. Clipboard
+vim.opt.clipboard:append("unnamedplus")
+
+-- 11. Cursor Settings
+vim.opt.guicursor =
+    "n-v-c-sm-i-ci-ve-r-cr-o:ver25,t:ver25-blinkon400-blinkoff400-blinkwait300-Cursor"
+
+-- 12. Folding Settings
+vim.opt.foldenable = true
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+vim.opt.foldcolumn = "0"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+
+-- 13. Split Behavior
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- 14. Terminal and Input
+vim.opt.virtualedit = "onemore"
+vim.opt.backspace = "indent,eol,start"
+
+vim.opt.errorbells = false
+vim.opt.visualbell = false
+
+-- 15. Built-in netrw
+vim.g.netrw_keepdir = 0
+vim.g.netrw_localcopydircmd = "cp -r"
+
+-- 16. LSP Diagnostics
+vim.diagnostic.config({
+    virtual_text = {
+        prefix = "",
+        spacing = 4,
+        source = true,
+        severity = {
+            min = vim.diagnostic.severity.INFO,
+        },
+    },
+
+    signs = false,
+
+    update_in_insert = false,
+
+    underline = true,
+
+    severity_sort = true,
+
+    float = {
+        border = "rounded",
+        source = true,
+        header = "",
+        prefix = "",
+    },
+})
+
+-- 17. Disable Unnecessary Built-in Plugins
 local disabled_built_ins = {
-	"netrw",
-	"netrwPlugin",
-	"netrwSettings",
-	"netrwFileHandlers",
-	"gzip",
-	"zip",
-	"zipPlugin",
-	"tar",
-	"tarPlugin",
-  "2html_plugin",
-  "tohtml",
-  "getscript",
-  "getscriptPlugin",
-  "logipat",
-  "matchit",
-  "rrhelper",
-  "spellfile_plugin",
-  "vimball",
-  "vimballPlugin",
+    "netrw",
+    "netrwPlugin",
+    "netrwSettings",
+    "netrwFileHandlers",
+
+    "gzip",
+    "zip",
+    "zipPlugin",
+    "tar",
+    "tarPlugin",
+
+    "2html_plugin",
+    "tohtml",
+
+    "getscript",
+    "getscriptPlugin",
+
+    "logipat",
+    "matchit",
+    "rrhelper",
+
+    "spellfile_plugin",
+
+    "vimball",
+    "vimballPlugin",
 }
 
-for _, plugin in pairs(disabled_built_ins) do
-	vim.g["loaded_" .. plugin] = 1
+for _, plugin in ipairs(disabled_built_ins) do
+    vim.g["loaded_" .. plugin] = 1
 end
+
+-- 18. Custom Filetypes
+vim.filetype.add({
+    extension = {
+        mjml = "html",
+    },
+})
