@@ -36,8 +36,8 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # 极速按键重复 (适合 Vim 党)
-defaults write NSGlobalDomain KeyRepeat -int 2
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 12
 
 # Tab 键聚焦所有控件 (对话框中可用 Tab 切换按钮)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
@@ -131,7 +131,7 @@ defaults write com.apple.finder _FXEnableColumnAutoSizing -bool true
 #   PfAF = All My Files (所有我的文件)
 #   PfLo = Other    (自定义路径，配合 NewWindowTargetPath 使用)
 defaults write com.apple.finder NewWindowTarget -string "PfLo"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Downloads/"
+defaults write com.apple.finder NewWindowTargetPath -string "file://$HOME/Downloads/"
 defaults write com.apple.finder FinderSpawnTab -bool true
 
 # 显示外置磁盘 / 移动硬盘 / 光盘 / 服务器在桌面
