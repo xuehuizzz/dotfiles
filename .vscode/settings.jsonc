@@ -321,16 +321,6 @@
         "editor.selectionHighlightBackground": "#3E66C522", // 与选中文本相同的其他文本
         "editor.wordHighlightBackground": "#3E66C533", // 光标所在单词的其他出现位置
     },
-    // code spell白名单
-    "cSpell.words": [
-        "myCustomWord",
-        "foobar",
-        "xuehui",
-        "k8s",
-        "cmdb",
-        "oceanbase",
-        "nopcloudnet"
-    ],
     // 文件列表配置
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.expand": false,
