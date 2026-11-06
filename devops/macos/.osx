@@ -227,7 +227,7 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 
 # 按 CPU 使用率排序
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
-defaults write com.apple.ActivityMonitor SortDirection -int 0
+defaults write com.apple.ActivityMonitor SortDirection -int 1
 
 # ============================================================================
 # Mission Control & 热区
@@ -268,7 +268,8 @@ defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # 自动下载后台更新
-defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+defaults write com.apple.SoftwareUpdate AutomaticDownload -bool true
+defaults write com.apple.commerce AutoUpdate -bool true
 
 #  最后: 重启相关服务使设置生效
 killall Dock 2>/dev/null || true
