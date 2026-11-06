@@ -185,18 +185,6 @@ defaults write com.apple.screencapture include-date -bool false
 defaults write com.apple.screencapture show-thumbnail -bool false
 
 # ============================================================================
-# TextEdit（沙盒应用，需要写容器路径）
-# ============================================================================
-TEXT_EDIT_PREFS="$HOME/Library/Containers/com.apple.TextEdit/Data/Library/Preferences/com.apple.TextEdit"
-mkdir -p "$(dirname "$TEXT_EDIT_PREFS")"
-
-# 默认使用纯文本模式
-defaults write "$TEXT_EDIT_PREFS" RichText -int 0
-# 默认 UTF-8 编码
-defaults write "$TEXT_EDIT_PREFS" PlainTextEncoding -int 4
-defaults write "$TEXT_EDIT_PREFS" PlainTextEncodingForWrite -int 4
-
-# ============================================================================
 # Terminal
 # ============================================================================
 
