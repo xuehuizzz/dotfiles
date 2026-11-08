@@ -54,7 +54,7 @@
   - ```bash
     docker run -e ARANGO_ROOT_PASSWORD=admin \
     -d --name arangodb \
-    -p 8529:8529 \
+    -p 127.0.0.1:8529:8529 \
     -v /Users/xuehuizzz/db/arango/data:/var/lib/arangodb3 \
     -v /Users/xuehuizzz/db/arango/apps:/var/lib/arangodb3-apps \
     --restart always \
