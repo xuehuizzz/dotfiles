@@ -24,8 +24,7 @@
     -e MYSQL_PASSWORD=admin \
     -e MYSQL_DATABASE=mydb \
     -v /Users/xuehuizzz/db/mysql:/app \
-    -p 3306:3306 \
-    -w /app \
+    -p 127.0.0.1:3306:3306 \
     --restart always \
     mysql:8.4
     ```
@@ -37,8 +36,7 @@
     -e POSTGRES_PASSWORD=admin \
     -e POSTGRES_DB=mydb \
     -v /Users/xuehuizzz/db/postgresql:/app \
-    -p 5432:5432 \
-    -w /app \
+    -p 127.0.0.1:5432:5432 \
     --restart always \
     postgres:18
     ```
