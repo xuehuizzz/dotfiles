@@ -6,7 +6,7 @@
     -e MYSQL_USER=admin \
     -e MYSQL_PASSWORD=admin \
     -e MYSQL_DATABASE=mydb \
-    -v /Users/xuehuizzz/db/mysql:/app \
+    -v /Users/xuehuizzz/db/mysql:/var/lib/mysql \
     -p 127.0.0.1:3306:3306 \
     --restart always \
     mysql:8.4
@@ -18,7 +18,7 @@
     -e POSTGRES_USER=admin \
     -e POSTGRES_PASSWORD=admin \
     -e POSTGRES_DB=mydb \
-    -v /Users/xuehuizzz/db/postgresql:/app \
+    -v /Users/xuehuizzz/db/postgresql:/var/lib/postgresql \
     -p 127.0.0.1:5432:5432 \
     --restart always \
     postgres:18
