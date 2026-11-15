@@ -82,8 +82,11 @@ unfocused_hollow = false
 save_to_clipboard = true
 
 [font]
+# Regular 常规
+# Bold 粗体
+# Italic 斜体
 size = 12.0
-normal = { family = "Maple Mono NF CN", style = "Regular" }
+normal = { family = "Maple Mono NF CN", style = "Italic" }
 bold = { family = "Maple Mono NF CN", style = "Bold" }
 italic = { family = "Maple Mono NF CN", style = "Italic" }
 builtin_box_drawing = true
