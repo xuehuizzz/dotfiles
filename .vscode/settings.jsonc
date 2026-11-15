@@ -248,12 +248,6 @@
     "editor.tokenColorCustomizations": {
         "textMateRules": [
             {
-                "scope": "comment",
-                "settings": { // 设置代码的注释部分为斜体
-                    "fontStyle": "italic"
-                }
-            },
-            {
                 "scope": [
                     "comment",
                     "source",
@@ -267,7 +261,7 @@
                     "entity.name.function",
                     "entity.name.type"
                 ],
-                "settings": {  // 设置常规也是斜体
+                "settings": {  // 设置代码为斜体
                     "fontStyle": "italic"
                 }
             }
