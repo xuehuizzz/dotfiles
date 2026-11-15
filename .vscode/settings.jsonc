@@ -252,6 +252,24 @@
                 "settings": { // 设置代码的注释部分为斜体
                     "fontStyle": "italic"
                 }
+            },
+            {
+                "scope": [
+                    "comment",
+                    "source",
+                    "variable",
+                    "entity",
+                    "keyword",
+                    "storage",
+                    "constant",
+                    "string",
+                    "support",
+                    "entity.name.function",
+                    "entity.name.type"
+                ],
+                "settings": {  // 设置常规也是斜体
+                    "fontStyle": "italic"
+                }
             }
         ]
     },
