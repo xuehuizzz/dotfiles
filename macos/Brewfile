@@ -2,6 +2,7 @@
 brew "bat"
 brew "duckdb"
 brew "fd"
+brew "fnm"
 brew "git-delta"
 brew "go"
 brew "hadolint"
