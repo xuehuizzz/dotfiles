@@ -74,6 +74,7 @@ if _command_exists docker && docker image inspect ffmpeg:v9 >/dev/null 2>&1; the
 fi
 
 # macOS
+alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 if [[ "$OSTYPE" == darwin* ]]; then
     _command_exists docker-slim && alias dsm="docker-slim build --http-probe=false --continue-after=exec"
     alias ql="qlmanage -p"                                 # quick look
