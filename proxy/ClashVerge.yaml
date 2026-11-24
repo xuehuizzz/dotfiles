@@ -1,14 +1,8 @@
-# Clash Verge Rev / Mihomo 配置
-# 转换自你提供的 Shadowrocket 规则
+# ============================================================
+# ⚠️ 修改代理组名称
+# 把下面所有的 "Zou" 全部替换成你自己的代理组名称
+# ============================================================
 
-mixed-port: 7890
-allow-lan: true
-bind-address: "*"
-mode: rule
-log-level: info
-ipv6: true
-
-# ==================== DNS 配置 ====================
 dns:
   enable: true
   listen: 0.0.0.0:1053
@@ -16,15 +10,15 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-    - "*.lan"
-    - "*.local"
-    - "localhost.ptlogin2.qq.com"
-    - "+.srv.nintendo.net"
-    - "+.stun.playstation.net"
-    - "xbox.*.microsoft.com"
-    - "+.xboxlive.com"
-    - "*.msftncsi.com"
-    - "www.msftconnecttest.com"
+    - '*.lan'
+    - '*.local'
+    - '*.localhost'
+    - '+.local'
+    - 'time.*.com'
+    - 'ntp.*.com'
+    - 'localhost.ptlogin2.qq.com'
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
 
   default-nameserver:
     - 223.5.5.5
@@ -34,246 +28,206 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
 
-  # 代理域名使用的 DNS（走代理解析）
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
 
-  # 国内域名专用 DNS（直连解析，提高 CDN 准确性）
   nameserver-policy:
-    "geosite:cn":
-      - https://dns.alidns.com/dns-query
-      - https://doh.pub/dns-query
-    "geosite:geolocation-!cn":
+    'geosite:cn,private,apple,microsoft@cn':
       - https://dns.alidns.com/dns-query
       - https://doh.pub/dns-query
 
-# ==================== 规则 ====================
-rules:
-  # 1. 局域网直连
-  - RULE-SET,lan,DIRECT
-
-  # 2. 广告拦截
-  - RULE-SET,reject,REJECT
-  - RULE-SET,reject_domain,REJECT
-
-  # 3. AI 服务代理（优先级高）
-  - RULE-SET,openai,PROXY
-  - RULE-SET,claude,PROXY
-  - RULE-SET,gemini,PROXY
-  - RULE-SET,copilot,PROXY
-  - DOMAIN-SUFFIX,perplexity.ai,PROXY
-  - DOMAIN-SUFFIX,grok.com,PROXY
-  - DOMAIN-SUFFIX,x.ai,PROXY
-  - DOMAIN-SUFFIX,cursor.com,PROXY
-  - DOMAIN-SUFFIX,b.ai,PROXY
-  - DOMAIN-SUFFIX,deepseek.com,PROXY
-
-  # 4. Google 与 YouTube
-  - RULE-SET,youtube,PROXY
-  - RULE-SET,google,PROXY
-
-  # 5. 社交与通讯
-  - RULE-SET,telegram,PROXY
-  - RULE-SET,twitter,PROXY
-  - RULE-SET,instagram,PROXY
-  - RULE-SET,facebook,PROXY
-  - RULE-SET,discord,PROXY
-
-  # 6. 开发工具
-  - RULE-SET,github,PROXY
-
-  # 7. 流媒体
-  - RULE-SET,netflix,PROXY
-  - RULE-SET,disney,PROXY
-  - RULE-SET,spotify,PROXY
-
-  # 8. Apple 服务直连
-  - RULE-SET,apple,DIRECT
-  - RULE-SET,apple_domain,DIRECT
-
-  # 9. Microsoft 服务直连
-  - RULE-SET,microsoft,DIRECT
-
-  # 10. 中国大陆域名直连
-  - RULE-SET,cn,DIRECT
-  - RULE-SET,cn_domain,DIRECT
-
-  # 11. 中国大陆 IP 直连
-  - GEOIP,CN,DIRECT,no-resolve
-
-  # 12. 最终兜底
-  - MATCH,PROXY
-
-# ==================== 规则集（Rule Providers）====================
 rule-providers:
-  # 局域网
   lan:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Lan/Lan.list"
     path: ./ruleset/lan.yaml
     interval: 86400
 
-  # 广告
-  reject:
+  advertising:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising.yaml"
-    path: ./ruleset/reject.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Advertising/Advertising.list"
+    path: ./ruleset/advertising.yaml
     interval: 86400
 
-  reject_domain:
+  advertising_domain:
     type: http
     behavior: domain
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising_Domain.yaml"
-    path: ./ruleset/reject_domain.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Advertising/Advertising_Domain.list"
+    path: ./ruleset/advertising_domain.yaml
     interval: 86400
 
-  # AI
   openai:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/OpenAI/OpenAI.list"
     path: ./ruleset/openai.yaml
     interval: 86400
 
   claude:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Claude/Claude.list"
     path: ./ruleset/claude.yaml
     interval: 86400
 
   gemini:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Gemini/Gemini.list"
     path: ./ruleset/gemini.yaml
     interval: 86400
 
   copilot:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Copilot/Copilot.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Copilot/Copilot.list"
     path: ./ruleset/copilot.yaml
     interval: 86400
 
-  # Google / YouTube
   youtube:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/YouTube/YouTube.list"
     path: ./ruleset/youtube.yaml
     interval: 86400
 
   google:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Google/Google.list"
     path: ./ruleset/google.yaml
     interval: 86400
 
-  # 社交
   telegram:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Telegram/Telegram.list"
     path: ./ruleset/telegram.yaml
     interval: 86400
 
   twitter:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter.list"
     path: ./ruleset/twitter.yaml
     interval: 86400
 
   instagram:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Instagram/Instagram.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Instagram/Instagram.list"
     path: ./ruleset/instagram.yaml
     interval: 86400
 
   facebook:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Facebook/Facebook.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Facebook/Facebook.list"
     path: ./ruleset/facebook.yaml
     interval: 86400
 
   discord:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Discord/Discord.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Discord/Discord.list"
     path: ./ruleset/discord.yaml
     interval: 86400
 
-  # 开发
   github:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/GitHub/GitHub.list"
     path: ./ruleset/github.yaml
     interval: 86400
 
-  # 流媒体
   netflix:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Netflix/Netflix.list"
     path: ./ruleset/netflix.yaml
     interval: 86400
 
   disney:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Disney/Disney.list"
     path: ./ruleset/disney.yaml
     interval: 86400
 
   spotify:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Spotify/Spotify.list"
     path: ./ruleset/spotify.yaml
     interval: 86400
 
-  # Apple
   apple:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple.list"
     path: ./ruleset/apple.yaml
     interval: 86400
 
   apple_domain:
     type: http
     behavior: domain
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple_Domain.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple_Domain.list"
     path: ./ruleset/apple_domain.yaml
     interval: 86400
 
-  # Microsoft
   microsoft:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.yaml"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Microsoft/Microsoft.list"
     path: ./ruleset/microsoft.yaml
     interval: 86400
 
-  # 国内
-  cn:
+  china:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/China/China.yaml"
-    path: ./ruleset/cn.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/China/China.list"
+    path: ./ruleset/china.yaml
     interval: 86400
 
-  cn_domain:
+  china_domain:
     type: http
     behavior: domain
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/China/China_Domain.yaml"
-    path: ./ruleset/cn_domain.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/China/China_Domain.list"
+    path: ./ruleset/china_domain.yaml
     interval: 86400
+
+rules:
+  - RULE-SET,lan,DIRECT
+  - RULE-SET,advertising,REJECT
+  - RULE-SET,advertising_domain,REJECT
+  - RULE-SET,openai,Zou
+  - RULE-SET,claude,Zou
+  - RULE-SET,gemini,Zou
+  - RULE-SET,copilot,Zou
+  - DOMAIN-SUFFIX,perplexity.ai,Zou
+  - DOMAIN-SUFFIX,grok.com,Zou
+  - DOMAIN-SUFFIX,x.ai,Zou
+  - DOMAIN-SUFFIX,cursor.com,Zou
+  - DOMAIN-SUFFIX,b.ai,Zou
+  - DOMAIN-SUFFIX,deepseek.com,Zou
+  - RULE-SET,youtube,Zou
+  - RULE-SET,google,Zou
+  - RULE-SET,telegram,Zou
+  - RULE-SET,twitter,Zou
+  - RULE-SET,instagram,Zou
+  - RULE-SET,facebook,Zou
+  - RULE-SET,discord,Zou
+  - RULE-SET,github,Zou
+  - RULE-SET,netflix,Zou
+  - RULE-SET,disney,Zou
+  - RULE-SET,spotify,Zou
+  - RULE-SET,apple,DIRECT
+  - RULE-SET,apple_domain,DIRECT
+  - RULE-SET,microsoft,DIRECT
+  - RULE-SET,china,DIRECT
+  - RULE-SET,china_domain,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,Zou
