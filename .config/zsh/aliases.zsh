@@ -26,6 +26,7 @@ alias wgetc="wget -c"                                      # 续传; 不覆盖 w
 alias ncz="nc -zv"                                         # 端口连通性测试: ncz myserver.com 22
 
 # 压缩 (.tar.gz 带 -z;  .tar.bz2 用 -j)
+# 过滤文件内容在前:  tar --exclude='.venv' --exclude='.git' -czvf xxx.tar.gz xxx
 alias tarc="COPYFILE_DISABLE=1 tar -czvf"                  # tarc xxx.tar.gz file1 folder1
 alias tarx="tar -xzvf"                                     # tarx xxx.tar.gz
 
